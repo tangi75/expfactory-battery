@@ -1,0 +1,31 @@
+
+<html>
+<head>
+	<meta charset="UTF-8"> 
+
+	<title>Experiment: Keep Page Open</title>
+
+    <script src="js/jquery-1.11.3.js"></script>
+
+	<link rel="stylesheet" href="css/default_style.css" />
+</head>
+
+<body>
+
+	<!-- Only one page here, depending on whether we are in preview mode or not what actually gets displayed will be changed. You can use the class 'noprev' to get rid of things in preview mode. -->
+	<div class="multi-parent" id="instructions">
+		<p> </p>
+		<img src="images/stanford.png" alt="Stanford University" width = "45%" height = "30%">
+		<p> </p>
+		<p class="frontblock-text noprev">Thank you for your interest in our experiment!</p>
+		<p class="frontblock-text noprev">In this experiment ... </p>
+
+		<button id="startButton" type="button" onclick="buttonClick();">Start</button>
+
+		<p class="frontblock-text noprev" id="legal">Legal information: By answering the following questions, you are participating in a study being performed by cognitive scientists in the Stanford Department of Psychology. If you have questions about this research, please contact Ian Eisenberg at <a href="mailto:ieisenbe@stanford.edu">ieisenbe@stanford.edu</a>. You must be  at least 18 years old to participate. Your participation in this research is voluntary. You may decline to answer any or all of the following questions. You may decline further participation, at any time, without adverse consequences. Your anonymity is assured; the researchers who have requested your participation will not receive any personal information about you.</p>
+	</div>
+
+	<script src="js/preview.js"></script>
+</body>
+</html>
+

@@ -1,0 +1,106 @@
+<html>
+  <head>
+    <title>My experiment</title>
+    <script src="../General/js/jquery-1.11.3.js"></script>
+    <script src="../General/jspsych-4.2/jspsych.js"></script>
+    <script src="../General/jspsych-4.2/plugins/jspsych-text.js"></script>
+    <script src="../General/jspsych-4.2/plugins/jspsych-instructions.js"></script>
+    <script src="../General/jspsych-4.2/plugins/jspsych-single-stim.js"></script>
+    <script src="../General/jspsych-4.2/plugins/jspsych-categorize.js"></script>
+    <link href="../General/jspsych-4.2/css/jspsych.css" rel="stylesheet" type="text/css"></link>
+    <link href="../General/css/default_style.css" rel="stylesheet" type="text/css"></link>
+    <link href="simon.css" rel="stylesheet" type="text/css"></link>
+  </head>
+  <body>
+  </body>
+  <script>
+
+    /* define welcome message block */
+    var welcome_block = {
+      type: 'text',
+      text: '<div class = centerbox><p class = block-text>Welcome to the experiment. Press any key to begin.</p></div>'
+    };
+    
+    var correct_responses = jsPsych.randomization.repeat([["left arrow",37],["right arrow",39]],1)
+    
+    /* define instructions block */
+    var instructions_block = {
+      type: 'instructions',
+      pages: [
+        '<div class = centerbox><p class = block-text>If you see red, press the ' + correct_responses[0][0] + '. Press <strong>enter</strong> to continue.</p></div>',
+        '<div class = centerbox><p class = block-text>If you see red, press the ' + correct_responses[1][0] + '. Press any key to begin.</p></div>'
+        ],
+      key_forward: 13
+    };
+
+    /* define test block */
+    var test_stimuli = [
+      {
+        image: '<div class = centerbox><div class = simon_left id = "stim1"></div></div>',
+        data: { correct_response: correct_responses[0][1], side: 0}
+      },
+      {
+        image:  '<div class = centerbox><div class = simon_right id = "stim1"></div></div>',
+        data: { correct_response: correct_responses[0][1], side:  1}
+      },
+      {
+        image: '<div class = simon_leftbox><div class = simon_left id = "stim2"></div></div>',
+        data: { correct_response: correct_responses[1][1], side: 0}
+      },
+      {
+        image:  '<div class = simon_rightbox><div class = simon_right id = "stim2"></div></div>',
+        data: { correct_response: correct_responses[1][1], side:  1}
+      }
+    ];
+
+    var all_trials = jsPsych.randomization.repeat(test_stimuli, 10, true);
+    var response_array = [];
+    for (i = 0; i < all_trials.data.length; i++) {
+        response_array.push(all_trials.data[i]['correct_response'])
+    }
+    var post_trial_gap = function() {
+      return Math.floor( Math.random() * 1500 ) + 750;
+    }
+    
+    var test_block = {
+      type: 'single-stim',
+      stimuli: all_trials.image,
+      is_html: true,
+      choices: [37,39],
+      data: all_trials.data,
+      timing_response: 1500,
+      timing_post_trial: post_trial_gap
+    };
+    
+    var practice_block = {
+      type: 'categorize',
+      stimuli: all_trials.image,
+      is_html: true,
+      key_answer: response_array,
+      correct_text: '<div class = centerbox><p class = center-text>Correct</p></div>',
+      incorrect_text: '<div class = centerbox><p class = center-text>Incorrect</p></div>',
+      choices: [37,39],
+      data: all_trials.data,
+      timing_stim: 1500,
+      timing_feedback_duration: 500,
+      show_stim_with_feedback: false,
+      timing_post_trial: post_trial_gap,
+	}
+
+
+    /* create experiment definition array */
+    var experiment = [];
+    experiment.push(welcome_block);
+    experiment.push(instructions_block);
+    experiment.push(practice_block);
+    experiment.push(test_block);
+
+    /* start the experiment */
+    jsPsych.init({
+      experiment_structure: experiment,
+      on_finish: function() {
+        jsPsych.data.displayData();
+      }
+    });
+  </script>
+</html>
