@@ -6,7 +6,7 @@
     <script src="../General/jspsych-4.2/plugins/jspsych-text.js"></script>
     <script src="../General/jspsych-4.2/plugins/jspsych-instructions.js"></script>
     <script src="../General/jspsych-4.2/plugins/jspsych-single-stim.js"></script>
-    <script src="../General/jspsych-4.2/plugins/jspsych-categorize.js"></script>
+    <script src="../General/jspsych-4.2/plugins/jspsych-stim-feedback-IE.js"></script>
     <link href="../General/jspsych-4.2/css/jspsych.css" rel="stylesheet" type="text/css"></link>
     <link href="../General/css/default_style.css" rel="stylesheet" type="text/css"></link>
     <link href="simon.css" rel="stylesheet" type="text/css"></link>
@@ -28,7 +28,7 @@
       type: 'instructions',
       pages: [
         '<div class = centerbox><p class = block-text>If you see red, press the ' + correct_responses[0][0] + '. Press <strong>enter</strong> to continue.</p></div>',
-        '<div class = centerbox><p class = block-text>If you see red, press the ' + correct_responses[1][0] + '. Press any key to begin.</p></div>'
+        '<div class = centerbox><p class = block-text>If you see red, press the ' + correct_responses[1][0] + '. Press <strong>enter</strong> to continue.</p></div>'
         ],
       key_forward: 13
     };
@@ -53,13 +53,13 @@
       }
     ];
 
-    var all_trials = jsPsych.randomization.repeat(test_stimuli, 10, true);
+    var all_trials = jsPsych.randomization.repeat(test_stimuli, 2, true);
     var response_array = [];
     for (i = 0; i < all_trials.data.length; i++) {
         response_array.push(all_trials.data[i]['correct_response'])
     }
     var post_trial_gap = function() {
-      return Math.floor( Math.random() * 1500 ) + 750;
+      return Math.floor( Math.random() * 500 ) + 500;
     }
     
     var test_block = {
@@ -73,16 +73,18 @@
     };
     
     var practice_block = {
-      type: 'categorize',
+      type: 'stim-feedback',
       stimuli: all_trials.image,
       is_html: true,
       key_answer: response_array,
       correct_text: '<div class = centerbox><p class = center-text>Correct</p></div>',
       incorrect_text: '<div class = centerbox><p class = center-text>Incorrect</p></div>',
+	  noresponse_text: '<div class = centerbox><p class = center-text>Response faster!</p></div>',
       choices: [37,39],
       data: all_trials.data,
+	  timing_response: 1500, 
       timing_stim: 1500,
-      timing_feedback_duration: 500,
+      timing_feedback_duration: 1000,
       show_stim_with_feedback: false,
       timing_post_trial: post_trial_gap,
 	}
@@ -99,7 +101,7 @@
     jsPsych.init({
       experiment_structure: experiment,
       on_finish: function() {
-        jsPsych.data.displayData();
+        jsPsych.data.localSave('Simon_test_save.csv','csv');
       }
     });
   </script>
