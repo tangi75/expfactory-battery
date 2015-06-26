@@ -108,7 +108,7 @@
 				var t2 = setTimeout(function() {
 					// save data
 					var trial_data = {
-						"rt": 999,
+						"rt": -1,
 						"correct": "NAN",
 						"stimulus": trial.a_path,
 						"key_press": -1
