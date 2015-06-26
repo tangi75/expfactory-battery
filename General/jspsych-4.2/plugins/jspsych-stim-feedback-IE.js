@@ -128,7 +128,6 @@
 
 			function doFeedback(correct) {
 				// kill keyboard listeners
-				console.log(keyboardListener)
 				if(typeof keyboardListener !== 'undefined'){
 					jsPsych.pluginAPI.cancelKeyboardResponse(keyboardListener);
 				}

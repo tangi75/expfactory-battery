@@ -26,17 +26,7 @@
   transform: translate(-50%,100%);
 }
 
-.ANT_stim {
-	text-align: center;
-	font-size: 60px;
-}
-
-.ANT_cue {
-	text-align: center;
-	font-size: 60px;
-}
-
-#fixation {
+.ANT_text {
 	text-align: center;
 	font-size: 60px;
 }
