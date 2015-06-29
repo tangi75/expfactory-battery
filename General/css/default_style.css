@@ -1,4 +1,8 @@
 
+.multi-parent {
+	position:relative;
+	text-align:center;
+}
 
 .centerbox {
   width:500px;

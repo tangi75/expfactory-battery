@@ -157,7 +157,7 @@
 				}
 				else {
 					if (correct) {
-						atext = trial.correct_text + ' Your reaction time was ' + rt;
+						atext = trial.correct_text + ' Your reaction time was ' + rt  + 'ms.';
 					} else {
 						atext = trial.incorrect_text + ' Your reaction time was ' + rt + 'ms.';
 					}

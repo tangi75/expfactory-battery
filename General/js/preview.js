@@ -8,7 +8,7 @@ if (turk.previewMode) {
 function buttonClick() {
 	$("#startButton").blur();
 	if (!started || turk.previewMode) {
-		started = true; window.open('../ANT/ANT.html');
+		started = true; window.open('../Simon/simon.html');
 	} else {
 		alert('Please do not do this HIT more than once!');
 	}
