@@ -1,0 +1,69 @@
+.ss_text {
+	text-align: center;
+	font-size: 60px;
+}
+
+.ss_fixation {
+	text-align: center;
+	font-size: 24px;
+}
+
+.ss_stim {
+	text-align: center;
+	font-size: 24px;
+}
+
+.stop-signal{
+	text-align: center;
+	font-size: 60px;
+	color: red;
+}
+
+.centered-shape {
+	position:absolute;
+	top:50%;
+    left:50%;
+	transform: translate(-50%,-50%);
+}
+
+#circle {
+	width: 100px;
+	height: 100px;
+	background: black;
+	-moz-border-radius: 50px;
+	-webkit-border-radius: 50px;
+	border-radius: 50px;
+}
+
+#square {
+	width: 100px;
+	height: 100px;
+	background: black;
+}
+
+#triangle{
+	width: 0;
+	height: 0;
+	border-left: 50px solid transparent;
+	border-right: 50px solid transparent;
+	border-bottom: 100px solid black;
+}
+
+
+#diamond {
+	width: 0;
+	height: 0;
+	border: 50px solid transparent;
+	border-bottom: 70px solid black;
+	position: relative;
+}
+
+#diamond:after {
+	content: '';
+	position: absolute;
+	left: -50px; top: 70px;
+	width: 0;
+	height: 0;
+	border: 50px solid transparent;
+	border-top: 70px solid black;
+}

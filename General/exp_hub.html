@@ -1,0 +1,32 @@
+<html>
+  <head>
+    <title>My experiment</title>
+    <script src="../General/js/jquery-1.11.3.js"></script>
+    <script src="../General/jspsych-4.2/jspsych.js"></script>
+    <script src="../General/jspsych-4.2/plugins/jspsych-text.js"></script>
+    <script src="../General/jspsych-4.2/plugins/jspsych-instructions.js"></script>
+    <script src="../General/jspsych-4.2/plugins/jspsych-single-stim.js"></script>
+    <script src="../General/jspsych-4.2/plugins/jspsych-stim-feedback-IE.js"></script>
+	<script src="../General/js/load_experiments.js"></script>
+    <link href="../General/jspsych-4.2/css/jspsych.css" rel="stylesheet" type="text/css"></link>
+    <link href="../General/css/default_style.css" rel="stylesheet" type="text/css"></link>
+	
+  </head>
+  <body>
+	  
+	  <script> 
+		var experiments = []
+		<!-- concatenate on the experimental blocks defined for each of the constituent experiments -->
+		cat_experiments(experiments)
+
+		<!-- start the experiment -->
+		jsPsych.init({
+		  experiment_structure: experiments,
+		  on_finish: function() {
+			jsPsych.data.localSave('test_save.csv','csv');
+		  }
+		});
+		
+	  </script>
+  </body>
+</html>

@@ -152,79 +152,77 @@
     experiment.push(welcome_block);
     experiment.push(instructions_block);
     
-    var trial_num = 0
-    for (b = 0; b < practice_block.data.length; b ++) {
-        var block = practice_block
-        for (i = 0; i < block.data.length; i++) {
-            var trial_num = trial_num + 1
-            var first_fixation_gap = Math.floor( Math.random() * 1200 ) + 400;
-            var first_fixation = {
-              type: 'single-stim',
-              stimuli: '<div class = centerbox><p class = ANT_text>+</p></div>',
-              is_html: true,
-              choices: 'none',
-              data: {trial_id: 'fixation', duration: first_fixation_gap},
-              timing_post_trial: 0,
-              timing_stim: first_fixation_gap,
-              timing_response: first_fixation_gap
-            }
-            experiment.push(first_fixation)
-                
-            if (block.data[i].cue == 'nocue') {
-                experiment.push(no_cue)
-            } else if (block.data[i].cue == 'center') {
-                experiment.push(center_cue)
-            } else if (block.data[i].cue == 'double') {
-                experiment.push(double_cue)
-            } else {
-                var spatial_cue = {
-                  type: 'single-stim',
-                  stimuli: '<div class = centerbox><div class = ANT_' + block.data[i].location +'><p class = ANT_text>*</p></div></div>',
-                  is_html: true,
-                  choices: 'none',
-                  data: {trial_id: 'spatialcue', duration: 100},
-                  timing_post_trial: 0,
-                  timing_stim: 100,
-                  timing_response: 100
-                }
-                experiment.push(spatial_cue)
-            }
-            experiment.push(fixation)
-            
-            block.data[i]['trial_num'] = trial_num
-            block.data[i]['trial_id'] = 'ANT_practice'
-            var ANT_practice_trial = {
-              type: 'ANT-practice',
-              stimuli: block.image[i],
-              is_html: true,
-              key_answer: block.data[i].correct_response,
-              correct_text: '<div class = centerbox><p class = center-text>Correct.',
-              incorrect_text: '<div class = centerbox><p class = center-text>Incorrect.',
-              noresponse_text: '<div class = centerbox><p class = center-text>Response faster!</p></div>',
-              choices: [37,39],
-              data: block.data[i],
-              timing_response: 1700, 
-              timing_stim: 1700,
-              timing_feedback_duration: 1000,
-              show_stim_with_feedback: false,
-              timing_post_trial: 0
-            }
-            experiment.push(ANT_practice_trial)
-        
-            var last_fixation = {
-              type: 'single-stim',
-              stimuli: '<div class = centerbox><p class = ANT_text>+</p></div>',
-              is_html: true,
-              choices: 'none',
-              data: {trial_id: 'fixation'},
-              timing_post_trial: 0,
-              timing_stim: post_trial_gap,
-              timing_response: post_trial_gap
-            }
-            experiment.push(last_fixation)
-        }
-        experiment.push(rest_block)
-    }
+	var trial_num = 0
+	var block = practice_block
+	for (i = 0; i < block.data.length; i++) {
+		var trial_num = trial_num + 1
+		var first_fixation_gap = Math.floor( Math.random() * 1200 ) + 400;
+		var first_fixation = {
+		  type: 'single-stim',
+		  stimuli: '<div class = centerbox><p class = ANT_text>+</p></div>',
+		  is_html: true,
+		  choices: 'none',
+		  data: {trial_id: 'fixation', duration: first_fixation_gap},
+		  timing_post_trial: 0,
+		  timing_stim: first_fixation_gap,
+		  timing_response: first_fixation_gap
+		}
+		experiment.push(first_fixation)
+			
+		if (block.data[i].cue == 'nocue') {
+			experiment.push(no_cue)
+		} else if (block.data[i].cue == 'center') {
+			experiment.push(center_cue)
+		} else if (block.data[i].cue == 'double') {
+			experiment.push(double_cue)
+		} else {
+			var spatial_cue = {
+			  type: 'single-stim',
+			  stimuli: '<div class = centerbox><div class = ANT_' + block.data[i].location +'><p class = ANT_text>*</p></div></div>',
+			  is_html: true,
+			  choices: 'none',
+			  data: {trial_id: 'spatialcue', duration: 100},
+			  timing_post_trial: 0,
+			  timing_stim: 100,
+			  timing_response: 100
+			}
+			experiment.push(spatial_cue)
+		}
+		experiment.push(fixation)
+		
+		block.data[i]['trial_num'] = trial_num
+		block.data[i]['trial_id'] = 'ANT_practice'
+		var ANT_practice_trial = {
+		  type: 'ANT-practice',
+		  stimuli: block.image[i],
+		  is_html: true,
+		  key_answer: block.data[i].correct_response,
+		  correct_text: '<div class = centerbox><p class = center-text>Correct.',
+		  incorrect_text: '<div class = centerbox><p class = center-text>Incorrect.',
+		  noresponse_text: '<div class = centerbox><p class = center-text>Response faster!</p></div>',
+		  choices: [37,39],
+		  data: block.data[i],
+		  timing_response: 1700, 
+		  timing_stim: 1700,
+		  timing_feedback_duration: 1000,
+		  show_stim_with_feedback: false,
+		  timing_post_trial: 0
+		}
+		experiment.push(ANT_practice_trial)
+	
+		var last_fixation = {
+		  type: 'single-stim',
+		  stimuli: '<div class = centerbox><p class = ANT_text>+</p></div>',
+		  is_html: true,
+		  choices: 'none',
+		  data: {trial_id: 'fixation'},
+		  timing_post_trial: 0,
+		  timing_stim: post_trial_gap,
+		  timing_response: post_trial_gap
+		}
+		experiment.push(last_fixation)
+	}
+	experiment.push(rest_block)
     
     
     var trial_num = 0
