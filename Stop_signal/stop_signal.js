@@ -17,8 +17,7 @@ var instructions_block = {
 	'<div class = centerbox><p class = block-text>Only one key is correct for each shape. The correct keys are as follows: <ul><li>Square: ' + correct_responses[0][0] + '</li><li>Circle: ' + correct_responses[1][0] + ' </li><li>Triangle: ' + correct_responses[2][0] + ' </li><li>Diamond: ' + correct_responses[3][0] + ' </li></ul> Press <strong>enter</strong> to continue.</p></div>',
 	'<div class = centerbox><p class = block-text>Importantly, you should respond as quickly and accurately as possible. The shape will only be on the screen for a very short amount of time, and you must respond to it before it disappears.</p><p class = block-text>Press <strong>enter</strong> to continue.</p></div>',
 	'<div class = centerbox><p class = block-text>On some proportion of trials a red "X" will appear over the shape after a short delay. On this trials try your best to <strong>not respond</strong> as you normally would.</p><p class = block-text>Press <strong>enter</strong> to continue.</p></div>',
-	'<div class = centerbox><p class = block-text>It is equally important that you both respond quickly and accurately to the black shirts <strong>and</strong> successfully stop your response on trials where the shape turns red.</p><p class = block-text>Press <strong>enter</strong> to continue.</p></div>',
-	'<div class = centerbox><p class = block-text>We will not start with a practice session. Press <strong>enter</strong> to continue.</p></div>'
+	'<div class = centerbox><p class = block-text>It is equally important that you both respond quickly and accurately to the black shirts <strong>and</strong> successfully stop your response on trials where the shape turns red.</p><p class = block-text>Press <strong>enter</strong> to continue.</p></div>'
 	],
   key_forward: 13
 };
@@ -33,11 +32,22 @@ var rest_block = {
   text: '<div class = centerbox><p class = block-text>Take a break! Press any key to continue.</p></div>'
 };
 
+var practice_feedback_text = 'We will not start with a practice session. Press <strong>enter</strong> to continue.'
+var getPracticeFeedback = function() {
+	return '<div class = centerbox><p class = block-text>' + practice_feedback_text + '</p></div>'
+}
+var practice_feedback_block = {
+  type: 'text',
+  text: getPracticeFeedback
+};
+
 /* define test block */
 var chars = 'BCDEFGHIJLMNOPQRSTUVWZ'
 var getChar = function() {
  return '<div class = centerbox><p class = AX_text>' + chars[Math.round(Math.random()*21)] + '</p></div>'
 }
+
+
 
 var SSD = 250
 var updateSSD = function() {
@@ -77,9 +87,9 @@ stimuli = [
 ]
 
 
-var practice_list = jsPsych.randomization.repeat(stimuli,6, true)
-var block1_list = jsPsych.randomization.repeat(stimuli,60, true)
-var block2_list = jsPsych.randomization.repeat(stimuli,60, true)
+var practice_list = jsPsych.randomization.repeat($.extend(true,[],stimuli),6, true)
+var block1_list = jsPsych.randomization.repeat($.extend(true,[],stimuli),60, true)
+var block2_list = jsPsych.randomization.repeat($.extend(true,[],stimuli),60, true)
 var blocks = [block1_list,block2_list]
 var ss_freq = jsPsych.randomization.repeat(['low','high'],blocks.length/2,false)
 
@@ -89,16 +99,16 @@ stop_signal_experiment.push(instructions_block);
 
 /* Practice block */
 var practice_trials = []
-var block = practice_list
+practice_trials.push(practice_feedback_block)
 var stop_trials = jsPsych.randomization.repeat(['stop','stop','go','go','go','go'],4,false)
-for (i = 0; i < block.data.length; i++) {
+for (i = 0; i < practice_list.data.length; i++) {
 	practice_trials.push(fixation_block)
-	block.data[i]["condition"] = "go_practice"
+	practice_list.data[i]["condition"] = "go_practice"
 	if (stop_trials[i] == 'go') {
 		var stim_block = {
 		  type: 'single-stim',
-		  stimuli: block.image[i],
-		  data: block.data[i],
+		  stimuli: practice_list.image[i],
+		  data: practice_list.data[i],
 		  is_html: true,
 		  choices: [37,39],
 		  timing_post_trial: 1000,
@@ -107,11 +117,11 @@ for (i = 0; i < block.data.length; i++) {
 		}
 		practice_trials.push(stim_block)
 	} else {
-		block.data[i]["condition"] = "go_practice"
+		practice_list.data[i]["condition"] = "go_practice"
         var stop_signal_block = {
           type: 'stop-signal',
-          stimuli: block.image[i],
-          data: block.data[i],
+          stimuli: practice_list.image[i],
+          data: practice_list.data[i],
           is_html: true,
           choices: [37,39],
           timing_post_trial: 1000,
@@ -124,6 +134,7 @@ for (i = 0; i < block.data.length; i++) {
 		practice_trials.push(stop_signal_block)
 	}
 }
+
 var practice_chunk = {
     chunk_type: 'while',
     timeline: practice_trials,
@@ -132,33 +143,32 @@ var practice_chunk = {
         var sum_rt = 0;
         var sum_correct = 0;
         var go_length = 0;
+		console.log(data.length)
         for(var i=0; i < data.length; i++){
-            if (data.condition == "go_practice" && data.rt != -1) {
+            if (data[i].condition == "go_practice" && data[i].rt != -1) {
                 go_length += 1
-                sum_rt += data.rt;
-                if (data.key_press == data.correct_response) { sum_correct += sum_correct }
+                sum_rt += data[i].rt;
+				console.log(sum_rt)
+                if (data.key_press == data.correct_response) { sum_correct += 1 }
             }
         }
         var average_rt = sum_rt / go_length;
         var average_correct = sum_correct / go_length;
         if(average_rt < 1000 && average_correct > .75){
             // end the loop
-            console.log('end ' + average_rt)
+            practice_feedback_text = "Average reaction time:  " + Math.round(average_rt) + " ms. Accuracy: " + average_correct*100 + "%"
             return false;
         } else {
             // keep going until they are faster!
-            console.log('continue ' + average_rt)
+            practice_feedback_text = "Average reaction time:  " + Math.round(average_rt) + " ms. Accuracy: " + average_correct*100 + "%"
             return true;
         }
     }
 }
-console.log(practice_list.data[0].condition)
 stop_signal_experiment.push(practice_chunk)
-
-
-
-
+stop_signal_experiment.push(practice_feedback_block)
 stop_signal_experiment.push(test_block)
+
 /* Test blocks */
 for (b = 0; b< blocks.length; b++) {
 	var block = blocks[b]
@@ -169,8 +179,8 @@ for (b = 0; b< blocks.length; b++) {
 	}
 	for (i = 0; i < block.data.length; i++) {
 		stop_signal_experiment.push(fixation_block)
-		block.data[i]["condition"] = "go_" + ss_freq[b]
 		if (stop_trials[i] == 'go') {
+			block.data[i]["condition"] = "go_" + ss_freq[b]
 			var stim_block = {
 			  type: 'single-stim',
 			  stimuli: block.image[i],
@@ -202,6 +212,8 @@ for (b = 0; b< blocks.length; b++) {
 	}
 	stop_signal_experiment.push(rest_block)
 }
+
+block.data[0]["condition"]="hiya"
 	
 
 

@@ -72,9 +72,9 @@ var get_RT = function() {
 }
 
 /* set up repeats for three test blocks */
-var block1_trials = jsPsych.randomization.repeat(test_stimuli, 2, true);
-var block2_trials = jsPsych.randomization.repeat(test_stimuli, 2, true);
-var block3_trials = jsPsych.randomization.repeat(test_stimuli, 2, true);
+var block1_trials = jsPsych.randomization.repeat($.extend(true,[],test_stimuli), 2, true);
+var block2_trials = jsPsych.randomization.repeat($.extend(true,[],test_stimuli), 2, true);
+var block3_trials = jsPsych.randomization.repeat($.extend(true,[],test_stimuli), 2, true);
 var blocks = [block1_trials, block2_trials, block3_trials]
 
 var post_trial_gap = function() {
