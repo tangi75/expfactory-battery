@@ -49,6 +49,7 @@ for (i = 0; i < experiment_names.length; i++) {
 	case "stop_signal":
 		loadjscssfile("../Stop_signal/stop_signal.css","css")
 		loadjscssfile("../Stop_signal/stop_signal.js","js")
+		loadjscssfile("../Stop_signal/jspsych-stop-signal.js","js")
 		break;
 	}
 }

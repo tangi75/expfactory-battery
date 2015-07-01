@@ -42,9 +42,9 @@ var getChar = function() {
 var SSD = 250
 var updateSSD = function() {
 	var curr_trial = jsPsych.progress().current_trial_global
-	if (jsPsych.data.getData()[curr_trial].rt != -1 || jsPsych.data.getData()[curr_trial-1].rt != -1) {
+	if (jsPsych.data.getData()[curr_trial].rt != -1) {
 		SSD = SSD + 50
-	} else { 
+	} else if (SSD > 50) { 
 		SSD = SSD - 50
 	}
 }
@@ -60,18 +60,6 @@ var fixation_block = {
   timing_response: 500
 }
 
-
-
-var A_cue = {
-  type: 'single-stim',
-  stimuli: '<div class = centerbox><p class = AX_text>A</p></div>',
-  is_html: true,
-  choices: 'none',
-  data: {exp_id: "AX-CPT", "trial_type": "cue"},
-  timing_stim: 300,
-  timing_response: 300,
-  timing_post_trial: 4900
-};
 
 stimuli = [
 	{image: '<div class = centerbox><div class = centered-shape id = circle></div></div>',
@@ -93,70 +81,100 @@ var practice_list = jsPsych.randomization.repeat(stimuli,6, true)
 var block1_list = jsPsych.randomization.repeat(stimuli,60, true)
 var block2_list = jsPsych.randomization.repeat(stimuli,60, true)
 var blocks = [block1_list,block2_list]
+var ss_freq = jsPsych.randomization.repeat(['low','high'],blocks.length/2,false)
 
 var stop_signal_experiment = []
 stop_signal_experiment.push(welcome_block);
 stop_signal_experiment.push(instructions_block);
 
 /* Practice block */
+var practice_trials = []
 var block = practice_list
 var stop_trials = jsPsych.randomization.repeat(['stop','stop','go','go','go','go'],4,false)
 for (i = 0; i < block.data.length; i++) {
-	stop_signal_experiment.push(fixation_block)
-	stim_data = block.data[i]["condition"] = "go"
+	practice_trials.push(fixation_block)
+	block.data[i]["condition"] = "go_practice"
 	if (stop_trials[i] == 'go') {
 		var stim_block = {
 		  type: 'single-stim',
 		  stimuli: block.image[i],
-		  data: stim_data,
+		  data: block.data[i],
 		  is_html: true,
 		  choices: [37,39],
 		  timing_post_trial: 1000,
 		  timing_stim: 850,
 		  timing_response: 850
 		}
-		stop_signal_experiment.push(stim_block)
+		practice_trials.push(stim_block)
 	} else {
-		stim_data = block.data[i]["condition"] = "stop"
-		var stim_block = {
-		  type: 'single-stim',
-		  stimuli: block.image[i],
-		  data: stim_data,
-		  is_html: true,
-		  choices: [37,39],
-		  timing_post_trial: 0,
-		  timing_stim: SSD,
-		  timing_response: SSD
-		}
-		var stop_signal_block = {
-		  type: 'single-stim',
-		  stimuli: block.image[i] + '<div class = centerbox><p class = "stop-signal">X</p></div>',
-		  data: stim_data,
-		  is_html: true,
-		  choices: [37,39],
-		  timing_post_trial: 1000,
-		  timing_stim: 500,
-		  timing_response: 500,
-		  on_finish: updateSSD
-		}
-		stop_signal_experiment.push(stim_block)
-		stop_signal_experiment.push(stop_signal_block)
+		block.data[i]["condition"] = "go_practice"
+        var stop_signal_block = {
+          type: 'stop-signal',
+          stimuli: block.image[i],
+          data: block.data[i],
+          is_html: true,
+          choices: [37,39],
+          timing_post_trial: 1000,
+          timing_stim: 850,
+          timing_response: 850,
+          SSD: 250,
+          SS_stimulus: '<div class = centerbox><p class = "stop-signal">X</p></div>',
+          on_finish: updateSSD
+        }
+		practice_trials.push(stop_signal_block)
 	}
 }
-stop_signal_experiment.push(test_block)
+var practice_chunk = {
+    chunk_type: 'while',
+    timeline: practice_trials,
+    continue_function: function(data){
+        // check to see if the average RT was under 1s
+        var sum_rt = 0;
+        var sum_correct = 0;
+        var go_length = 0;
+        for(var i=0; i < data.length; i++){
+            if (data.condition == "go_practice" && data.rt != -1) {
+                go_length += 1
+                sum_rt += data.rt;
+                if (data.key_press == data.correct_response) { sum_correct += sum_correct }
+            }
+        }
+        var average_rt = sum_rt / go_length;
+        var average_correct = sum_correct / go_length;
+        if(average_rt < 1000 && average_correct > .75){
+            // end the loop
+            console.log('end ' + average_rt)
+            return false;
+        } else {
+            // keep going until they are faster!
+            console.log('continue ' + average_rt)
+            return true;
+        }
+    }
+}
+console.log(practice_list.data[0].condition)
+stop_signal_experiment.push(practice_chunk)
 
+
+
+
+stop_signal_experiment.push(test_block)
 /* Test blocks */
 for (b = 0; b< blocks.length; b++) {
 	var block = blocks[b]
-	var stop_trials = jsPsych.randomization.repeat(['stop','stop','go','go','go'],block.data.length/5,false)
+	if (ss_freq[b] == "high") {
+	    var stop_trials = jsPsych.randomization.repeat(['stop','stop','go','go','go'],block.data.length/5,false)
+	} else {
+	    var stop_trials = jsPsych.randomization.repeat(['stop','go','go','go','go'],block.data.length/5,false)
+	}
 	for (i = 0; i < block.data.length; i++) {
 		stop_signal_experiment.push(fixation_block)
-		stim_data = block.data[i]["condition"] = "go"
+		block.data[i]["condition"] = "go_" + ss_freq[b]
 		if (stop_trials[i] == 'go') {
 			var stim_block = {
 			  type: 'single-stim',
 			  stimuli: block.image[i],
-			  data: stim_data,
+			  data: block.data[i],
 			  is_html: true,
 			  choices: [37,39],
 			  timing_post_trial: 1000,
@@ -165,29 +183,20 @@ for (b = 0; b< blocks.length; b++) {
 			}
 			stop_signal_experiment.push(stim_block)
 		} else {
-			stim_data = block.data[i]["condition"] = "stop"
-			var stim_block = {
-			  type: 'single-stim',
-			  stimuli: block.image[i],
-			  data: stim_data,
-			  is_html: true,
-			  choices: [37,39],
-			  timing_post_trial: 0,
-			  timing_stim: SSD,
-			  timing_response: SSD
-			}
+			block.data[i]["condition"] = "stop_" + ss_freq[b]
 			var stop_signal_block = {
-			  type: 'single-stim',
-			  stimuli: '<div class = centerbox><p class = "stop-signal">X</p></div>',
-			  data: stim_data,
+			  type: 'stop-signal',
+			  stimuli: block.image[i],
+			  data: block.data[i],
 			  is_html: true,
 			  choices: [37,39],
 			  timing_post_trial: 1000,
-			  timing_stim: 500,
-			  timing_response: 500,
+			  timing_stim: 850,
+			  timing_response: 850,
+			  SSD: 250,
+			  SS_stimulus: '<div class = centerbox><p class = "stop-signal">X</p></div>',
 			  on_finish: updateSSD
 			}
-			stop_signal_experiment.push(stim_block)
 			stop_signal_experiment.push(stop_signal_block)
 		}
 	}
