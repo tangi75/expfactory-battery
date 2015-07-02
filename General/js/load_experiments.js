@@ -27,8 +27,8 @@ function loadjscssfile(filename, filetype){
 but eventually they should be selected by some function (I.E. random new combinations
 for a returning subject, keeping the total time under 30 minutes)
 */ 
-/* full list of experiment names: ["simon", "ANT", "AX-CPT", "stop_signal"] */
-var experiment_names = ["stop_signal"]
+/* full list of experiment names: ["simon", "ANT", "AX-CPT", "stop_signal","plus-minus","number-letter"] */
+var experiment_names = ["number-letter"]
 
 /* One the experiments are selected, load the appropriate files */
 for (i = 0; i < experiment_names.length; i++) {
@@ -51,6 +51,14 @@ for (i = 0; i < experiment_names.length; i++) {
 		loadjscssfile("../Stop_signal/stop_signal.js","js")
 		loadjscssfile("../Stop_signal/jspsych-stop-signal.js","js")
 		break;
+	case "plus-minus":
+		loadjscssfile("../Plus-minus/plus-minus.js","js")
+		loadjscssfile("jspsych-4.2/plugins/jspsych-survey-text.js","js")
+		break;
+	case "number-letter":
+	    loadjscssfile("../Number-letter/number-letter.css","css")
+		loadjscssfile("../Number-letter/number-letter.js","js")
+		break;
 	}
 }
 
@@ -70,6 +78,12 @@ function cat_experiments(experiment_array) {
 			break;
 		case "stop_signal":
 			experiments = experiments.concat(stop_signal_experiment)
+			break;
+		case "plus-minus":
+			experiments = experiments.concat(plus_minus_experiment)
+			break;
+		case "number-letter":
+			experiments = experiments.concat(numlet_experiment)
 			break;
 		}
 	}

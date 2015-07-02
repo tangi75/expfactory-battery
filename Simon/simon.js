@@ -26,19 +26,19 @@ var start_test_block = {
 var test_stimuli = [
   {
 	image: '<div class = centerbox><div class = simon_left id = "stim1"></div></div>',
-	data: { correct_response: correct_responses[0][1], side: 0, exp_id: 'simon'}
+	data: { correct_response: correct_responses[0][1], condition: 'left', exp_id: 'simon'}
   },
   {
 	image:  '<div class = centerbox><div class = simon_right id = "stim1"></div></div>',
-	data: { correct_response: correct_responses[0][1], side:  1, exp_id: 'simon'}
+	data: { correct_response: correct_responses[0][1], condition:  'left', exp_id: 'simon'}
   },
   {
 	image: '<div class = simon_leftbox><div class = simon_left id = "stim2"></div></div>',
-	data: { correct_response: correct_responses[1][1], side: 0, exp_id: 'simon'}
+	data: { correct_response: correct_responses[1][1], condition: 'right', exp_id: 'simon'}
   },
   {
 	image:  '<div class = simon_rightbox><div class = simon_right id = "stim2"></div></div>',
-	data: { correct_response: correct_responses[1][1], side:  1, exp_id: 'simon'}
+	data: { correct_response: correct_responses[1][1], condition:  'right', exp_id: 'simon'}
   }
 ];
 

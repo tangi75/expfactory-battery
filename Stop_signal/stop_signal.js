@@ -9,28 +9,65 @@ var welcome_block = {
 
 var correct_responses = jsPsych.randomization.repeat([["left arrow",37],["left arrow",37],["right arrow",39],["right arrow",39]],1)
 
-/* define instructions block */
+/* define static blocks */
 var instructions_block = {
   type: 'instructions',
   pages: [
 	'<div class = centerbox><p class = block-text>In this task you will see black shapes appear on the screen one at a time. You will respond to them by pressing the left or right arrow keys.</p><p class = block-text>Press <strong>enter</strong> to continue.</p></div>',
-	'<div class = centerbox><p class = block-text>Only one key is correct for each shape. The correct keys are as follows: <ul><li>Square: ' + correct_responses[0][0] + '</li><li>Circle: ' + correct_responses[1][0] + ' </li><li>Triangle: ' + correct_responses[2][0] + ' </li><li>Diamond: ' + correct_responses[3][0] + ' </li></ul> Press <strong>enter</strong> to continue.</p></div>',
-	'<div class = centerbox><p class = block-text>Importantly, you should respond as quickly and accurately as possible. The shape will only be on the screen for a very short amount of time, and you must respond to it before it disappears.</p><p class = block-text>Press <strong>enter</strong> to continue.</p></div>',
-	'<div class = centerbox><p class = block-text>On some proportion of trials a red "X" will appear over the shape after a short delay. On this trials try your best to <strong>not respond</strong> as you normally would.</p><p class = block-text>Press <strong>enter</strong> to continue.</p></div>',
-	'<div class = centerbox><p class = block-text>It is equally important that you both respond quickly and accurately to the black shirts <strong>and</strong> successfully stop your response on trials where the shape turns red.</p><p class = block-text>Press <strong>enter</strong> to continue.</p></div>'
+	'<div class = centerbox><p class = block-text>Only one key is correct for each shape. The correct keys are as follows:</p><ul class = list-text><li >Square:  ' + correct_responses[0][0] + '</li><li>Circle:  ' + correct_responses[1][0] + ' </li><li>Triangle:  ' + correct_responses[2][0] + ' </li><li>Diamond:  ' + correct_responses[3][0] + ' </li></ul><p class = block-text>These instructions will remain on the screen during practice, but will be removed during the test phase.</p><p class = block-text> Press <strong>enter</strong> to continue.</p></div>',
+	'<div class = centerbox><p class = block-text>You should respond as quickly and accurately as possible to each shape. The shape will only be on the screen for a very short amount of time, and you must respond before it disappears.</p><p class = block-text>Press <strong>enter</strong> to continue.</p></div>',
+	'<div class = centerbox><p class = block-text>On some proportion of trials a red "X" will appear over the shape after a short delay. On these trials you should <strong>not respond</strong> in any way.</p><p class = block-text>Press <strong>enter</strong> to continue.</p></div>',
+	'<div class = centerbox><p class = block-text>It is equally important that you both respond quickly and accurately to the shapes when there is no "X" <strong>and</strong> successfully stop your response on trials where there is a red "X".</p><p class = block-text>Press <strong>enter</strong> to continue.</p></div>'
 	],
   key_forward: 13
 };
 
 var test_block = {
   type: 'text',
-  text: '<div class = centerbox><p class = block-text>Done with practice. We will not begin the two test blocks. There will be a break after each block. Press any key to continue.</p></div>'
+  cont_key: 13,
+  text: '<div class = centerbox><p class = block-text>Done with practice. We will now begin the two test blocks. There will be a break after each block. Press any key to continue.</p></div>'
 };
 
 var rest_block = {
   type: 'text',
+  cont_key: 13,
   text: '<div class = centerbox><p class = block-text>Take a break! Press any key to continue.</p></div>'
 };
+
+var fixation_block = {
+  type: 'single-stim',
+  stimuli: '<div class = centerbox><p class = ss_fixation>+</p></div>',
+  is_html: true,
+  choices: 'none',
+  data: {exp_id: "stop_signal", "trial_type": "fixation"},
+  timing_post_trial: 0,
+  timing_stim: 500,
+  timing_response: 500
+}
+
+/* prompt blocks are used during practice to show the instructions */
+var prompt_text = '<ul list-text><li>Square:  ' + correct_responses[0][0] + '</li><li>Circle:  ' + correct_responses[1][0] + ' </li><li>Triangle:  ' + correct_responses[2][0] + ' </li><li>Diamond:  ' + correct_responses[3][0] + ' </li></ul>'
+var prompt_block = {
+  type: 'single-stim',
+  stimuli: prompt_text,
+  is_html: true,
+  choices: 'none',
+  timing_post_trial: 0,
+  timing_stim: 1000,
+  timing_response: 1000,
+}
+
+var prompt_fixation_block = {
+  type: 'single-stim',
+  stimuli: '<div class = centerbox><p class = ss_fixation>+</p></div>',
+  is_html: true,
+  choices: 'none',
+  data: {exp_id: "stop_signal", "trial_type": "fixation"},
+  timing_post_trial: 0,
+  timing_stim: 500,
+  timing_response: 500,
+  prompt: prompt_text
+}
 
 var practice_feedback_text = 'We will not start with a practice session. Press <strong>enter</strong> to continue.'
 var getPracticeFeedback = function() {
@@ -59,16 +96,7 @@ var updateSSD = function() {
 	}
 }
 
-var fixation_block = {
-  type: 'single-stim',
-  stimuli: '<div class = centerbox><p class = ss_fixation>+</p></div>',
-  is_html: true,
-  choices: 'none',
-  data: {exp_id: "stop_signal", "trial_type": "fixation"},
-  timing_post_trial: 0,
-  timing_stim: 500,
-  timing_response: 500
-}
+
 
 
 stimuli = [
@@ -102,7 +130,7 @@ var practice_trials = []
 practice_trials.push(practice_feedback_block)
 var stop_trials = jsPsych.randomization.repeat(['stop','stop','go','go','go','go'],4,false)
 for (i = 0; i < practice_list.data.length; i++) {
-	practice_trials.push(fixation_block)
+	practice_trials.push(prompt_fixation_block)
 	practice_list.data[i]["condition"] = "go_practice"
 	if (stop_trials[i] == 'go') {
 		var stim_block = {
@@ -111,9 +139,10 @@ for (i = 0; i < practice_list.data.length; i++) {
 		  data: practice_list.data[i],
 		  is_html: true,
 		  choices: [37,39],
-		  timing_post_trial: 1000,
+		  timing_post_trial: 0,
 		  timing_stim: 850,
-		  timing_response: 850
+		  timing_response: 850,
+		  prompt: prompt_text
 		}
 		practice_trials.push(stim_block)
 	} else {
@@ -124,15 +153,17 @@ for (i = 0; i < practice_list.data.length; i++) {
           data: practice_list.data[i],
           is_html: true,
           choices: [37,39],
-          timing_post_trial: 1000,
+          timing_post_trial: 0,
           timing_stim: 850,
           timing_response: 850,
+          prompt: prompt_text,
           SSD: 250,
           SS_stimulus: '<div class = centerbox><p class = "stop-signal">X</p></div>',
           on_finish: updateSSD
         }
 		practice_trials.push(stop_signal_block)
 	}
+	practice_trials.push(prompt_block)
 }
 
 var practice_chunk = {
@@ -149,18 +180,20 @@ var practice_chunk = {
                 go_length += 1
                 sum_rt += data[i].rt;
 				console.log(sum_rt)
-                if (data.key_press == data.correct_response) { sum_correct += 1 }
+                if (data[i].key_press == data[i].correct_response) { sum_correct += 1 }
             }
         }
         var average_rt = sum_rt / go_length;
         var average_correct = sum_correct / go_length;
+        practice_feedback_text = "Average reaction time:  " + Math.round(average_rt) + " ms. Accuracy: " + Math.round(average_correct*100) + "%"
         if(average_rt < 1000 && average_correct > .75){
             // end the loop
-            practice_feedback_text = "Average reaction time:  " + Math.round(average_rt) + " ms. Accuracy: " + average_correct*100 + "%"
             return false;
         } else {
             // keep going until they are faster!
-            practice_feedback_text = "Average reaction time:  " + Math.round(average_rt) + " ms. Accuracy: " + average_correct*100 + "%"
+            if (average_correct < .75) {
+                practice_feedback_text += 	'</p><p class = block-text>We will try another practice block. Remember, the correct keys are as follows: <ul list-text><li>Square: ' + correct_responses[0][0] + '</li><li>Circle: ' + correct_responses[1][0] + ' </li><li>Triangle: ' + correct_responses[2][0] + ' </li><li>Diamond: ' + correct_responses[3][0] + ' </li></ul>'
+            }
             return true;
         }
     }
