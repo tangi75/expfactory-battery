@@ -1,6 +1,28 @@
 
 /* Main reference: http://www.pnas.org/content/suppl/2009/04/20/0808187106.DCSupplemental/0808187106SI.pdf#nameddest=STXT */
 
+
+/* Define helper functions */
+
+var randomDraw = function(lst) {
+    index = Math.round(Math.random()*(lst.length-1))
+    return lst[index]
+}
+
+var getPracticeFeedback = function() {
+	return '<div class = centerbox><p class = block-text>' + practice_feedback_text + '</p></div>'
+}
+
+var updateSSD = function() {
+	var curr_trial = jsPsych.progress().current_trial_global
+	if (jsPsych.data.getData()[curr_trial].rt == -1 && SSD<850) {
+		SSD = SSD + 50
+	} else if (SSD > 0) { 
+		SSD = SSD - 50
+	}
+}
+
+
 /* define welcome message block */
 var welcome_block = {
   type: 'text',
@@ -70,56 +92,39 @@ var prompt_fixation_block = {
 }
 
 var practice_feedback_text = 'We will not start with a practice session. Press <strong>enter</strong> to continue.'
-var getPracticeFeedback = function() {
-	return '<div class = centerbox><p class = block-text>' + practice_feedback_text + '</p></div>'
-}
+
 var practice_feedback_block = {
   type: 'text',
   text: getPracticeFeedback
 };
 
 /* define test block */
-var chars = 'BCDEFGHIJLMNOPQRSTUVWZ'
-var getChar = function() {
- return '<div class = centerbox><p class = AX_text>' + chars[Math.round(Math.random()*21)] + '</p></div>'
-}
-
-
 
 var SSD = 250
-var updateSSD = function() {
-	var curr_trial = jsPsych.progress().current_trial_global
-	if (jsPsych.data.getData()[curr_trial].rt != -1) {
-		SSD = SSD + 50
-	} else if (SSD > 50) { 
-		SSD = SSD - 50
-	}
-}
-
-
-
 
 stimuli = [
-	{image: '<div class = centerbox><div class = centered-shape id = circle></div></div>',
+	{image: '<div class = shapebox><div class = centered-shape id = circle></div></div>',
 	data: {correct_response: correct_responses[0][1], exp_id: "stop_signal"}
 	},
-	{image: '<div class = centerbox><div class = centered-shape id = square></div></div>',
+	{image: '<div class = shapebox><div class = centered-shape id = square></div></div>',
 	data: {correct_response: correct_responses[1][1], exp_id: "stop_signal"}
 	},
-	{image: '<div class = centerbox><div class = centered-shape id = triangle></div></div>',
+	{image: '<div class = shapebox><div class = centered-shape id = triangle></div></div>',
 	data: {correct_response: correct_responses[2][1], exp_id: "stop_signal"}
 	},
-	{image: '<div class = centerbox><div class = centered-shape id = diamond></div></div>',
+	{image: '<div class = shapebox><div class = centered-shape id = diamond></div></div>',
 	data: {correct_response: correct_responses[3][1], exp_id: "stop_signal"}
 	},
 ]
 
 
-var practice_list = jsPsych.randomization.repeat($.extend(true,[],stimuli),6, true)
-var block1_list = jsPsych.randomization.repeat($.extend(true,[],stimuli),60, true)
-var block2_list = jsPsych.randomization.repeat($.extend(true,[],stimuli),60, true)
-var blocks = [block1_list,block2_list]
-var ss_freq = jsPsych.randomization.repeat(['low','high'],blocks.length/2,false)
+var practice_list = jsPsych.randomization.repeat($.extend(true,[],stimuli),5, true)
+
+numblocks = 10
+blocks = []
+for (i = 0; i< numblocks; i++) {
+    blocks.push(jsPsych.randomization.repeat($.extend(true,[],stimuli),15, true))
+}
 
 var stop_signal_experiment = []
 stop_signal_experiment.push(welcome_block);
@@ -128,10 +133,11 @@ stop_signal_experiment.push(instructions_block);
 /* Practice block */
 var practice_trials = []
 practice_trials.push(practice_feedback_block)
-var stop_trials = jsPsych.randomization.repeat(['stop','stop','go','go','go','go'],4,false)
+var stop_trials = jsPsych.randomization.repeat(['stop','stop', 'stop', 'go', 'go', 'go','go','go','go','go'],2,false)
 for (i = 0; i < practice_list.data.length; i++) {
 	practice_trials.push(prompt_fixation_block)
 	practice_list.data[i]["condition"] = "go_practice"
+	practice_list.data[i]["SSD"] = SSD
 	if (stop_trials[i] == 'go') {
 		var stim_block = {
 		  type: 'single-stim',
@@ -147,6 +153,7 @@ for (i = 0; i < practice_list.data.length; i++) {
 		practice_trials.push(stim_block)
 	} else {
 		practice_list.data[i]["condition"] = "go_practice"
+		practice_list.data[i]["SSD"] = SSD
         var stop_signal_block = {
           type: 'stop-signal',
           stimuli: practice_list.image[i],
@@ -157,9 +164,8 @@ for (i = 0; i < practice_list.data.length; i++) {
           timing_stim: 850,
           timing_response: 850,
           prompt: prompt_text,
-          SSD: 250,
-          SS_stimulus: '<div class = centerbox><p class = "stop-signal">X</p></div>',
-          on_finish: updateSSD
+          SSD: SSD,
+          SS_stimulus: '<div class = centerbox><div id = burst-12></div></div>'
         }
 		practice_trials.push(stop_signal_block)
 	}
@@ -192,7 +198,10 @@ var practice_chunk = {
         } else {
             // keep going until they are faster!
             if (average_correct < .75) {
-                practice_feedback_text += 	'</p><p class = block-text>We will try another practice block. Remember, the correct keys are as follows: <ul list-text><li>Square: ' + correct_responses[0][0] + '</li><li>Circle: ' + correct_responses[1][0] + ' </li><li>Triangle: ' + correct_responses[2][0] + ' </li><li>Diamond: ' + correct_responses[3][0] + ' </li></ul>'
+                practice_feedback_text += 	'</p><p class = block-text>We will try another practice block. Remember, the correct keys are as follows: ' + prompt_text
+            }
+            if (average_rt < 1000) {
+                practice_feedback_text += '</p><p class = block-text>We will try another practice block. Remember, try to response as quickly and accurately as possible when no stop signal occurs.'
             }
             return true;
         }
@@ -203,9 +212,13 @@ stop_signal_experiment.push(practice_feedback_block)
 stop_signal_experiment.push(test_block)
 
 /* Test blocks */
+ss_freq = randomDraw(['high','low'])
 for (b = 0; b< blocks.length; b++) {
 	var block = blocks[b]
-	if (ss_freq[b] == "high") {
+	if (b == b.length/2) {
+	    if (ss_freq=="high") {ss_freq = "low"} else { ss_freq = "high"}
+	}
+	if (ss_freq == "high") {
 	    var stop_trials = jsPsych.randomization.repeat(['stop','stop','go','go','go'],block.data.length/5,false)
 	} else {
 	    var stop_trials = jsPsych.randomization.repeat(['stop','go','go','go','go'],block.data.length/5,false)
@@ -214,6 +227,7 @@ for (b = 0; b< blocks.length; b++) {
 		stop_signal_experiment.push(fixation_block)
 		if (stop_trials[i] == 'go') {
 			block.data[i]["condition"] = "go_" + ss_freq[b]
+			block.data[i]["SSD"] = SSD
 			var stim_block = {
 			  type: 'single-stim',
 			  stimuli: block.image[i],
@@ -227,6 +241,7 @@ for (b = 0; b< blocks.length; b++) {
 			stop_signal_experiment.push(stim_block)
 		} else {
 			block.data[i]["condition"] = "stop_" + ss_freq[b]
+			block.data[i]["SSD"] = SSD
 			var stop_signal_block = {
 			  type: 'stop-signal',
 			  stimuli: block.image[i],
@@ -236,7 +251,7 @@ for (b = 0; b< blocks.length; b++) {
 			  timing_post_trial: 1000,
 			  timing_stim: 850,
 			  timing_response: 850,
-			  SSD: 250,
+			  SSD: SSD,
 			  SS_stimulus: '<div class = centerbox><p class = "stop-signal">X</p></div>',
 			  on_finish: updateSSD
 			}
