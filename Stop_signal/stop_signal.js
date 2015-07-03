@@ -30,16 +30,17 @@ var welcome_block = {
 };
 
 var correct_responses = jsPsych.randomization.repeat([["left arrow",37],["left arrow",37],["right arrow",39],["right arrow",39]],1)
+var prompt_text = '<ul list-text><li>Square:  ' + correct_responses[0][0] + '</li><li>Circle:  ' + correct_responses[1][0] + ' </li><li>Triangle:  ' + correct_responses[2][0] + ' </li><li>Diamond:  ' + correct_responses[3][0] + ' </li></ul>'
 
 /* define static blocks */
 var instructions_block = {
   type: 'instructions',
   pages: [
 	'<div class = centerbox><p class = block-text>In this task you will see black shapes appear on the screen one at a time. You will respond to them by pressing the left or right arrow keys.</p><p class = block-text>Press <strong>enter</strong> to continue.</p></div>',
-	'<div class = centerbox><p class = block-text>Only one key is correct for each shape. The correct keys are as follows:</p><ul class = list-text><li >Square:  ' + correct_responses[0][0] + '</li><li>Circle:  ' + correct_responses[1][0] + ' </li><li>Triangle:  ' + correct_responses[2][0] + ' </li><li>Diamond:  ' + correct_responses[3][0] + ' </li></ul><p class = block-text>These instructions will remain on the screen during practice, but will be removed during the test phase.</p><p class = block-text> Press <strong>enter</strong> to continue.</p></div>',
-	'<div class = centerbox><p class = block-text>You should respond as quickly and accurately as possible to each shape. The shape will only be on the screen for a very short amount of time, and you must respond before it disappears.</p><p class = block-text>Press <strong>enter</strong> to continue.</p></div>',
-	'<div class = centerbox><p class = block-text>On some proportion of trials a red "X" will appear over the shape after a short delay. On these trials you should <strong>not respond</strong> in any way.</p><p class = block-text>Press <strong>enter</strong> to continue.</p></div>',
-	'<div class = centerbox><p class = block-text>It is equally important that you both respond quickly and accurately to the shapes when there is no "X" <strong>and</strong> successfully stop your response on trials where there is a red "X".</p><p class = block-text>Press <strong>enter</strong> to continue.</p></div>'
+	'<div class = centerbox><p class = block-text>Only one key is correct for each shape. The correct keys are as follows:' + prompt_text + '<p class = block-text>These instructions will remain on the screen during practice, but will be removed during the test phase.</p><p class = block-text> Press <strong>enter</strong> to continue.</p></div>',
+	'<div class = centerbox><p class = block-text>You should respond as quickly and accurately as possible to each shape. The shape will only be on the screen for a very short amount of time.</p><p class = block-text>Press <strong>enter</strong> to continue.</p></div>',
+	'<div class = centerbox><p class = block-text>On some proportion of trials a red "stop signal"  will appear around the shape after a short delay. On these trials you should <strong>not respond</strong> in any way.</p><p class = block-text>Press <strong>enter</strong> to continue.</p></div>',
+	'<div class = centerbox><p class = block-text>It is equally important that you both respond quickly and accurately to the shapes when there is no red stop signal <strong>and</strong> successfully stop your response on trials where there is a red stop signal.</p><p class = block-text>Press <strong>enter</strong> to continue.</p></div>'
 	],
   key_forward: 13
 };
@@ -68,7 +69,6 @@ var fixation_block = {
 }
 
 /* prompt blocks are used during practice to show the instructions */
-var prompt_text = '<ul list-text><li>Square:  ' + correct_responses[0][0] + '</li><li>Circle:  ' + correct_responses[1][0] + ' </li><li>Triangle:  ' + correct_responses[2][0] + ' </li><li>Diamond:  ' + correct_responses[3][0] + ' </li></ul>'
 var prompt_block = {
   type: 'single-stim',
   stimuli: prompt_text,
@@ -81,7 +81,7 @@ var prompt_block = {
 
 var prompt_fixation_block = {
   type: 'single-stim',
-  stimuli: '<div class = centerbox><p class = ss_fixation>+</p></div>',
+  stimuli: '<div class = shapebox><p class = ss_fixation>+</p></div>',
   is_html: true,
   choices: 'none',
   data: {exp_id: "stop_signal", "trial_type": "fixation"},
@@ -101,6 +101,7 @@ var practice_feedback_block = {
 /* define test block */
 
 var SSD = 250
+var stop_signal = '<div class = stopbox><div class = centered-shape id = stop-signal></div><div class = centered-shape id = stop-signal-inner></div></div>'
 
 stimuli = [
 	{image: '<div class = shapebox><div class = centered-shape id = circle></div></div>',
@@ -152,7 +153,7 @@ for (i = 0; i < practice_list.data.length; i++) {
 		}
 		practice_trials.push(stim_block)
 	} else {
-		practice_list.data[i]["condition"] = "go_practice"
+		practice_list.data[i]["condition"] = "stop_practice"
 		practice_list.data[i]["SSD"] = SSD
         var stop_signal_block = {
           type: 'stop-signal',
@@ -165,7 +166,7 @@ for (i = 0; i < practice_list.data.length; i++) {
           timing_response: 850,
           prompt: prompt_text,
           SSD: SSD,
-          SS_stimulus: '<div class = centerbox><div id = burst-12></div></div>'
+          SS_stimulus: stop_signal
         }
 		practice_trials.push(stop_signal_block)
 	}
@@ -252,7 +253,7 @@ for (b = 0; b< blocks.length; b++) {
 			  timing_stim: 850,
 			  timing_response: 850,
 			  SSD: SSD,
-			  SS_stimulus: '<div class = centerbox><p class = "stop-signal">X</p></div>',
+			  SS_stimulus: stop_signal,
 			  on_finish: updateSSD
 			}
 			stop_signal_experiment.push(stop_signal_block)
