@@ -1,4 +1,23 @@
-/* define welcome message block */
+/* ************************************ */
+/* Define helper functions */
+/* ************************************ */
+
+/* ************************************ */
+/* Define experimental variables */
+/* ************************************ */
+var numbers =  [];
+for (var i = 10; i <= 99; i++) {
+    numbers.push(i.toString());
+}
+var numbers = jsPsych.randomization.repeat(numbers,1,false)
+var add_list = numbers.slice(0,30)
+var minus_list = numbers.slice(30,60)
+var alternate_list = numbers.slice(60,90)
+
+/* ************************************ */
+/* Set up jsPsych blocks */
+/* ************************************ */
+/* define static blocks */
 var welcome_block = {
   type: 'text',
   text: '<div class = centerbox><p class = block-text>Welcome to the plus-minus experiment. Press any key to begin.</p></div>'
@@ -23,15 +42,6 @@ var start_alternate_block = {
   type: 'text',
   text: '<div class = centerbox><p class = block-text>On the following screen you will see a list of numbers. <strong>Alternate between adding and subtracting 3</strong> to the numbers and enter the value in the box below the number.</p><p class = block-text>For instance, if the numbers were 27, 13, 40, your responses should be 30 (27+3), 10 (13-3), 43 (40+3). Complete the list as quickly and accurately as possible. Press any key to begin.</p></div>'
 };
-
-var numbers =  [];
-for (var i = 10; i <= 99; i++) {
-    numbers.push(i.toString());
-}
-var numbers = jsPsych.randomization.repeat(numbers,1,false)
-var add_list = numbers.slice(0,30)
-var minus_list = numbers.slice(30,60)
-var alternate_list = numbers.slice(60,90)
 
 var practice_block = {
     type: 'survey-text',

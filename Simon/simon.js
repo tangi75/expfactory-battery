@@ -1,28 +1,15 @@
 
-/* define welcome message block */
-var welcome_block = {
-  type: 'text',
-  text: '<div class = centerbox><p class = block-text>Welcome to the experiment. Press any key to begin.</p></div>'
-};
+/* ************************************ */
+/* Define helper functions */
+/* ************************************ */
+var post_trial_gap = function() {
+  return Math.floor( Math.random() * 500 ) + 500;
+}
 
+/* ************************************ */
+/* Define experimental variables */
+/* ************************************ */
 var correct_responses = jsPsych.randomization.repeat([["left arrow",37],["right arrow",39]],1)
-
-/* define instructions block */
-var instructions_block = {
-  type: 'instructions',
-  pages: [
-	'<div class = centerbox><p class = block-text>If you see red, press the ' + correct_responses[0][0] + '. Press <strong>enter</strong> to continue.</p></div>',
-	'<div class = centerbox><p class = block-text>If you see blue, press the ' + correct_responses[1][0] + '. Press <strong>enter</strong> to continue.</p></div>'
-	],
-  key_forward: 13
-};
-
-var start_test_block = {
-  type: 'text',
-  text: '<div class = centerbox><p class = block-text>Starting test. Press any key to begin.</p></div>'
-};
-
-/* define test block */
 var test_stimuli = [
   {
 	image: '<div class = centerbox><div class = simon_left id = "stim1"></div></div>',
@@ -49,10 +36,31 @@ var response_array = [];
 for (i = 0; i < practice_trials.data.length; i++) {
 	response_array.push(practice_trials.data[i]['correct_response'])
 }
-var post_trial_gap = function() {
-  return Math.floor( Math.random() * 500 ) + 500;
-}
 
+/* ************************************ */
+/* Set up jsPsych blocks */
+/* ************************************ */
+/* define static blocks */
+var welcome_block = {
+  type: 'text',
+  text: '<div class = centerbox><p class = block-text>Welcome to the experiment. Press any key to begin.</p></div>'
+};
+
+var instructions_block = {
+  type: 'instructions',
+  pages: [
+	'<div class = centerbox><p class = block-text>If you see red, press the ' + correct_responses[0][0] + '. Press <strong>enter</strong> to continue.</p></div>',
+	'<div class = centerbox><p class = block-text>If you see blue, press the ' + correct_responses[1][0] + '. Press <strong>enter</strong> to continue.</p></div>'
+	],
+  key_forward: 13
+};
+
+var start_test_block = {
+  type: 'text',
+  text: '<div class = centerbox><p class = block-text>Starting test. Press any key to begin.</p></div>'
+};
+
+/* define practice block */
 var practice_block = {
   type: 'stim-feedback',
   stimuli: practice_trials.image,
@@ -69,7 +77,8 @@ var practice_block = {
   show_stim_with_feedback: false,
   timing_post_trial: post_trial_gap,
 }
-	
+
+/* define test block */
 var test_block = {
   type: 'single-stim',
   stimuli: test_trials.image,

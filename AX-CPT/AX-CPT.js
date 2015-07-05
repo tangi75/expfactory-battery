@@ -1,15 +1,38 @@
 
 /* Main reference: http://www.pnas.org/content/suppl/2009/04/20/0808187106.DCSupplemental/0808187106SI.pdf#nameddest=STXT */
 
-/* define welcome message block */
+/* ************************************ */
+/* Define helper functions */
+/* ************************************ */
+
+var getChar = function() {
+ return '<div class = centerbox><p class = AX_text>' + chars[Math.round(Math.random()*21)] + '</p></div>'
+}
+var post_trial_gap = function() {
+  return Math.floor( Math.random() * 500 ) + 500;
+}
+
+/* ************************************ */
+/* Define experimental variables */
+/* ************************************ */
+var correct_responses = jsPsych.randomization.repeat([["left arrow",37],["right arrow",39]],1)
+var chars = 'BCDEFGHIJLMNOPQRSTUVWZ'
+var trial_proportions = ["AX", "AX", "AX", "AX", "AX", "AX", "AX", "BX", "AY", "BY"]
+var block1_list = jsPsych.randomization.repeat(trial_proportions,10)
+var block2_list = jsPsych.randomization.repeat(trial_proportions,10)
+var block3_list = jsPsych.randomization.repeat(trial_proportions,10)
+var blocks = [block1_list,block2_list, block3_list]
+
+/* ************************************ */
+/* Set up jsPsych blocks */
+/* ************************************ */
+
+/* define static blocks */
 var welcome_block = {
   type: 'text',
   text: '<div class = centerbox><p class = block-text>Welcome to the AX experiment. Press any key to begin.</p></div>'
 };
 
-var correct_responses = jsPsych.randomization.repeat([["left arrow",37],["right arrow",39]],1)
-
-/* define instructions block */
 var instructions_block = {
   type: 'instructions',
   pages: [
@@ -24,15 +47,6 @@ var rest_block = {
   text: '<div class = centerbox><p class = block-text>Take a break! Press any key to continue.</p></div>'
 };
 
-/* define test block */
-var chars = 'BCDEFGHIJLMNOPQRSTUVWZ'
-var getChar = function() {
- return '<div class = centerbox><p class = AX_text>' + chars[Math.round(Math.random()*21)] + '</p></div>'
-}
-var post_trial_gap = function() {
-  return Math.floor( Math.random() * 500 ) + 500;
-}
-
 var wait_block = {
   type: 'single-stim',
   stimuli: '<div class = centerbox><p class = AX_feedback>Trial over, get ready for the next one.</p></div>',
@@ -44,6 +58,7 @@ var wait_block = {
   timing_response: 1000
 }
 
+/* define test block cues and targets*/
 var A_cue = {
   type: 'single-stim',
   stimuli: '<div class = centerbox><p class = AX_text>A</p></div>',
@@ -88,13 +103,9 @@ var other_target = {
   timing_post_trial: 0
 };
 
-
-
-var trial_proportions = ["AX", "AX", "AX", "AX", "AX", "AX", "AX", "BX", "AY", "BY"]
-var block1_list = jsPsych.randomization.repeat(trial_proportions,10)
-var block2_list = jsPsych.randomization.repeat(trial_proportions,10)
-var block3_list = jsPsych.randomization.repeat(trial_proportions,10)
-var blocks = [block1_list,block2_list, block3_list]
+/* ************************************ */
+/* Set up experiment */
+/* ************************************ */
 
 var AX_experiment = []
 AX_experiment.push(welcome_block);

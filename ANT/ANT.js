@@ -1,28 +1,19 @@
+/* ************************************ */
+/* Define helper functions */
+/* ************************************ */
+var post_trial_gap = function() {
+  var curr_trial = jsPsych.progress().current_trial_global
+  return 3500 - jsPsych.data.getData()[curr_trial - 1].rt - jsPsych.data.getData()[curr_trial - 4].duration
+}
 
-/* define welcome message block */
-var welcome_block = {
-  type: 'text',
-  text: '<div class = centerbox><p class = block-text>Welcome to the ANT experiment. Press any key to begin.</p></div>'
-};
-	
-/* define instructions block */
-var instructions_block = {
-  type: 'instructions',
-  pages: [
-	'<div class = centerbox><p class = block-text>Instructions 1. Press <strong>enter</strong> to continue.</p></div>',
-	'<div class = centerbox><p class = block-text>Instructions 2. Press <strong>enter</strong> to continue.</p></div>'
-	],
-  key_forward: 13
-};
+var get_RT = function() {
+  var curr_trial = jsPsych.progress().current_trial_global
+  return jsPsych.data.getData()[curr_trial].rt
+}
 
-/* define rest block */
-var rest_block = {
-  type: 'text',
-  text: '<div class = centerbox><p class = block-text>Take a break! Press any key to continue.</p></div>'
-};
-
-
-/* define test block */
+/* ************************************ */
+/* Define experimental variables */
+/* ************************************ */
 /* set up stim: location (2) * cue (4) * direction (2) * condition (3) */
 var locations = ['up', 'down']
 var cues = ['nocue', 'center', 'double', 'spatial']
@@ -66,24 +57,37 @@ for (l = 0; l < locations.length; l++) {
 /* set up 24 practice trials. Included all nocue up trials, center cue up trials, double cue down trials, and 6 spatial trials (3 up, 3 down) */
 var practice_block = jsPsych.randomization.repeat(test_stimuli.slice(0,12).concat(test_stimuli.slice(18,21)).concat(test_stimuli.slice(36,45)),1,true);
 
-var get_RT = function() {
-  var curr_trial = jsPsych.progress().current_trial_global
-  return jsPsych.data.getData()[curr_trial].rt
-}
-
 /* set up repeats for three test blocks */
 var block1_trials = jsPsych.randomization.repeat($.extend(true,[],test_stimuli), 2, true);
 var block2_trials = jsPsych.randomization.repeat($.extend(true,[],test_stimuli), 2, true);
 var block3_trials = jsPsych.randomization.repeat($.extend(true,[],test_stimuli), 2, true);
 var blocks = [block1_trials, block2_trials, block3_trials]
 
-var post_trial_gap = function() {
-  var curr_trial = jsPsych.progress().current_trial_global
-  return 3500 - jsPsych.data.getData()[curr_trial - 1].rt - jsPsych.data.getData()[curr_trial - 4].duration
-}
 
+/* ************************************ */
+/* Set up jsPsych blocks */
+/* ************************************ */
 
-/* create fixation definition array */
+/* define static blocks */
+var welcome_block = {
+  type: 'text',
+  text: '<div class = centerbox><p class = block-text>Welcome to the ANT experiment. Press any key to begin.</p></div>'
+};
+	
+var instructions_block = {
+  type: 'instructions',
+  pages: [
+	'<div class = centerbox><p class = block-text>Instructions 1. Press <strong>enter</strong> to continue.</p></div>',
+	'<div class = centerbox><p class = block-text>Instructions 2. Press <strong>enter</strong> to continue.</p></div>'
+	],
+  key_forward: 13
+};
+
+var rest_block = {
+  type: 'text',
+  text: '<div class = centerbox><p class = block-text>Take a break! Press any key to continue.</p></div>'
+};
+
 var fixation = {
   type: 'single-stim',
   stimuli: '<div class = centerbox><p class = ANT_text>+</p></div>',
@@ -129,12 +133,12 @@ var double_cue = {
 }
 
 
-	
-/* create ANT_experiment definition array */
+/* set up ANT experiment */
 var ANT_experiment = [];
 ANT_experiment.push(welcome_block);
 ANT_experiment.push(instructions_block);
 
+/* set up ANT practice */
 var trial_num = 0
 var block = practice_block
 for (i = 0; i < block.data.length; i++) {
@@ -208,7 +212,7 @@ for (i = 0; i < block.data.length; i++) {
 ANT_experiment.push(rest_block)
 
 
-
+/* Set up ANT main task */
 var trial_num = 0
 for (b = 0; b < blocks.length; b ++) {
 	var block = blocks[b]

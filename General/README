@@ -6,3 +6,20 @@ General points when making experiments:
 -Each trial of each experiment should be tagged with a "exp_id" indicating the experiment it belongs to.
 -More general identification (like "fixation") should be defined in "trial_id" if need be. Generally only used for 
  when more detailed descriptors aren't applicable (like condition, direction, etc.). Best practice to include it regardless.
+
+ For easy reading, set up each experiment in this way:
+ /* ************************************ */
+/* Define helper functions */
+/* ************************************ */
+
+
+
+/* ************************************ */
+/* Define experimental variables */
+/* ************************************ */
+
+
+
+/* ************************************ */
+/* Set up jsPsych blocks */
+/* ************************************ */

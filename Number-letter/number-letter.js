@@ -1,30 +1,6 @@
-
-/* define welcome message block */
-var welcome_block = {
-  type: 'text',
-  text: '<div class = centerbox><p class = block-text>Welcome to the number-letter experiment. Press any key to begin.</p></div>'
-};
-
-var correct_responses = jsPsych.randomization.repeat([["left arrow",37],["right arrow",39]],1)
-
-/* define instructions block */
-var instructions_block = {
-  type: 'instructions',
-  pages: [
-	'<div class = centerbox><p class = block-text>In this experiment you will see letter-number pairs appear in one of four quadrants on the screen. For instance, you may see "G9" appear in the top right of the screen. Press <strong>enter</strong> to continue.</p></div>',
-	'<div class = centerbox><p class = block-text>When the letter-number pair is in the top half of the screen, you should indicate whether the number is odd or even using the arrow keys: left of odd, right for even. Press <strong>enter</strong> to continue.</p></div>',
-	'<div class = centerbox><p class = block-text>When the letter-number pair is in the bottom half of the screen, you should indicate whether the letter is a consonant or vowel using the arrow keys: left for consonant, right for vowel. Press <strong>enter</strong> to continue.</p></div>'
-	],
-  key_forward: 13
-};
-
-var evens = [2,4,6,8]
-var odds = [3,5,7,9]
-var numbers = [evens,odds]
-var consonants = ["G","K","M","R"]
-var vowels = ["A","E","I","U"]
-var letters = [consonants, vowels]
-
+/* ************************************ */
+/* Define helper functions */
+/* ************************************ */
 var randomDraw = function(lst) {
     index = Math.round(Math.random()*(lst.length-1))
     return lst[index]
@@ -43,7 +19,6 @@ var getBottomStim = function() {
     return [stim_place,'<div class = numlet-' +  stim_place +'><p class = numlet-text>' + getStim() + '</p></div><div class = vertical-line></div><div class = horizontal-line></div>']
 }
 
-var place = randomDraw([0,1,2,3])
 var getRotateStim = function() {
     switch(place) {
         case 0:
@@ -63,12 +38,37 @@ var getRotateStim = function() {
     return [stim_place, '<div class = numlet-' + stim_place +'><p class = numlet-text>' + getStim() + '</p></div><div class = vertical-line></div><div class = horizontal-line></div>']
 }
 
+/* ************************************ */
+/* Define experimental variables */
+/* ************************************ */
+var correct_responses = jsPsych.randomization.repeat([["left arrow",37],["right arrow",39]],1)
+var evens = [2,4,6,8]
+var odds = [3,5,7,9]
+var numbers = [evens,odds]
+var consonants = ["G","K","M","R"]
+var vowels = ["A","E","I","U"]
+var letters = [consonants, vowels]
+var place = randomDraw([0,1,2,3])
 
+/* ************************************ */
+/* Set up jsPsych blocks */
+/* ************************************ */
 
+/* define static blocks */
+var welcome_block = {
+  type: 'text',
+  text: '<div class = centerbox><p class = block-text>Welcome to the number-letter experiment. Press any key to begin.</p></div>'
+};
 
-
-
-
+var instructions_block = {
+  type: 'instructions',
+  pages: [
+	'<div class = centerbox><p class = block-text>In this experiment you will see letter-number pairs appear in one of four quadrants on the screen. For instance, you may see "G9" appear in the top right of the screen. Press <strong>enter</strong> to continue.</p></div>',
+	'<div class = centerbox><p class = block-text>When the letter-number pair is in the top half of the screen, you should indicate whether the number is odd or even using the arrow keys: left of odd, right for even. Press <strong>enter</strong> to continue.</p></div>',
+	'<div class = centerbox><p class = block-text>When the letter-number pair is in the bottom half of the screen, you should indicate whether the letter is a consonant or vowel using the arrow keys: left for consonant, right for vowel. Press <strong>enter</strong> to continue.</p></div>'
+	],
+  key_forward: 13
+};
 
 /* create experiment definition array */
 var numlet_experiment = []
