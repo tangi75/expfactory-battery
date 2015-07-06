@@ -46,9 +46,9 @@ var getTestFeedback = function() {
 	var stop_percent = successful_stops/stop_length
 	test_feedback_text = "Average reaction time:  " + Math.round(average_rt) + " ms. Accuracy: " + Math.round(average_correct*100) + "%"
 	if (stop_percent >= .75) {
-		test_feedback_text += '</p><p class = block-text> Remember to response as quickly as possible on each trial.'
+		test_feedback_text += '</p><p class = block-text> Remember to respond as quickly as possible on each trial.'
 	} else if (stop_percent <= .25) {
-		test_feedback_text += '</p><p class = block-text> Remember to withold any response if you see the red stop signal.'
+		test_feedback_text += '</p><p class = block-text> Remember to try to withold your response if you see the red stop signal.'
 	}
 	return '<div class = centerbox><p class = block-text>' + test_feedback_text + '</p></div>'
 }
@@ -59,7 +59,7 @@ var updateSSD = function() {
 	var curr_trial = jsPsych.progress().current_trial_global
 	if (jsPsych.data.getData()[curr_trial].rt == -1 && SSD<850) {
 		SSD = SSD + 50
-	} else if (SSD > 0) { 
+	} else if (jsPsych.data.getData()[curr_trial].rt != -1 && SSD > 0) { 
 		SSD = SSD - 50
 	}
 }
@@ -93,6 +93,7 @@ var stimuli = [
 	},
 ]
 
+var noSS_practice_list = jsPsych.randomization.repeat(stimuli,3,true)
 var practice_list = jsPsych.randomization.repeat(stimuli,5, true)
 
 numblocks = 2
@@ -116,11 +117,17 @@ var instructions_block = {
   pages: [
 	'<div class = centerbox><p class = block-text>In this task you will see black shapes appear on the screen one at a time. You will respond to them by pressing the left or right arrow keys.</p><p class = block-text>Press <strong>enter</strong> to continue.</p></div>',
 	'<div class = centerbox><p class = block-text>Only one key is correct for each shape. The correct keys are as follows:' + prompt_text + '<p class = block-text>These instructions will remain on the screen during practice, but will be removed during the test phase.</p><p class = block-text> Press <strong>enter</strong> to continue.</p></div>',
-	'<div class = centerbox><p class = block-text>You should respond as quickly and accurately as possible to each shape. The shape will only be on the screen for a very short amount of time.</p><p class = block-text>Press <strong>enter</strong> to continue.</p></div>',
+	'<div class = centerbox><p class = block-text>You should respond as quickly and accurately as possible to each shape.</p><p class = block-text>Press <strong>enter</strong> to continue.</p></div>',
 	'<div class = centerbox><p class = block-text>On some proportion of trials a red "stop signal"  will appear around the shape after a short delay. On these trials you should <strong>not respond</strong> in any way.</p><p class = block-text>Press <strong>enter</strong> to continue.</p></div>',
 	'<div class = centerbox><p class = block-text>It is equally important that you both respond quickly and accurately to the shapes when there is no red stop signal <strong>and</strong> successfully stop your response on trials where there is a red stop signal.</p><p class = block-text>Press <strong>enter</strong> to continue.</p></div>'
 	],
   key_forward: 13
+};
+
+var noSS_practice_block = {
+  type: 'text',
+  cont_key: 13,
+  text: '<div class = centerbox><p class = block-text>We will now start with a practice session. There will be no stop signals. In this practice just concentrate on responding quickly and accurately to each shape. Press <strong>enter</strong> to continue.</p></div>'
 };
 
 var test_block = {
@@ -150,11 +157,12 @@ var fixation_block = {
 var prompt_block = {
   type: 'single-stim',
   stimuli: prompt_text,
+  choices: [37, 39],
   is_html: true,
-  choices: 'none',
   timing_post_trial: 0,
   timing_stim: 1000,
   timing_response: 1000,
+  response_ends_trial: false
 }
 
 var prompt_fixation_block = {
@@ -170,15 +178,17 @@ var prompt_fixation_block = {
 }
 
 /* Initialize 'feedback text' and set up feedback blocks */
-var practice_feedback_text = 'We will now start with a practice session. Press <strong>enter</strong> to continue.'
+var practice_feedback_text = 'In this next practice there will be a stop signal on some trials like in the rest of the experiment. On these trials try to withold your response. Press <strong>enter</strong> to continue.'
 
 var practice_feedback_block = {
   type: 'text',
+  cont_key: 13,
   text: getPracticeFeedback
 };
 
 var test_feedback_block = {
   type: 'text',
+  cont_key: 13,
   text: getTestFeedback
 };
 
@@ -190,7 +200,35 @@ var stop_signal_experiment = []
 stop_signal_experiment.push(welcome_block);
 stop_signal_experiment.push(instructions_block);
 
-/* Practice block */
+/* Practice block w/o SS */
+var noSS_practice_trials = []
+noSS_practice_trials.push(noSS_practice_block)
+for (i = 0; i < noSS_practice_list.data.length; i++) {
+	noSS_practice_trials.push(prompt_fixation_block)
+	var stim_data = $.extend({},noSS_practice_list.data[i])
+	stim_data["condition"] = "go_noSS_practice"
+	var stim_block = {
+	  type: 'single-stim',
+	  stimuli: noSS_practice_list.image[i],
+	  data: stim_data,
+	  is_html: true,
+	  choices: [37,39],
+	  timing_post_trial: 0,
+	  timing_stim: 850,
+	  timing_response: 850,
+	  response_ends_trial: false,
+	  prompt: prompt_text
+	}
+	noSS_practice_trials.push(stim_block)
+	noSS_practice_trials.push(prompt_block)
+}
+var noSS_practice_chunk = {
+    chunk_type: 'linear',
+    timeline: noSS_practice_trials
+}
+stop_signal_experiment.push(noSS_practice_chunk)
+
+/* Practice block with SS */
 var practice_trials = []
 practice_trials.push(practice_feedback_block)
 var stop_trials = jsPsych.randomization.repeat(['stop','stop','stop','go','go','go','go','go','go','go'],practice_list.data.length/10,false)
@@ -252,6 +290,11 @@ var practice_chunk = {
 					num_responses += 1
 					sum_rt += data[i].rt;
 					if (data[i].key_press == data[i].correct_response) { sum_correct += 1 }
+				} else if (data[i+1].rt != -1) {
+					console.log(850+data[i+1].rt)
+					num_responses += 1
+					sum_rt += (850 + data[i+1].rt);
+					if (data[i+1].key_press == data[i].correct_response) { sum_correct += 1 }
 				}
 				go_length += 1
             }
@@ -266,15 +309,15 @@ var practice_chunk = {
         } else {
             // keep going until they are faster!
 			practice_feedback_text += '</p><p class = block-text>We will try another practice block. '
-            if (average_correct < .75) {
-                practice_feedback_text += 	 'Remember, the correct keys are as follows: ' + prompt_text
-            }
             if (average_rt > 1000) {
-                practice_feedback_text += 'Remember, try to response as quickly and accurately as possible when no stop signal occurs.'
+                practice_feedback_text += '</p><p class = block-text>Remember, try to response as quickly and accurately as possible when no stop signal occurs.'
             }
 			if (missed_responses >= 3) {
-			    practice_feedback_text += 'Remember to respond to each shape unless you see the red stop signal.'
+			    practice_feedback_text += '</p><p class = block-text>Remember to respond to each shape unless you see the red stop signal.'
 			}
+			if (average_correct < .75) {
+                practice_feedback_text += 	 '</p><p class = block-text>Remember, the correct keys are as follows: ' + prompt_text
+            }
             return true;
         }
     }
