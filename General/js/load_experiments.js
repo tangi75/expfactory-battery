@@ -53,7 +53,7 @@ for (i = 0; i < experiment_names.length; i++) {
 		break;
 	case "plus-minus":
 		loadjscssfile("../Plus-minus/plus-minus.js","js")
-		loadjscssfile("jspsych-4.2/plugins/jspsych-survey-text.js","js")
+		loadjscssfile("jspsych/plugins/jspsych-survey-text.js","js")
 		break;
 	case "number-letter":
 	    loadjscssfile("../Number-letter/number-letter.css","css")

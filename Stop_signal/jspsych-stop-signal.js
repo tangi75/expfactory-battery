@@ -52,12 +52,12 @@
 			if (!trial.is_html) {
 				display_element.append($('<img>', {
 					src: trial.a_path,
-					id: 'jspsych-single-stim-stimulus'
+					id: 'jspsych-stop-signal-stimulus'
 				}));
 			} else {
 				display_element.append($('<div>', {
 					html: trial.a_path,
-					id: 'jspsych-single-stim-stimulus'
+					id: 'jspsych-stop-signal-stimulus'
 				}));
 			}
 
@@ -103,7 +103,7 @@
 
 				// after a valid response, the stimulus will have the CSS class 'responded'
 				// which can be used to provide visual feedback that a response was recorded
-				$("#jspsych-single-stim-stimulus").addClass('responded');
+				$("#jspsych-stop-signal-stimulus").addClass('responded');
 
 				// only record the first response
 				if(response.key == -1){
@@ -117,13 +117,20 @@
 
 			// start the response listener
 			if(JSON.stringify(trial.choices) != JSON.stringify(["none"])) {
-				var keyboardListener = jsPsych.pluginAPI.getKeyboardResponse(after_response, trial.choices);
+				var keyboardListener = jsPsych.pluginAPI.getKeyboardResponse({
+					callback_function: after_response,
+					valid_responses: trial.choices,
+					rt_method: 'date',
+					persist: false,
+					allow_held_key: false
+				});
 			}
 
 			// hide image if timing is set
 			if (trial.timing_stim > 0) {
 				var t1 = setTimeout(function() {
-					$('#jspsych-single-stim-stimulus').css('visibility', 'hidden');
+					$('#jspsych-stop-signal-stimulus').css('visibility', 'hidden');
+					$('#jspsych-stop-signal-SS').css('visibility', 'hidden');
 				}, trial.timing_stim);
 				setTimeoutHandlers.push(t1);
 			}
@@ -137,9 +144,12 @@
 			}
 			
 			// end trial if time limit is set
-			if (trial.SSD > 0) {
+			if (trial.SSD >= 0) {
 				var t3 = setTimeout(function() {
-					display_element.append(trial.SS_stimulus);
+					display_element.append($('<div>', {
+						html: trial.SS_stimulus,
+						id: 'jspsych-stop-signal-SS'
+					}));
 				}, trial.SSD);
 				setTimeoutHandlers.push(t3);
 			}

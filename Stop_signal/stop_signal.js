@@ -55,12 +55,17 @@ var getTestFeedback = function() {
 
 /* Staircase procedure. After each successful stop, make the stop signal delay longer (making stopping harder) */
 var updateSSD = function() {
+	jsPsych.data.addDataToLastTrial({'SSD': SSD})
 	var curr_trial = jsPsych.progress().current_trial_global
 	if (jsPsych.data.getData()[curr_trial].rt == -1 && SSD<850) {
 		SSD = SSD + 50
 	} else if (SSD > 0) { 
 		SSD = SSD - 50
 	}
+}
+
+var getSSD = function() {
+	return SSD
 }
 
 /* ************************************ */
@@ -74,10 +79,10 @@ var correct_responses = jsPsych.randomization.repeat([["left arrow",37],["left a
 var prompt_text = '<ul list-text><li>Square:  ' + correct_responses[0][0] + '</li><li>Circle:  ' + correct_responses[1][0] + ' </li><li>Triangle:  ' + correct_responses[2][0] + ' </li><li>Diamond:  ' + correct_responses[3][0] + ' </li></ul>'
 
 var stimuli = [
-	{image: '<div class = shapebox><div class = centered-shape id = circle></div></div>',
+	{image: '<div class = shapebox><div class = centered-shape id = square></div></div>',
 	data: {correct_response: correct_responses[0][1], exp_id: "stop_signal", trial_id: "stim"}
 	},
-	{image: '<div class = shapebox><div class = centered-shape id = square></div></div>',
+	{image: '<div class = shapebox><div class = centered-shape id = circle></div></div>',
 	data: {correct_response: correct_responses[1][1], exp_id: "stop_signal", trial_id: "stim"}
 	},
 	{image: '<div class = shapebox><div class = centered-shape id = triangle></div></div>',
@@ -165,7 +170,7 @@ var prompt_fixation_block = {
 }
 
 /* Initialize 'feedback text' and set up feedback blocks */
-var practice_feedback_text = 'We will not start with a practice session. Press <strong>enter</strong> to continue.'
+var practice_feedback_text = 'We will now start with a practice session. Press <strong>enter</strong> to continue.'
 
 var practice_feedback_block = {
   type: 'text',
@@ -204,6 +209,7 @@ for (i = 0; i < practice_list.data.length; i++) {
 		  timing_post_trial: 0,
 		  timing_stim: 850,
 		  timing_response: 850,
+		  response_ends_trial: false,
 		  prompt: prompt_text
 		}
 		practice_trials.push(stim_block)
@@ -220,6 +226,7 @@ for (i = 0; i < practice_list.data.length; i++) {
           timing_post_trial: 0,
           timing_stim: 850,
           timing_response: 850,
+		  response_ends_trial: false,
           prompt: prompt_text,
           SSD: SSD,
           SS_stimulus: stop_signal
@@ -252,7 +259,6 @@ var practice_chunk = {
         var average_rt = sum_rt / go_length;
         var average_correct = sum_correct / num_responses;
 		var missed_responses = go_length - num_responses
-		console.log('sum correct: ' + sum_correct + ', go length: ' + go_length)
         practice_feedback_text = "Average reaction time:  " + Math.round(average_rt) + " ms. Accuracy: " + Math.round(average_correct*100) + "%"
         if(average_rt < 1000 && average_correct > .75 && missed_responses < 3){
             // end the loop
@@ -275,12 +281,12 @@ var practice_chunk = {
 }
 
 stop_signal_experiment.push(practice_chunk)
-stop_signal_experiment.push(practice_feedback_block)
+stop_signal_experiment.push(practice_feedback_block) 
 stop_signal_experiment.push(test_block)
 
 
 /* Test blocks */
-ss_freq = randomDraw(['high','low'])
+ss_freq = 'high' // randomDraw(['high','low'])
 for (b = 0; b< blocks.length; b++) {
 	stop_signal_exp_block = []
 	var block = blocks[b]
@@ -297,7 +303,6 @@ for (b = 0; b< blocks.length; b++) {
 		if (stop_trials[i] == 'go') {
 			var stim_data = $.extend({},block.data[i])
 			stim_data["condition"] = "go_" + ss_freq
-			stim_data["SSD"] = SSD
 			var stim_block = {
 			  type: 'single-stim',
 			  stimuli: block.image[i],
@@ -306,13 +311,13 @@ for (b = 0; b< blocks.length; b++) {
 			  choices: [37,39],
 			  timing_post_trial: 0,
 			  timing_stim: 850,
-			  timing_response: 1850
+			  timing_response: 1850,
+			  response_ends_trial: false
 			}
 			stop_signal_exp_block.push(stim_block)
 		} else {
 			var stim_data = $.extend({},block.data[i])
 			stim_data["condition"] = "stop_" + ss_freq
-			stim_data["SSD"] = SSD
 			var stop_signal_block = {
 			  type: 'stop-signal',
 			  stimuli: block.image[i],
@@ -322,7 +327,8 @@ for (b = 0; b< blocks.length; b++) {
 			  timing_post_trial: 0,
 			  timing_stim: 850,
 			  timing_response: 1850,
-			  SSD: SSD,
+			  response_ends_trial: false,
+			  SSD: getSSD,
 			  SS_stimulus: stop_signal,
 			  on_finish: updateSSD
 			}
