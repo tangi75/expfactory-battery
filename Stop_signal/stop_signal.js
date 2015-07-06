@@ -124,12 +124,6 @@ var instructions_block = {
   key_forward: 13
 };
 
-var noSS_practice_block = {
-  type: 'text',
-  cont_key: 13,
-  text: '<div class = centerbox><p class = block-text>We will now start with a practice session. There will be no stop signals. In this practice just concentrate on responding quickly and accurately to each shape. Press <strong>enter</strong> to continue.</p></div>'
-};
-
 var test_block = {
   type: 'text',
   cont_key: 13,
@@ -178,8 +172,7 @@ var prompt_fixation_block = {
 }
 
 /* Initialize 'feedback text' and set up feedback blocks */
-var practice_feedback_text = 'In this next practice there will be a stop signal on some trials like in the rest of the experiment. On these trials try to withold your response. Press <strong>enter</strong> to continue.'
-
+var practice_feedback_text = 'We will now start with a practice session. There will be no stop signals. In this practice just concentrate on responding quickly and accurately to each shape. Press <strong>enter</strong> to continue.'
 var practice_feedback_block = {
   type: 'text',
   cont_key: 13,
@@ -202,7 +195,7 @@ stop_signal_experiment.push(instructions_block);
 
 /* Practice block w/o SS */
 var noSS_practice_trials = []
-noSS_practice_trials.push(noSS_practice_block)
+noSS_practice_trials.push(practice_feedback_block)
 for (i = 0; i < noSS_practice_list.data.length; i++) {
 	noSS_practice_trials.push(prompt_fixation_block)
 	var stim_data = $.extend({},noSS_practice_list.data[i])
@@ -222,9 +215,54 @@ for (i = 0; i < noSS_practice_list.data.length; i++) {
 	noSS_practice_trials.push(stim_block)
 	noSS_practice_trials.push(prompt_block)
 }
+
 var noSS_practice_chunk = {
-    chunk_type: 'linear',
-    timeline: noSS_practice_trials
+    chunk_type: 'while',
+    timeline: noSS_practice_trials,
+	continue_function: function(data){
+        var sum_rt = 0;
+        var sum_correct = 0;
+        var go_length = 0;
+		var num_responses = 0;
+        for(var i=0; i < data.length; i++){
+			if (data[i].condition == "go_noSS_practice") {
+				if (data[i].rt != -1) {
+					console.log(data[i].rt)
+					num_responses += 1
+					sum_rt += data[i].rt;
+					if (data[i].key_press == data[i].correct_response) { sum_correct += 1 }
+				} else if (data[i+1].rt != -1) {
+					console.log(850+data[i+1].rt)
+					num_responses += 1
+					sum_rt += (850 + data[i+1].rt);
+					if (data[i+1].key_press == data[i].correct_response) { sum_correct += 1 }
+				}
+				go_length += 1
+			}
+        }
+        var average_rt = sum_rt / num_responses;
+        var average_correct = sum_correct / num_responses;
+		var missed_responses = go_length - num_responses
+        practice_feedback_text = "Average reaction time:  " + Math.round(average_rt) + " ms. Accuracy: " + Math.round(average_correct*100) + "%"
+        if(average_rt < 1000 && average_correct > .75 && missed_responses < 3){
+            // end the loop
+			practice_feedback_text += '</p><p class = block-text>In this next practice there will be a stop signal on some trials like there will be in the rest of the experiment. On these trials try to withold your response. Press <strong>enter</strong> to continue.'
+            return false;
+        } else {
+            // keep going until they are faster!
+			practice_feedback_text += '</p><p class = block-text>We will try another practice block. '
+            if (average_rt > 1000) {
+                practice_feedback_text += '</p><p class = block-text>Remember, try to response as quickly and accurately as possible.'
+            }
+			if (missed_responses >= 3) {
+			    practice_feedback_text += '</p><p class = block-text>Remember to respond to each shape.'
+			}
+			if (average_correct < .75) {
+                practice_feedback_text += '</p><p class = block-text>Remember, the correct keys are as follows: ' + prompt_text
+            }
+            return true;
+        }
+    }
 }
 stop_signal_experiment.push(noSS_practice_chunk)
 
@@ -299,7 +337,7 @@ var practice_chunk = {
 				go_length += 1
             }
         }
-        var average_rt = sum_rt / go_length;
+        var average_rt = sum_rt / num_responses;
         var average_correct = sum_correct / num_responses;
 		var missed_responses = go_length - num_responses
         practice_feedback_text = "Average reaction time:  " + Math.round(average_rt) + " ms. Accuracy: " + Math.round(average_correct*100) + "%"
@@ -316,7 +354,7 @@ var practice_chunk = {
 			    practice_feedback_text += '</p><p class = block-text>Remember to respond to each shape unless you see the red stop signal.'
 			}
 			if (average_correct < .75) {
-                practice_feedback_text += 	 '</p><p class = block-text>Remember, the correct keys are as follows: ' + prompt_text
+                practice_feedback_text += '</p><p class = block-text>Remember, the correct keys are as follows: ' + prompt_text
             }
             return true;
         }
@@ -335,6 +373,7 @@ for (b = 0; b< blocks.length; b++) {
 	var block = blocks[b]
 	if (b == blocks.length/2) {
 	    if (ss_freq=="high") {ss_freq = "low"} else { ss_freq = "high"}
+		SSD = 250
 	}
 	if (ss_freq == "high") {
 	    var stop_trials = jsPsych.randomization.repeat(['stop','stop','go','go','go'],block.data.length/5,false)
