@@ -43,7 +43,8 @@ for (i = 0; i < practice_trials.data.length; i++) {
 /* define static blocks */
 var welcome_block = {
   type: 'text',
-  text: '<div class = centerbox><p class = block-text>Welcome to the experiment. Press any key to begin.</p></div>'
+  text: '<div class = centerbox><p class = block-text>Welcome to the experiment. Press <strong>enter</strong> to begin.</p></div>',
+  cont_key: 13
 };
 
 var instructions_block = {
@@ -57,18 +58,19 @@ var instructions_block = {
 
 var start_test_block = {
   type: 'text',
-  text: '<div class = centerbox><p class = block-text>Starting test. Press any key to begin.</p></div>'
+  text: '<div class = centerbox><p class = block-text>Starting test. Press <strong>enter</strong> to begin.</p></div>',
+  cont_key: 13
 };
 
 /* define practice block */
 var practice_block = {
-  type: 'stim-feedback',
+  type: 'categorize',
   stimuli: practice_trials.image,
   is_html: true,
   key_answer: response_array,
   correct_text: '<div class = centerbox><p class = center-text>Correct</p></div>',
   incorrect_text: '<div class = centerbox><p class = center-text>Incorrect</p></div>',
-  noresponse_text: '<div class = centerbox><p class = center-text>Response faster!</p></div>',
+  timeout_message: '<div class = centerbox><p class = center-text>Response faster!</p></div>',
   choices: [37,39],
   data: practice_trials.data,
   timing_response: 1500, 

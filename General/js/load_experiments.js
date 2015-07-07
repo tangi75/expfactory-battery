@@ -6,29 +6,14 @@ function loadjscssfile(filename, filetype){
 		document.write('<link href =' + filename + ' rel="stylesheet" type="text/css"></script>')
 	}
 }
-/*
-    if (filetype=="js"){ //if filename is a external JavaScript file
-        var fileref=document.createElement('script')
-        fileref.setAttribute("type","text/javascript")
-        fileref.setAttribute("src", filename)
-    }
-    else if (filetype=="css"){ //if filename is an external CSS file
-        var fileref=document.createElement("link")
-        fileref.setAttribute("rel", "stylesheet")
-        fileref.setAttribute("type", "text/css")
-        fileref.setAttribute("href", filename)
-    }
-    if (typeof fileref!="undefined")
-        document.getElementsByTagName("head")[0].appendChild(fileref)
-}
-*/
+
 
 /* Define some function to select experiments to show. Right now I am hard coding,
 but eventually they should be selected by some function (I.E. random new combinations
 for a returning subject, keeping the total time under 30 minutes)
 */ 
-/* full list of experiment names: ["simon", "ANT", "AX-CPT", "stop_signal","plus-minus","number-letter"] */
-var experiment_names = ["stop_signal"]
+/* full list of experiment names: ["simon", "ANT", "AX-CPT", "stop_signal","plus-minus","number-letter", "local-global"] */
+var experiment_names = ["local-global"]
 
 /* One the experiments are selected, load the appropriate files */
 for (i = 0; i < experiment_names.length; i++) {
@@ -59,6 +44,10 @@ for (i = 0; i < experiment_names.length; i++) {
 	    loadjscssfile("../Number-letter/number-letter.css","css")
 		loadjscssfile("../Number-letter/number-letter.js","js")
 		break;
+	case "local-global":
+		loadjscssfile("../Local-global/local-global.css","css")
+	    loadjscssfile("../Local-global/local-global.js","js")
+		break;
 	}
 }
 
@@ -84,6 +73,9 @@ function cat_experiments(experiment_array) {
 			break;
 		case "number-letter":
 			experiments = experiments.concat(numlet_experiment)
+			break;
+		case "local-global":
+			experiments = experiments.concat(local_global_experiment)
 			break;
 		}
 	}
