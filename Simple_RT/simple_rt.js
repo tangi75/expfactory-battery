@@ -2,7 +2,9 @@
 /* ************************************ */
 /* Define helper functions */
 /* ************************************ */
-
+var post_trial_gap = function() {
+  return Math.floor( Math.random() * 500 ) + 500;
+}
 
 /* ************************************ */
 /* Define experimental variables */
@@ -21,15 +23,13 @@ var welcome_block = {
 
 var instructions_block = {
   type: 'instructions',
-  pages: [
-	'<div class = centerbox><p class = block-text>In this experiment we are testing how fast you can respond. On each trial wait press the spacebar as quickly as possible after you see the large "X".</p><p class = block-text>Press <strong>enter</strong> to continue.</p></div>'
-	],
+  text: '<div class = centerbox><p class = block-text>In this experiment we are testing how fast you can respond. On each trial wait press the spacebar as quickly as possible after you see the large "X".</p><p class = block-text>Press <strong>enter</strong> to continue.</p></div>'
   key_forward: 13
 };
 
 var start_practice_block = {
   type: 'text',
-  text: '<div class = centerbox><p class = block-text>We will start with some practice. Press <strong>enter</strong> to begin.</p></div>',
+  text: '<div class = centerbox><p class = block-text>We will start 5 practice trials. Press <strong>enter</strong> to begin.</p></div>',
   cont_key: 13
 };
 
@@ -41,28 +41,22 @@ var start_test_block = {
 
 /* define practice block */
 var practice_block = {
-  type: 'categorize',
-  stimuli: practice_trials.image,
+  type: 'single-stim',
+  stimuli: test_trials.image,
   is_html: true,
-  key_answer: practice_response_array,
-  correct_text: '<div class = centerbox><p class = center-text>Correct</p></div>',
-  incorrect_text: '<div class = centerbox><p class = center-text>Incorrect</p></div>',
-  timeout_message: '<div class = centerbox><p class = center-text>Response faster!</p></div>',
-  choices: [49,50,51,52],
-  data: practice_trials.data,
-  timing_feedback_duration: 1000,
-  show_stim_with_feedback: false,
-  timing_post_trial: 500
-}
+  data: {exp_id: "simple_rt", trial_id: "practice"},
+  choices: [32],
+  timing_post_trial: post_trial_gap
+};
 
 /* define test block */
 var test_block = {
   type: 'single-stim',
   stimuli: test_trials.image,
   is_html: true,
-  data: test_trials.data,
-  choices: [49,50,51,52],
-  timing_post_trial: 500
+  data: {exp_id: "simple_rt", trial_id: "test"},
+  choices: [32],
+  timing_post_trial: post_trial_gap
 };
 
 /* create experiment definition array */
