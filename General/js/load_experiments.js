@@ -13,7 +13,7 @@ but eventually they should be selected by some function (I.E. random new combina
 for a returning subject, keeping the total time under 30 minutes)
 */ 
 /* full list of experiment names: ["simon", "ANT", "AX-CPT", "stop_signal","plus-minus","number-letter", "local-global"] */
-var experiment_names = ["local-global"]
+var experiment_names = ["stop_signal"]
 
 /* One the experiments are selected, load the appropriate files */
 for (i = 0; i < experiment_names.length; i++) {
