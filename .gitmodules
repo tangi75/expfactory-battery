@@ -1,0 +1,3 @@
+[submodule "General/jsPsych"]
+	path = General/jsPsych
+	url = https://github.com/jodeleeuw/jsPsych.git
