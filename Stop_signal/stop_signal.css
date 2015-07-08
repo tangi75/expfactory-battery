@@ -91,11 +91,24 @@ align-items: center; /* align vertical */
 }
 
 
-#diamond {
-    width: 75%;
-	height: 75%;
-	background: black;
-    -webkit-transform: translate(-50%%, -50%%) rotate(45deg);
+#diamond{
+	width: 0;
+	height: 0;
+	border: 5vw solid transparent;
+	border-bottom: 10vw solid black;
+	position: relative;
+    top: -25%;
+    left: 25%
+}
+
+#diamond:after {
+	content: '';
+	position: absolute;
+	left: -5vw; top: 10vw;
+	width: 0;
+	height: 0;
+	border: 5vw solid transparent;
+	border-top: 10vw solid black;
 }
 
 #stop-signal {

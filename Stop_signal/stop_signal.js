@@ -101,7 +101,7 @@ var stimuli = [
 	{image: '<div class = shapebox><div class = centered-shape id = triangle></div></div>',
 	data: {correct_response: correct_responses[2][1], exp_id: "stop_signal", trial_id: "stim"}
 	},
-	{image: '<div class = shapebox><div class = centered-shape id = diamond></div></div>',
+	{image: '<div class = shapebox><div id = diamond></div></div>',
 	data: {correct_response: correct_responses[3][1], exp_id: "stop_signal", trial_id: "stim"}
 	},
 ]
@@ -111,7 +111,7 @@ var practice_list = jsPsych.randomization.repeat(stimuli,5, true)
 
 //number of blocks per condition
 numconditions = 2
-numblocks = 1
+numblocks = 5
 condition_blocks = []
 blocks = []
 for (j = 0; j<numconditions; j++) {
