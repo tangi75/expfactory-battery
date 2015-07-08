@@ -5,7 +5,7 @@
 /* ************************************ */
 
 var randomDraw = function(lst) {
-    index = Math.round(Math.random()*(lst.length-1))
+    var index = Math.round(Math.random()*(lst.length-1))
     return lst[index]
 }
 
@@ -39,11 +39,20 @@ var getTestFeedback = function() {
 			}
 		}
 	}
-	var average_rt = sum_rt / go_length;
-	var average_correct = sum_correct / num_responses;
+	var average_rt = sum_rt / num_responses;
+	var average_correct = sum_correct / go_length;
 	var missed_responses = go_length - num_responses
 	var stop_percent = successful_stops/stop_length
 	test_feedback_text = "Average reaction time:  " + Math.round(average_rt) + " ms. Accuracy: " + Math.round(average_correct*100) + "%"
+	if (average_rt > 1000) {
+        test_feedback_text += '</p><p class = block-text>Remember, try to response as quickly and accurately as possible when no stop signal occurs.'
+    }
+    if (missed_responses >= 3) {
+        test_feedback_text += '</p><p class = block-text>Remember to respond to each shape unless you see the red stop signal.'
+    }
+    if (average_correct < .75) {
+        test_feedback_text += '</p><p class = block-text>Remember, the correct keys are as follows: ' + prompt_text
+    }
 	if (stop_percent >= .75) {
 		test_feedback_text += '</p><p class = block-text> Remember to respond as quickly as possible on each trial.'
 	} else if (stop_percent <= .25) {
@@ -373,9 +382,9 @@ var practice_chunk = {
     }
 }
 
-//stop_signal_experiment.push(noSS_practice_chunk)
-//stop_signal_experiment.push(practice_chunk)
-//stop_signal_experiment.push(practice_feedback_block) 
+stop_signal_experiment.push(noSS_practice_chunk)
+stop_signal_experiment.push(practice_chunk)
+stop_signal_experiment.push(practice_feedback_block) 
 
 /* Test blocks */
 ss_freq = randomDraw(['high','low'])
