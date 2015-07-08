@@ -88,6 +88,12 @@ var welcome_block = {
   cont_key: 13
 };
 
+var end_block = {
+  type: 'text',
+  text: '<div class = centerbox><p class = block-text>Finished with this task. Press <strong>enter</strong> to continue.</p></div>',
+  cont_key: 13
+};
+
 var instructions_block = {
   type: 'instructions',
   pages: [
@@ -144,5 +150,6 @@ local_global_experiment.push(start_practice_block);
 local_global_experiment.push(practice_block);
 local_global_experiment.push(start_test_block);
 local_global_experiment.push(test_block);
+local_global_experiment.push(end_block);
 
 

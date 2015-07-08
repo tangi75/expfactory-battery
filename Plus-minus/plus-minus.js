@@ -23,6 +23,12 @@ var welcome_block = {
   text: '<div class = centerbox><p class = block-text>Welcome to the plus-minus experiment. Press any key to begin.</p></div>'
 };
 
+var end_block = {
+  type: 'text',
+  text: '<div class = centerbox><p class = block-text>Finished with this task. Press <strong>enter</strong> to continue.</p></div>',
+  cont_key: 13
+};
+
 var intro_block = {
   type: 'text',
   text: '<div class = centerbox><p class = block-text>In this experiment you will be adding and subtracting numbers. It is important that you respond as quickly and accurately as possible. To familiarize you with the test, on the next screen will be a list of numbers. For each number, copy the number into the blank as quickly and accurately as possible. Use the "tab" key to move from question to question. If possible, use your numpad to make entering numbers easier.</p></div>'
@@ -84,6 +90,6 @@ plus_minus_experiment.push(start_minus_block)
 plus_minus_experiment.push(minus_block)
 plus_minus_experiment.push(start_alternate_block)
 plus_minus_experiment.push(alternate_block)
-
+plus_minus_experiment.push(end_block)
 
 

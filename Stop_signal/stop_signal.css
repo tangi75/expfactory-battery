@@ -5,8 +5,13 @@
 
 .ss_fixation {
 	text-align: center;
-	font-size: 100px;
+	font-size: 150px;
+	position: relative;
+    top: 50%; 
+    transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
 }
+
 
 .ss_stim {
 	text-align: center;
@@ -34,7 +39,6 @@
   left:50%;
   margin-right:-50%;
   transform: translate(-50%,-50%);
-  display: flex;
 justify-content: center; /* align horizontal */
 align-items: center; /* align vertical */
 }

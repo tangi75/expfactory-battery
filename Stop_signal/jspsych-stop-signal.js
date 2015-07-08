@@ -26,6 +26,7 @@
 				trials[i].SS_stimulus = params.SS_stimulus;
 				// timing parameters
 				trials[i].timing_stim = params.timing_stim || -1; // if -1, then show indefinitely
+				trials[i].timing_SS = params.timing_SS || -1; // if -1, then show indefinitely
 				trials[i].timing_response = params.timing_response || -1; // if -1, then wait for response forever
 				trials[i].SSD = params.SSD || -1
 				// optional parameters
@@ -130,7 +131,6 @@
 			if (trial.timing_stim > 0) {
 				var t1 = setTimeout(function() {
 					$('#jspsych-stop-signal-stimulus').css('visibility', 'hidden');
-					$('#jspsych-stop-signal-SS').css('visibility', 'hidden');
 				}, trial.timing_stim);
 				setTimeoutHandlers.push(t1);
 			}
@@ -152,6 +152,14 @@
 					}));
 				}, trial.SSD);
 				setTimeoutHandlers.push(t3);
+			}
+			
+			// hide SS after a fixed interval (or when stimulus ends)
+			if (trial.timing_SS > 0) {
+				var t4 = setTimeout(function() {
+					$('#jspsych-stop-signal-SS').css('visibility', 'hidden');
+				}, trial.timing_SS+trial.SSD);
+				setTimeoutHandlers.push(t4);
 			}
 
 		};

@@ -33,6 +33,12 @@ var welcome_block = {
   text: '<div class = centerbox><p class = block-text>Welcome to the AX experiment. Press any key to begin.</p></div>'
 };
 
+var end_block = {
+  type: 'text',
+  text: '<div class = centerbox><p class = block-text>Finished with this task. Press <strong>enter</strong> to continue.</p></div>',
+  cont_key: 13
+};
+
 var instructions_block = {
   type: 'instructions',
   pages: [
@@ -146,7 +152,7 @@ for (b = 0; b< blocks.length; b++) {
 	}
 	AX_experiment.push(rest_block)
 }
-	
+AX_experiment.push(end_block)
 
 
 

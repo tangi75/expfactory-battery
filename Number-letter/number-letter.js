@@ -60,6 +60,12 @@ var welcome_block = {
   text: '<div class = centerbox><p class = block-text>Welcome to the number-letter experiment. Press any key to begin.</p></div>'
 };
 
+var end_block = {
+  type: 'text',
+  text: '<div class = centerbox><p class = block-text>Finished with this task. Press <strong>enter</strong> to continue.</p></div>',
+  cont_key: 13
+};
+
 var instructions_block = {
   type: 'instructions',
   pages: [
@@ -113,7 +119,7 @@ for (i=0; i<rotate_block_len; i++) {
     }
     numlet_experiment.push(rotate_block)
 }
-
+numlet_experiment.push(end_block)
 
 
 
