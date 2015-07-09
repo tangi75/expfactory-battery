@@ -32,15 +32,44 @@
 }
 
 .shapebox {
-  width: 20%;
-  height: 20vw;
+  width: 25vw;
+  height: 25vw;
   position: absolute;
   top:50%;
   left:50%;
   margin-right:-50%;
   transform: translate(-50%,-50%);
-justify-content: center; /* align horizontal */
-align-items: center; /* align vertical */
+}
+
+img {
+    height: auto;
+    width: auto\9; /* ie8 */
+    position: absolute;  
+    top: 0;  
+    bottom: 0;  
+    left: 0;  
+    right: 0;  
+    margin: auto;  
+}
+
+img.square {
+    max-height: 75%;
+    content:url('../Stop_signal/stim/square.png')
+}
+
+img.circle {
+    max-height: 80%;
+    content:url('../Stop_signal/stim/circle.png')
+}
+
+img.triangle {
+    max-height: 80%;
+    content:url('../Stop_signal/stim/triangle.png')
+}
+
+img.diamond {
+    max-height: 90%;
+    content:url('../Stop_signal/stim/diamond.png')
 }
 
 .stopbox {
@@ -54,62 +83,6 @@ align-items: center; /* align vertical */
   z-index: -1;
 }
 
-
-#circle {
-	width: 75%;
-	height: 75%;
-	background: black;
-	-moz-border-radius: 75%;
-	-webkit-border-radius: 75%;
-	border-radius: 75%;
-}
-
-#square {
-	width: 75%;
-	height: 75%;
-	background: black;
-}
-
-#triangle {
-    margin: 0 auto;
-    width: 75%;
-    height: 0;    
-    padding-left:75%;
-    padding-bottom: 75%;
-    overflow: hidden;
-    top: 40%
-}
-#triangle:after {
-    content: "";
-    display: block;
-    width: 0;
-    height: 0;
-    margin-left:-500px;
-    border-left: 500px solid transparent;
-    border-right: 500px solid transparent;
-    border-bottom: 865px solid black;
-}
-
-
-#diamond{
-	width: 0;
-	height: 0;
-	border: 5vw solid transparent;
-	border-bottom: 10vw solid black;
-	position: relative;
-    top: -25%;
-    left: 25%
-}
-
-#diamond:after {
-	content: '';
-	position: absolute;
-	left: -5vw; top: 10vw;
-	width: 0;
-	height: 0;
-	border: 5vw solid transparent;
-	border-top: 10vw solid black;
-}
 
 #stop-signal {
     background: red;
