@@ -63,7 +63,7 @@ for (i = 0; i < experiment_names.length; i++) {
 		case "ANT":
 			loadjscssfile("../Experiments/ANT/ANT.css","css")
 			loadjscssfile("../Experiments/ANT/ANT.js","js")
-			loadjscssfile("../Experiments/ANT/jspsych-ANT-practice.js","js")
+			loadjscssfile("jspsych/custom_plugins/jspsych-ANT-practice.js","js")
 			break;
 		case "AX-CPT":
 			loadjscssfile("../Experiments/AX-CPT/AX-CPT.css","css")
