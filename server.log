@@ -1,0 +1,416 @@
+2015-07-13 17:32:02,570 /Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-07-13 17:32:02,590 /Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-07-13 17:32:02,594 /Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-07-13 17:32:02,594 /Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-07-13 17:32:02,598 /Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-07-13 17:32:03,209 Exception on /ad [GET]
+Traceback (most recent call last):
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/flask/app.py", line 1817, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/flask/app.py", line 1477, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/flask/app.py", line 1381, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/flask/app.py", line 1475, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/flask/app.py", line 1461, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/psiturk/user_utils.py", line 15, in new_func
+    resp = make_response(func(*args, **kwargs))
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/psiturk/experiment.py", line 282, in advertisement
+    with open('templates/ad.html', 'r') as temp_file:
+IOError: [Errno 2] No such file or directory: 'templates/ad.html'
+2015-07-13 17:34:03,427 Exception on /ad [GET]
+Traceback (most recent call last):
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/flask/app.py", line 1817, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/flask/app.py", line 1477, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/flask/app.py", line 1381, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/flask/app.py", line 1475, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/flask/app.py", line 1461, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/psiturk/user_utils.py", line 15, in new_func
+    resp = make_response(func(*args, **kwargs))
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/psiturk/experiment.py", line 282, in advertisement
+    with open('templates/ad.html', 'r') as temp_file:
+IOError: [Errno 2] No such file or directory: 'templates/ad.html'
+2015-07-13 17:36:09,392 insert_mode_failed (1020) {'assignmentId': [u'debugIN4MBR'], 'workerId': [u'debugEPBO94'], 'hitId': [u'debugN9PCI2'], 'mode': [u'debug']}
+2015-07-13 17:36:09,474 Exception on /ad [GET]
+Traceback (most recent call last):
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/flask/app.py", line 1817, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/flask/app.py", line 1477, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/flask/app.py", line 1379, in handle_user_exception
+    return handler(e)
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/psiturk/experiment.py", line 105, in handle_exp_error
+    'contact_email_on_error'))
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/psiturk/experiment_errors.py", line 47, in error_page
+    **request.args)
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/flask/templating.py", line 127, in render_template
+    return _render(ctx.app.jinja_env.get_or_select_template(template_name_or_list),
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/jinja2/environment.py", line 830, in get_or_select_template
+    return self.get_template(template_name_or_list, parent, globals)
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/jinja2/environment.py", line 791, in get_template
+    return self._load_template(name, self.make_globals(globals))
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/jinja2/environment.py", line 765, in _load_template
+    template = self.loader.load(self, name, globals)
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/jinja2/loaders.py", line 113, in load
+    source, filename, uptodate = self.get_source(environment, name)
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/flask/templating.py", line 64, in get_source
+    raise TemplateNotFound(template)
+TemplateNotFound: error.html
+2015-07-13 17:43:15,250 Exception on /js/jquery-1.11.3.js [GET]
+Traceback (most recent call last):
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/flask/app.py", line 1817, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/flask/app.py", line 1477, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/flask/app.py", line 1381, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/flask/app.py", line 1475, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/flask/app.py", line 1461, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/psiturk/experiment.py", line 667, in regularpage
+    return render_template(foldername+"/"+pagename)
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/flask/templating.py", line 127, in render_template
+    return _render(ctx.app.jinja_env.get_or_select_template(template_name_or_list),
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/jinja2/environment.py", line 830, in get_or_select_template
+    return self.get_template(template_name_or_list, parent, globals)
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/jinja2/environment.py", line 791, in get_template
+    return self._load_template(name, self.make_globals(globals))
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/jinja2/environment.py", line 765, in _load_template
+    template = self.loader.load(self, name, globals)
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/jinja2/loaders.py", line 113, in load
+    source, filename, uptodate = self.get_source(environment, name)
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/flask/templating.py", line 64, in get_source
+    raise TemplateNotFound(template)
+TemplateNotFound: js/jquery-1.11.3.js
+2015-07-13 17:43:15,295 Exception on /js/preview.js [GET]
+Traceback (most recent call last):
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/flask/app.py", line 1817, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/flask/app.py", line 1477, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/flask/app.py", line 1381, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/flask/app.py", line 1475, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/flask/app.py", line 1461, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/psiturk/experiment.py", line 667, in regularpage
+    return render_template(foldername+"/"+pagename)
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/flask/templating.py", line 127, in render_template
+    return _render(ctx.app.jinja_env.get_or_select_template(template_name_or_list),
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/jinja2/environment.py", line 830, in get_or_select_template
+    return self.get_template(template_name_or_list, parent, globals)
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/jinja2/environment.py", line 791, in get_template
+    return self._load_template(name, self.make_globals(globals))
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/jinja2/environment.py", line 765, in _load_template
+    template = self.loader.load(self, name, globals)
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/jinja2/loaders.py", line 113, in load
+    source, filename, uptodate = self.get_source(environment, name)
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/flask/templating.py", line 64, in get_source
+    raise TemplateNotFound(template)
+TemplateNotFound: js/preview.js
+2015-07-13 17:43:15,294 Exception on /images/stanford.png [GET]
+Traceback (most recent call last):
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/flask/app.py", line 1817, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/flask/app.py", line 1477, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/flask/app.py", line 1381, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/flask/app.py", line 1475, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/flask/app.py", line 1461, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/psiturk/experiment.py", line 667, in regularpage
+    return render_template(foldername+"/"+pagename)
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/flask/templating.py", line 127, in render_template
+    return _render(ctx.app.jinja_env.get_or_select_template(template_name_or_list),
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/jinja2/environment.py", line 830, in get_or_select_template
+    return self.get_template(template_name_or_list, parent, globals)
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/jinja2/environment.py", line 791, in get_template
+    return self._load_template(name, self.make_globals(globals))
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/jinja2/environment.py", line 765, in _load_template
+    template = self.loader.load(self, name, globals)
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/jinja2/loaders.py", line 113, in load
+    source, filename, uptodate = self.get_source(environment, name)
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/flask/templating.py", line 64, in get_source
+    raise TemplateNotFound(template)
+TemplateNotFound: images/stanford.png
+2015-07-13 17:43:15,296 Exception on /css/default_style.css [GET]
+Traceback (most recent call last):
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/flask/app.py", line 1817, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/flask/app.py", line 1477, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/flask/app.py", line 1381, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/flask/app.py", line 1475, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/flask/app.py", line 1461, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/psiturk/experiment.py", line 667, in regularpage
+    return render_template(foldername+"/"+pagename)
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/flask/templating.py", line 127, in render_template
+    return _render(ctx.app.jinja_env.get_or_select_template(template_name_or_list),
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/jinja2/environment.py", line 830, in get_or_select_template
+    return self.get_template(template_name_or_list, parent, globals)
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/jinja2/environment.py", line 791, in get_template
+    return self._load_template(name, self.make_globals(globals))
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/jinja2/environment.py", line 765, in _load_template
+    template = self.loader.load(self, name, globals)
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/jinja2/loaders.py", line 113, in load
+    source, filename, uptodate = self.get_source(environment, name)
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/flask/templating.py", line 64, in get_source
+    raise TemplateNotFound(template)
+TemplateNotFound: css/default_style.css
+2015-07-13 17:44:11,062 Exception on /js/jquery-1.11.3.js [GET]
+Traceback (most recent call last):
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/flask/app.py", line 1817, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/flask/app.py", line 1477, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/flask/app.py", line 1381, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/flask/app.py", line 1475, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/flask/app.py", line 1461, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/psiturk/experiment.py", line 667, in regularpage
+    return render_template(foldername+"/"+pagename)
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/flask/templating.py", line 127, in render_template
+    return _render(ctx.app.jinja_env.get_or_select_template(template_name_or_list),
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/jinja2/environment.py", line 830, in get_or_select_template
+    return self.get_template(template_name_or_list, parent, globals)
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/jinja2/environment.py", line 791, in get_template
+    return self._load_template(name, self.make_globals(globals))
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/jinja2/environment.py", line 765, in _load_template
+    template = self.loader.load(self, name, globals)
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/jinja2/loaders.py", line 113, in load
+    source, filename, uptodate = self.get_source(environment, name)
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/flask/templating.py", line 64, in get_source
+    raise TemplateNotFound(template)
+TemplateNotFound: js/jquery-1.11.3.js
+2015-07-13 17:44:11,098 Exception on /css/default_style.css [GET]
+Traceback (most recent call last):
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/flask/app.py", line 1817, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/flask/app.py", line 1477, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/flask/app.py", line 1381, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/flask/app.py", line 1475, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/flask/app.py", line 1461, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/psiturk/experiment.py", line 667, in regularpage
+    return render_template(foldername+"/"+pagename)
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/flask/templating.py", line 127, in render_template
+    return _render(ctx.app.jinja_env.get_or_select_template(template_name_or_list),
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/jinja2/environment.py", line 830, in get_or_select_template
+    return self.get_template(template_name_or_list, parent, globals)
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/jinja2/environment.py", line 791, in get_template
+    return self._load_template(name, self.make_globals(globals))
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/jinja2/environment.py", line 765, in _load_template
+    template = self.loader.load(self, name, globals)
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/jinja2/loaders.py", line 113, in load
+    source, filename, uptodate = self.get_source(environment, name)
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/flask/templating.py", line 64, in get_source
+    raise TemplateNotFound(template)
+TemplateNotFound: css/default_style.css
+2015-07-13 17:44:11,098 Exception on /js/preview.js [GET]
+Traceback (most recent call last):
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/flask/app.py", line 1817, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/flask/app.py", line 1477, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/flask/app.py", line 1381, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/flask/app.py", line 1475, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/flask/app.py", line 1461, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/psiturk/experiment.py", line 667, in regularpage
+    return render_template(foldername+"/"+pagename)
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/flask/templating.py", line 127, in render_template
+    return _render(ctx.app.jinja_env.get_or_select_template(template_name_or_list),
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/jinja2/environment.py", line 830, in get_or_select_template
+    return self.get_template(template_name_or_list, parent, globals)
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/jinja2/environment.py", line 791, in get_template
+    return self._load_template(name, self.make_globals(globals))
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/jinja2/environment.py", line 765, in _load_template
+    template = self.loader.load(self, name, globals)
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/jinja2/loaders.py", line 113, in load
+    source, filename, uptodate = self.get_source(environment, name)
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/flask/templating.py", line 64, in get_source
+    raise TemplateNotFound(template)
+TemplateNotFound: js/preview.js
+2015-07-13 17:44:16,750 Exception on /css/default_style.css [GET]
+Traceback (most recent call last):
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/flask/app.py", line 1817, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/flask/app.py", line 1477, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/flask/app.py", line 1381, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/flask/app.py", line 1475, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/flask/app.py", line 1461, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/psiturk/experiment.py", line 667, in regularpage
+    return render_template(foldername+"/"+pagename)
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/flask/templating.py", line 127, in render_template
+    return _render(ctx.app.jinja_env.get_or_select_template(template_name_or_list),
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/jinja2/environment.py", line 830, in get_or_select_template
+    return self.get_template(template_name_or_list, parent, globals)
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/jinja2/environment.py", line 791, in get_template
+    return self._load_template(name, self.make_globals(globals))
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/jinja2/environment.py", line 765, in _load_template
+    template = self.loader.load(self, name, globals)
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/jinja2/loaders.py", line 113, in load
+    source, filename, uptodate = self.get_source(environment, name)
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/flask/templating.py", line 64, in get_source
+    raise TemplateNotFound(template)
+TemplateNotFound: css/default_style.css
+2015-07-13 17:44:16,913 Exception on /js/jquery-1.11.3.js [GET]
+Traceback (most recent call last):
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/flask/app.py", line 1817, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/flask/app.py", line 1477, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/flask/app.py", line 1381, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/flask/app.py", line 1475, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/flask/app.py", line 1461, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/psiturk/experiment.py", line 667, in regularpage
+    return render_template(foldername+"/"+pagename)
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/flask/templating.py", line 127, in render_template
+    return _render(ctx.app.jinja_env.get_or_select_template(template_name_or_list),
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/jinja2/environment.py", line 830, in get_or_select_template
+    return self.get_template(template_name_or_list, parent, globals)
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/jinja2/environment.py", line 791, in get_template
+    return self._load_template(name, self.make_globals(globals))
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/jinja2/environment.py", line 765, in _load_template
+    template = self.loader.load(self, name, globals)
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/jinja2/loaders.py", line 113, in load
+    source, filename, uptodate = self.get_source(environment, name)
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/flask/templating.py", line 64, in get_source
+    raise TemplateNotFound(template)
+TemplateNotFound: js/jquery-1.11.3.js
+2015-07-13 17:44:16,956 Exception on /js/preview.js [GET]
+Traceback (most recent call last):
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/flask/app.py", line 1817, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/flask/app.py", line 1477, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/flask/app.py", line 1381, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/flask/app.py", line 1475, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/flask/app.py", line 1461, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/psiturk/experiment.py", line 667, in regularpage
+    return render_template(foldername+"/"+pagename)
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/flask/templating.py", line 127, in render_template
+    return _render(ctx.app.jinja_env.get_or_select_template(template_name_or_list),
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/jinja2/environment.py", line 830, in get_or_select_template
+    return self.get_template(template_name_or_list, parent, globals)
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/jinja2/environment.py", line 791, in get_template
+    return self._load_template(name, self.make_globals(globals))
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/jinja2/environment.py", line 765, in _load_template
+    template = self.loader.load(self, name, globals)
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/jinja2/loaders.py", line 113, in load
+    source, filename, uptodate = self.get_source(environment, name)
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/flask/templating.py", line 64, in get_source
+    raise TemplateNotFound(template)
+TemplateNotFound: js/preview.js
+2015-07-13 17:44:20,570 Exception on /js/preview.js [GET]
+Traceback (most recent call last):
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/flask/app.py", line 1817, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/flask/app.py", line 1477, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/flask/app.py", line 1381, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/flask/app.py", line 1475, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/flask/app.py", line 1461, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/psiturk/experiment.py", line 667, in regularpage
+    return render_template(foldername+"/"+pagename)
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/flask/templating.py", line 127, in render_template
+    return _render(ctx.app.jinja_env.get_or_select_template(template_name_or_list),
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/jinja2/environment.py", line 830, in get_or_select_template
+    return self.get_template(template_name_or_list, parent, globals)
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/jinja2/environment.py", line 791, in get_template
+    return self._load_template(name, self.make_globals(globals))
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/jinja2/environment.py", line 765, in _load_template
+    template = self.loader.load(self, name, globals)
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/jinja2/loaders.py", line 113, in load
+    source, filename, uptodate = self.get_source(environment, name)
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/flask/templating.py", line 64, in get_source
+    raise TemplateNotFound(template)
+TemplateNotFound: js/preview.js
+2015-07-13 17:44:20,570 Exception on /css/default_style.css [GET]
+Traceback (most recent call last):
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/flask/app.py", line 1817, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/flask/app.py", line 1477, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/flask/app.py", line 1381, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/flask/app.py", line 1475, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/flask/app.py", line 1461, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/psiturk/experiment.py", line 667, in regularpage
+    return render_template(foldername+"/"+pagename)
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/flask/templating.py", line 127, in render_template
+    return _render(ctx.app.jinja_env.get_or_select_template(template_name_or_list),
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/jinja2/environment.py", line 830, in get_or_select_template
+    return self.get_template(template_name_or_list, parent, globals)
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/jinja2/environment.py", line 791, in get_template
+    return self._load_template(name, self.make_globals(globals))
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/jinja2/environment.py", line 765, in _load_template
+    template = self.loader.load(self, name, globals)
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/jinja2/loaders.py", line 113, in load
+    source, filename, uptodate = self.get_source(environment, name)
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/flask/templating.py", line 64, in get_source
+    raise TemplateNotFound(template)
+TemplateNotFound: css/default_style.css
+2015-07-13 17:44:20,573 Exception on /js/jquery-1.11.3.js [GET]
+Traceback (most recent call last):
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/flask/app.py", line 1817, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/flask/app.py", line 1477, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/flask/app.py", line 1381, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/flask/app.py", line 1475, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/flask/app.py", line 1461, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/psiturk/experiment.py", line 667, in regularpage
+    return render_template(foldername+"/"+pagename)
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/flask/templating.py", line 127, in render_template
+    return _render(ctx.app.jinja_env.get_or_select_template(template_name_or_list),
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/jinja2/environment.py", line 830, in get_or_select_template
+    return self.get_template(template_name_or_list, parent, globals)
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/jinja2/environment.py", line 791, in get_template
+    return self._load_template(name, self.make_globals(globals))
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/jinja2/environment.py", line 765, in _load_template
+    template = self.loader.load(self, name, globals)
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/jinja2/loaders.py", line 113, in load
+    source, filename, uptodate = self.get_source(environment, name)
+  File "/Users/Ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/flask/templating.py", line 64, in get_source
+    raise TemplateNotFound(template)
+TemplateNotFound: js/jquery-1.11.3.js
