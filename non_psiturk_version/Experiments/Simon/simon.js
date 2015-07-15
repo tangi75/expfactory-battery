@@ -43,7 +43,7 @@ for (i = 0; i < practice_trials.data.length; i++) {
 /* define static blocks */
 var welcome_block = {
   type: 'text',
-  text: '<div class = centerbox><p class = block-text>Welcome to the experiment. Press <strong>enter</strong> to begin.</p></div>',
+  text: '<div class = centerbox><p class = block-text>Welcome to the simon experiment. Press <strong>enter</strong> to begin.</p></div>',
   cont_key: 13
 };
 
@@ -54,6 +54,12 @@ var instructions_block = {
 	'<div class = centerbox><p class = block-text>If you see blue, press the ' + correct_responses[1][0] + '. Press <strong>enter</strong> to continue.</p></div>'
 	],
   key_forward: 13
+};
+
+var end_block = {
+  type: 'text',
+  text: '<div class = centerbox><p class = block-text>Finished with this task. Press <strong>enter</strong> to continue.</p></div>',
+  cont_key: 13
 };
 
 var start_test_block = {
@@ -98,5 +104,5 @@ simon_experiment.push(instructions_block);
 simon_experiment.push(practice_block);
 simon_experiment.push(start_test_block);
 simon_experiment.push(test_block);
-
+simon_experiment.push(end_block)
 

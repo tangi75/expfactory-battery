@@ -44,10 +44,11 @@ for a returning subject, keeping the total time under 30 minutes)
 */ 
 // full list of experiment names:
 var experiment_list = [{name:"simple_rt", time: 2}, {name: "simon", time: 10}, {name: "ANT", time: 20}, {name: "AX-CPT", time: 10}, 
-						{name: "stop_signal", time: 20},{name: "plus-minus", time: 5},{name: "number-letter", time: 5}, {name: "local-global", time: 5}] 
+						{name: "stop_signal", time: 20},{name: "plus-minus", time: 5},{name: "number-letter", time: 5}, {name: "local-global", time: 5},
+						{name: "go-nogo", time: 7}] 
 						
 // experiment_names = experimentDraw(experiment_list)
-var experiment_names = ["stop_signal"]
+var experiment_names = ["go-nogo"]
 
 /* One the experiments are selected, load the appropriate files */
 for (i = 0; i < experiment_names.length; i++) {
@@ -87,6 +88,10 @@ for (i = 0; i < experiment_names.length; i++) {
 			loadjscssfile("../Experiments/Local-global/local-global.css","css")
 			loadjscssfile("../Experiments/Local-global/local-global.js","js")
 			break;
+		case "go-nogo":
+			loadjscssfile("../Experiments/Go-NoGo/go-nogo.css","css")
+			loadjscssfile("../Experiments/Go-NoGo/go-nogo.js","js")
+			break;
 	}
 }
 
@@ -118,6 +123,9 @@ function cat_experiments(experiment_array) {
 				break;
 			case "local-global":
 				experiments = experiments.concat(local_global_experiment)
+				break;
+			case "go-nogo":
+				experiments = experiments.concat(gonogo_experiment)
 				break;
 		}
 	}
