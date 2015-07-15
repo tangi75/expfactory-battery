@@ -21,7 +21,7 @@
 	<script src="static/js/jspsych/plugins/jspsych-categorize.js"></script>
     <script src="static/js/jspsych/custom_plugins/jspsych-stim-feedback-IE.js"></script>
 	<script src="static/js/load_experiments.js"></script>
-	
+	<script src="/static/js/psiturk.js" type="text/javascript"></script>
 	
     <link href="static/css/jspsych.css" rel="stylesheet" type="text/css"></link>
     <link href="static/css/default_style.css" rel="stylesheet" type="text/css"></link>
@@ -30,6 +30,8 @@
   <body>
 	  
 	  <script> 
+	    var psiturk = new PsiTurk(uniqueId, adServerLoc);
+	    
 		var task_list = '<ul list-text>'
 		for (i=0; i<experiment_names.length; i++) {
 			task_list += '<li>' + experiment_names[i] + '</li>'
@@ -48,10 +50,15 @@
 
 		<!-- start the experiment -->
 		jsPsych.init({
-		  experiment_structure: experiments,
-		  on_finish: function() {
-			jsPsych.data.localSave('test_save.csv','csv');
-		  }
+		    experiment_structure: experiments,
+		    on_finish: function() {
+                psiturk.saveData({
+                    success: function() { psiturk.completeHIT(); }
+                });
+            },
+            on_data_update: function(data) {
+                psiturk.recordTrialData(data);
+            }
 		});
 		
 	  </script>
