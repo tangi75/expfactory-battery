@@ -45,52 +45,56 @@ for a returning subject, keeping the total time under 30 minutes)
 // full list of experiment names:
 var experiment_list = [{name:"simple_rt", time: 2}, {name: "simon", time: 10}, {name: "ANT", time: 20}, {name: "AX-CPT", time: 10}, 
 						{name: "stop_signal", time: 20},{name: "plus-minus", time: 5},{name: "number-letter", time: 5}, {name: "local-global", time: 5},
-						{name: "go-nogo", time: 7}] 
+						{name: "go-nogo", time: 7}, {name: 'stroop', time: 6}] 
 						
 // experiment_names = experimentDraw(experiment_list)
-var experiment_names = ["go-nogo"]
+var experiment_names = ["stop_signal"]
 
 /* One the experiments are selected, load the appropriate files */
 for (i = 0; i < experiment_names.length; i++) {
 	switch (experiment_names[i]) {
 		case "simple_rt":
-			loadjscssfile("../Experiments/Simple_rt/simple_rt.css","css")
-			loadjscssfile("../Experiments/Simple_rt/simple_rt.js","js")
+			loadjscssfile("../Experiments/css/simple_rt.css","css")
+			loadjscssfile("../Experiments/js/simple_rt.js","js")
 			break;
 		case "simon":
-			loadjscssfile("../Experiments/Simon/simon.css","css")
-			loadjscssfile("../Experiments/Simon/simon.js","js")
+			loadjscssfile("../Experiments/css/simon.css","css")
+			loadjscssfile("../Experiments/js/simon.js","js")
 			break;
 		case "ANT":
-			loadjscssfile("../Experiments/ANT/ANT.css","css")
-			loadjscssfile("../Experiments/ANT/ANT.js","js")
-			loadjscssfile("jspsych/custom_plugins/jspsych-ANT-practice.js","js")
+			loadjscssfile("../Experiments/css/ANT.css","css")
+			loadjscssfile("../Experiments/js/ANT.js","js")
+			loadjscssfile("../General/jspsych/custom_plugins/jspsych-ANT-practice.js","js")
 			break;
 		case "AX-CPT":
-			loadjscssfile("../Experiments/AX-CPT/AX-CPT.css","css")
-			loadjscssfile("../Experiments/AX-CPT/AX-CPT.js","js")
+			loadjscssfile("../Experiments/css/AX-CPT.css","css")
+			loadjscssfile("../Experiments/js/AX-CPT.js","js")
 			break;
 		case "stop_signal":
-			loadjscssfile("../Experiments/Stop_signal/stop_signal.css","css")
-			loadjscssfile("../Experiments/Stop_signal/stop_signal.js","js")
-			loadjscssfile("../Experiments/Stop_signal/jspsych-stop-signal.js","js")
-			loadjscssfile("jspsych/plugins/jspsych-call-function.js","js")
+			loadjscssfile("../Experiments/css/stop_signal.css","css")
+			loadjscssfile("../Experiments/js/stop_signal.js","js")
+			loadjscssfile("../General/jspsych/custom_plugins/jspsych-stop-signal.js","js")
+			loadjscssfile("../General/jspsych/plugins/jspsych-call-function.js","js")
 			break;
 		case "plus-minus":
-			loadjscssfile("../Experiments/Plus-minus/plus-minus.js","js")
-			loadjscssfile("jspsych/plugins/jspsych-survey-text.js","js")
+			loadjscssfile("../Experiments/js/plus-minus.js","js")
+			loadjscssfile("../General/jspsych/plugins/jspsych-survey-text.js","js")
 			break;
 		case "number-letter":
-			loadjscssfile("../Experiments/Number-letter/number-letter.css","css")
-			loadjscssfile("../Experiments/Number-letter/number-letter.js","js")
+			loadjscssfile("../Experiments/css/number-letter.css","css")
+			loadjscssfile("../Experiments/js/number-letter.js","js")
 			break;
 		case "local-global":
-			loadjscssfile("../Experiments/Local-global/local-global.css","css")
-			loadjscssfile("../Experiments/Local-global/local-global.js","js")
+			loadjscssfile("../Experiments/css/local-global.css","css")
+			loadjscssfile("../Experiments/js/local-global.js","js")
 			break;
 		case "go-nogo":
-			loadjscssfile("../Experiments/Go-NoGo/go-nogo.css","css")
-			loadjscssfile("../Experiments/Go-NoGo/go-nogo.js","js")
+			loadjscssfile("../Experiments/css/go-nogo.css","css")
+			loadjscssfile("../Experiments/js/go-nogo.js","js")
+			break;
+		case "stroop":
+			loadjscssfile("../Experiments/css/stroop.css","css")
+			loadjscssfile("../Experiments/js/stroop.js","js")
 			break;
 	}
 }
@@ -126,6 +130,9 @@ function cat_experiments(experiment_array) {
 				break;
 			case "go-nogo":
 				experiments = experiments.concat(gonogo_experiment)
+				break;
+			case "stroop":
+				experiments = experiments.concat(stroop_experiment)
 				break;
 		}
 	}
