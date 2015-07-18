@@ -45,7 +45,7 @@ for a returning subject, keeping the total time under 30 minutes)
 // full list of experiment names:
 var experiment_list = [{name:"simple_rt", time: 2}, {name: "simon", time: 10}, {name: "ANT", time: 20}, {name: "AX-CPT", time: 10}, 
 						{name: "stop_signal", time: 20},{name: "plus-minus", time: 5},{name: "number-letter", time: 5}, {name: "local-global", time: 5},
-						{name: "go-nogo", time: 7}] 
+						{name: "go-nogo", time: 7}, {name: 'stroop', time: 6}] 
 						
 // experiment_names = experimentDraw(experiment_list)
 var experiment_names = ["go-nogo"]
@@ -54,43 +54,47 @@ var experiment_names = ["go-nogo"]
 for (i = 0; i < experiment_names.length; i++) {
 	switch (experiment_names[i]) {
 		case "simple_rt":
-			loadjscssfile("static/css/simple_rt.css","css")
-			loadjscssfile("static/js/simple_rt.js","js")
+			loadjscssfile("static/Experiments/css/simple_rt.css","css")
+			loadjscssfile("static/Experiments/js/simple_rt.js","js")
 			break;
 		case "simon":
-			loadjscssfile("static/css/simon.css","css")
-			loadjscssfile("static/js/simon.js","js")
+			loadjscssfile("static/Experiments/css/simon.css","css")
+			loadjscssfile("static/Experiments/js/simon.js","js")
 			break;
 		case "ANT":
-			loadjscssfile("static/css/ANT.css","css")
-			loadjscssfile("static/js/ANT.js","js")
-			loadjscssfile("static/js/jspsych/custom_plugins/jspsych-ANT-practice.js","js")
+			loadjscssfile("static/Experiments/css/ANT.css","css")
+			loadjscssfile("static/Experiments/js/ANT.js","js")
+			loadjscssfile("static/Experiments/js/jspsych/custom_plugins/jspsych-ANT-practice.js","js")
 			break;
 		case "AX-CPT":
-			loadjscssfile("static/css/AX-CPT.css","css")
-			loadjscssfile("static/js/AX-CPT.js","js")
+			loadjscssfile("static/Experiments/css/AX-CPT.css","css")
+			loadjscssfile("static/Experiments/js/AX-CPT.js","js")
 			break;
 		case "stop_signal":
-			loadjscssfile("static/css/stop_signal.css","css")
-			loadjscssfile("static/js/stop_signal.js","js")
-			loadjscssfile("static/js/jspsych/custom_plugins/jspsych-stop-signal.js","js")
-			loadjscssfile("static/js/jspsych/plugins/jspsych-call-function.js","js")
+			loadjscssfile("static/Experiments/css/stop_signal.css","css")
+			loadjscssfile("static/Experiments/js/stop_signal.js","js")
+			loadjscssfile("static/Experiments/js/jspsych/custom_plugins/jspsych-stop-signal.js","js")
+			loadjscssfile("static/Experiments/js/jspsych/plugins/jspsych-call-function.js","js")
 			break;
 		case "plus-minus":
-			loadjscssfile("static/js/plus-minus.js","js")
-			loadjscssfile("static/js/jspsych/plugins/jspsych-survey-text.js","js")
+			loadjscssfile("static/Experiments/js/plus-minus.js","js")
+			loadjscssfile("static/Experiments/js/jspsych/plugins/jspsych-survey-text.js","js")
 			break;
 		case "number-letter":
-			loadjscssfile("static/css/number-letter.css","css")
-			loadjscssfile("static/js/number-letter.js","js")
+			loadjscssfile("static/Experiments/css/number-letter.css","css")
+			loadjscssfile("static/Experiments/js/number-letter.js","js")
 			break;
 		case "local-global":
-			loadjscssfile("static/css/local-global.css","css")
-			loadjscssfile("static/js/local-global.js","js")
+			loadjscssfile("static/Experiments/css/local-global.css","css")
+			loadjscssfile("static/Experiments/js/local-global.js","js")
 			break;
 		case "go-nogo":
-			loadjscssfile("static/css/go-nogo.css","css")
-			loadjscssfile("static/js/go-nogo.js","js")
+			loadjscssfile("static/Experiments/css/go-nogo.css","css")
+			loadjscssfile("static/Experiments/js/go-nogo.js","js")
+			break;
+		case "stroop":
+			loadjscssfile("static/Experiments/css/stroop.css","css")
+			loadjscssfile("static/Experiments/js/stroop.js","js")
 			break;
 	}
 }
@@ -126,6 +130,9 @@ function cat_experiments(experiment_array) {
 				break;
 			case "go-nogo":
 				experiments = experiments.concat(gonogo_experiment)
+				break;
+			case "stroop":
+				experiments = experiments.concat(stroop_experiment)
 				break;
 		}
 	}
