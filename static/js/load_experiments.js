@@ -48,7 +48,7 @@ var experiment_list = [{name:"simple_rt", time: 2}, {name: "simon", time: 10}, {
 						{name: "go-nogo", time: 7}, {name: 'stroop', time: 6}] 
 						
 // experiment_names = experimentDraw(experiment_list)
-var experiment_names = ["stop_signal"]
+var experiment_names = ["simple_rt"]
 
 /* One the experiments are selected, load the appropriate files */
 for (i = 0; i < experiment_names.length; i++) {
