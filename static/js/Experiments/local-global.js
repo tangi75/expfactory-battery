@@ -3,7 +3,7 @@
 /* Define helper functions */
 /* ************************************ */
 var randomDraw = function(lst) {
-    index = Math.round(Math.random()*(lst.length-1))
+    var index = Math.floor(Math.random()*(lst.length))
     return lst[index]
 }
 
@@ -17,9 +17,9 @@ var makeTrialList = function(len, stim, data) {
 	//randomize first trial
 	var trial_index = jsPsych.randomization.shuffle(['global','local'])[0]
 	if (trial_index == 'global') {
-		tmpi = Math.round(Math.random()*(stim.length/2-1))
+		tmpi = Math.floor(Math.random()*(stim.length/2))
 	} else {
-		tmpi = Math.round(Math.random()*(stim.length/2-1))+stim.length/2
+		tmpi = Math.floor(Math.random()*(stim.length/2))+stim.length/2
 	}
 	output_list['image'].push(stim[tmpi])
 	var tmp_data = $.extend({},data[tmpi])
@@ -35,9 +35,9 @@ var makeTrialList = function(len, stim, data) {
 			else {trial_index = 'global'}
 		}
 		if (trial_index == 'global') {
-			tmpi = Math.round(Math.random()*(stim.length/2-1))
+			tmpi = Math.floor(Math.random()*(stim.length/2))
 		} else {
-			tmpi = Math.round(Math.random()*(stim.length/2-1))+stim.length/2
+			tmpi = Math.floor(Math.random()*(stim.length/2))+stim.length/2
 		}
 		output_list['image'].push(stim[tmpi])
 		tmp_data = $.extend({},data[tmpi])

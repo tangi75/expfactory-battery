@@ -5,7 +5,7 @@
 /* ************************************ */
 
 var randomDraw = function(lst) {
-    var index = Math.round(Math.random()*(lst.length-1))
+    var index = Math.floor(Math.random()*(lst.length))
     return lst[index]
 }
 

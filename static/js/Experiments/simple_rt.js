@@ -15,7 +15,7 @@ var appendGap = function() {
 /* Define experimental variables */
 /* ************************************ */
 var practice_len = 5
-var experiment_len = 5
+var experiment_len = 50
 var gap = 500 //default
 stim = '<div class = shapebox><div id = cross></div></div>'
 

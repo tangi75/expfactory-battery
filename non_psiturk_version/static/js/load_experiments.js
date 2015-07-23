@@ -11,7 +11,7 @@ var randomDraw = function(lst,n) {
 	n = n || "1"
 	var random_list = []
 	for (i=0; i<n; i++) {
-		index = Math.round(Math.random()*(lst.length-1))
+		index = Math.floor(Math.random()*lst.length)
 		random_list.push(lst[index])
 	}
     return random_list
@@ -28,7 +28,7 @@ var experimentDraw = function(lst, time) {
 	var total_time = 0
 	while (total_time < time && lst.length > 0) {
 		console.log(lst.length)
-		index = Math.round(Math.random()*(lst.length-1))
+		index = Math.floor(Math.random()*lst.length)
 		if ((total_time + lst[index].time) < 30) {
 			total_time += lst[index].time
 			return_list.push(lst[index].name)
@@ -45,10 +45,10 @@ for a returning subject, keeping the total time under 30 minutes)
 // full list of experiment names:
 var experiment_list = [{name:"simple_rt", time: 2}, {name: "simon", time: 10}, {name: "ANT", time: 20}, {name: "AX-CPT", time: 10}, 
 						{name: "stop_signal", time: 20},{name: "plus-minus", time: 5},{name: "number-letter", time: 5}, {name: "local-global", time: 5},
-						{name: "go-nogo", time: 7}, {name: 'stroop', time: 6}] 
+						{name: "go-nogo", time: 7}, {name: 'stroop', time: 6}, {name: 'antisaccade', time: 7.5}] 
 						
 // experiment_names = experimentDraw(experiment_list)
-var experiment_names = ["stop_signal"]
+var experiment_names = ["antisaccade"]
 
 /* One the experiments are selected, load the appropriate files */
 for (i = 0; i < experiment_names.length; i++) {
@@ -96,6 +96,10 @@ for (i = 0; i < experiment_names.length; i++) {
 			loadjscssfile("static/css/Experiments/stroop.css","css")
 			loadjscssfile("static/js/Experiments/stroop.js","js")
 			break;
+		case "antisaccade":
+			loadjscssfile("static/css/Experiments/antisaccade.css","css")
+			loadjscssfile("static/js/Experiments/antisaccade.js","js")
+			break;
 	}
 }
 
@@ -133,6 +137,9 @@ function cat_experiments(experiment_array) {
 				break;
 			case "stroop":
 				experiments = experiments.concat(stroop_experiment)
+				break;
+			case "antisaccade":
+				experiments = experiments.concat(antisaccade_experiment)
 				break;
 		}
 	}

@@ -6,7 +6,7 @@
 /* ************************************ */
 
 var getChar = function() {
- return '<div class = centerbox><p class = AX_text>' + chars[Math.round(Math.random()*21)] + '</p></div>'
+ return '<div class = centerbox><p class = AX_text>' + chars[Math.floor(Math.random()*22)] + '</p></div>'
 }
 var post_trial_gap = function() {
   return Math.floor( Math.random() * 500 ) + 500;
