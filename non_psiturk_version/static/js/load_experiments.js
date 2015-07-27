@@ -45,10 +45,11 @@ for a returning subject, keeping the total time under 30 minutes)
 // full list of experiment names:
 var experiment_list = [{name:"simple_rt", time: 2}, {name: "simon", time: 10}, {name: "ANT", time: 20}, {name: "AX-CPT", time: 10}, 
 						{name: "stop_signal", time: 20},{name: "plus-minus", time: 5},{name: "number-letter", time: 5}, {name: "local-global", time: 5},
-						{name: "go-nogo", time: 7}, {name: 'stroop', time: 6}, {name: 'antisaccade', time: 7.5}] 
+						{name: "go-nogo", time: 7}, {name: 'stroop', time: 6}, {name: 'antisaccade', time: 7.5}, {name: 'flanker', time: 6},
+						{name: 'tone_monitoring', time: 6}] 
 						
 // experiment_names = experimentDraw(experiment_list)
-var experiment_names = ["antisaccade"]
+var experiment_names = ["tone_monitoring"]
 
 /* One the experiments are selected, load the appropriate files */
 for (i = 0; i < experiment_names.length; i++) {
@@ -100,6 +101,15 @@ for (i = 0; i < experiment_names.length; i++) {
 			loadjscssfile("static/css/Experiments/antisaccade.css","css")
 			loadjscssfile("static/js/Experiments/antisaccade.js","js")
 			break;
+		case "flanker":
+			loadjscssfile("static/css/Experiments/flanker.css","css")
+			loadjscssfile("static/js/Experiments/flanker.js","js")
+			break;
+		case "tone_monitoring":
+			loadjscssfile("static/css/Experiments/tone_monitoring.css","css")
+			loadjscssfile("static/js/Experiments/tone_monitoring.js","js")
+			loadjscssfile("static/js/jspsych/plugins/jspsych-single-audio.js","js")
+			break;
 	}
 }
 
@@ -140,6 +150,12 @@ function cat_experiments(experiment_array) {
 				break;
 			case "antisaccade":
 				experiments = experiments.concat(antisaccade_experiment)
+				break;
+			case "flanker":
+				experiments = experiments.concat(flanker_experiment)
+				break;
+			case "tone_monitoring":
+				experiments = experiments.concat(tone_monitoring_experiment)
 				break;
 		}
 	}
