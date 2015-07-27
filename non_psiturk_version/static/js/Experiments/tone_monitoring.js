@@ -43,7 +43,7 @@ var start_test_block = {
 
 var high_tone_block = {
   type: 'single-audio',
-  stimuli: ['static/images/tone_monitoring/880Hz_-6dBFS_.5s.mp3'],
+  stimuli: ['static/sounds/tone_monitoring/880Hz_-6dBFS_.5s.mp3'],
   choices: [32],
   timing_stim: 500,
   timing_response: 500,
