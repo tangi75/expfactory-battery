@@ -17,6 +17,7 @@ var correct_responses = jsPsych.randomization.repeat([["left arrow",37],["right 
 /* ************************************ */
 /* define static blocks */
 var welcome_block = {
+	
   type: 'text',
   text: '<div class = centerbox><p class = block-text>Welcome to the tone_monitoring experiment. Press <strong>enter</strong> to begin.</p></div>',
   cont_key: 13
@@ -43,7 +44,25 @@ var start_test_block = {
 
 var high_tone_block = {
   type: 'single-audio',
-  stimuli: ['static/sounds/tone_monitoring/880Hz_-6dBFS_.5s.mp3'],
+  stimuli: ['static/sounds/tone_monitoring/880Hz_-6dBFS_.5s.mp3','static/sounds/tone_monitoring/440Hz_-6dBFS_.5s.mp3'],
+  choices: [32],
+  timing_stim: 500,
+  timing_response: 500,
+  timing_post_trial: 2500
+};
+
+var middle_tone_block = {
+  type: 'single-audio',
+  stimuli: ['static/sounds/tone_monitoring/440Hz_-6dBFS_.5s.mp3'],
+  choices: [32],
+  timing_stim: 500,
+  timing_response: 500,
+  timing_post_trial: 2500
+};
+
+var low_tone_block = {
+  type: 'single-audio',
+  stimuli: ['static/sounds/tone_monitoring/220Hz_-6dBFS_.5s.mp3'],
   choices: [32],
   timing_stim: 500,
   timing_response: 500,
