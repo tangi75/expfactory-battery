@@ -5,12 +5,33 @@ var post_trial_gap = function() {
   return Math.floor( Math.random() * 500 ) + 500;
 }
 
+var randomDraw = function(lst) {
+    var index = Math.floor(Math.random()*(lst.length))
+    return lst[index]
+}
+
 /* ************************************ */
 /* Define experimental variables */
 /* ************************************ */
 var correct_responses = jsPsych.randomization.repeat([["left arrow",37],["right arrow",39]],1)
 
+stims = [{sound: 'static/sounds/tone_monitoring/880Hz_-6dBFS_.5s.mp3',
+		  data: {exp_id: 'tone_monitoring', condition: 'high'}},
+		 {sound: 'static/sounds/tone_monitoring/440Hz_-6dBFS_.5s.mp3',
+		  data: {exp_id: 'tone_monitoring', condition: 'medium'}},
+		 {sound: 'static/sounds/tone_monitoring/220Hz_-6dBFS_.5s.mp3',
+		 data: {exp_id: 'tone_monitoring', condition: 'low'}}
+]
 
+block_num = 4
+blocks = []
+for (b=0; b<block_num; b++){
+	block_trials = jsPsych.randomization.repeat(stims,8,true);
+	last_tone = randomDraw(stims)
+	block_trials.sound.push(last_tone.sound)
+	block_trials.data.push(last_tone.data)
+	blocks.push(block_trials)
+}
 
 /* ************************************ */
 /* Set up jsPsych blocks */
