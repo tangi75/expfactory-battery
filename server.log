@@ -301,3 +301,477 @@ Traceback (most recent call last):
   File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/MySQLdb/connections.py", line 36, in defaulterrorhandler
     raise errorclass, errorvalue
 OperationalError: (_mysql_exceptions.OperationalError) (1142, "CREATE command denied to user 'gpoldrackla_ro'@'sr15-e51dbb276a.stanford.edu' for table 'ControlOntology'") [SQL: u'\nCREATE TABLE `ControlOntology` (\n\tuniqueid VARCHAR(128) NOT NULL, \n\tassignmentid VARCHAR(128) NOT NULL, \n\tworkerid VARCHAR(128) NOT NULL, \n\thitid VARCHAR(128) NOT NULL, \n\tipaddress VARCHAR(128), \n\tbrowser VARCHAR(128), \n\tplatform VARCHAR(128), \n\tlanguage VARCHAR(128), \n\tcond INTEGER, \n\tcounterbalance INTEGER, \n\tcodeversion VARCHAR(128), \n\tbeginhit DATETIME, \n\tbeginexp DATETIME, \n\tendhit DATETIME, \n\tbonus FLOAT, \n\tstatus INTEGER, \n\tdatastring TEXT(4294967295), \n\tPRIMARY KEY (uniqueid)\n)\n\n']
+2015-07-27 18:11:37,052 /home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-07-27 18:11:37,109 /home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-07-27 18:11:37,208 /home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+[2015-07-27 19:15:57 +0000] [2997] [CRITICAL] WORKER TIMEOUT (pid:3002)
+[2015-07-27 19:15:57 +0000] [2997] [CRITICAL] WORKER TIMEOUT (pid:3003)
+[2015-07-27 19:15:57 +0000] [2997] [CRITICAL] WORKER TIMEOUT (pid:3004)
+2015-07-27 19:16:05,753 /home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-07-27 19:16:05,758 /home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-07-27 19:16:05,762 /home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-07-28 15:26:37,460 /home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-07-28 15:26:37,461 /home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-07-28 15:26:37,462 /home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-07-28 15:32:15,014 /home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-07-28 15:32:15,900 /home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-07-28 15:32:16,020 /home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-07-28 15:36:31,952 /home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-07-28 15:36:32,158 /home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-07-28 15:36:32,198 /home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-07-28 15:41:19,288 /home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-07-28 15:41:19,481 /home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-07-28 15:41:19,558 /home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-07-28 15:50:29,447 /home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-07-28 15:50:29,624 /home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-07-28 15:50:29,645 /home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-07-28 15:52:25,163 /home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-07-28 15:52:25,284 /home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-07-28 15:52:25,379 /home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-07-28 15:58:46,079 /home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-07-28 15:58:46,146 /home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-07-28 15:58:46,149 /home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-07-28 16:26:33,876 /home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-07-28 16:26:34,046 /home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-07-28 16:26:34,097 /home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-07-28 16:30:58,783 /home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-07-28 16:30:58,803 /home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-07-28 16:30:58,886 /home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-07-28 16:37:16,249 /home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-07-28 16:37:16,267 /home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-07-28 16:37:16,433 /home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-07-28 16:40:44,561 /home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-07-28 16:40:44,566 /home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-07-28 16:40:44,580 /home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-07-28 16:42:39,141 /home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-07-28 16:42:39,360 /home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-07-28 16:42:39,422 /home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-07-28 16:59:02,016 /home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-07-28 16:59:02,017 /home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-07-28 16:59:02,032 /home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-07-28 16:59:02,034 /home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-07-28 17:13:19,939 /home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-07-28 17:13:20,024 /home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-07-28 17:13:20,146 /home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-07-28 17:20:56,999 /home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-07-28 17:20:57,167 /home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-07-28 17:20:57,215 /home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-07-28 17:36:28,057 /home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-07-28 17:36:28,073 /home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-07-28 17:36:28,163 /home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-07-28 17:36:58,990 /home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-07-28 17:36:59,065 /home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-07-28 17:36:59,175 /home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-07-28 18:00:29,688 /home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-07-28 18:00:29,788 /home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-07-28 18:00:29,878 /home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-07-28 18:00:41,431 Exception on / [GET]
+Traceback (most recent call last):
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/flask/app.py", line 1817, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/flask/app.py", line 1477, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/flask/app.py", line 1381, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/flask/app.py", line 1475, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/flask/app.py", line 1461, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/psiturk/user_utils.py", line 15, in new_func
+    resp = make_response(func(*args, **kwargs))
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/psiturk/experiment.py", line 166, in index
+    return render_template('default.html')
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/flask/templating.py", line 127, in render_template
+    return _render(ctx.app.jinja_env.get_or_select_template(template_name_or_list),
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/jinja2/environment.py", line 830, in get_or_select_template
+    return self.get_template(template_name_or_list, parent, globals)
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/jinja2/environment.py", line 791, in get_template
+    return self._load_template(name, self.make_globals(globals))
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/jinja2/environment.py", line 765, in _load_template
+    template = self.loader.load(self, name, globals)
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/jinja2/loaders.py", line 113, in load
+    source, filename, uptodate = self.get_source(environment, name)
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/flask/templating.py", line 64, in get_source
+    raise TemplateNotFound(template)
+TemplateNotFound: default.html
+2015-07-28 18:12:44,702 /home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-07-28 18:12:44,762 /home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-07-28 18:12:44,809 /home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-07-28 18:13:29,183 /home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-07-28 18:13:29,350 /home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-07-28 18:13:29,429 /home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-07-28 18:16:36,707 /home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-07-28 18:16:36,718 /home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-07-28 18:16:36,721 /home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-07-28 18:17:43,582 /home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-07-28 18:17:43,647 /home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-07-28 18:17:43,650 /home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+[2015-07-28 21:30:14 +0000] [2400] [CRITICAL] WORKER TIMEOUT (pid:2405)
+[2015-07-28 21:30:14 +0000] [2400] [CRITICAL] WORKER TIMEOUT (pid:2406)
+[2015-07-28 21:30:14 +0000] [2400] [CRITICAL] WORKER TIMEOUT (pid:2407)
+[2015-07-28 21:30:18 +0000] [2705] [ERROR] Exception in worker process:
+Traceback (most recent call last):
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/gunicorn/arbiter.py", line 507, in spawn_worker
+    worker.init_process()
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/gunicorn/workers/base.py", line 118, in init_process
+    self.wsgi = self.app.wsgi()
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/gunicorn/app/base.py", line 67, in wsgi
+    self.callable = self.load()
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/psiturk/experiment_server.py", line 49, in load
+    return util.import_app("psiturk.experiment:app")
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/gunicorn/util.py", line 355, in import_app
+    __import__(module)
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/psiturk/experiment.py", line 85, in <module>
+    init_db()
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/psiturk/db.py", line 23, in init_db
+    Base.metadata.create_all(bind=engine)
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/sqlalchemy/sql/schema.py", line 3622, in create_all
+    tables=tables)
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 1853, in _run_visitor
+    with self._optional_conn_ctx_manager(connection) as conn:
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/contextlib.py", line 17, in __enter__
+    return self.gen.next()
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 1846, in _optional_conn_ctx_manager
+    with self.contextual_connect() as conn:
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 2037, in contextual_connect
+    self._wrap_pool_connect(self.pool.connect, None),
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 2076, in _wrap_pool_connect
+    e, dialect, self)
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 1405, in _handle_dbapi_exception_noconnection
+    exc_info
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/sqlalchemy/util/compat.py", line 199, in raise_from_cause
+    reraise(type(exception), exception, tb=exc_tb)
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 2072, in _wrap_pool_connect
+    return fn()
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/sqlalchemy/pool.py", line 376, in connect
+    return _ConnectionFairy._checkout(self)
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/sqlalchemy/pool.py", line 708, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/sqlalchemy/pool.py", line 480, in checkout
+    rec = pool._do_get()
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/sqlalchemy/pool.py", line 1055, in _do_get
+    self._dec_overflow()
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/sqlalchemy/util/langhelpers.py", line 60, in __exit__
+    compat.reraise(exc_type, exc_value, exc_tb)
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/sqlalchemy/pool.py", line 1052, in _do_get
+    return self._create_connection()
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/sqlalchemy/pool.py", line 323, in _create_connection
+    return _ConnectionRecord(self)
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/sqlalchemy/pool.py", line 449, in __init__
+    self.connection = self.__connect()
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/sqlalchemy/pool.py", line 602, in __connect
+    connection = self.__pool._invoke_creator(self)
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/sqlalchemy/engine/strategies.py", line 97, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/sqlalchemy/engine/default.py", line 385, in connect
+    return self.dbapi.connect(*cargs, **cparams)
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/MySQLdb/__init__.py", line 81, in Connect
+    return Connection(*args, **kwargs)
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/MySQLdb/connections.py", line 193, in __init__
+    super(Connection, self).__init__(*args, **kwargs2)
+OperationalError: (_mysql_exceptions.OperationalError) (2005, "Unknown MySQL server host 'mysql-user.stanford.edu' (111)")
+Traceback (most recent call last):
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/gunicorn/arbiter.py", line 507, in spawn_worker
+    worker.init_process()
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/gunicorn/workers/base.py", line 118, in init_process
+    self.wsgi = self.app.wsgi()
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/gunicorn/app/base.py", line 67, in wsgi
+    self.callable = self.load()
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/psiturk/experiment_server.py", line 49, in load
+    return util.import_app("psiturk.experiment:app")
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/gunicorn/util.py", line 355, in import_app
+    __import__(module)
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/psiturk/experiment.py", line 85, in <module>
+    init_db()
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/psiturk/db.py", line 23, in init_db
+    Base.metadata.create_all(bind=engine)
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/sqlalchemy/sql/schema.py", line 3622, in create_all
+    tables=tables)
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 1853, in _run_visitor
+    with self._optional_conn_ctx_manager(connection) as conn:
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/contextlib.py", line 17, in __enter__
+    return self.gen.next()
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 1846, in _optional_conn_ctx_manager
+    with self.contextual_connect() as conn:
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 2037, in contextual_connect
+    self._wrap_pool_connect(self.pool.connect, None),
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 2076, in _wrap_pool_connect
+    e, dialect, self)
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 1405, in _handle_dbapi_exception_noconnection
+    exc_info
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/sqlalchemy/util/compat.py", line 199, in raise_from_cause
+    reraise(type(exception), exception, tb=exc_tb)
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 2072, in _wrap_pool_connect
+    return fn()
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/sqlalchemy/pool.py", line 376, in connect
+    return _ConnectionFairy._checkout(self)
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/sqlalchemy/pool.py", line 708, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/sqlalchemy/pool.py", line 480, in checkout
+    rec = pool._do_get()
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/sqlalchemy/pool.py", line 1055, in _do_get
+    self._dec_overflow()
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/sqlalchemy/util/langhelpers.py", line 60, in __exit__
+    compat.reraise(exc_type, exc_value, exc_tb)
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/sqlalchemy/pool.py", line 1052, in _do_get
+    return self._create_connection()
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/sqlalchemy/pool.py", line 323, in _create_connection
+    return _ConnectionRecord(self)
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/sqlalchemy/pool.py", line 449, in __init__
+    self.connection = self.__connect()
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/sqlalchemy/pool.py", line 602, in __connect
+    connection = self.__pool._invoke_creator(self)
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/sqlalchemy/engine/strategies.py", line 97, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/sqlalchemy/engine/default.py", line 385, in connect
+    return self.dbapi.connect(*cargs, **cparams)
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/MySQLdb/__init__.py", line 81, in Connect
+    return Connection(*args, **kwargs)
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/MySQLdb/connections.py", line 193, in __init__
+    super(Connection, self).__init__(*args, **kwargs2)
+OperationalError: (_mysql_exceptions.OperationalError) (2005, "Unknown MySQL server host 'mysql-user.stanford.edu' (111)")
+[2015-07-28 21:30:18 +0000] [2707] [ERROR] Exception in worker process:
+Traceback (most recent call last):
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/gunicorn/arbiter.py", line 507, in spawn_worker
+    worker.init_process()
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/gunicorn/workers/base.py", line 118, in init_process
+    self.wsgi = self.app.wsgi()
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/gunicorn/app/base.py", line 67, in wsgi
+    self.callable = self.load()
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/psiturk/experiment_server.py", line 49, in load
+    return util.import_app("psiturk.experiment:app")
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/gunicorn/util.py", line 355, in import_app
+    __import__(module)
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/psiturk/experiment.py", line 85, in <module>
+    init_db()
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/psiturk/db.py", line 23, in init_db
+    Base.metadata.create_all(bind=engine)
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/sqlalchemy/sql/schema.py", line 3622, in create_all
+    tables=tables)
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 1853, in _run_visitor
+    with self._optional_conn_ctx_manager(connection) as conn:
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/contextlib.py", line 17, in __enter__
+    return self.gen.next()
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 1846, in _optional_conn_ctx_manager
+    with self.contextual_connect() as conn:
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 2037, in contextual_connect
+    self._wrap_pool_connect(self.pool.connect, None),
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 2076, in _wrap_pool_connect
+    e, dialect, self)
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 1405, in _handle_dbapi_exception_noconnection
+    exc_info
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/sqlalchemy/util/compat.py", line 199, in raise_from_cause
+    reraise(type(exception), exception, tb=exc_tb)
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 2072, in _wrap_pool_connect
+    return fn()
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/sqlalchemy/pool.py", line 376, in connect
+    return _ConnectionFairy._checkout(self)
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/sqlalchemy/pool.py", line 708, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/sqlalchemy/pool.py", line 480, in checkout
+    rec = pool._do_get()
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/sqlalchemy/pool.py", line 1055, in _do_get
+    self._dec_overflow()
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/sqlalchemy/util/langhelpers.py", line 60, in __exit__
+    compat.reraise(exc_type, exc_value, exc_tb)
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/sqlalchemy/pool.py", line 1052, in _do_get
+    return self._create_connection()
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/sqlalchemy/pool.py", line 323, in _create_connection
+    return _ConnectionRecord(self)
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/sqlalchemy/pool.py", line 449, in __init__
+    self.connection = self.__connect()
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/sqlalchemy/pool.py", line 602, in __connect
+    connection = self.__pool._invoke_creator(self)
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/sqlalchemy/engine/strategies.py", line 97, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/sqlalchemy/engine/default.py", line 385, in connect
+    return self.dbapi.connect(*cargs, **cparams)
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/MySQLdb/__init__.py", line 81, in Connect
+    return Connection(*args, **kwargs)
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/MySQLdb/connections.py", line 193, in __init__
+    super(Connection, self).__init__(*args, **kwargs2)
+OperationalError: (_mysql_exceptions.OperationalError) (2005, "Unknown MySQL server host 'mysql-user.stanford.edu' (111)")
+Traceback (most recent call last):
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/gunicorn/arbiter.py", line 507, in spawn_worker
+    worker.init_process()
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/gunicorn/workers/base.py", line 118, in init_process
+    self.wsgi = self.app.wsgi()
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/gunicorn/app/base.py", line 67, in wsgi
+    self.callable = self.load()
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/psiturk/experiment_server.py", line 49, in load
+    return util.import_app("psiturk.experiment:app")
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/gunicorn/util.py", line 355, in import_app
+    __import__(module)
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/psiturk/experiment.py", line 85, in <module>
+    init_db()
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/psiturk/db.py", line 23, in init_db
+    Base.metadata.create_all(bind=engine)
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/sqlalchemy/sql/schema.py", line 3622, in create_all
+    tables=tables)
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 1853, in _run_visitor
+    with self._optional_conn_ctx_manager(connection) as conn:
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/contextlib.py", line 17, in __enter__
+    return self.gen.next()
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 1846, in _optional_conn_ctx_manager
+    with self.contextual_connect() as conn:
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 2037, in contextual_connect
+    self._wrap_pool_connect(self.pool.connect, None),
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 2076, in _wrap_pool_connect
+    e, dialect, self)
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 1405, in _handle_dbapi_exception_noconnection
+    exc_info
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/sqlalchemy/util/compat.py", line 199, in raise_from_cause
+    reraise(type(exception), exception, tb=exc_tb)
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 2072, in _wrap_pool_connect
+    return fn()
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/sqlalchemy/pool.py", line 376, in connect
+    return _ConnectionFairy._checkout(self)
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/sqlalchemy/pool.py", line 708, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/sqlalchemy/pool.py", line 480, in checkout
+    rec = pool._do_get()
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/sqlalchemy/pool.py", line 1055, in _do_get
+    self._dec_overflow()
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/sqlalchemy/util/langhelpers.py", line 60, in __exit__
+    compat.reraise(exc_type, exc_value, exc_tb)
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/sqlalchemy/pool.py", line 1052, in _do_get
+    return self._create_connection()
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/sqlalchemy/pool.py", line 323, in _create_connection
+    return _ConnectionRecord(self)
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/sqlalchemy/pool.py", line 449, in __init__
+    self.connection = self.__connect()
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/sqlalchemy/pool.py", line 602, in __connect
+    connection = self.__pool._invoke_creator(self)
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/sqlalchemy/engine/strategies.py", line 97, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/sqlalchemy/engine/default.py", line 385, in connect
+    return self.dbapi.connect(*cargs, **cparams)
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/MySQLdb/__init__.py", line 81, in Connect
+    return Connection(*args, **kwargs)
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/MySQLdb/connections.py", line 193, in __init__
+    super(Connection, self).__init__(*args, **kwargs2)
+OperationalError: (_mysql_exceptions.OperationalError) (2005, "Unknown MySQL server host 'mysql-user.stanford.edu' (111)")
+[2015-07-28 21:30:19 +0000] [2706] [ERROR] Exception in worker process:
+Traceback (most recent call last):
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/gunicorn/arbiter.py", line 507, in spawn_worker
+    worker.init_process()
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/gunicorn/workers/base.py", line 118, in init_process
+    self.wsgi = self.app.wsgi()
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/gunicorn/app/base.py", line 67, in wsgi
+    self.callable = self.load()
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/psiturk/experiment_server.py", line 49, in load
+    return util.import_app("psiturk.experiment:app")
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/gunicorn/util.py", line 355, in import_app
+    __import__(module)
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/psiturk/experiment.py", line 85, in <module>
+    init_db()
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/psiturk/db.py", line 23, in init_db
+    Base.metadata.create_all(bind=engine)
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/sqlalchemy/sql/schema.py", line 3622, in create_all
+    tables=tables)
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 1853, in _run_visitor
+    with self._optional_conn_ctx_manager(connection) as conn:
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/contextlib.py", line 17, in __enter__
+    return self.gen.next()
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 1846, in _optional_conn_ctx_manager
+    with self.contextual_connect() as conn:
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 2037, in contextual_connect
+    self._wrap_pool_connect(self.pool.connect, None),
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 2076, in _wrap_pool_connect
+    e, dialect, self)
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 1405, in _handle_dbapi_exception_noconnection
+    exc_info
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/sqlalchemy/util/compat.py", line 199, in raise_from_cause
+    reraise(type(exception), exception, tb=exc_tb)
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 2072, in _wrap_pool_connect
+    return fn()
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/sqlalchemy/pool.py", line 376, in connect
+    return _ConnectionFairy._checkout(self)
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/sqlalchemy/pool.py", line 708, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/sqlalchemy/pool.py", line 480, in checkout
+    rec = pool._do_get()
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/sqlalchemy/pool.py", line 1055, in _do_get
+    self._dec_overflow()
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/sqlalchemy/util/langhelpers.py", line 60, in __exit__
+    compat.reraise(exc_type, exc_value, exc_tb)
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/sqlalchemy/pool.py", line 1052, in _do_get
+    return self._create_connection()
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/sqlalchemy/pool.py", line 323, in _create_connection
+    return _ConnectionRecord(self)
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/sqlalchemy/pool.py", line 449, in __init__
+    self.connection = self.__connect()
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/sqlalchemy/pool.py", line 602, in __connect
+    connection = self.__pool._invoke_creator(self)
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/sqlalchemy/engine/strategies.py", line 97, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/sqlalchemy/engine/default.py", line 385, in connect
+    return self.dbapi.connect(*cargs, **cparams)
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/MySQLdb/__init__.py", line 81, in Connect
+    return Connection(*args, **kwargs)
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/MySQLdb/connections.py", line 193, in __init__
+    super(Connection, self).__init__(*args, **kwargs2)
+OperationalError: (_mysql_exceptions.OperationalError) (2005, "Unknown MySQL server host 'mysql-user.stanford.edu' (111)")
+Traceback (most recent call last):
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/gunicorn/arbiter.py", line 507, in spawn_worker
+    worker.init_process()
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/gunicorn/workers/base.py", line 118, in init_process
+    self.wsgi = self.app.wsgi()
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/gunicorn/app/base.py", line 67, in wsgi
+    self.callable = self.load()
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/psiturk/experiment_server.py", line 49, in load
+    return util.import_app("psiturk.experiment:app")
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/gunicorn/util.py", line 355, in import_app
+    __import__(module)
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/psiturk/experiment.py", line 85, in <module>
+    init_db()
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/psiturk/db.py", line 23, in init_db
+    Base.metadata.create_all(bind=engine)
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/sqlalchemy/sql/schema.py", line 3622, in create_all
+    tables=tables)
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 1853, in _run_visitor
+    with self._optional_conn_ctx_manager(connection) as conn:
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/contextlib.py", line 17, in __enter__
+    return self.gen.next()
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 1846, in _optional_conn_ctx_manager
+    with self.contextual_connect() as conn:
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 2037, in contextual_connect
+    self._wrap_pool_connect(self.pool.connect, None),
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 2076, in _wrap_pool_connect
+    e, dialect, self)
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 1405, in _handle_dbapi_exception_noconnection
+    exc_info
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/sqlalchemy/util/compat.py", line 199, in raise_from_cause
+    reraise(type(exception), exception, tb=exc_tb)
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 2072, in _wrap_pool_connect
+    return fn()
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/sqlalchemy/pool.py", line 376, in connect
+    return _ConnectionFairy._checkout(self)
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/sqlalchemy/pool.py", line 708, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/sqlalchemy/pool.py", line 480, in checkout
+    rec = pool._do_get()
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/sqlalchemy/pool.py", line 1055, in _do_get
+    self._dec_overflow()
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/sqlalchemy/util/langhelpers.py", line 60, in __exit__
+    compat.reraise(exc_type, exc_value, exc_tb)
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/sqlalchemy/pool.py", line 1052, in _do_get
+    return self._create_connection()
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/sqlalchemy/pool.py", line 323, in _create_connection
+    return _ConnectionRecord(self)
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/sqlalchemy/pool.py", line 449, in __init__
+    self.connection = self.__connect()
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/sqlalchemy/pool.py", line 602, in __connect
+    connection = self.__pool._invoke_creator(self)
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/sqlalchemy/engine/strategies.py", line 97, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/sqlalchemy/engine/default.py", line 385, in connect
+    return self.dbapi.connect(*cargs, **cparams)
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/MySQLdb/__init__.py", line 81, in Connect
+    return Connection(*args, **kwargs)
+  File "/home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/MySQLdb/connections.py", line 193, in __init__
+    super(Connection, self).__init__(*args, **kwargs2)
+OperationalError: (_mysql_exceptions.OperationalError) (2005, "Unknown MySQL server host 'mysql-user.stanford.edu' (111)")
+2015-07-29 14:09:18,144 /home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-07-29 14:09:18,278 /home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js
+2015-07-29 14:09:18,284 /home/ian/miniconda3/envs/py2.7/lib/python2.7/site-packages/psiturk/psiturk_js/psiturk.js

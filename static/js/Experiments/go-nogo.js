@@ -10,10 +10,10 @@ var practice_index = 0
 var getFeedback = function() {
 	if (response_array[practice_index] == -1) {
 		practice_index += 1
-		return  '<div class = centerbox><p class = center-text><font size = 20>Correct</font></p></div>'
+		return  '<div class = centerbox><div class = center-text><font size = 20>Correct</font></p></div>'
 	} else {
 		practice_index +=1
-		return  '<div class = centerbox><p class = center-text><font size = 20>Incorrect</font></p></div>'
+		return  '<div class = centerbox><div class = center-text><font size = 20>Incorrect</font></p></div>'
 	}
 }
 
@@ -113,8 +113,8 @@ var practice_block = {
   stimuli: practice_trials.image,
   is_html: true,
   key_answer: response_array,
-  correct_text: '<div class = centerbox><p class = center-text><font size = 20>Correct</font></p></div>',
-  incorrect_text: '<div class = centerbox><p class = center-text><font size = 20>Incorrect</font></p></div>',
+  correct_text: '<div class = centerbox><div class = center-text><font size = 20>Correct</font></div></div>',
+  incorrect_text: '<div class = centerbox><div class = center-text><font size = 20>Incorrect</font></div></div>',
   timeout_message: getFeedback,
   choices: [32],
   data: practice_trials.data,
