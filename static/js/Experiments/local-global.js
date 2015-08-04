@@ -90,7 +90,7 @@ var welcome_block = {
 
 var end_block = {
   type: 'text',
-  text: '<div class = centerbox><p class = block-text>Finished with this task. Press <strong>enter</strong> to continue.</p></div>',
+  text: '<div class = centerbox><p class = center-block-text>Finished with this task.</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
   cont_key: 13
 };
 
@@ -106,13 +106,13 @@ var instructions_block = {
 
 var start_practice_block = {
   type: 'text',
-  text: '<div class = centerbox><p class = block-text>We will start with some practice. Press <strong>enter</strong> to begin.</p></div>',
+  text: '<div class = centerbox><p class = center-block-text>We will start with some practice. Press <strong>enter</strong> to begin.</p></div>',
   cont_key: 13
 };
 
 var start_test_block = {
   type: 'text',
-  text: '<div class = centerbox><p class = block-text>We will now start the test. Press <strong>enter</strong> to begin.</p></div>',
+  text: '<div class = centerbox><p class = center-block-text>We will now start the test. Press <strong>enter</strong> to begin.</p></div>',
   cont_key: 13
 };
 

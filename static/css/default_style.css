@@ -14,6 +14,7 @@
   transform: translate(-50%,-50%);
 }
 
+/* Used for general instructions */
 .block-text {
   width:100%;
   height 100vw;
@@ -24,17 +25,23 @@
   line-height: 120%;
 }
 
+/* As above but centered instead of justified. Good for instructions with few lines */
+.center-block-text {
+  width:100%;
+  height 100vw;
+  text-align: center;
+  margin: 0 auto;
+  margin-bottom: 1em;
+  font-size: 20px;
+  line-height: 120%;
+}
+
+/* Used in lists */
 .list-text li{
   font-size: 18px;
 }
 
-.instruction-text {
-  width:650;
-  text-align:justify;
-  margin: 0 auto;
-  margin-bottom: 1em;
-}
-
+/* used for large text shown in the center of the screen, like FB or stimuli */
 .center-text {
 	text-align:center;
 	font-size: 40px;

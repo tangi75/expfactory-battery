@@ -27,7 +27,7 @@ var experimentDraw = function(lst, time) {
 	var return_list = []
 	var total_time = 0
 	while (total_time < time && lst.length > 0) {
-		console.log(lst.length)
+		console.log(lst.lnoteength)
 		index = Math.floor(Math.random()*lst.length)
 		if ((total_time + lst[index].time) < 30) {
 			total_time += lst[index].time
@@ -46,10 +46,10 @@ for a returning subject, keeping the total time under 30 minutes)
 var experiment_list = [{name:"simple_rt", time: 2}, {name: "simon", time: 10}, {name: "ANT", time: 20}, {name: "AX-CPT", time: 10}, 
 						{name: "stop_signal", time: 20},{name: "plus-minus", time: 5},{name: "number-letter", time: 5}, {name: "local-global", time: 5},
 						{name: "go-nogo", time: 7}, {name: 'stroop', time: 6}, {name: 'antisaccade', time: 7.5}, {name: 'flanker', time: 6},
-						{name: 'tone_monitoring', time: 6}, {name: 'image_monitoring', time: 6}] 
+						{name: 'tone_monitoring', time: 6}, {name: 'image_monitoring', time: 6}, {name: 'letter_memory', time: 5}] 
 						
 // experiment_names = experimentDraw(experiment_list)
-var experiment_names = ["image_monitoring"]
+var experiment_names = ["keep_track"]
 
 /* One the experiments are selected, load the appropriate files */
 for (i = 0; i < experiment_names.length; i++) {
@@ -79,7 +79,6 @@ for (i = 0; i < experiment_names.length; i++) {
 			break;
 		case "plus-minus":
 			loadjscssfile("static/js/Experiments/plus-minus.js","js")
-			loadjscssfile("static/js/jspsych/plugins/jspsych-survey-text.js","js")
 			break;
 		case "number-letter":
 			loadjscssfile("static/css/Experiments/number-letter.css","css")
@@ -108,6 +107,7 @@ for (i = 0; i < experiment_names.length; i++) {
 		case "tone_monitoring":
 			loadjscssfile("static/css/Experiments/tone_monitoring.css","css")
 			loadjscssfile("static/js/Experiments/tone_monitoring.js","js")
+			loadjscssfile("static/js/jspsych/custom_plugins/jspsych-categorize-audio.js","js")
 			loadjscssfile("static/js/jspsych/plugins/jspsych-single-audio.js","js")
 			loadjscssfile("static/js/jspsych/plugins/jspsych-call-function.js","js")
 			break;
@@ -115,6 +115,13 @@ for (i = 0; i < experiment_names.length; i++) {
 			loadjscssfile("static/css/Experiments/image_monitoring.css","css")
 			loadjscssfile("static/js/Experiments/image_monitoring.js","js")
 			loadjscssfile("static/js/jspsych/plugins/jspsych-call-function.js","js")
+			break;
+		case "letter_memory":
+			loadjscssfile("static/js/Experiments/letter_memory.js","js")
+			break;
+		case "keep_track":
+			loadjscssfile("static/css/Experiments/keep_track.css","css")
+			loadjscssfile("static/js/Experiments/keep_track.js","js")
 			break;
 	}
 }
@@ -165,6 +172,12 @@ function cat_experiments(experiment_array) {
 				break;
 			case "image_monitoring":
 				experiments = experiments.concat(image_monitoring_experiment)
+				break;
+			case "letter_memory":
+				experiments = experiments.concat(letter_memory_experiment)
+				break;
+			case "keep_track":
+				experiments = experiments.concat(keep_track_experiment)
 				break;
 		}
 	}

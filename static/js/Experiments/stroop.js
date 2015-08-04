@@ -47,7 +47,7 @@ var instructions_block = {
 
 var end_block = {
   type: 'text',
-  text: '<div class = centerbox><p class = block-text>Finished with this task. Press <strong>enter</strong> to continue.</p></div>',
+  text: '<div class = centerbox><p class = center-block-text>Finished with this task.</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
   cont_key: 13
 };
 
@@ -59,7 +59,7 @@ var start_practice_block = {
 
 var start_test_block = {
   type: 'text',
-  text: '<div class = centerbox><p class = block-text>We will now start the test. Respond exactly like you did during practice.</p><p class = block-text>Press <strong>enter</strong> to begin the test.</p></div>',
+  text: '<div class = centerbox><p class = center-block-text>We will now start the test. Respond exactly like you did during practice.</p><p class = center-block-text>Press <strong>enter</strong> to begin the test.</p></div>',
   cont_key: 13
 };
 

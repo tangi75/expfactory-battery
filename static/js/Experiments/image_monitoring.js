@@ -119,19 +119,19 @@ var instructions_block = {
 
 var end_block = {
   type: 'text',
-  text: '<div class = centerbox><p class = block-text>Finished with this task. Press <strong>enter</strong> to continue.</p></div>',
+  text: '<div class = centerbox><p class = center-block-text>Finished with this task.</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
   cont_key: 13
 };
 
 var start_practice_block = {
   type: 'text',
-  text: '<div class = centerbox><p class = block-text>We will start with some practice. During practice you will get feedback about whether your responses are correct or not, which you will not get during the rest of the experiment. Press <strong>enter</strong> to begin.</p></div>',
+  text: '<div class = centerbox><p class = block-text>We will start with some practice followed by ' + block_num + ' test blocks. During practice you will get feedback about whether your responses are correct or not, which you will not get during the rest of the experiment. Press <strong>enter</strong> to begin.</p></div>',
   cont_key: 13
 };
 
 var start_test_block = {
   type: 'text',
-  text: '<div class = centerbox><p class = block-text>Starting a test block. Press <strong>enter</strong> to begin.</p></div>',
+  text: '<div class = centerbox><p class = block-text>Starting a test block. Remember to respond after a shape repeats four times and "reset" your count after you press the spacebar, <strong>regardless of whether or not you were correct</strong>.</p><p class = block-text>Press <strong>enter</strong> to begin.</p></div>',
   cont_key: 13
 };
 
@@ -159,15 +159,15 @@ for (i = 0; i< practice_trials.image.length; i++) {
 	  timeout_message: ' ',
 	  choices: [32],
 	  timing_stim: 500,
-	  timing_response: 3000,
+	  timing_response: 2000,
 	  timing_feedback_duration: 1000,
 	  show_stim_with_feedback: false,
 	  timing_post_trial: 500,
 	  on_trial_start: update_count,
 	  on_finish: reset_count
 	};
-	image_monitoring_experiment.push(update_function)
-	image_monitoring_experiment.push(practice_shape_block)
+	//image_monitoring_experiment.push(update_function)
+	//image_monitoring_experiment.push(practice_shape_block)
 }
 
 // set up test
@@ -181,8 +181,9 @@ for (b=0; b<block_num; b++) {
 	  data: block.data,
 	  choices: [32],
 	  timing_stim: 500,
-	  timing_response: 500,
-	  timing_post_trial: 2500
+	  timing_response: 2500,
+	  response_ends_trial: false,
+	  timing_post_trial: 0
 	};
 	image_monitoring_experiment.push(test_shape_block)
 }
