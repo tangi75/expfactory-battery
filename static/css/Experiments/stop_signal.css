@@ -132,6 +132,7 @@ img.diamond {
     width: 100%;
     background: white;
 }
+
 #stop-signal-inner:before {
     -webkit-transform: rotate(30deg);
        -moz-transform: rotate(30deg);

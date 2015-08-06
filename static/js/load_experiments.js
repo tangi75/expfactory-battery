@@ -46,10 +46,11 @@ for a returning subject, keeping the total time under 30 minutes)
 var experiment_list = [{name:"simple_rt", time: 2}, {name: "simon", time: 10}, {name: "ANT", time: 20}, {name: "AX-CPT", time: 10}, 
 						{name: "stop_signal", time: 20},{name: "plus-minus", time: 5},{name: "number-letter", time: 5}, {name: "local-global", time: 5},
 						{name: "go-nogo", time: 7}, {name: 'stroop', time: 6}, {name: 'antisaccade', time: 7.5}, {name: 'flanker', time: 6},
-						{name: 'tone_monitoring', time: 6}, {name: 'image_monitoring', time: 6}, {name: 'letter_memory', time: 5}] 
+						{name: 'tone_monitoring', time: 6}, {name: 'image_monitoring', time: 6}, {name: 'letter_memory', time: 5},
+						{name: 'volatile_bandit', time: 18}] 
 						
 // experiment_names = experimentDraw(experiment_list)
-var experiment_names = ["keep_track"]
+var experiment_names = ["volatile_bandit"]
 
 /* One the experiments are selected, load the appropriate files */
 for (i = 0; i < experiment_names.length; i++) {
@@ -123,6 +124,10 @@ for (i = 0; i < experiment_names.length; i++) {
 			loadjscssfile("static/css/Experiments/keep_track.css","css")
 			loadjscssfile("static/js/Experiments/keep_track.js","js")
 			break;
+		case "volatile_bandit":
+			loadjscssfile("static/css/Experiments/volatile_bandit.css","css")
+			loadjscssfile("static/js/Experiments/volatile_bandit.js","js")
+			break;
 	}
 }
 
@@ -178,6 +183,9 @@ function cat_experiments(experiment_array) {
 				break;
 			case "keep_track":
 				experiments = experiments.concat(keep_track_experiment)
+				break;
+			case "volatile_bandit":
+				experiments = experiments.concat(volatile_bandit_experiment)
 				break;
 		}
 	}
