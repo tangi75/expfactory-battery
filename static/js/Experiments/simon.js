@@ -50,10 +50,9 @@ var welcome_block = {
 var instructions_block = {
   type: 'instructions',
   pages: [
-	'<div class = centerbox><p class = block-text>If you see red, press the ' + correct_responses[0][0] + '. Press <strong>enter</strong> to continue.</p></div>',
-	'<div class = centerbox><p class = block-text>If you see blue, press the ' + correct_responses[1][0] + '. Press <strong>enter</strong> to continue.</p></div>'
-	],
-  key_forward: 13
+	'<div class = centerbox><p class = block-text>If you see red, press the ' + correct_responses[0][0] + '.</p><p class = block-text>Use the <strong>right arrow key</strong> to advance through the instructions. You can go back using the <strong>left arrow key</strong>.</p></div>',
+	'<div class = centerbox><p class = block-text>If you see blue, press the ' + correct_responses[1][0] + '.</p><p class = block-text>Use the <strong>right arrow key</strong> to advance through the instructions. You can go back using the <strong>left arrow key</strong>.</p></div>'
+	]
 };
 
 var end_block = {

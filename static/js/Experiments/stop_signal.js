@@ -144,11 +144,10 @@ var end_block = {
 var instructions_block = {
   type: 'instructions',
   pages: [
-	'<div class = centerbox><p class = block-text>In this task you will see black shapes appear on the screen one at a time. You will respond to them by pressing the left or right arrow keys.</p><p class = block-text>Press <strong>enter</strong> to continue.</p></div>',
-	'<div class = centerbox><p class = block-text>Only one key is correct for each shape. The correct keys are as follows:' + prompt_text + '<p class = block-text>These instructions will remain on the screen during practice, but will be removed during the test phase.</p><p class = block-text> Press <strong>enter</strong> to continue.</p></div>',
-	'<div class = centerbox><p class = block-text>You should respond as quickly and accurately as possible to each shape.</p><p class = block-text>Press <strong>enter</strong> to continue.</p></div>',
-	],
-  key_forward: 13
+	'<div class = centerbox><p class = block-text>In this task you will see black shapes appear on the screen one at a time. You will respond to them by pressing the left or right arrow keys.</p><p class = block-text>Use the <strong>right arrow key</strong> to advance through the instructions. You can go back using the <strong>left arrow key</strong>.</p></div>',
+	'<div class = centerbox><p class = block-text>Only one key is correct for each shape. The correct keys are as follows:' + prompt_text + '<p class = block-text>These instructions will remain on the screen during practice, but will be removed during the test phase.</p><p class = block-text>Use the <strong>right arrow key</strong> to advance through the instructions. You can go back using the <strong>left arrow key</strong>.</p></div>',
+	'<div class = centerbox><p class = block-text>You should respond as quickly and accurately as possible to each shape.</p><p class = block-text>Use the <strong>right arrow key</strong> to advance through the instructions. You can go back using the <strong>left arrow key</strong>.</p></div>',
+	]
 };
 
 var fixation_block = {

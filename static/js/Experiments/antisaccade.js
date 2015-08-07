@@ -74,8 +74,7 @@ var end_block = {
 
 var instructions_block = {
   type: 'text',
-  text: '<div class = centerbox><p class = block-text>In this task you will have to identify which way an arrow is pointing. In each trial a cross will appear on the screen, after which a black square will be presented on one side of the screen (left or right).</p><p class = block-text>Following the square an arrow will be presented on the other side of the screen and then quickly covered up by a grey mask. You should respond by identifying which way the arrow was pointed (left, right, or up) using the arrow keys.</p><p class = block-text>Press <strong>enter</strong> to continue.</p></div>',
-  cont_key: 13
+  text: '<div class = centerbox><p class = block-text>In this task you will have to identify which way an arrow is pointing. In each trial a cross will appear on the screen, after which a black square will be presented on one side of the screen (left or right).</p><p class = block-text>Following the square an arrow will be presented on the other side of the screen and then quickly covered up by a grey mask. You should respond by identifying which way the arrow was pointed (left, right, or up) using the arrow keys.</p><p class = block-text>Press <strong>enter</strong> to begin.</p></div>'
 };
 
 var begin_practice_block = {

@@ -79,7 +79,7 @@ var welcome_block = {
 
 var instructions_block = {
   type: 'text',
-  text: '<div class = centerbox><p class = block-text>In this experiment blue and orange squares will appear on the screen. You will be told to respond to one of the colored squares by pressing the space bar. You should only respond to this color and withhold any response to the other color.</p><p class = block-text>Press <strong>enter</strong> to continue.</p></div>',
+  text: '<div class = centerbox><p class = block-text>In this experiment blue and orange squares will appear on the screen. You will be told to respond to one of the colored squares by pressing the space bar. You should only respond to this color and withhold any response to the other color.</p><p class = block-text>Press <strong>enter</strong> to begin.</p></div>',
   cont_key: 13
 };
 

@@ -70,11 +70,10 @@ var end_block = {
 var instructions_block = {
   type: 'instructions',
   pages: [
-	'<div class = centerbox><p class = block-text>In this experiment you will see letter-number pairs appear in one of four quadrants on the screen. For instance, you may see "G9" appear in the top right of the screen. Press <strong>enter</strong> to continue.</p></div>',
-	'<div class = centerbox><p class = block-text>When the letter-number pair is in the top half of the screen, you should indicate whether the number is odd or even using the arrow keys: left of odd, right for even. Press <strong>enter</strong> to continue.</p></div>',
-	'<div class = centerbox><p class = block-text>When the letter-number pair is in the bottom half of the screen, you should indicate whether the letter is a consonant or vowel using the arrow keys: left for consonant, right for vowel. Press <strong>enter</strong> to continue.</p></div>'
-	],
-  key_forward: 13
+	'<div class = centerbox><p class = block-text>In this experiment you will see letter-number pairs appear in one of four quadrants on the screen. For instance, you may see "G9" appear in the top right of the screen.</p><p class = block-text>Use the <strong>right arrow key</strong> to advance through the instructions. You can go back using the <strong>left arrow key</strong>.</p></div>',
+	'<div class = centerbox><p class = block-text>When the letter-number pair is in the top half of the screen, you should indicate whether the number is odd or even using the arrow keys: left of odd, right for even.</p><p class = block-text>Use the <strong>right arrow key</strong> to advance through the instructions. You can go back using the <strong>left arrow key</strong>.</p></div>',
+	'<div class = centerbox><p class = block-text>When the letter-number pair is in the bottom half of the screen, you should indicate whether the letter is a consonant or vowel using the arrow keys: left for consonant, right for vowel.</p><p class = block-text>Use the <strong>right arrow key</strong> to advance through the instructions. You can go back using the <strong>left arrow key</strong>.</p></div>'
+	]
 };
 
 /* create experiment definition array */

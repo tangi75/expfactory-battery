@@ -1,3 +1,7 @@
+/* reference: Fan, J., McCandliss, B. D., Sommer, T., Raz, A., & Posner, M. I. (2002). Testing the efficiency and independence of attentional networks. 
+Journal of Cognitive Neuroscience, 14(3), 340-7. doi:10.1162/089892902317361886
+*/
+
 /* ************************************ */
 /* Define helper functions */
 /* ************************************ */
@@ -83,10 +87,9 @@ var end_block = {
 var instructions_block = {
   type: 'instructions',
   pages: [
-	'<div class = centerbox><p class = block-text>Instructions 1. Press <strong>enter</strong> to continue.</p></div>',
-	'<div class = centerbox><p class = block-text>Instructions 2. Press <strong>enter</strong> to continue.</p></div>'
-	],
-  key_forward: 13
+	'<div class = centerbox><p class = block-text>In this experiment you will see groups of five arrows and dashes pointing left or right (e.g &larr; &larr; &larr; &larr; &larr;, or &mdash; &mdash; &rarr; &mdash; &mdash;) presented randomly at the top or bottom of the screen.</p><p class = block-text>Your job is to indicate which way the central arrow is pointing by pressing the corresponding arrow key.</p></p></p><p class = block-text>Use the <strong>right arrow key</strong> to advance through the instructions. You can go back using the <strong>left arrow key</strong>.</p></div>',
+	'<div class = centerbox><p class = block-text>Before the arrows and dashes come up, an "*" will occasionally come up, either in the center of the screen, at the top and bottom of the screen, or where the arrows and dashes will be presented.</p><p class = block-text>It is important that you respond as quickly and accurately as possible by pressing the arrow key corresponding to the center arrow.</p><p class = block-text>Use the <strong>right arrow key</strong> to start practice (You will not be able to go back). You can go back using the <strong>left arrow key</strong>.</p></div>'	
+	]
 };
 
 var rest_block = {

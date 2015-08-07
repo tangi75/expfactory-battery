@@ -47,10 +47,10 @@ var experiment_list = [{name:"simple_rt", time: 2}, {name: "simon", time: 10}, {
 						{name: "stop_signal", time: 20},{name: "plus-minus", time: 5},{name: "number-letter", time: 5}, {name: "local-global", time: 5},
 						{name: "go-nogo", time: 7}, {name: 'stroop', time: 6}, {name: 'antisaccade', time: 7.5}, {name: 'flanker', time: 6},
 						{name: 'tone_monitoring', time: 6}, {name: 'image_monitoring', time: 6}, {name: 'letter_memory', time: 5},
-						{name: 'volatile_bandit', time: 18}] 
+						{name: 'volatile_bandit', time: 18}, {name: 'multi-source', time: 7}] 
 						
 // experiment_names = experimentDraw(experiment_list)
-var experiment_names = ["volatile_bandit"]
+var experiment_names = ["multi-source"]
 
 /* One the experiments are selected, load the appropriate files */
 for (i = 0; i < experiment_names.length; i++) {
@@ -128,6 +128,10 @@ for (i = 0; i < experiment_names.length; i++) {
 			loadjscssfile("static/css/Experiments/volatile_bandit.css","css")
 			loadjscssfile("static/js/Experiments/volatile_bandit.js","js")
 			break;
+		case "multi-source":
+			loadjscssfile("static/css/Experiments/multi-source.css","css")
+			loadjscssfile("static/js/Experiments/multi-source.js","js")
+			break;
 	}
 }
 
@@ -186,6 +190,9 @@ function cat_experiments(experiment_array) {
 				break;
 			case "volatile_bandit":
 				experiments = experiments.concat(volatile_bandit_experiment)
+				break;
+			case "multi-source":
+				experiments = experiments.concat(multisource_experiment)
 				break;
 		}
 	}

@@ -70,8 +70,7 @@ var instructions_block = {
 
 var end_block = {
   type: 'text',
-  text: '<div class = centerbox><p class = center-block-text>Finished with this task.</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
-  cont_key: 13
+  text: '<div class = centerbox><p class = center-block-text>Finished with this task.</p><p class = center-block-text>Use the <strong>right arrow key</strong> to advance through the instructions. You can go back using the <strong>left arrow key</strong>.</p></div>'
 };
 
 var start_practice_block = {
