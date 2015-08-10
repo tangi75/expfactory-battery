@@ -47,10 +47,11 @@ var experiment_list = [{name:"simple_rt", time: 2}, {name: "simon", time: 10}, {
 						{name: "stop_signal", time: 20},{name: "plus-minus", time: 5},{name: "number-letter", time: 5}, {name: "local-global", time: 5},
 						{name: "go-nogo", time: 7}, {name: 'stroop', time: 6}, {name: 'antisaccade', time: 7.5}, {name: 'flanker', time: 6},
 						{name: 'tone_monitoring', time: 6}, {name: 'image_monitoring', time: 6}, {name: 'letter_memory', time: 5},
-						{name: 'volatile_bandit', time: 18}, {name: 'multi-source', time: 7}] 
+						{name: 'volatile_bandit', time: 18}, {name: 'multi-source', time: 7}, {name: 'n-back', time: 16},
+						{name: 'RNG', time: 3}] 
 						
 // experiment_names = experimentDraw(experiment_list)
-var experiment_names = ["multi-source"]
+var experiment_names = ["RNG"]
 
 /* One the experiments are selected, load the appropriate files */
 for (i = 0; i < experiment_names.length; i++) {
@@ -132,6 +133,16 @@ for (i = 0; i < experiment_names.length; i++) {
 			loadjscssfile("static/css/Experiments/multi-source.css","css")
 			loadjscssfile("static/js/Experiments/multi-source.js","js")
 			break;
+		case "n-back":
+			loadjscssfile("static/js/Experiments/n-back.js","js")
+			break;
+		case "RNG":
+			//loadjscssfile("static/css/Experiments/random_number_generation.css","css")
+			//loadjscssfile("static/js/Experiments/random_number_generation.js","js")
+			loadjscssfile("static/js/jspsych/custom_plugins/jspsych-multi-button.js","js")
+			loadjscssfile("static/css/Experiments/RNG.css","css")
+			loadjscssfile("static/js/Experiments/RNG.js","js")
+			break;
 	}
 }
 
@@ -193,6 +204,12 @@ function cat_experiments(experiment_array) {
 				break;
 			case "multi-source":
 				experiments = experiments.concat(multisource_experiment)
+				break;
+			case "n-back":
+				experiments = experiments.concat(n_back_experiment)
+				break;
+			case "RNG":
+				experiments = experiments.concat(RNG_experiment)
 				break;
 		}
 	}

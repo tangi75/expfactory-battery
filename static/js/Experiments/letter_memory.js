@@ -65,12 +65,14 @@ var instructions_block = {
     '<div class = centerbox><p class = block-text>In this experiment you will see a sequence of letters presented one at a time. Your job is to remember the last four letters presented and report them at the end of the sequence.</p><p class = block-text>For instance, if the sequence F...J...K...N...F...L is presented, you would report KNFL.</p><p class = block-text>The sequences vary in length so it is important that you keep track of each letter. To ensure this, while doing the task repeat the last four letters (or less if less than four letters had been shown) out loud or to yourself while the letters are being presented.</p><p class = block-text>Press <strong>enter</strong> to continue.</p></div>',
 	'<div class = centerbox><p class = block-text>We will start with two practice sequences. Following will be 12 test blocks.</p><p class = block-text>Press <strong>enter</strong> to continue.</p></div>'
   ],
-  key_forward: 13
+  key_forward: 13,
+  allow_backwards: false
 };
 
 var end_block = {
   type: 'text',
-  text: '<div class = centerbox><p class = center-block-text>Finished with this task.</p><p class = center-block-text>Use the <strong>right arrow key</strong> to advance through the instructions. You can go back using the <strong>left arrow key</strong>.</p></div>'
+  text: '<div class = centerbox><p class = center-block-text>Finished with this task.</p><p class = center-block-text>Press <strong>enter</strong> to begin.</p></div>',
+  cont_key: 13
 };
 
 var start_practice_block = {
