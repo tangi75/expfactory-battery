@@ -48,10 +48,10 @@ var experiment_list = [{name:"simple_rt", time: 2}, {name: "simon", time: 10}, {
 						{name: "go-nogo", time: 7}, {name: 'stroop', time: 6}, {name: 'antisaccade', time: 7.5}, {name: 'flanker', time: 6},
 						{name: 'tone_monitoring', time: 6}, {name: 'image_monitoring', time: 6}, {name: 'letter_memory', time: 5},
 						{name: 'volatile_bandit', time: 18}, {name: 'multi-source', time: 7}, {name: 'n-back', time: 16},
-						{name: 'RNG', time: 3}] 
+						{name: 'RNG', time: 3}, {name: '2-stage-decision', time: 20}] 
 						
 // experiment_names = experimentDraw(experiment_list)
-var experiment_names = ["RNG"]
+var experiment_names = ["2-stage-decision"]
 
 /* One the experiments are selected, load the appropriate files */
 for (i = 0; i < experiment_names.length; i++) {
@@ -143,6 +143,11 @@ for (i = 0; i < experiment_names.length; i++) {
 			loadjscssfile("static/css/Experiments/RNG.css","css")
 			loadjscssfile("static/js/Experiments/RNG.js","js")
 			break;
+		case "2-stage-decision":
+			loadjscssfile("static/css/Experiments/2-stage-decision.css","css")
+			loadjscssfile("static/js/Experiments/2-stage-decision.js","js")
+			loadjscssfile("static/js/jspsych/plugins/jspsych-call-function.js","js")
+			break;
 	}
 }
 
@@ -210,6 +215,9 @@ function cat_experiments(experiment_array) {
 				break;
 			case "RNG":
 				experiments = experiments.concat(RNG_experiment)
+				break;
+			case "2-stage-decision":
+				experiments = experiments.concat(two_stage_experiment)
 				break;
 		}
 	}
