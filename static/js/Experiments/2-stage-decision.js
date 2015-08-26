@@ -1,3 +1,5 @@
+// reference: http://www.sciencedirect.com/science/article/pii/S0896627311001255
+// Model-Based Influences on Humans' Choices and Striatal Prediction Errors, Daw et al. 2011
 
 /* ************************************ */
 /* Define helper functions */
@@ -35,6 +37,23 @@ var initialize_FB_matrix = function() {
 	return [Math.random()*.5+.25,Math.random()*.5+.25,Math.random()*.5+.25,Math.random()*.5+.25]
 }
 
+//Change phase from practice to test
+var change_phase = function() {
+	if (curr_images == practice_images) {
+		curr_images = test_images
+		curr_colors = test_colors
+		curr_fs_stims = test_fs_stims
+		curr_ss_stim = test_ss_stim
+		phase = 'test'
+	} else {
+		curr_images = practice_images
+		curr_colors = practice_colors
+		curr_fs_stims = practice_fs_stims
+		curr_ss_stim = practice_ss_stim
+		phase = 'practice'
+	}
+	current_trial = -1 //reset count
+}
 
 
 /*
@@ -117,7 +136,7 @@ var get_first_selected = function() {
 	var first_stage_trial = jsPsych.data.getData()[global_trial-1]
 	var stim_ids = curr_fs_stims.data[current_trial].condition
 	action = actions.indexOf(first_stage_trial.key_press)
-	jsPsych.data.addDataToLastTrial({condition: stim_ids, trial_num: current_trial})
+	jsPsych.data.addDataToLastTrial({condition: stim_ids, trial_num: current_trial,trial_id: phase+'_first_stage'})
 	if (action != -1) {
 		first_selected = stim_ids[action]
 		first_notselected = stim_ids[1-action]
@@ -167,7 +186,7 @@ var get_second_selected = function() {
 	var stim_index = curr_ss_stim.stimulus.indexOf(second_stage_trial.stimulus.slice(slice_start_index))
 	var stim_ids = curr_ss_stim.data[stim_index].condition
 	action = actions.indexOf(second_stage_trial.key_press)
-	jsPsych.data.addDataToLastTrial({condition: stim_ids, trial_num: current_trial})
+	jsPsych.data.addDataToLastTrial({condition: stim_ids, trial_num: current_trial, trial_id: phase+'_second_stage'})
 	if (action != -1) {
 		second_selected = stim_ids[action]
 		second_notselected = stim_ids[1-action]
@@ -220,6 +239,11 @@ var get_feedback = function() {
 	}
 }
 
+var update_FB_data = function () {
+	jsPsych.data.addDataToLastTrial({condition: FB, trial_num: current_trial, trial_id: phase+'_FB_stage', FB_probs: FB_matrix})
+	return ""	
+}
+
 /* ************************************ */
 /* Define experimental variables */
 /* ************************************ */
@@ -237,6 +261,7 @@ var FB_on = 1 //tracks whether FB should be displayed on this trial
 var FB = -1 //tracks FB value
 var stage = 0 //stage is used to track which second stage was shown, 0 or 1
 var FB_matrix = initialize_FB_matrix() //tracks the reward probabilities for the four final stimuli
+var phase = 'practice'
 
 // Actions for left and right
 var actions = [37,39]
@@ -246,7 +271,7 @@ var stim_move = ['selected-left', 'selected-right']
 // Set up colors
 var test_colors = jsPsych.randomization.shuffle(['#98bf21', '#FF9966', '#C2C2FF'])
 var practice_colors = jsPsych.randomization.shuffle(['#F1B8D4', '#CCFF99', '#E0C2FF'])
-var curr_colors = test_colors
+var curr_colors = practice_colors
 
 //The first two stims are first-stage stims.
 //The next four are second-stage
@@ -266,14 +291,20 @@ var practice_images = jsPsych.randomization.repeat(
 	 "static/images/2-stage-decision/84.png",
 	 "static/images/2-stage-decision/85.png",],1)
 
-var curr_images = test_images
+var curr_images = practice_images
 
 var test_fs_stim = get_fs_stim(test_images,test_colors,'test')
+var practice_fs_stim = get_fs_stim(practice_images,practice_colors,'practice')
+
 var test_ss_stim = get_ss_stim(test_images,test_colors,'test')
+var practice_ss_stim = get_ss_stim(practice_images,practice_colors,'practice')
 
 var test_fs_stims = jsPsych.randomization.repeat(test_fs_stim, test_trials_num, true);
-var curr_fs_stims = test_fs_stims
-var curr_ss_stim = test_ss_stim
+var practice_fs_stims = jsPsych.randomization.repeat(practice_fs_stim, practice_trials_num, true);
+
+
+var curr_fs_stims = practice_fs_stims
+var curr_ss_stim = practice_ss_stim
 
 
 /* ************************************ */
@@ -282,21 +313,38 @@ var curr_ss_stim = test_ss_stim
 /* define static blocks */
 var welcome_block = {
   type: 'text',
-  text: '<div class = centerbox><p class = block-text>Welcome to the simon experiment. Press <strong>enter</strong> to begin.</p></div>',
+  text: '<div class = centerbox><p class = block-text>Welcome to the two-stage decision task experiment. Press <strong>enter</strong> to begin.</p></div>',
   cont_key: 13
 };
 
 var instructions_block = {
   type: 'instructions',
   pages: [
-	'<div class = centerbox><p class = block-text>If you see red, press the.</p><p class = block-text>Use the <strong>right arrow key</strong> to advance through the instructions. You can go back using the <strong>left arrow key</strong>.</p></div>',
-	'<div class = centerbox><p class = block-text>If you see blue, press the.</p><p class = block-text>Use the <strong>right arrow key</strong> to advance through the instructions. You can go back using the <strong>left arrow key</strong>.</p></div>'
+	'<div class = centerbox><p class = block-text>In this task, you need to make decisions in two stages to get a reward. In each stage, two abstract shapes will come up on the screen overlaid on colored backgrounds. You choose one by pressing either the left or right arrow keys.</p><p class = block-text>On the next screen you will see an example "stage" with two shapes on colored backgrounds.</p><p class = block-text>Use the <strong>right arrow key</strong> to advance through the instructions. You can go back using the <strong>left arrow key</strong>.</p></div>',
+	"<div class = decision-left style='background:" + curr_colors[0] +"; width:330px;height:230px;'><img class = 'decision-stim' src= '" + curr_images[0] + "'></img></div><div class = decision-right style='background:" + curr_colors[0] +"; width:330px;height:230px;'><img class = 'decision-stim' src= '" + curr_images[1] + "'></img></div>",
+	'<div class = centerbox><p class = block-text>Both the first and second stage will look something like that. After you make your first-stage choice, you will move to one of two second-stages (referred to as 2a and 2b). Each second stage has its own background color and has two different abstract shapes.</p><p class = block-text>In total, the task has three "stages": a first stage which can lead to either stage 2a or stage 2b. Each stage is associated with a different color background and has its own shapes. In total there are six different shapes in the three stages.</p><p class = block-text>Use the <strong>right arrow key</strong> to advance through the instructions. You can go back using the <strong>left arrow key</strong>.</p></div>',
+	'<div class = centerbox><p class = block-text>Each first-stage choice is primarily associated with one of the two second-stages. This means that each first-stage choice is more likely to bring you to one of the two second-stages than the other.</p<p class = block-text>For instance, one first-stage shape may bring you to 2a most of the time, and only sometimes bring you to 2b, while the other shape does the reverse.</p><p class = block-text>After moving to one of the two second-stages, you respond by again pressing an arrow key. After you respond you will get feedback.</p><p class = block-text>Use the <strong>right arrow key</strong> to advance through the instructions. You can go back using the <strong>left arrow key</strong>.</p></div>',
+	'<div class = centerbox><p class = block-text>The feedback will either be a gold coin or a "0" indicating whether you won or lost on that trial. The gold coins determine your bonus pay, so try to get as many as possible!</p><p class = block-text>As mentioned, there are four second-stage shapes: two shapes in 2a and two shapes in 2b. These four shapes each have a different chance of paying a gold coin. You want to learn which shape is the best so you can get as many coins as possible.</p><p class = block-text>Use the <strong>right arrow key</strong> to advance through the instructions. You can go back using the <strong>left arrow key</strong>.</p></div>',
+	'<div class = centerbox><p class = block-text>The chance of getting a coin from each second-stage shape changes over the experiment, so the best choice early on may not be the best choice later.</p><p class = block-text>In contrast, the chance of going to one of the second-stages after choosing one of the first-stage choices is fixed throughout the experiment. If you find over time that one first-stage shape brings you to 2a most of the time, it will stay that way for the whole experiment.</p><p class = block-text>Use the <strong>right arrow key</strong> to advance through the instructions. You can go back using the <strong>left arrow key</strong>.</p></div>',
+	'<div class = centerbox><p class = block-text>We will start with some practice.</p><p class = block-text>Use the <strong>right arrow key</strong> to advance through the instructions. You can go back using the <strong>left arrow key</strong>. After practice we will show you the instructions again, but please make sure you understand them as well as you can now.</p></div>'
 	]
-};
+}
 
 var end_block = {
   type: 'text',
   text: '<div class = centerbox><p class = center-block-text>Finished with this task.</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
+  cont_key: 13
+};
+
+var wait_block = {
+  type: 'text',
+  text: '<div class = centerbox><p class = center-block-text>Take a break!</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>',
+  cont_key: 13
+};
+
+var start_practice_block = {
+  type: 'text',
+  text: '<div class = centerbox><p class = center-block-text>Starting practice. Press <strong>enter</strong> to begin.</p></div>',
   cont_key: 13
 };
 
@@ -306,9 +354,9 @@ var start_test_block = {
   cont_key: 13
 };
 
-var intertrial_wait = {
+var intertrial_wait_update_FB = {
 	type: "single-stim",
-	stimuli: "",
+	stimuli: update_FB_data, //dummy stimuli. Returns "" but updates previous trial
 	continue_after_response: false,
 	is_html: true,
 	timing_post_trial: 0,
@@ -316,6 +364,20 @@ var intertrial_wait = {
 	timing_response: 1000
 }
 
+var intertrial_wait = {
+	type: "single-stim",
+	stimuli: "", //dummy stimuli. Returns "" but updates previous trial
+	continue_after_response: false,
+	is_html: true,
+	timing_post_trial: 0,
+	timing_stim: 1000,
+	timing_response: 1000
+}
+
+var change_phase_block = {
+	type: 'call-function',
+	func: change_phase
+}
 
 //experiment blocks
 var first_stage = {
@@ -328,7 +390,7 @@ var first_stage = {
 		show_response: true,
 		timing_post_trial: 0,
 		trial_count: get_current_trial,
-		data: {exp_id: "two-stage-decision", trial_id: 'first_stage'}
+		data: {exp_id: "two-stage-decision"}
 }
 
 var first_stage_selected = {
@@ -350,7 +412,7 @@ var second_stage = {
 		timing_response: 2000,
 		timing_post_trial: 0,
 		trial_count: get_current_trial,
-		data: {exp_id: "two-stage-decision", trial_id: 'second_stage'}
+		data: {exp_id: "two-stage-decision"}
 }	
 
 var second_stage_selected = {
@@ -378,7 +440,7 @@ var FB_stage = {
 
 var FB_chunk = {
 	chunk_type: 'if',
-	timeline: [second_stage_selected, FB_stage, intertrial_wait],
+	timeline: [second_stage_selected, FB_stage, intertrial_wait_update_FB],
 	conditional_function: function() {
 		return FB_on == 1
 	}
@@ -393,18 +455,34 @@ var noFB_chunk = {
 }
 
 var two_stage_experiment = []
-//two_stage_experiment.push(welcome_block);
-//two_stage_experiment.push(instructions_block);
-
-for (var i = 0; i < 10; i ++ ) {
+two_stage_experiment.push(welcome_block);
+two_stage_experiment.push(instructions_block);
+two_stage_experiment.push(start_practice_block);
+for (var i = 0; i < practice_trials_num; i ++ ) {
 	two_stage_experiment.push(first_stage)
 	two_stage_experiment.push(first_stage_selected)
 	two_stage_experiment.push(second_stage)
 	two_stage_experiment.push(FB_chunk)
 	two_stage_experiment.push(noFB_chunk)
 }
-
-
+two_stage_experiment.push(change_phase_block)
+two_stage_experiment.push(start_test_block)
+for (var i = 0; i < test_trials_num/2; i ++ ) {
+	two_stage_experiment.push(first_stage)
+	two_stage_experiment.push(first_stage_selected)
+	two_stage_experiment.push(second_stage)
+	two_stage_experiment.push(FB_chunk)
+	two_stage_experiment.push(noFB_chunk)
+}
+two_stage_experiment.push(wait_block)
+for (var i = 0; i < test_trials_num/2; i ++ ) {
+	two_stage_experiment.push(first_stage)
+	two_stage_experiment.push(first_stage_selected)
+	two_stage_experiment.push(second_stage)
+	two_stage_experiment.push(FB_chunk)
+	two_stage_experiment.push(noFB_chunk)
+}
+two_stage_experiment.push(end_block)
 
 
 

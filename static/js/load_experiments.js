@@ -43,15 +43,15 @@ but eventually they should be selected by some function (I.E. random new combina
 for a returning subject, keeping the total time under 30 minutes)
 */ 
 // full list of experiment names:
-var experiment_list = [{name:"simple_rt", time: 2}, {name: "simon", time: 10}, {name: "ANT", time: 20}, {name: "AX-CPT", time: 10}, 
+var experiment_list = [{name:"simple_rt", time: 2}, {name:"choice_rt", time: 7}, {name: "simon", time: 10}, {name: "ANT", time: 20}, {name: "AX-CPT", time: 10}, 
 						{name: "stop_signal", time: 20},{name: "plus-minus", time: 5},{name: "number-letter", time: 5}, {name: "local-global", time: 5},
 						{name: "go-nogo", time: 7}, {name: 'stroop', time: 6}, {name: 'antisaccade', time: 7.5}, {name: 'flanker', time: 6},
 						{name: 'tone_monitoring', time: 6}, {name: 'image_monitoring', time: 6}, {name: 'letter_memory', time: 5},
 						{name: 'volatile_bandit', time: 18}, {name: 'multi-source', time: 7}, {name: 'n-back', time: 16},
-						{name: 'RNG', time: 3}, {name: '2-stage-decision', time: 20}] 
+						{name: 'adaptive-n-back', time: 16}, {name: 'RNG', time: 3}, {name: '2-stage-decision', time: 20}] 
 						
 // experiment_names = experimentDraw(experiment_list)
-var experiment_names = ["2-stage-decision"]
+var experiment_names = ["adaptive-n-back"]
 
 /* One the experiments are selected, load the appropriate files */
 for (i = 0; i < experiment_names.length; i++) {
@@ -59,6 +59,10 @@ for (i = 0; i < experiment_names.length; i++) {
 		case "simple_rt":
 			loadjscssfile("static/css/Experiments/simple_rt.css","css")
 			loadjscssfile("static/js/Experiments/simple_rt.js","js")
+			break;
+		case "choice_rt":
+			loadjscssfile("static/css/Experiments/choice_rt.css","css")
+			loadjscssfile("static/js/Experiments/choice_rt.js","js")
 			break;
 		case "simon":
 			loadjscssfile("static/css/Experiments/simon.css","css")
@@ -136,9 +140,11 @@ for (i = 0; i < experiment_names.length; i++) {
 		case "n-back":
 			loadjscssfile("static/js/Experiments/n-back.js","js")
 			break;
+		case "adaptive-n-back":
+			loadjscssfile("static/js/Experiments/adaptive_n-back.js","js")
+			loadjscssfile("static/js/jspsych/plugins/jspsych-call-function.js","js")
+			break;
 		case "RNG":
-			//loadjscssfile("static/css/Experiments/random_number_generation.css","css")
-			//loadjscssfile("static/js/Experiments/random_number_generation.js","js")
 			loadjscssfile("static/js/jspsych/custom_plugins/jspsych-multi-button.js","js")
 			loadjscssfile("static/css/Experiments/RNG.css","css")
 			loadjscssfile("static/js/Experiments/RNG.js","js")
@@ -158,6 +164,9 @@ function cat_experiments(experiment_array) {
 		switch (experiment_names[i]) {
 			case "simple_rt":
 				experiments = experiments.concat(simple_rt_experiment)
+				break;
+			case "choice_rt":
+				experiments = experiments.concat(choice_rt_experiment)
 				break;
 			case "simon":
 				experiments = experiments.concat(simon_experiment)
@@ -212,6 +221,9 @@ function cat_experiments(experiment_array) {
 				break;
 			case "n-back":
 				experiments = experiments.concat(n_back_experiment)
+				break;
+			case "adaptive-n-back":
+				experiments = experiments.concat(adaptive_n_back_experiment)
 				break;
 			case "RNG":
 				experiments = experiments.concat(RNG_experiment)
