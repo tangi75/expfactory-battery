@@ -43,7 +43,8 @@ but eventually they should be selected by some function (I.E. random new combina
 for a returning subject, keeping the total time under 30 minutes)
 */ 
 // full list of experiment names:
-var experiment_list = [{name:"simple_rt", time: 2}, {name:"choice_rt", time: 7}, {name: "simon", time: 10}, {name: "ANT", time: 20}, {name: "AX-CPT", time: 10}, 
+var experiment_list = [{name:"simple_rt", time: 2}, {name:"choice_rt", time: 7}, {name: "simon", time: 10}, {name: "ANT", time: 20}, 
+						{name: "AX-CPT", time: 10}, {name: "DPX", time: 12},
 						{name: "stop_signal", time: 20},{name: "plus-minus", time: 5},{name: "number-letter", time: 5}, {name: "local-global", time: 5},
 						{name: "go-nogo", time: 7}, {name: 'stroop', time: 6}, {name: 'antisaccade', time: 7.5}, {name: 'flanker', time: 6},
 						{name: 'tone_monitoring', time: 6}, {name: 'image_monitoring', time: 6}, {name: 'letter_memory', time: 5},
@@ -51,7 +52,7 @@ var experiment_list = [{name:"simple_rt", time: 2}, {name:"choice_rt", time: 7},
 						{name: 'adaptive-n-back', time: 16}, {name: 'RNG', time: 3}, {name: '2-stage-decision', time: 20}] 
 						
 // experiment_names = experimentDraw(experiment_list)
-var experiment_names = ["adaptive-n-back"]
+var experiment_names = ["DPX"]
 
 /* One the experiments are selected, load the appropriate files */
 for (i = 0; i < experiment_names.length; i++) {
@@ -76,6 +77,10 @@ for (i = 0; i < experiment_names.length; i++) {
 		case "AX-CPT":
 			loadjscssfile("static/css/Experiments/AX-CPT.css","css")
 			loadjscssfile("static/js/Experiments/AX-CPT.js","js")
+			break;
+		case "DPX":
+			loadjscssfile("static/css/Experiments/DPX.css","css")
+			loadjscssfile("static/js/Experiments/DPX.js","js")
 			break;
 		case "stop_signal":
 			loadjscssfile("static/css/Experiments/stop_signal.css","css")
@@ -111,7 +116,6 @@ for (i = 0; i < experiment_names.length; i++) {
 			loadjscssfile("static/js/Experiments/flanker.js","js")
 			break;
 		case "tone_monitoring":
-			loadjscssfile("static/css/Experiments/tone_monitoring.css","css")
 			loadjscssfile("static/js/Experiments/tone_monitoring.js","js")
 			loadjscssfile("static/js/jspsych/custom_plugins/jspsych-categorize-audio.js","js")
 			loadjscssfile("static/js/jspsych/plugins/jspsych-single-audio.js","js")
@@ -176,6 +180,9 @@ function cat_experiments(experiment_array) {
 				break;
 			case "AX-CPT":
 				experiments = experiments.concat(AX_experiment)
+				break;
+			case "DPX":
+				experiments = experiments.concat(DPX_experiment)
 				break;
 			case "stop_signal":
 				experiments = experiments.concat(stop_signal_experiment)

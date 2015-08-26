@@ -99,7 +99,7 @@ var rest_block = {
 
 var fixation = {
   type: 'single-stim',
-  stimuli: '<div class = centerbox><p class = ANT_text>+</p></div>',
+  stimuli: '<div class = centerbox><div class = fixation>+</div></div>',
   is_html: true,
   choices: 'none',
   data: {exp_id: 'ANT', trial_type: 'fixation', duration: 400},

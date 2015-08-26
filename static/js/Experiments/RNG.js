@@ -44,7 +44,6 @@ var empty_grid =
 		'<div class = "square num-button"><div class = content><div class = numbers ></div></div></div></div>'
 		
 var num_trials = 162 
-var fixation = "<div class = centerbox><div class = fixation>+</div></div>",
 practice_stims = []
 test_stims = []
 for (var i = 0; i < 10; i++) {

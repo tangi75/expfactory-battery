@@ -3,15 +3,6 @@
 	font-size: 60px;
 }
 
-.ss_fixation {
-	text-align: center;
-	font-size: 150px;
-	position: relative;
-    top: 50%; 
-    transform: translateY(-50%);
-    -webkit-transform: translateY(-50%);
-}
-
 
 .ss_stim {
 	text-align: center;
