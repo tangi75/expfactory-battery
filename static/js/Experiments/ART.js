@@ -1,6 +1,26 @@
 /* ************************************ */
 /* Define helper functions */
 /* ************************************ */
+function appendTextAfter(input,search_term, new_text) {
+	var index = input.search(search_term)+search_term.length
+	return input.slice(0,index) + new_text + input.slice(index)
+}
+
+function getGame() {
+	if (pond_state == "" ) {
+		return game_setup
+	} else {
+		// Update game state with cached values
+		game_state = game_setup
+		game_state = appendTextAfter(game_state, 'pond>', pond_state)
+		game_state = appendTextAfter(game_state, 'cooler>', cooler_state)
+		game_state = appendTextAfter(game_state, '# Red Fish in Pond: </strong>', red_fish_num)
+		game_state = appendTextAfter(game_state, '# Blue Fish in Pond: </strong>', total_fish_num-red_fish_num)
+		game_state = appendTextAfter(game_state, 'Trip Bank: </strong>', trip_bank)
+		game_state = appendTextAfter(game_state, 'Tournament Bank: </strong>', tournament_bank)
+		return game_state
+	}
+}
 
 function makeFish() {
     $(".redfish").remove();
@@ -11,11 +31,19 @@ function makeFish() {
             max_x = $('.pond').width()*.8;
             max_y = $('.pond').height()*.8;   
         }
-        $('.pond').append('<div class = redfish id = red_fish' + red_fish_num +'></div>')  
+		if (weather == "sunny") {
+			$('.pond').append('<div class = redfish id = red_fish' + red_fish_num +'></div>')  
+		} else {
+			$('.pond').append('<div class = greyfish id = red_fish' + red_fish_num +'></div>')  
+		}
         place_fish('red_fish' + red_fish_num)
         red_fish_num+=1
     }
-    $('.pond').append('<div class = bluefish id = blue_fish></div>')  
+	if (weather == "sunny") {
+		$('.pond').append('<div class = bluefish id = blue_fish></div>')  
+	} else {
+		$('.pond').append('<div class = greyfish id = blue_fish></div>')  
+	}
     place_fish('blue_fish')
     $('#red_count').html('<strong># Red Fish in Pond:</strong>: ' + red_fish_num)
     $('#blue_count').html('<strong># Red Fish in Pond:</strong>: 1')
@@ -27,21 +55,31 @@ function goFish() {
 		if (Math.random() < 1/(total_fish_num)) {
 			$('#blue_fish').remove();
 			trip_bank = 0
-			$('#trip_bank').html('<strong>Trip Bank:</strong> $' + trip_bank)
 			$('.cooler').append('<div class = bluefish>fish</div>')
 			$(".pond").html('')
 			red_fish_num = 0
 			total_fish_num = 0
 		 } else {
-			$('#red_fish'+red_fish_num).remove();
-			red_fish_num-=1
-			total_fish_num-=1
+			if (release == "keep") {
+				$('#red_fish'+red_fish_num).remove();
+				red_fish_num-=1
+				total_fish_num-=1
+			}
 			trip_bank += .05
 			trip_bank = Math.round(trip_bank * 100) / 100
-			$('#trip_bank').html('<strong>Trip Bank:</strong> $' + trip_bank)
 			$('.cooler').append('<div class = redfish>fish</div>')
 		 }
-	}
+		pond_state = $('.pond').html()
+		cooler_state = $('.cooler').html()
+		var e = jQuery.Event("keydown");
+		e.which = 32; // # Some key code value
+		e.keyCode = 32
+		$(document).trigger(e);
+		var e = jQuery.Event("keyup");
+		e.which = 32; // # Some key code value
+		e.keyCode = 32
+		$(document).trigger(e);
+	}	
 }
 
 function collect() {
@@ -54,6 +92,17 @@ function collect() {
     $('#trip_bank').html('<strong>Trip Bank:</strong> $' + trip_bank)
 	red_fish_num = 0
 	total_fish_num = 0
+	pond_state = $('.pond').html()
+	cooler_state = $('.pond').html()
+	
+	var e = jQuery.Event("keydown");
+	e.which = 40; // # Some key code value
+	e.keyCode = 40
+	$(document).trigger(e);
+	var e = jQuery.Event("keyup");
+	e.which = 40; // # Some key code value
+	e.keyCode = 40
+	$(document).trigger(e)
 }
 
 
@@ -147,11 +196,18 @@ function place_fish(fish) {
 /* ************************************ */
 /* Define experimental variables */
 /* ************************************ */
+//Task variables
 var red_fish_num = 0
 var total_fish_num = 0
 var start_fish_num = 120
 var trip_bank = 0
 var tournament_bank = 0
+var weather = "sunny" //sunny or cloudy
+var release = "keep" //keep or release
+//Variables for redrawing the board from trial to trial
+var pond_state = ''
+
+//Variables for placing fish
 var maxSearchIterations = 100;
 var min_x = 0
 var max_x = 0
@@ -159,19 +215,19 @@ var min_y = 0
 var max_y = 0
 var filled_areas = [];
 
-var game_setup = "<div class = titlebox><div class = title-text>Catch N' Release</div></div>" +
+var game_setup = "<div class = titlebox><div class = center-text>Catch N' Release</div></div>" +
 "<div class = pond></div><div class = cooler></div>" +
 "<div class = infocontainer>" +
     "<div class = subinfocontainer>" +
-        "<div class = infobox><p class = info-text id = red_count><strong># Red Fish in Pond:</strong></p></div>" +
-        "<div class = infobox><p class = info-text id = blue_count><strong># Blue Fish in Pond:</strong></p></div>" +
+        "<div class = infobox><p class = info-text id = red_count><strong># Red Fish in Pond: </strong></p></div>" +
+        "<div class = infobox><p class = info-text id = blue_count><strong># Blue Fish in Pond: </strong></p></div>" +
     "</div>" +
     "<div class = subimgcontainer>" +
 		"<div class = imgbox></div>" +
 	"</div>" +
     "<div class = subinfocontainer>" +
-        "<div class = infobox><p class = info-text id = trip_bank><strong>Trip Bank</strong></p></div> " +
-        "<div class = infobox><p class = info-text id = tournament_bank><strong>Tournament Bank</strong></p></div>" +
+        "<div class = infobox><p class = info-text id = trip_bank><strong>Trip Bank: </strong></p></div> " +
+        "<div class = infobox><p class = info-text id = tournament_bank><strong>Tournament Bank: </strong></p></div>" +
 "</div>" +
     "</div>" +
 "<div class = buttonbox><button type='button' class = select-button onclick = goFish()>Go Fish</button><button type='button' class = select-button onclick = collect()>Collect</button></div>" +
@@ -229,14 +285,17 @@ var  wait_block = {
 
 var game_block = {
   type: 'single-stim',
-  stimuli: [game_setup],
-  choices: 'none',
+  stimuli: getGame,
+  choices: [32,40],
   is_html: true,
   data: {exp_id: "RNG", condition: "practice"},
   timing_post_trial: 0
 };
 
 ART_experiment = []
-ART_experiment.push(game_block)
+for (i=0; i <50; i++) {
+	ART_experiment.push(game_block)
+}
+
 ART_experiment.push(welcome_block)
 ART_experiment.push(instructions_block)
