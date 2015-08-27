@@ -1,0 +1,121 @@
+.titlebox {
+  width:25vw;
+  height: 5vw;
+  position:absolute;
+  top:50%;
+  left:50%;
+  margin-right:-50%;
+  transform: translate(-50%,-450%);
+  border-style: solid;
+  border-color: CadetBlue;
+}
+
+.title-text {
+  width:100%;
+  height 100vw;
+  text-align: center;
+  margin: 0 auto;
+  margin-bottom: 1em;
+  font-size: 20px;
+  line-height: 120%;
+}
+
+.buttonbox {
+  width:25vw;
+  height: 5vw;
+  position:absolute;
+  top:50%;
+  left:50%;
+  margin-right:-50%;
+  transform: translate(-50%,300%);
+  border-style: solid;
+  border-color: CadetBlue;
+}
+
+button {width:50%;
+      height: 100%;
+}
+
+.select-button {
+	width:50%;
+	height: 100%;
+	float: left;
+   margin: 0;
+}
+.infocontainer {
+  width: 45vw;
+  height: 10vw;
+  position:absolute;
+  top:50%;
+  left:50%;
+  margin-right:-50%;
+  transform: translate(-50%,25%);
+}
+
+.subinfocontainer {
+  width:33%;
+  height: 100%;
+    float:left;
+}
+
+.subimgcontainer {
+  width:34%;
+  height: 100%;
+  float:left;
+}
+
+.infobox {
+  width:100%;
+  height: 40%;
+  margin-bottom: 10px;
+  float:left;
+  border-style: solid;
+  border-color: CadetBlue;
+}
+
+.infotext {
+    text-align: justify;
+    font-size: 16px;
+}
+
+.imgbox {
+  width:100%;
+  height: 100%;
+  float:left;
+  content:url('../../../static/images/ART/fish_icon.png');
+
+}
+
+.pond {
+  width:65vw;
+  height: 20vw;
+  position:absolute;
+  top:50%;
+  left:50%;
+  margin-right:-50%;
+  transform: translate(-50%,-90%);
+  border-style: solid;
+  border-color: CadetBlue;
+}
+
+.cooler {
+  width:10vw;
+  height: 20vw;
+  position:absolute;
+  top:50%;
+  left:50%;
+  margin-right:-50%;
+  transform: translate(355%,-90%);
+  border-style: solid;
+  border-color: CadetBlue;
+}
+
+.redfish {
+	 content:url('../../../static/images/ART/red_fish.png');
+	 width: 2vw
+}
+.bluefish{
+	 content:url('../../../static/images/ART/blue_fish.png');
+	 width: 2vw
+}
+
