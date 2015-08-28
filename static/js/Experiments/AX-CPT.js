@@ -18,9 +18,9 @@ var post_trial_gap = function() {
 var correct_responses = [["left arrow",37],["down arrow",40]]
 var chars = 'BCDEFGHIJLMNOPQRSTUVWZ'
 var trial_proportions = ["AX", "AX", "AX", "AX", "AX", "AX", "AX", "BX", "AY", "BY"]
-var block1_list = jsPsych.randomization.repeat(trial_proportions,10)
-var block2_list = jsPsych.randomization.repeat(trial_proportions,10)
-var block3_list = jsPsych.randomization.repeat(trial_proportions,10)
+var block1_list = jsPsych.randomization.repeat(trial_proportions,4)
+var block2_list = jsPsych.randomization.repeat(trial_proportions,4)
+var block3_list = jsPsych.randomization.repeat(trial_proportions,4)
 var blocks = [block1_list,block2_list, block3_list]
 
 /* ************************************ */
@@ -73,8 +73,9 @@ var A_cue = {
   choices: 'none',
   data: {exp_id: "AX-CPT", trial_id: "cue"},
   timing_stim: 300,
-  timing_response: 300,
-  timing_post_trial: 4900
+  timing_response: 5200,
+  response_ends_trial: false,
+  timing_post_trial: 0
 };
 
 var other_cue = {
@@ -84,8 +85,9 @@ var other_cue = {
   choices: 'none',
   data: {exp_id: "AX-CPT", trial_id: "cue"},
   timing_stim: 300,
-  timing_response: 300,
-  timing_post_trial: 4900
+  timing_response: 5200,
+  response_ends_trial: false,
+  timing_post_trial: 0
 };
 
 var X_target = {

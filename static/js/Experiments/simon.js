@@ -30,7 +30,7 @@ var test_stimuli = [
 ];
 
 var practice_trials = jsPsych.randomization.repeat(test_stimuli, 2, true);
-var test_trials = jsPsych.randomization.repeat(test_stimuli, 4, true);
+var test_trials = jsPsych.randomization.repeat(test_stimuli, 25, true);
 
 var response_array = [];
 for (i = 0; i < practice_trials.data.length; i++) {

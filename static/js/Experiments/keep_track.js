@@ -24,8 +24,8 @@ var exemplars = {
 }
 
 var difficulty_order = jsPsych.randomization.repeat([3,4,5],1,false)
-var num_blocks = 3
-var trial_length = 15
+var num_blocks = 3 //per difficulty level
+var trial_length = 15 //variable never used, just for reference
 var blocks = []
 var targets = []
 var practice_block = []

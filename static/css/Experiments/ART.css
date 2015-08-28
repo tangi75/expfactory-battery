@@ -74,7 +74,6 @@ button {width:50%;
   height: 100%;
   float:left;
   content:url('../../../static/images/ART/fish_icon.png');
-
 }
 
 .pond {
@@ -87,32 +86,60 @@ button {width:50%;
   transform: translate(-50%,-90%);
   border-style: solid;
   border-color: CadetBlue;
+  background-color: LightBlue
 }
 
 .cooler {
-  width:10vw;
-  height: 20vw;
+  width:12vw;
+  height: 5vw;
   position:absolute;
   top:50%;
   left:50%;
   margin-right:-50%;
-  transform: translate(355%,-90%);
+  transform: translate(280%,-90%);
   border-style: solid;
   border-color: CadetBlue;
 }
 
+.weatherbox {
+  width:12vw;
+  height: 10vw;
+  position:absolute;
+  top:50%;
+  left:50%;
+  margin-right:-50%;
+  transform: translate(280%,-175%);
+  border-style: solid;
+  border-color: CadetBlue;
+}
+
+/*
+@keyframes backandforth {
+  50% { transform: translateX(3vw);}
+}
+*/
+
 .redfish {
 	 content:url('../../../static/images/ART/red_fish.png');
-	 width: 2vw
+	 width: 2vw;
+	 height:1.4vw;
+    animation: backandforth 3s ease 0s;
+    animation-iteration-count:infinite;
 }
 
 .bluefish{
 	 content:url('../../../static/images/ART/blue_fish.png');
-	 width: 2vw
+	 width: 2vw;
+	 height:1.4vw;
+	 animation: backandforth 3s ease 0s;
+    animation-iteration-count:infinite;
 }
 
 .greyfish{
 	 content:url('../../../static/images/ART/grey_fish.png');
-	 width: 2vw
+	 width: 2vw;
+	 height:1.4vw;
+	 animation: backandforth 3s ease 0s;
+    animation-iteration-count:infinite;
 }
 

@@ -43,13 +43,13 @@ but eventually they should be selected by some function (I.E. random new combina
 for a returning subject, keeping the total time under 30 minutes)
 */ 
 // full list of experiment names:
-var experiment_list = [{name:"simple_rt", time: 2}, {name:"choice_rt", time: 7}, {name: "simon", time: 10}, {name: "ANT", time: 20}, 
-						{name: "AX-CPT", time: 10}, {name: "DPX", time: 12},
-						{name: "stop_signal", time: 20},{name: "plus-minus", time: 5},{name: "number-letter", time: 5}, {name: "local-global", time: 5},
-						{name: "go-nogo", time: 7}, {name: 'stroop', time: 6}, {name: 'antisaccade', time: 7.5}, {name: 'flanker', time: 6},
+var experiment_list = [{name:"simple_rt", time: 3.5}, {name:"choice_rt", time: 4}, {name: "simon", time: 5}, {name: "ANT", time: 20}, 
+						{name: "AX-CPT", time: 20}, {name: "DPX", time: 15}, {name: 'keep_track', time: 6},
+						{name: "stop_signal", time: 30},{name: "plus-minus", time: 5},{name: "number-letter", time: 5}, {name: "local-global", time: 5},
+						{name: "go-nogo", time: 7}, {name: 'stroop', time: 5}, {name: 'antisaccade', time: 8}, {name: 'flanker', time: 6.5},
 						{name: 'tone_monitoring', time: 6}, {name: 'image_monitoring', time: 6}, {name: 'letter_memory', time: 5},
 						{name: 'volatile_bandit', time: 18}, {name: 'multi-source', time: 7}, {name: 'n-back', time: 16},
-						{name: 'adaptive-n-back', time: 16}, {name: 'RNG', time: 3}, {name: '2-stage-decision', time: 20},
+						{name: 'adaptive-n-back', time: 16}, {name: 'RNG', time: 3}, {name: '2-stage-decision', time: 26},
 						{name: 'ART', time: 900}] 
 						
 // experiment_names = experimentDraw(experiment_list)
