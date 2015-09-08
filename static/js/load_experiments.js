@@ -162,6 +162,7 @@ for (i = 0; i < experiment_names.length; i++) {
 		case "ART":
 			loadjscssfile("static/css/Experiments/ART.css","css")
 			loadjscssfile("static/js/Experiments/ART.js","js")
+			loadjscssfile("static/js/jspsych/plugins/jspsych-call-function.js","js")
 			break;
 	}
 }

@@ -7,16 +7,21 @@ function appendTextAfter(input,search_term, new_text) {
 }
 
 function getGame() {
-	if (pond_state == "" ) {
+	if (total_fish_num == 0) {
 		round_over = 0
 		game_state = game_setup
 		game_state = appendTextAfter(game_state, 'Trip Bank: </strong>$', trip_bank)
 		game_state = appendTextAfter(game_state, 'Tournament Bank: </strong>$', tournament_bank)
-		game_state = appendTextAfter(game_state, 'Red Fish Caught: </strong>', 0)
+		game_state = appendTextAfter(game_state, 'Red Fish in Cooler: </strong>', 0)
 		game_state = appendTextAfter(game_state, "Catch N' ", release)
 		game_state = appendTextAfter(game_state, "weathertext>", weather)
 		$(document.body).html(game_state)
-		makeFish()
+		if (weather == "Sunny") {
+			$('.pond').css("background-color", "LightBlue")
+		} else {
+			$('.pond').css("background-color", "CadetBlue")
+		}
+		makeFish(start_fish_num)
 	} else {
 		// Update game state with cached values
 		game_state = game_setup
@@ -29,8 +34,16 @@ function getGame() {
 		game_state = appendTextAfter(game_state, 'Tournament Bank: </strong>$', tournament_bank)
 		game_state = appendTextAfter(game_state, "Catch N' ", release)
 		game_state = appendTextAfter(game_state, "weathertext>", weather)
-		game_state = appendTextAfter(game_state, 'Red Fish Caught: </strong>', Math.round(trip_bank/pay*100)/100)
+		if (release == "Keep") {
+			game_state = appendTextAfter(game_state, 'Red Fish in Cooler: </strong>', Math.round(trip_bank/pay*100)/100)
+		}
 		$(document.body).html(game_state)
+		if (weather == "Sunny") {
+			$('.pond').css("background-color", "LightBlue")
+		} else {
+			$('.pond').css("background-color", "CadetBlue")
+		}
+		makeFish(total_fish_num)
 	}
 }
 
@@ -45,6 +58,7 @@ function get_data() {
 		FB = 0
 	}
 	return {exp_id: "ART",
+			trial_id: "test",
 			red_fish_num: red_fish_num + 1,
 			trip_bank: trip_bank - last_pay,
 			FB: FB,
@@ -53,14 +67,34 @@ function get_data() {
 			release: release}
 }
 
-function makeFish() {
+function get_practice_data() {
+	/* This records the data AFTER the choice has been made and so the values have all been updated. We are interested
+		in the state of the world before the choice has been made. What value is the trip_bank at when the choice was made?
+		To get this we need to subtract the changes due to this choice.
+	*/
+	if (last_pay == .05) {
+		FB = 1
+	} else {
+		FB = 0
+	}
+	return {exp_id: "ART",
+			trial_id: "practice",
+			red_fish_num: red_fish_num + 1,
+			trip_bank: trip_bank - last_pay,
+			FB: FB,
+			tournament_bank: tournament_bank,
+			weather: weather,
+			release: release}
+}
+
+function makeFish(fish_num) {
     $(".redfish").remove();
     $(".bluefish").remove();
 	$(".greyfish").remove();
 	red_fish_num = 0
 	total_fish_num = 0
 	filled_areas = [];
-    for (i=0;i<start_fish_num-1;i++) {
+    for (i=0;i<fish_num-1;i++) {
         if (max_x == 0) {
 			min_x = $('.pond').width()*.05;
 			min_y = $('.pond').height()*.05;
@@ -70,15 +104,11 @@ function makeFish() {
 		red_fish_num+=1
 		if (weather == "Sunny") {
 			$('.pond').append('<div class = redfish id = red_fish' + red_fish_num +'></div>')  
-		} else {
-			$('.pond').append('<div class = greyfish id = red_fish' + red_fish_num +'></div>')  
-		}
+		} 
     }
 	if (weather == "Sunny") {
 		$('.pond').append('<div class = bluefish id = blue_fish></div>')  
-	} else {
-		$('.pond').append('<div class = greyfish id = blue_fish></div>')  
-	}
+	} 
 	place_fish()
 	if (weather == "Sunny") {
 		$('#red_count').html('<strong># Red Fish in Pond:</strong>: ' + red_fish_num)
@@ -219,11 +249,6 @@ function place_fish() {
 				"z-index": index++
 			});
 			
-			$(this).animate({
-				left: rand_x,
-				top: rand_y
-			}, 'slow');
-			
 			$(this).css({left:rand_x, top: rand_y});
 
 		});
@@ -235,6 +260,7 @@ function place_fish() {
 /* Define experimental variables */
 /* ************************************ */
 //Task variables
+var num_practice_rounds = 2
 var num_rounds = 30
 var red_fish_num = 0
 var total_fish_num = 0
@@ -259,24 +285,22 @@ var filled_areas = [];
 
 var game_setup = "<div class = titlebox><div class = center-text>Catch N' </div></div>" +
 "<div class = pond></div>" +
-"<div class = cooler><p class = info-text><strong>Red Fish Caught: </strong></p></div>" +
+"<div class = cooler><p class = info-text><strong>Red Fish in Cooler: </strong></p></div>" +
 "<div class = weatherbox><div class = center-text id = weathertext></div></div>" +
 "<div class = infocontainer>" +
     "<div class = subinfocontainer>" +
-        "<div class = infobox><p class = info-text id = red_count><strong># Red Fish in Pond: </strong></p></div>" +
-        "<div class = infobox><p class = info-text id = blue_count><strong># Blue Fish in Pond: </strong></p></div>" +
+        "<div class = infobox><p class = info-text id = red_count>&nbsp&nbsp<strong># Red Fish in Pond: </strong></p></div>" +
+        "<div class = infobox><p class = info-text id = blue_count>&nbsp&nbsp<strong># Blue Fish in Pond: </strong></p></div>" +
     "</div>" +
     "<div class = subimgcontainer>" +
 		"<div class = imgbox></div>" +
 	"</div>" +
     "<div class = subinfocontainer>" +
-        "<div class = infobox><p class = info-text id = trip_bank><strong>Trip Bank: </strong>$</p></div> " +
-        "<div class = infobox><p class = info-text id = tournament_bank><strong>Tournament Bank: </strong>$</p></div>" +
+        "<div class = infobox><p class = info-text id = trip_bank>&nbsp&nbsp<strong>Trip Bank: </strong>$</p></div> " +
+        "<div class = infobox><p class = info-text id = tournament_bank>&nbsp&nbsp<strong>Tournament Bank: </strong>$</p></div>" +
 "</div>" +
     "</div>" +
-"<div class = buttonbox><button type='button' class = select-button onclick = goFish()>Go Fish</button><button type='button' class = select-button onclick = collect()>Collect</button></div>" +
-"<button type = 'button' id = 'makeFish' onclick = makeFish()>Make Fish</button>"
-
+"<div class = buttonbox><button type='button' class = select-button onclick = goFish()>Go Fish</button><button type='button' class = select-button onclick = collect()>Collect</button></div>" 
 /* ************************************ */
 /* Set up jsPsych blocks */
 /* ************************************ */
@@ -291,10 +315,12 @@ var welcome_block = {
 var instructions_block = {
   type: 'instructions',
   pages: [
-    '<div class = centerbox><p class = block-text>In this task, your job is to generate a random sequence of digits. You will do this by clicking on a virtual numpad using your mouse. Once you click, the number will temporarily turn red. You have less than a second to respond on each trial so it is important to respond quickly!</p><p class = block-text>.After the trial ends the numbers will dissapear for a moment. When they appear again the next trial has begun and you should respond as quickly as possible.</p><p class = block-text>Your goal is to choose each number completely randomly, as if you were picking a number from a hat with 9 slips of paper, reading it, and placing it back before picking another number.</p><p class = block-text>Press <strong>enter</strong> to continue.</p></div>',
-  ],
-  key_forward: 13,
-  allow_backwards: false
+    '<div class = centerbox><p class = block-text>In this task, you will participate in a fishing tournament. During this tournament you will play a fishing game for multiple rounds. Your goal is to earn as much money as possible during each round so as to collect as much money as possible by the end of the tournament.</p><p class = block-text>On the screen you will see a pond and two buttons: "Go Fish" and "Collect". If you "Go Fish" you randomly catch one of the fish in the lake. Each fish is equally likely.</p><p class = block-text>There are many red fish in the lake and one blue fish. Each red fish earns you 5 cents towards that rounds "Trip Bank", which you can then "Collect" to move the money to your "Tournament Bank" and start a new round. However, if you catch the blue fish, the round will end and you will lose all the money you earned that round.</p><p class = block-text>Press the <strong>right</strong> arrow key to move forward through the instructions.</p></div>',
+    '<div class = centerbox><p class = block-text>To keep your money from round to round you must therefore stop fishing and press "Collect" before you catch a blue fish.</p><p class = block-text>You will participate in four tournaments, each with different rules. First, the tournaments differ in whether you keep or release the fish you catch. In the "Catch N Release" condition, you will always release the fish you just caught so the number of red and blue fish will stay the same throughout the tournament.</p><p class = block-text>In the "Catch N Keep" condition, the fish you catch will come out of the pond and go into your cooler. Thus the chance of catching a blue fish increases each time you catch a red fish.</p><p class = block-text>Press the <strong>left</strong> arrow key to go back or the <strong>right</strong> arrow key to move forward through the instructions.</p></div>',
+	'<div class = centerbox><p class = block-text>Second, the weather will differ between tournaments. When the weather is sunny you will be able to see how many fish are in the pond. There will also be counters below the pond that tell you exactly how many red and blue fish are still in the pond.</p><p class = block-text>When the weather is cloudy, the pond is murky and you will be unable to see any fish. The counters will also be blank. The keep or release rules still apply however. If you are in "Catch N Release", the number of fish in the pond stay the same after each "Go Fish". If you are in "Catch N Keep", the fish come out of the pond.</p><p class = block-text>Press the <strong>left</strong> arrow key to go back or the <strong>right</strong> arrow key to move forward through the instructions.</p></div>',
+	'<div class = centerbox><p class = block-text>You will play one tournament with each combination of weather (sunny or cloudy) and release (release or keep) rules. Each tournament is independent. The money you earn in one tournament has no effect on the next. Your goal is to do as well as possible on all four tournaments.</p><p class = block-text>You can earn bonus pay by doing well on the tasks so try your best!</p><p class = block-text>Press the <strong>left</strong> arrow key to go back or the <strong>right</strong> arrow key to move forward through the instructions.</p></div>',
+	'<div class = centerbox><p class = block-text>Before we start the tournaments, there will be a brief practice session for each of the four tournaments. Before each practice tournament starts you will choose the number of fish in the pond (1-360). During the actual experiment, you will not be able to choose the number of fish.</p><p class = block-text>Press the <strong>left</strong> arrow key to go back or the <strong>right</strong> arrow key to start practice. You will <strong>not</strong> be able to go back!</p></div>',
+  ]
 };
 
 var end_block = {
@@ -327,6 +353,43 @@ var  wait_block = {
   timing_post_trial: 0
 };
 
+var ask_fish_block = {
+		type: 'survey-text',
+		questions: [["<p>For this tournament, how many fish are in the pond? Please enter a number between 1-360</p><p>If you don't respond, or respond out of these bounds the number of fish will be randomly set between 1-360.</p>"]]
+}
+
+var set_fish_block = {
+	type: 'call-function',
+	func: function() {
+		var last_data = jsPsych.data.getData().slice(-1)[0]
+		var last_response = parseInt(last_data.responses.slice(7,10))
+		start_fish_num = last_response
+		if (isNaN(start_fish_num) || start_fish num > 360 || start_fish_num < 0) {
+			start_fish_num = Math.floor(Math.random()*360)+1
+		}
+	}
+}
+
+var practice_block = {
+  type: 'single-stim',
+  stimuli: getGame,
+  choices: [32,40],
+  is_html: true,
+  data: get_practice_data,
+  timing_post_trial: 0
+};
+
+var practice_chunk = {
+    chunk_type: 'while',
+    timeline: [practice_block],
+    continue_function: function(data){
+        if (round_over == 1) {
+			return false
+		} else {
+			return true
+		}
+    }
+}
 
 var game_block = {
   type: 'single-stim',
@@ -349,21 +412,61 @@ var game_chunk = {
     }
 }
 
-
 ART_experiment = []
+ART_experiment.push(welcome_block)
+ART_experiment.push(instructions_block)
+for (b = 0; b<blocks.length; b++) {
+	block = blocks[b]
+	weather = block.weather
+	release = block.release
+	if (weather == "Sunny") {
+		weather_rule = "you can see how many fish are in the pond"
+	} else {
+		weather_rule = "you won't be able to see how many fish are in the pond"
+	}
+	if (release == "Keep") {
+		release_rule = "the number of fish in the pond stays the same"
+	} else {
+		release_rule = "the fish you catch comes out of the pond"
+	}
+	var tournament_intro_block = {
+		type: 'text',
+		text: '<div class = centerbox><p class = block-text>You will now start a tournament. The weather is ' + weather + ' which means ' + weather_rule + '. The release rule is "' + release + '", which means ' + release_rule + '.</p><p class = center-block-text>Press <strong>enter</strong> to begin.</p></div>',
+		cont_key: 13
+	}
+	ART_experiment.push(tournament_intro_block)
+	ART_experiment.push(ask_fish_block)
+	ART_experiment.push(set_fish_block)
+	for (i=0; i <num_practice_rounds; i++) {
+		ART_experiment.push(practice_chunk)
+	}
+}
+
 for (b = 0; b<blocks.length; b++) {
 	block = blocks[b]
 	weather = block.weather
 	release = block.release
 	if (weather == "Sunny") {
 		start_fish_num = 128
+		weather_rule = "you can see how many fish are in the pond"
 	} else {
 		start_fish_num = 65
+		weather_rule = "you won't be able to see how many fish are in the pond"
 	}
+	if (release == "Keep") {
+		release_rule = "the number of fish in the pond stays the same"
+	} else {
+		release_rule = "the fish you catch comes out of the pond"
+	}
+	var tournament_intro_block = {
+		type: 'text',
+		text: '<div class = centerbox><p class = block-text>You will now start a tournament. The weather is ' + weather + ' which means ' + weather_rule + '. The release rule is "' + release + '", which means ' + release_rule + '.</p><p class = center-block-text>Press <strong>enter</strong> to begin.</p></div>',
+		cont_key: 13
+	}
+	ART_experiment.push(tournament_intro_block)
 	for (i=0; i <num_rounds; i++) {
 		ART_experiment.push(game_chunk)
 	}
 }
 
-ART_experiment.push(welcome_block)
-ART_experiment.push(instructions_block)
+
