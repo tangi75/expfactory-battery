@@ -50,10 +50,10 @@ var experiment_list = [{name:"simple_rt", time: 3.5}, {name:"choice_rt", time: 4
 						{name: 'tone_monitoring', time: 6}, {name: 'image_monitoring', time: 6}, {name: 'letter_memory', time: 5},
 						{name: 'volatile_bandit', time: 18}, {name: 'multi-source', time: 7}, {name: 'n-back', time: 16},
 						{name: 'adaptive-n-back', time: 16}, {name: 'RNG', time: 3}, {name: '2-stage-decision', time: 26},
-						{name: 'ART', time: 900}] 
+						{name: 'ART', time: 45}, {name: 'IDED', time : 10}] 
 						
 // experiment_names = experimentDraw(experiment_list)
-var experiment_names = ["ART"]
+var experiment_names = ["IDED"]
 
 /* One the experiments are selected, load the appropriate files */
 for (i = 0; i < experiment_names.length; i++) {
@@ -164,6 +164,10 @@ for (i = 0; i < experiment_names.length; i++) {
 			loadjscssfile("static/js/Experiments/ART.js","js")
 			loadjscssfile("static/js/jspsych/plugins/jspsych-call-function.js","js")
 			break;
+		case "IDED":
+			loadjscssfile("static/js/Experiments/IDED.js","js")
+			loadjscssfile("static/css/Experiments/IDED.css","css")
+			break;
 	}
 }
 
@@ -246,6 +250,9 @@ function cat_experiments(experiment_array) {
 				break;
 			case "ART":
 				experiments = experiments.concat(ART_experiment)
+				break;
+			case "IDED":
+				experiments = experiments.concat(IDED_experiment)
 				break;
 		}
 	}

@@ -329,18 +329,6 @@ var end_block = {
   cont_key: 13
 };
 
-var start_practice_block = {
-  type: 'text',
-  text: '<div class = centerbox><p class = center-block-text>Starting a practice block.</p><p class = center-block-text>Press <strong>enter</strong> to begin.</p></div>',
-  cont_key: 13
-};
-
-var start_test_block = {
-  type: 'text',
-  text: '<div class = centerbox><p class = center-block-text>Starting a test block.</p><p class = center-block-text>Press <strong>enter</strong> to begin.</p></div>',
-  cont_key: 13
-};
-
 var  wait_block = {
   type: 'single-stim',
   stimuli: [game_setup],
@@ -468,5 +456,6 @@ for (b = 0; b<blocks.length; b++) {
 		ART_experiment.push(game_chunk)
 	}
 }
+ART_experiment.push(end_block)
 
 
