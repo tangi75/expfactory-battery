@@ -1,3 +1,6 @@
+// Reference: http://www.ncbi.nlm.nih.gov/pubmed/18194061
+// Decision Making and Learning While Taking Sequential Risks. Pleskac 2008
+
 /* ************************************ */
 /* Define helper functions */
 /* ************************************ */
