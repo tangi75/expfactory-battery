@@ -167,6 +167,7 @@ for (i = 0; i < experiment_names.length; i++) {
 		case "IDED":
 			loadjscssfile("static/js/Experiments/IDED.js","js")
 			loadjscssfile("static/css/Experiments/IDED.css","css")
+			loadjscssfile("static/js/jspsych/plugins/jspsych-call-function.js","js")
 			break;
 	}
 }
