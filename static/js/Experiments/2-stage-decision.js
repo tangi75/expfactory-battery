@@ -253,8 +253,8 @@ var update_FB_data = function () {
 /* ************************************ */
 
 //define global variables
-var practice_trials_num = 2
-var test_trials_num = 4
+var practice_trials_num = 10
+var test_trials_num = 200
 var current_trial = -1 
 var first_selected = -1 //Tracks the ID of the selected fs stimuli
 var first_notselected = -1 //The fs stimuli not selected
