@@ -3,6 +3,8 @@ reference: http://www.sciencedirect.com/science/article/pii/S1053811905001424
 Cognitive control and brain resources in major depression: An fMRI study using the n-back task Harvey at al. 2005
 This task differs in that the subject only has to respond on target trials, rather than indicating whether the current trial is 
 a match or not
+
+refernce for adaptive n-back, though not explictely used: http://www.pnas.org/content/105/19/6829.full
 */
 
 /* ************************************ */
@@ -46,12 +48,12 @@ var update_delay = function() {
 /* ************************************ */
 
 var letters = 'bBdDgGtTvV'
-var num_blocks = 8
-var num_trials = 50
+var num_blocks = 20
+var num_trials = 20
 var control_before = Math.round(Math.random()) //0 control comes before test, 1, after
 var block_acc = 0 // record block accuracy to determine next blocks delay
 var delay = 2 // starting delay
-var acc_thresh = .9 // percent correct above which the delay is increased (or decreased if percent correct is under 1-acc_thresh
+var acc_thresh = .8 // percent correct above which the delay is increased (or decreased if percent correct is under 1-acc_thresh
 
 /* ************************************ */
 /* Set up jsPsych blocks */

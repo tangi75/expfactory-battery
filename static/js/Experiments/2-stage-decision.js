@@ -1,5 +1,9 @@
 // reference: http://www.sciencedirect.com/science/article/pii/S0896627311001255
 // Model-Based Influences on Humans' Choices and Striatal Prediction Errors, Daw et al. 2011
+/* notes
+Condition = ordered stims in stage 1 and stage 2 (so [0, 1] or [1, 0] for stage 1 and [2, 3], [4, 5] etc. for stage 2
+			and FB for the FB condition (1 for reward, 0 for no reward)
+*/
 
 /* ************************************ */
 /* Define helper functions */
@@ -240,7 +244,7 @@ var get_feedback = function() {
 }
 
 var update_FB_data = function () {
-	jsPsych.data.addDataToLastTrial({condition: FB, trial_num: current_trial, trial_id: phase+'_FB_stage', FB_probs: FB_matrix})
+	jsPsych.data.addDataToLastTrial({condition: FB, trial_num: current_trial, trial_id: phase+'_FB_stage', FB_probs: FB_matrix.slice(0)})
 	return ""	
 }
 
@@ -249,8 +253,8 @@ var update_FB_data = function () {
 /* ************************************ */
 
 //define global variables
-var practice_trials_num = 10
-var test_trials_num = 200
+var practice_trials_num = 2
+var test_trials_num = 4
 var current_trial = -1 
 var first_selected = -1 //Tracks the ID of the selected fs stimuli
 var first_notselected = -1 //The fs stimuli not selected
@@ -323,7 +327,7 @@ var instructions_block = {
 	'<div class = centerbox><p class = block-text>In this task, you need to make decisions in two stages to get a reward. In each stage, two abstract shapes will come up on the screen overlaid on colored backgrounds. You choose one by pressing either the left or right arrow keys.</p><p class = block-text>On the next screen you will see an example "stage" with two shapes on colored backgrounds.</p><p class = block-text>Use the <strong>right arrow key</strong> to advance through the instructions. You can go back using the <strong>left arrow key</strong>.</p></div>',
 	"<div class = decision-left style='background:" + curr_colors[0] +"; width:330px;height:230px;'><img class = 'decision-stim' src= '" + curr_images[0] + "'></img></div><div class = decision-right style='background:" + curr_colors[0] +"; width:330px;height:230px;'><img class = 'decision-stim' src= '" + curr_images[1] + "'></img></div>",
 	'<div class = centerbox><p class = block-text>Both the first and second stage will look something like that. After you make your first-stage choice, you will move to one of two second-stages (referred to as 2a and 2b). Each second stage has its own background color and has two different abstract shapes.</p><p class = block-text>In total, the task has three "stages": a first stage which can lead to either stage 2a or stage 2b. Each stage is associated with a different color background and has its own shapes. In total there are six different shapes in the three stages.</p><p class = block-text>Use the <strong>right arrow key</strong> to advance through the instructions. You can go back using the <strong>left arrow key</strong>.</p></div>',
-	'<div class = centerbox><p class = block-text>Each first-stage choice is primarily associated with one of the two second-stages. This means that each first-stage choice is more likely to bring you to one of the two second-stages than the other.</p<p class = block-text>For instance, one first-stage shape may bring you to 2a most of the time, and only sometimes bring you to 2b, while the other shape does the reverse.</p><p class = block-text>After moving to one of the two second-stages, you respond by again pressing an arrow key. After you respond you will get feedback.</p><p class = block-text>Use the <strong>right arrow key</strong> to advance through the instructions. You can go back using the <strong>left arrow key</strong>.</p></div>',
+	'<div class = centerbox><p class = block-text>Each first-stage choice is primarily associated with one of the two second-stages. This means that each first-stage choice is more likely to bring you to one of the two second-stages than the other.</p><p class = block-text>For instance, one first-stage shape may bring you to 2a most of the time, and only sometimes bring you to 2b, while the other shape does the reverse.</p><p class = block-text>After moving to one of the two second-stages, you respond by again pressing an arrow key. After you respond you will get feedback.</p><p class = block-text>Use the <strong>right arrow key</strong> to advance through the instructions. You can go back using the <strong>left arrow key</strong>.</p></div>',
 	'<div class = centerbox><p class = block-text>The feedback will either be a gold coin or a "0" indicating whether you won or lost on that trial. The gold coins determine your bonus pay, so try to get as many as possible!</p><p class = block-text>As mentioned, there are four second-stage shapes: two shapes in 2a and two shapes in 2b. These four shapes each have a different chance of paying a gold coin. You want to learn which shape is the best so you can get as many coins as possible.</p><p class = block-text>Use the <strong>right arrow key</strong> to advance through the instructions. You can go back using the <strong>left arrow key</strong>.</p></div>',
 	'<div class = centerbox><p class = block-text>The chance of getting a coin from each second-stage shape changes over the experiment, so the best choice early on may not be the best choice later.</p><p class = block-text>In contrast, the chance of going to one of the second-stages after choosing one of the first-stage choices is fixed throughout the experiment. If you find over time that one first-stage shape brings you to 2a most of the time, it will stay that way for the whole experiment.</p><p class = block-text>Use the <strong>right arrow key</strong> to advance through the instructions. You can go back using the <strong>left arrow key</strong>.</p></div>',
 	'<div class = centerbox><p class = block-text>We will start with some practice.</p><p class = block-text>Use the <strong>right arrow key</strong> to advance through the instructions. You can go back using the <strong>left arrow key</strong>. After practice we will show you the instructions again, but please make sure you understand them as well as you can now.</p></div>'
@@ -396,7 +400,7 @@ var first_stage = {
 var first_stage_selected = {
 	type: "single-stim",
 	stimuli: get_first_selected,
-	continue_after_response: false,
+	choices: 'none',
 	is_html: true,
 	timing_post_trial: 0,
 	timing_stim: 1000,
@@ -418,7 +422,7 @@ var second_stage = {
 var second_stage_selected = {
 	type: "single-stim",
 	stimuli: get_second_selected,
-	continue_after_response: false,
+	choices: 'none',
 	is_html: true,
 	timing_post_trial: 0,
 	timing_stim: 1000,

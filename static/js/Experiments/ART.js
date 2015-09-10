@@ -10,6 +10,11 @@ function appendTextAfter(input,search_term, new_text) {
 }
 
 function getGame() {
+	/* At the beginning of each round the task displays either a new pond (if a new tournament is starting)
+	or the state of the pond from the last round after the action had been chosen. This function works
+	by editing "game_setup" a string which determines the html to display, followed by calling the "makeFish"
+	function, which...makes fish.
+	*/
 	if (total_fish_num == 0) {
 		round_over = 0
 		game_state = game_setup
@@ -91,6 +96,10 @@ function get_practice_data() {
 }
 
 function makeFish(fish_num) {
+	/* This function makes fish. This includes setting the global variables that track fish number and displaying the
+		fish in the pond if it is sunny out. It uses the placeFish function to set the fish locations
+	
+	*/
     $(".redfish").remove();
     $(".bluefish").remove();
 	$(".greyfish").remove();
@@ -121,6 +130,10 @@ function makeFish(fish_num) {
 }
 
 function goFish() {
+	/* If the subject chooses to goFish, one fish is randomly selected from the pond. If it is red, the trip bank
+		is increased by "pay". If it is blue the round ends. If the release rule is "Keep", the fish is also removed
+		from the pond. Coded as keycode 32 for jspsych
+	*/
 	if (total_fish_num > 0) {
 		if (Math.random() < 1/(total_fish_num)) {
 			$('#blue_fish').remove();
@@ -155,6 +168,7 @@ function goFish() {
 }
 
 function collect() {
+	// Tranfers money from trip bank to tournament bank and ends the round. Coded as keycode 40 for jspsych
  	tournament_bank += trip_bank
 	tournment_bank = Math.round(tournament_bank * 100) / 100
     trip_bank = 0
@@ -181,6 +195,7 @@ function collect() {
 
 
 function calc_overlap(a1) {
+	// helper function when placing fish. 
     var overlap = 0;
     for (var i = 0; i < filled_areas.length; i++) {
 		a2 = filled_areas[i]
@@ -213,6 +228,11 @@ function calc_overlap(a1) {
 }
 
 function place_fish() {
+	/* Places fish in the pond and attempts to overlap them as little as possible. It does this by randomly placing the fish
+	   up to maxSearchIterations times. It stops if it places the fish with no overlap. Otherwise, the fish goes where there is the
+	   least overlap. 
+	
+	*/
     var index = 0;
 	fish_types = ['redfish','bluefish','greyfish']
 	for (f = 0; f<fish_types.length; f++) {
