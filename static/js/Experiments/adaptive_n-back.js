@@ -7,6 +7,10 @@ a match or not
 refernce for adaptive n-back, though not explictely used: http://www.pnas.org/content/105/19/6829.full
 */
 
+/* 
+Condition records the n for that block of trials
+/*
+
 /* ************************************ */
 /* Define helper functions */
 /* ************************************ */

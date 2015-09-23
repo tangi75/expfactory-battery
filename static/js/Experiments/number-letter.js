@@ -1,3 +1,5 @@
+// Reference: http://www.sciencedirect.com/science/article/pii/S001002859990734X
+//condition indicates block (which task, or rotateswitch block) and trial_id indicates stimulus position
 /* ************************************ */
 /* Define helper functions */
 /* ************************************ */
@@ -90,7 +92,7 @@ for (i=0; i<half_block_len; i++) {
         stimuli: stim[1],
         is_html: true,
         choices: [37,39],
-        data: {'exp_id': 'number-letter', 'condition': stim[0], 'trial_id': 'test'},
+        data: {'exp_id': 'number-letter', 'trial_id': stim[0], 'condition': 'top_oddeven'},
         timing_post_trial: 150 
     }
     numlet_experiment.push(top_block)
@@ -102,7 +104,7 @@ for (i=0; i<half_block_len; i++) {
         stimuli: stim[1],
         is_html: true,
         choices: [37,39],
-        data: {'exp_id': 'number-letter', 'condition': stim[0], 'trial_id': 'test'},
+        data: {'exp_id': 'number-letter', 'trial_id': stim[0], 'condition': 'bottom_consonantvowel'},
         timing_post_trial: 150 
     }
     numlet_experiment.push(bottom_block)
@@ -114,7 +116,7 @@ for (i=0; i<rotate_block_len; i++) {
         stimuli: stim[1],
         is_html: true,
         choices: [37,39],
-        data: {'exp_id': 'number-letter', 'condition': stim[0], 'trial_id': 'test'},
+        data: {'exp_id': 'number-letter', 'trial_id': stim[0], 'condition': 'rotate_switch'},
         timing_post_trial: 150 
     }
     numlet_experiment.push(rotate_block)

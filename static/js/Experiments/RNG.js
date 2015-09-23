@@ -1,10 +1,5 @@
+// reference: http://www.sciencedirect.com/science/article/pii/S1053811905001424
 
-
-
-		
-/*
-reference: http://www.sciencedirect.com/science/article/pii/S1053811905001424
-*/
 
 /* ************************************ */
 /* Define helper functions */
@@ -96,7 +91,7 @@ var  wait_block = {
   stimuli: [empty_grid],
   choices: 'none',
   is_html: true,
-  data: {exp_id: "RNG", condition: "practice"},
+  data: {exp_id: "RNG", trial_id: "practice"},
   timing_stim: 200,
   timing_response: 200,
   response_ends_trial: false,
@@ -113,7 +108,7 @@ for (var i = 0; i <practice_stims.length; i++) {
 	  type: 'multi-button',
 	  buttons: [practice_stims[i]],
 	  button_class: 'num-button',
-	  data: {exp_id: "RNG", condition: "practice"},
+	  data: {exp_id: "RNG", trial_id: "practice"},
 	  timing_response: 800,
 	  response_ends_trial: false,
 	  timing_post_trial: 0
@@ -127,7 +122,7 @@ for (var i = 0; i <practice_stims.length; i++) {
 	  type: 'multi-button',
 	  buttons: [test_stims[i]],
 	  button_class: 'num-button',
-	  data: {exp_id: "RNG", condition: "test"},
+	  data: {exp_id: "RNG", trial_id: "test"},
 	  timing_response: 800,
 	  response_ends_trial: false,
 	  timing_post_trial: 0

@@ -16,21 +16,21 @@ correct_responses = jsPsych.randomization.shuffle([['left',37],['right',39]])
 var practice_stimuli = [
   {
 	image: '<div class = centerbox><div  id = "stim1"></div></div>',
-	data: { correct_response: correct_responses[0][1], condition: correct_responses[0][0], trial_id: 'practice', exp_id: 'choice_rt'}
+	data: { correct_response: correct_responses[0][1], trial_id: 'practice', exp_id: 'choice_rt'}
   },
   {
 	image:  '<div class = centerbox><div id = "stim2"></div></div>',
-	data: { correct_response: correct_responses[1][1], condition:  correct_responses[1][0], trial_id: 'practice', exp_id: 'choice_rt'}
+	data: { correct_response: correct_responses[1][1], trial_id: 'practice', exp_id: 'choice_rt'}
   }
 ];
 var test_stimuli_block1 = [
   {
 	image: '<div class = centerbox><div  id = "stim1"></div></div>',
-	data: { correct_response: correct_responses[0][1], condition: correct_responses[0][0], trial_id: 'test_block1', exp_id: 'choice_rt'}
+	data: { correct_response: correct_responses[0][1], trial_id: 'test_block', exp_id: 'choice_rt'}
   },
   {
 	image:  '<div class = centerbox><div id = "stim2"></div></div>',
-	data: { correct_response: correct_responses[1][1], condition:  correct_responses[1][0], trial_id: 'test_block1', exp_id: 'choice_rt'}
+	data: { correct_response: correct_responses[1][1], trial_id: 'test_block', exp_id: 'choice_rt'}
   }
 ];
 

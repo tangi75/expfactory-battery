@@ -1,3 +1,6 @@
+// Reference: http://www.sciencedirect.com/science/article/pii/S001002859990734X
+//Condition indicates block task (add, subtract, alternate)
+
 /* ************************************ */
 /* Define helper functions */
 /* ************************************ */

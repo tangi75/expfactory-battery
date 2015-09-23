@@ -1,3 +1,5 @@
+//Reference: The Multi-Source Interference Task: validation study with fMRI in individual subjects, Bush et al.
+//Condition records current block (practice/test control/interference), trial_id records stimulus ID (where the target is: left, middle or right) and whether the target is large or small
 
 /* ************************************ */
 /* Define helper functions */

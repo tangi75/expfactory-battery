@@ -1,5 +1,10 @@
 // Reference http://www.sciencedirect.com/science/article/pii/0028393289901280
 // Impaired extra-dimensional shift performance in medicated and unmedicated Parkinson's disease: evidence for a specific attentional dysfunction. Downes et al. 1989
+
+/*
+Condition indicates stage in the IDED task
+*/
+
 /* ************************************ */
 /* Define helper functions */
 /* ************************************ */
@@ -42,7 +47,7 @@ function get_correct_response() {
 }
 
 function get_data() {
-	return {exp_id: 'IDED', trial_id: 'test', stage: stages[stage_counter]}
+	return {exp_id: 'IDED', trial_id: 'test', condition: stages[stage_counter]}
 }
 	
 /* ************************************ */

@@ -53,7 +53,7 @@ var experiment_list = [{name:"simple_rt", time: 3.5}, {name:"choice_rt", time: 4
 						{name: 'ART', time: 45}, {name: 'IDED', time : 10}] 
 						
 // experiment_names = experimentDraw(experiment_list)
-var experiment_names = ["2-stage-decision"]
+var experiment_names = ["IDED"]
 
 /* One the experiments are selected, load the appropriate files */
 for (i = 0; i < experiment_names.length; i++) {

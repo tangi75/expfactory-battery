@@ -3,6 +3,10 @@
 Cognitive Control Predicts Use of Model-based Reinforcement learning, Otto et al. 2014
 */
 
+/*
+Condition indicates cue/target trial type: AX, BX, AY, BY
+*/
+
 /* ************************************ */
 /* Define helper functions */
 /* ************************************ */
