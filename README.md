@@ -1,7 +1,7 @@
 ### Psiturk-battery
 
 All experiments are run through the [exp_hub.html](exp_hub.html).
-The list of experiments are defined and loaded by [load_experiments.js](js/load_experiments.js)
+The list of experiments are defined and loaded by [load_experiments.js](static/js/load_experiments.js)
 
 General points when making experiments:
 - Each experiment should end with an X_experiment jspsych array.
