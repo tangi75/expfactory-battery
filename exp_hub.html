@@ -29,10 +29,10 @@
 				
 		var experiments = []
 		experiments.push(task_list_block)
-		<!-- concatenate on the experimental blocks defined for each of the constituent experiments -->
+		// concatenate on the experimental blocks defined for each of the constituent experiments
 		cat_experiments(experiments)
 
-		<!-- start the experiment -->
+		// start the experiment
 		jsPsych.init({
 		  experiment_structure: experiments,
 		  on_finish: function() {
