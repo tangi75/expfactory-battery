@@ -43,7 +43,7 @@ but eventually they should be selected by some function (I.E. random new combina
 for a returning subject, keeping the total time under 30 minutes)
 */ 
 // full list of experiment names:
-var experiment_list = [[SUB_EXPERIMENTLIST_SUB]] 
+var experiment_list = [SUB_EXPERIMENTTIMES_SUB]
 						
 experiment_names = experimentDraw(experiment_list)
 
