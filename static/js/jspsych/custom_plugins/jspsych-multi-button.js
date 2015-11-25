@@ -1,4 +1,13 @@
-
+/**
+ * jspsych-multi-button
+ * Ian Eisenberg
+ *
+ * plugin for displaying buttons and getting mouse responses
+ *
+ * documentation: docs.jspsych.org
+ *
+ **/
+ 
 jsPsych['multi-button'] = (function(){
 
     var plugin = {};

@@ -1,6 +1,6 @@
 /**
  * jspsych plugin for categorization trials with feedback
- * Josh de Leeuw
+ * Ian Eisenberg
  *
  * documentation: docs.jspsych.org
  **/
