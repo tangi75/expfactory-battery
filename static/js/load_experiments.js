@@ -23,11 +23,9 @@ when it can't find another experiment to add */
 
 var experimentDraw = function(lst, time) {
 	var time = time || "30"
-	console.log(time)
 	var return_list = []
 	var total_time = 0
 	while (total_time < time && lst.length > 0) {
-		console.log(lst.lnoteength)
 		index = Math.floor(Math.random()*lst.length)
 		if ((total_time + lst[index].time) < 30) {
 			total_time += lst[index].time
@@ -43,8 +41,7 @@ but eventually they should be selected by some function (I.E. random new combina
 for a returning subject, keeping the total time under 30 minutes)
 */ 
 // full list of experiment names:
-var experiment_list = [SUB_EXPERIMENTTIMES_SUB]
-						
+experiment_list = [SUB_EXPERIMENTTIMES_SUB]						
 experiment_names = experimentDraw(experiment_list)
 
 /* One the experiments are selected, load the appropriate files */

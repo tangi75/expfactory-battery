@@ -52,11 +52,15 @@
         if (trial.show_clickable_nav) {
 
           var nav_html = "<div class='jspsych-instructions-nav'>";
-          if (current_page != 0 && trial.allow_backward) {
-            nav_html += "<button id='jspsych-instructions-back'>&lt; Previous</button>";
+          if (current_page == trial.pages.length-1) {
+            nav_html += "<button id='jspsych-instructions-next'>End Instructions</button>"
+          } else {
+            nav_html += "<button id='jspsych-instructions-next'>Next</button>"
           }
-          nav_html += "<button id='jspsych-instructions-next'>Next &gt;</button></div>"
-
+          if (current_page != 0 && trial.allow_backward) {
+            nav_html += "<button id='jspsych-instructions-back'>Previous</button>";
+          }
+          nav_html += "</div>"
           display_element.append(nav_html);
 
           if (current_page != 0 && trial.allow_backward) {
