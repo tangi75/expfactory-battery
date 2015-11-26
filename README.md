@@ -1,4 +1,4 @@
-### Psiturk-battery
+### Experiment Factory Battery
 
 All experiments are run through the [exp_hub.html](exp_hub.html).
 The list of experiments are defined and loaded by [load_experiments.js](static/js/load_experiments.js)
