@@ -3,6 +3,8 @@
 All experiments are run through the [exp_hub.html](exp_hub.html).
 The list of experiments are defined and loaded by [load_experiments.js](static/js/load_experiments.js)
 
+Full instructions will be provided shortly for generating new experiments.
+
 General points when making experiments:
 - Each experiment should end with an X_experiment jspsych array.
 - Each trial of each experiment should be tagged with a "exp_id" indicating the experiment it belongs to.
@@ -24,4 +26,3 @@ For easy reading, set up each experiment in this way:
       /* Set up jsPsych blocks */
       /* ************************************ */
 
-Complete instructions will be / migrated to [psiturk-doc](https://github.com/psiturk/psiturk-doc)
