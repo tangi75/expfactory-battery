@@ -2,7 +2,7 @@
  * jspsych-multi-button
  * Ian Eisenberg
  *
- * plugin for displaying buttons and getting mouse responses
+ * plugin for displaying stimuli and getting mouse responses
  *
  * documentation: docs.jspsych.org
  *
@@ -13,11 +13,13 @@ jsPsych['multi-button'] = (function(){
     var plugin = {};
 
     plugin.create = function(params){
-        var trials = new Array(params.buttons.length);
+    	params = jsPsych.pluginAPI.enforceArray(params, ['stimuli', 'button_class']);
+
+        var trials = new Array(params.stimuli.length);
 			for (var i = 0; i < trials.length; i++) {
 				trials[i] = {};
-				trials[i].buttons = params.buttons[i];
-				trials[i].button_class = params.button_class;
+				trials[i].stimuli = params.stimuli[i]; 
+				trials[i].button_class = params.button_class; //class of button to listen for
 				trials[i].response_ends_trial = (typeof params.response_ends_trial === 'undefined') ? true : params.response_ends_trial;
 				// timing parameters
 				trials[i].timing_stim = params.timing_stim || -1; // if -1, then show indefinitely
@@ -32,6 +34,11 @@ jsPsych['multi-button'] = (function(){
 
     plugin.trial = function(display_element, trial){
 		
+		// if any trial variables are functions
+		// this evaluates the function and replaces
+		// it with the output of the function
+		trial = jsPsych.pluginAPI.evaluateFunctionParameters(trial);
+
 		var start_time = (new Date()).getTime();
 		var response = {rt: -1, mouse: -1};
 		
@@ -64,7 +71,7 @@ jsPsych['multi-button'] = (function(){
 		
 		// display stimulus
 		display_element.append($('<div>', {
-					html: trial.buttons,
+					html: trial.stimuli,
 					id: 'jspsych-multi-button-stimulus'
 				}));
 				
@@ -78,10 +85,13 @@ jsPsych['multi-button'] = (function(){
 			if(response.mouse == -1){
 				var end_time = (new Date()).getTime();
 				var rt = end_time - start_time;
-				var originalColor = $(this).css('color')
 				
 				response.rt = rt
-				response.mouse = $(this).text()
+				if ($(this).attr('id') != undefined) {
+					response.mouse = $(this).attr('id')
+				} else {
+					response.mouse = 'undefined_button'
+				}
 				$(this).addClass('responded')
 				if (trial.response_ends_trial) {
 					end_trial();

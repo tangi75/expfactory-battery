@@ -38,6 +38,16 @@
 		for (i=0; i<experiment_names.length; i++) {
 			task_list += '<li>' + experiment_names[i] + '</li>'
 		}
+
+
+        var consent_block = {
+          type:'consent',
+          consent_text:'<div class = centerbox><p class = block-text>Welcome to the experiment. Please sign away your brain.</p><br></br>',
+          checkbox_text: 'I agree to participate in this study.',
+          button_text: "Begin experiment!",
+          timing_post_trial: 0
+        };
+      
 		
 		var task_list_block = {
 		  type: 'text',
@@ -47,6 +57,7 @@
 				
 		var experiments = []
 		experiments.push(task_list_block)
+        experiments.push(consent_block);
 		<!-- concatenate on the experimental blocks defined for each of the constituent experiments -->
 		cat_experiments(experiments)
 
