@@ -8,7 +8,7 @@
  *
  **/
  
-jsPsych['multi-button'] = (function(){
+jsPsych['single-stim-button'] = (function(){
 
     var plugin = {};
 
@@ -19,7 +19,7 @@ jsPsych['multi-button'] = (function(){
 			for (var i = 0; i < trials.length; i++) {
 				trials[i] = {};
 				trials[i].stimuli = params.stimuli[i]; 
-				trials[i].button_class = params.button_class; //class of button to listen for
+				trials[i].button_class = params.button_class; //class of button to listen for. All buttons that have this class will advance the trial and be recorded
 				trials[i].response_ends_trial = (typeof params.response_ends_trial === 'undefined') ? true : params.response_ends_trial;
 				// timing parameters
 				trials[i].timing_stim = params.timing_stim || -1; // if -1, then show indefinitely

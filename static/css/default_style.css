@@ -104,7 +104,7 @@ body {
 }
 
 
-button {
+#jspsych-instructions-next, #jspsych-instructions-back, .default_button {
   background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #7f9ac9), color-stop(1, #476e9e));
   background:-moz-linear-gradient(top, #7f9ac9 5%, #476e9e 100%);
   background:-webkit-linear-gradient(top, #7f9ac9 5%, #476e9e 100%);
@@ -135,7 +135,7 @@ button {
   max-width: 25vw;
   
 }
-button:hover {
+#jspsych-instructions-next:hover, #jspsych-instructions-back:hover, .default_button:hoer{
 	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #476e9e), color-stop(1, #7f9ac9));
   background:-moz-linear-gradient(top, #476e9e 5%, #7f9ac9 100%);
   background:-webkit-linear-gradient(top, #476e9e 5%, #7f9ac9 100%);
@@ -146,7 +146,7 @@ button:hover {
   background-color:#476e9e;
 }
 
-button[disabled] {
+#jspsych-instructions-next[disabled], #jspsych-instructions-back[disabled], .default_button[disabled] {
 	border: 1px solid #999;
 	border-top: 1px solid #e0e0e0;
 	border-left: 1px solid #e0e0e0;
