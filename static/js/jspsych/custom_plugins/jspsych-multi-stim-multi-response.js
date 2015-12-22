@@ -177,10 +177,14 @@
               display_element.html('');
               // show the next stimulus
               whichStimulus++;
-              var t2 = setTimeout(function() {
-                showNextStimulus();
-              }, trial.timing_gap)
-              setTimeoutHandlers.push(t2)
+              if (trial.timing_gap > 0) {
+                var t2 = setTimeout(function() {
+                  showNextStimulus();
+                }, trial.timing_gap)
+                setTimeoutHandlers.push(t2)
+              } else {
+                showNextStimulus()
+              }
             } else {
               $('#jspsych-multi-stim-multi-response-stimulus').css('visibility', 'hidden');
             }
