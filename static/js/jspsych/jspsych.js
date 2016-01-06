@@ -996,10 +996,11 @@
       var out = shuffle(allsamples);
 
       if (unpack) {
-        out = unpackArray(out);
+        return unpackArray(out);
+      } else {
+        return shuffle(out);
       }
 
-      return shuffle(out);
     }
 
     module.shuffle = function(arr) {
