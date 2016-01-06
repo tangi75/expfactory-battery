@@ -25,7 +25,7 @@
   margin-right:-50%;
 }
 
-
+/* Text based classes */
 /* Used for general instructions */
 .block-text {
   width:100%;
@@ -44,35 +44,44 @@
   text-align: center;
   margin: 0 auto;
   margin-bottom: 1em;
-  font-size: 20px;
+  font-size: 26px;
   line-height: 120%;
-}
-
-/* Used in lists */
-.list-text li{
-  font-size: 18px;
 }
 
 /* used for large text shown in the center of the screen, like FB or stimuli */
 .center-text {
-	text-align:center;
-	font-size: 40px;
-	position: relative;
+  text-align:center;
+  font-size: 40px;
+  position: relative;
   top: 50%;
   -ms-transform: translateY(-50%);
   -webkit-transform: translateY(-50%);
   transform: translateY(-50%);
 }
 
+/* used when the background is dark */
+.white-text {
+  color: white;
+}
+
 /* fixation should be used like this in: '<div class = centerbox><div class = fixation>+</div></div>'*/
 .fixation {
-	text-align: center;
-	font-size: 150px;
-	position: relative;
+  text-align: center;
+  font-size: 150px;
+  position: relative;
     top: 50%; 
     transform: translateY(-50%);
     -webkit-transform: translateY(-50%);
 }
+
+
+/* Used in lists */
+.list-text li{
+  font-size: 20px;
+}
+
+
+
 
 
 /* flex box used to vertically and horizontally center an img.
@@ -104,7 +113,7 @@ body {
 }
 
 
-#jspsych-instructions-next, #jspsych-instructions-back, .default_button {
+#jspsych-instructions-next, #jspsych-instructions-back,  .default_button {
   background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #7f9ac9), color-stop(1, #476e9e));
   background:-moz-linear-gradient(top, #7f9ac9 5%, #476e9e 100%);
   background:-webkit-linear-gradient(top, #7f9ac9 5%, #476e9e 100%);
@@ -130,13 +139,13 @@ body {
 	margin: 10px;
 	padding-left: 5px;
 	padding-right: 5px;
-	height: 6vw;
+	height: 4vw;
 	min-width: 15vw;
   max-width: 25vw;
   
 }
-#jspsych-instructions-next:hover, #jspsych-instructions-back:hover, .default_button:hoer{
-	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #476e9e), color-stop(1, #7f9ac9));
+#jspsych-instructions-next:hover, #jspsych-instructions-back:hover, .default_button:hover {
+  background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #476e9e), color-stop(1, #7f9ac9));
   background:-moz-linear-gradient(top, #476e9e 5%, #7f9ac9 100%);
   background:-webkit-linear-gradient(top, #476e9e 5%, #7f9ac9 100%);
   background:-o-linear-gradient(top, #476e9e 5%, #7f9ac9 100%);

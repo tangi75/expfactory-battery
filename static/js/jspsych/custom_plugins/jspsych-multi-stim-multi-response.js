@@ -8,15 +8,16 @@
  * documentation: docs.jspsych.org
  *
  **/
+
 (function($) {
   jsPsych["multi-stim-multi-response"] = (function() {
 
     var plugin = {};
 
     plugin.create = function(params) {
-
-      params = jsPsych.pluginAPI.enforceArray(params, ['stimuli']);
+      params = jsPsych.pluginAPI.enforceArray(params, ['stimuli', 'choices']);
       var trials = new Array(params.stimuli.length);
+
       for (var i = 0; i < trials.length; i++) {
         trials[i] = {};
         trials[i].stimuli = params.stimuli[i];
@@ -43,10 +44,12 @@
 
 
     plugin.trial = function(display_element, trial) {
+
       // if any trial variables are functions
       // this evaluates the function and replaces
       // it with the output of the function
       trial = jsPsych.pluginAPI.evaluateFunctionParameters(trial);
+
       // this array holds handlers from setTimeout calls
       // that need to be cleared if the trial ends early
       var setTimeoutHandlers = [];
@@ -109,9 +112,13 @@
 
       // function to handle responses by the subject
       var after_response = function(info) {
-
         var whichResponse;
         for (var i = 0; i < trial.choices.length; i++) {
+          
+          // allow overlap between response groups
+          if (validResponses[i]) {
+            continue;
+          }
 
           for (var j = 0; j < trial.choices[i].length; j++) {
             keycode = (typeof trial.choices[i][j] == 'string') ? jsPsych.pluginAPI.convertKeyCharacterToKeyCode(trial.choices[i][j]) : trial.choices[i][j];
@@ -178,10 +185,10 @@
               // show the next stimulus
               whichStimulus++;
               if (trial.timing_gap > 0) {
-                var t2 = setTimeout(function() {
+                var t3 = setTimeout(function() {
                   showNextStimulus();
                 }, trial.timing_gap)
-                setTimeoutHandlers.push(t2)
+                setTimeoutHandlers.push(t3)
               } else {
                 showNextStimulus()
               }
@@ -205,7 +212,7 @@
         valid_responses: allchoices,
         rt_method: 'date',
         persist: true,
-				allow_held_key: false
+        allow_held_key: false
       });
 
       // end trial if time limit is set
