@@ -47,7 +47,7 @@
       
       //Display form with a specific name (referred to later when submit button is clicked)
       //Appending directly instead of adding a div first and then populating it
-      display_element.append('<form id = "jspsych-radio-buttonlist">' + buttonlist + '</form>');
+      display_element.append('<form id = "jspsych-radio-buttonlist">' + trial.buttonlist + '</form>');
 
       // helper function to loop through each button in form and submit data
       function loopForm(form, checkAll) {
