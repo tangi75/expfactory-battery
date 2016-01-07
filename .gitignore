@@ -1,3 +1,5 @@
 *.db
 *.pyc
 config.txt
+*.DS_Store
+
