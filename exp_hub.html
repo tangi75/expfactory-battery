@@ -58,7 +58,8 @@
 
 		// start the experiment
 		jsPsych.init({
-		  experiment_structure: experiments,
+		  //experiment_structure: experiments,
+		  timeline: experiments,
 		  on_finish: function() {
 			jsPsych.data.localSave('test_save.csv','csv');
 		  }
