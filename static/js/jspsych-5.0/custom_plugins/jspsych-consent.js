@@ -5,46 +5,33 @@ a jspsych plugin to create a consent page and check for response without requrin
 
 Ayse Zeynep Enkavi*/
 
-//Look at text plugin for text and likert scale plugin for button
+jsPsych.plugins["consent"] = (function() {
 
-// parameters:
-// consent_text
-// checkbox_text
-// button_text
+  var plugin = {};
 
-(function($) {
-  jsPsych['consent'] = (function(){
+  plugin.trial = function(display_element, trial) {
 
-    var plugin = {};
+    // set default values for parameters
+    trial.consent_text = trial.consent_text;
+    trial.checkbox_text = trial.checkbox_text;
+    trial.button_text = trial.button_text;
+    trial.container = trial.container || -1
 
-    plugin.create = function(params){
+    // allow variables as functions
+    // this allows any trial variable to be specified as a function
+    // that will be evaluated when the trial runs. this allows users
+    // to dynamically adjust the contents of a trial as a result
+    // of other trials, among other uses. you can leave this out,
+    // but in general it should be included
+    trial = jsPsych.pluginAPI.evaluateFunctionParameters(trial);
 
-      params = jsPsych.pluginAPI.enforceArray(params, ['consent_text', 'checkbox_text', 'button_text']);
-      
-      var trials = new Array(params.consent_text.length);
-
-      for(var i = 0; i<trials.length; i++){
-        trials[i] = {};
-        trials[i].consent_text = params.consent_text[i];
-        trials[i].checkbox_text = params.checkbox_text[i];
-        trials[i].button_text = params.button_text[i];
-        trials[i].container = params.container || -1
-      }
-
-      return trials;
-    }
-
-    plugin.trial = function(display_element, trial){
-
-      trial = jsPsych.pluginAPI.evaluateFunctionParameters(trial);
-
-      //display consent text, checkbox and button
+    //display consent text, checkbox and button
       display_element.append($('<div>', {
-					html: trial.consent_text + //consent_text - should specify a container
-						"<p class = block-text><input type='checkbox' id = 'checkbox'>" + trial.checkbox_text + "</p>" +
-						"<button type='button' id = 'start'>" + trial.button_text +"</button>",
-					id: 'jspsych-consent-text'
-				}));
+          html: trial.consent_text + //consent_text - should specify a container
+            "<p class = block-text><input type='checkbox' id = 'checkbox'>" + trial.checkbox_text + "</p>" +
+            "<button type='button' id = 'start'>" + trial.button_text +"</button>",
+          id: 'jspsych-consent-text'
+        }));
 
 
       //specify what happens when start button is clicked
@@ -78,9 +65,8 @@ Ayse Zeynep Enkavi*/
       });
       
    var startTime = (new Date()).getTime();  
+
   };
 
-    return plugin;
-
-  })();
-})(jQuery);
+  return plugin;
+})();
