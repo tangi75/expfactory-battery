@@ -3,42 +3,38 @@
  * a jspsych plugin for displaying a form with a list of radio buttons
  *
  * A. Zeynep Enkavi 
- *
- * TO DO:
- * Add different types of buttons (radio, checklist etc.)
- * Add checkAll parameter that would alert if there are blank questions
+
+ NOTE: survey-multi-choice might be a better plugin for most cases. 
+ This plugin requires more raw html work when specifying questions
+ (thouhg this may cater to more flexible formatting needs).
+ Additionally data is saved in rows for each questions minimizing 
+ required text parsing later on.
+
+ TODO:
+ See if there is a way to get rid of data.write in finishTrial
  */
 
-(function($) {
-  jsPsych['radio-buttonlist'] = (function() {
+ jsPsych.plugins["radio-buttonlist"] = (function() {
 
-    var plugin = {};
+  var plugin = {};
 
-    plugin.create = function(params) {
+  plugin.trial = function(display_element, trial) {
 
-      //params = jsPsych.pluginAPI.enforceArray(params, ['data']);
+    // set default values for parameters
+    trial.preamble = (typeof trial.preamble === 'undefined') ? "" : trial.preamble;
+    trial.buttonlist = trial.buttonlist;
+    trial.checkAll = trial.checkAll;
+    trial.numq = trial.numq;
 
-      var trials = [];
-      for (var i = 0; i < params.buttonlist.length; i++) {
-        trials.push({
-          preamble: (typeof params.preamble === 'undefined') ? "" : params.preamble[i],
-          buttonlist: params.buttonlist[i],
-          checkAll: params.checkAll[i],
-          numq: params.numq[i]
-        });
-      }
-      return trials;
-    };
+    // allow variables as functions
+    // this allows any trial variable to be specified as a function
+    // that will be evaluated when the trial runs. this allows users
+    // to dynamically adjust the contents of a trial as a result
+    // of other trials, among other uses. you can leave this out,
+    // but in general it should be included
+    trial = jsPsych.pluginAPI.evaluateFunctionParameters(trial);
 
-    plugin.trial = function(display_element, trial) {
-
-      // if any trial variables are functions
-      // this evaluates the function and replaces
-      // it with the output of the function
-      trial = jsPsych.pluginAPI.evaluateFunctionParameters(trial);
-
-      // show preamble text
-      display_element.append($('<div>', {
+    display_element.append($('<div>', {
         "id": 'jspsych-radio-buttonlist-preamble',
         "class": 'jspsych-radio-buttonlist-preamble'
       }));
@@ -64,7 +60,7 @@
           return;
         }
       }
-      
+
       //loop through all checked radio buttons
       for (var i = 0; i < form.elements.length; i++ ) {
           if (form.elements[i].type == 'radio') {
@@ -106,8 +102,7 @@
       });
 
       var startTime = (new Date()).getTime();
-    };
+  };
 
-    return plugin;
-  })();
-})(jQuery);
+  return plugin;
+})();
