@@ -4,191 +4,176 @@
  *
  * plugin for playing an audio file, getting a keyboard response, and giving feedback
  *
- * 
- *
+ * modified by Zeynep Enkavi
+ * to be tested
  **/
 
-(function($) {
-	jsPsych["categorize-audio"] = (function() {
+jsPsych.plugins["categorize-audio"] = (function() {
 
-		var plugin = {};
+  var plugin = {};
 
-		var context = new AudioContext();
+  var context = new AudioContext();
 
-		plugin.create = function(params) {
+  plugin.trial = function(display_element, trial) {
 
-			params = jsPsych.pluginAPI.enforceArray(params, ['choices', 'key_answer', 'text_answer']);
+    // set default values for parameters
+    //trial.parameter = trial.parameter || 'default value';
+    trial.audio_stim = jsPsych.pluginAPI.loadAudioFile(trial.stimuli);
+    trial.audio_path = trial.stimuli;
+    trial.choices = trial.choices || [];
+	// option to show image for fixed time interval, ignoring key responses
+	//      true = image will keep displaying after response
+	//      false = trial will immediately advance when response is recorded
+	trial.key_answer = trial.key_answer;
+	trial.text_answer = (typeof trial.text_answer === 'undefined') ? "" : trial.text_answer;
+	trial.correct_text = (typeof trial.correct_text === 'undefined') ? "<p class='feedback'>Correct</p>" : trial.correct_text;
+	trial.incorrect_text = (typeof trial.incorrect_text === 'undefined') ? "<p class='feedback'>Incorrect</p>" : trial.incorrect_text;
+	trial.response_ends_trial = (typeof trial.response_ends_trial === 'undefined') ? true : trial.response_ends_trial;
+	trial.force_correct_button_press = (typeof trial.force_correct_button_press === 'undefined') ? false : trial.force_correct_button_press;
+	trial.prompt = (typeof trial.prompt === 'undefined') ? '' : trial.prompt;
+	trial.show_feedback_on_timeout = (typeof trial.show_feedback_on_timeout === 'undefined') ? false : trial.show_feedback_on_timeout;
+	trial.timeout_message = trial.timeout_message || "<p>Please respond faster.</p>";
+	// timing parameters
+	// trials[i].timing_stim = params.timing_stim || -1; // if -1, then show indefinitely
+	trial.timing_response = trial.timing_response || -1; // if -1, then wait for response forever
+	trial.prompt = (typeof trial.prompt === 'undefined') ? "" : trial.prompt;
+	trial.timing_feedback_duration = trial.timing_feedback_duration || 2000;
 
-			var trials = new Array(params.stimuli.length);
+    // allow variables as functions
+    // this allows any trial variable to be specified as a function
+    // that will be evaluated when the trial runs. this allows users
+    // to dynamically adjust the contents of a trial as a result
+    // of other trials, among other uses. you can leave this out,
+    // but in general it should be included
+    trial = jsPsych.pluginAPI.evaluateFunctionParameters(trial);
 
-			for (var i = 0; i < trials.length; i++) {
+    // this array holds handlers from setTimeout calls
+	// that need to be cleared if the trial ends early
+	var setTimeoutHandlers = [];
 
-				trials[i] = {};
-				trials[i].audio_stim = jsPsych.pluginAPI.loadAudioFile(params.stimuli[i]);
-				trials[i].audio_path = params.stimuli[i];
-				trials[i].choices = params.choices || [];
-				// option to show image for fixed time interval, ignoring key responses
-				//      true = image will keep displaying after response
-				//      false = trial will immediately advance when response is recorded
-				trials[i].key_answer = params.key_answer[i];
-				trials[i].text_answer = (typeof params.text_answer === 'undefined') ? "" : params.text_answer[i];
-				trials[i].correct_text = (typeof params.correct_text === 'undefined') ? "<p class='feedback'>Correct</p>" : params.correct_text;
-				trials[i].incorrect_text = (typeof params.incorrect_text === 'undefined') ? "<p class='feedback'>Incorrect</p>" : params.incorrect_text;
-				trials[i].response_ends_trial = (typeof params.response_ends_trial === 'undefined') ? true : params.response_ends_trial;
-				trials[i].force_correct_button_press = (typeof params.force_correct_button_press === 'undefined') ? false : params.force_correct_button_press;
-				trials[i].prompt = (typeof params.prompt === 'undefined') ? '' : params.prompt;
-				trials[i].show_feedback_on_timeout = (typeof params.show_feedback_on_timeout === 'undefined') ? false : params.show_feedback_on_timeout;
-				trials[i].timeout_message = params.timeout_message || "<p>Please respond faster.</p>";
-				// timing parameters
-				// trials[i].timing_stim = params.timing_stim || -1; // if -1, then show indefinitely
-				trials[i].timing_response = params.timing_response || -1; // if -1, then wait for response forever
-				trials[i].prompt = (typeof params.prompt === 'undefined') ? "" : params.prompt;
-				trials[i].timing_feedback_duration = params.timing_feedback_duration || 2000;
+	// play stimulus
+	var source = context.createBufferSource();
+	source.buffer = jsPsych.pluginAPI.getAudioBuffer(trial.audio_stim);
+	source.connect(context.destination);
+	startTime = context.currentTime + 0.1;
+	source.start(startTime);
 
-			}
+	// show prompt if there is one
+	if (trial.prompt !== "") {
+		display_element.append(trial.prompt);
+	}
 
-			return trials;
-		};
+	// store response
+	var response = {rt: -1, key: -1};
 
-		plugin.trial = function(display_element, trial) {
+			// // function to end trial when it is time
+			// var end_trial = function() {
 
-			// if any trial variables are functions
-			// this evaluates the function and replaces
-			// it with the output of the function
-			trial = jsPsych.pluginAPI.evaluateFunctionParameters(trial);
+			// 	// kill any remaining setTimeout handlers
+			// 	for (var i = 0; i < setTimeoutHandlers.length; i++) {
+			// 		clearTimeout(setTimeoutHandlers[i]);
+			// 	}
 
-			// this array holds handlers from setTimeout calls
-			// that need to be cleared if the trial ends early
-			var setTimeoutHandlers = [];
+			// 	// move on to the next trial
+			// 	jsPsych.finishTrial();
+			// };
 
-			// play stimulus
-			var source = context.createBufferSource();
-			source.buffer = jsPsych.pluginAPI.getAudioBuffer(trial.audio_stim);
-			source.connect(context.destination);
-			startTime = context.currentTime + 0.1;
-			source.start(startTime);
+	// function to handle responses by the subject
+	var after_response = function(info) {
+	
+		// kill any remaining setTimeout handlers
+		for (var i = 0; i < setTimeoutHandlers.length; i++) {
+			clearTimeout(setTimeoutHandlers[i]);
+		}
 
-			// show prompt if there is one
-			if (trial.prompt !== "") {
-				display_element.append(trial.prompt);
-			}
+		// clear keyboard listener
+		jsPsych.pluginAPI.cancelAllKeyboardResponses();
 
-			// store response
-			var response = {rt: -1, key: -1};
+		var correct = false;
+		if (trial.key_answer == info.key) {
+			correct = true;
+		}
+		console.log(trial.key_answer)
+		console.log(info.key)
 
-			// function to end trial when it is time
-			var end_trial = function() {
-
-				// kill any remaining setTimeout handlers
-				for (var i = 0; i < setTimeoutHandlers.length; i++) {
-					clearTimeout(setTimeoutHandlers[i]);
-				}
-
-				
-
-
-				// move on to the next trial
-				jsPsych.finishTrial();
+		// save data
+		var trial_data = {
+			"rt": info.rt,
+			"correct": correct,
+			"stimulus": trial.a_path,
+			"key_press": info.key
 			};
 
-			// function to handle responses by the subject
-			var after_response = function(info) {
+		// jsPsych.data.write(trial_data);
 
-				// kill any remaining setTimeout handlers
-				for (var i = 0; i < setTimeoutHandlers.length; i++) {
-					clearTimeout(setTimeoutHandlers[i]);
+		display_element.html('');
+
+		var timeout = info.rt == -1;
+		doFeedback(correct, timeout);
+	};
+
+	jsPsych.pluginAPI.getKeyboardResponse({
+		callback_function: after_response,
+		valid_responses: trial.choices,
+		rt_method: 'date',
+		persist: false,
+		allow_held_key: false
+	});
+
+	if(trial.timing_response > 0) {
+		setTimeoutHandlers.push(setTimeout(function(){
+			after_response({key: -1, rt: -1});
+		}, trial.timing_response));
+	}
+
+	function doFeedback(correct, timeout) {
+
+		if(timeout && !trial.show_feedback_on_timeout){
+			display_element.append(trial.timeout_message);
+		} else {
+		// substitute answer in feedback string.
+		var atext = "";
+		if (correct) {
+			atext = trial.correct_text.replace("%ANS%", trial.text_answer);
+		} else {
+			atext = trial.incorrect_text.replace("%ANS%", trial.text_answer);
+		}
+
+		// show the feedback
+		display_element.append(atext);
 				}
+		// check if force correct button press is set
+		if (trial.force_correct_button_press && correct === false && ((timeout && trial.show_feedback_on_timeout) || !timeout)) {
 
-				// clear keyboard listener
-				jsPsych.pluginAPI.cancelAllKeyboardResponses();
-
-				var correct = false;
-				if (trial.key_answer == info.key) {
-					correct = true;
-				}
-				console.log(trial.key_answer)
-				console.log(info.key)
-
-				// save data
-				var trial_data = {
-					"rt": info.rt,
-					"correct": correct,
-					"stimulus": trial.a_path,
-					"key_press": info.key
-				};
-
-				jsPsych.data.write(trial_data);
-
-				display_element.html('');
-
-				var timeout = info.rt == -1;
-				doFeedback(correct, timeout);
-			};
+			var after_forced_response = function(info) {
+				endTrial();
+			}
 
 			jsPsych.pluginAPI.getKeyboardResponse({
-        callback_function: after_response,
-        valid_responses: trial.choices,
-        rt_method: 'date',
-        persist: false,
+				callback_function: after_forced_response,
+				valid_responses: [trial.key_answer],
+				rt_method: 'date',
+				persist: false,
 				allow_held_key: false
-      });
+			});
 
-			if(trial.timing_response > 0) {
-				setTimeoutHandlers.push(setTimeout(function(){
-					after_response({key: -1, rt: -1});
-				}, trial.timing_response));
-			}
+		} else {
+			setTimeout(function() {
+				endTrial();
+			}, trial.timing_feedback_duration);
+		}
 
-			function doFeedback(correct, timeout) {
+	}
 
-				if(timeout && !trial.show_feedback_on_timeout){
-					display_element.append(trial.timeout_message);
-				} else {
-					// substitute answer in feedback string.
-					var atext = "";
-					if (correct) {
-						atext = trial.correct_text.replace("%ANS%", trial.text_answer);
-					} else {
-						atext = trial.incorrect_text.replace("%ANS%", trial.text_answer);
-					}
-
-					// show the feedback
-					display_element.append(atext);
-				}
-				// check if force correct button press is set
-				if (trial.force_correct_button_press && correct === false && ((timeout && trial.show_feedback_on_timeout) || !timeout)) {
-
-					var after_forced_response = function(info) {
-						endTrial();
-					}
-
-					jsPsych.pluginAPI.getKeyboardResponse({
-		        callback_function: after_forced_response,
-		        valid_responses: [trial.key_answer],
-		        rt_method: 'date',
-		        persist: false,
-	          allow_held_key: false
-		      });
-
-				} else {
-					setTimeout(function() {
-						endTrial();
-					}, trial.timing_feedback_duration);
-				}
-
-			}
-
-			function endTrial() {
-				display_element.html("");
-				// stop the audio file if it is playing
-				source.stop();
+	function endTrial() {
+		display_element.html("");
+		// stop the audio file if it is playing
+		source.stop();
 				
-				jsPsych.finishTrial();
-			}
+		// jsPsych.finishTrial();
+		jsPsych.finishTrial(trial_data);
+	}
 
-		};
-
-		return plugin;
-	})();
-})(jQuery);
+  return plugin;
+})();
 

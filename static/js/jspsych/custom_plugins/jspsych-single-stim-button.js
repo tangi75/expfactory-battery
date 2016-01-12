@@ -4,119 +4,114 @@
  *
  * plugin for displaying stimuli and getting mouse responses
  *
- * documentation: docs.jspsych.org
- *
+ * modified by Zeynep Enkavi
+ * to be tested
  **/
  
-jsPsych['single-stim-button'] = (function(){
+jsPsych.plugins["single-stim-button"] = (function() {
 
-    var plugin = {};
+  var plugin = {};
 
-    plugin.create = function(params){
-    	params = jsPsych.pluginAPI.enforceArray(params, ['stimuli', 'button_class']);
+  jsPsych.pluginAPI.registerPreload('single-stim-button', 'stimulus', 'image')
 
-        var trials = new Array(params.stimuli.length);
-			for (var i = 0; i < trials.length; i++) {
-				trials[i] = {};
-				trials[i].stimuli = params.stimuli[i]; 
-				trials[i].button_class = params.button_class; //class of button to listen for. All buttons that have this class will advance the trial and be recorded
-				trials[i].response_ends_trial = (typeof params.response_ends_trial === 'undefined') ? true : params.response_ends_trial;
-				// timing parameters
-				trials[i].timing_stim = params.timing_stim || -1; // if -1, then show indefinitely
-				trials[i].timing_response = params.timing_response || -1; // if -1, then wait for response forever
-				// optional parameters
-				trials[i].prompt = (typeof params.prompt === 'undefined') ? "" : params.prompt;
-			}
-			return trials;
-    }
-    
-    
+  plugin.trial = function(display_element, trial) {
 
-    plugin.trial = function(display_element, trial){
+    // set default values for parameters
+    // trial.parameter = trial.parameter || 'default value';
+    trial.stimulus = trial.stimulus; 
+	trial.button_class = trial.button_class; //class of button to listen for. All buttons that have this class will advance the trial and be recorded
+	trial.response_ends_trial = (typeof trial.response_ends_trial === 'undefined') ? true : trial.response_ends_trial;
+	// timing parameters
+	trial.timing_stim = trial.timing_stim || -1; // if -1, then show indefinitely
+	trial.timing_response = trial.timing_response || -1; // if -1, then wait for response forever
+	// optional parameters
+	trial.prompt = (typeof trial.prompt === 'undefined') ? "" : trial.prompt;
+
+    // allow variables as functions
+    // this allows any trial variable to be specified as a function
+    // that will be evaluated when the trial runs. this allows users
+    // to dynamically adjust the contents of a trial as a result
+    // of other trials, among other uses. you can leave this out,
+    // but in general it should be included
+    trial = jsPsych.pluginAPI.evaluateFunctionParameters(trial);
+
+    var start_time = (new Date()).getTime();
+	var response = {rt: -1, mouse: -1};
 		
-		// if any trial variables are functions
-		// this evaluates the function and replaces
-		// it with the output of the function
-		trial = jsPsych.pluginAPI.evaluateFunctionParameters(trial);
-
-		var start_time = (new Date()).getTime();
-		var response = {rt: -1, mouse: -1};
+	// this array holds handlers from setTimeout calls
+	// that need to be cleared if the trial ends early
+	var setTimeoutHandlers = [];
 		
-		// this array holds handlers from setTimeout calls
-		// that need to be cleared if the trial ends early
-		var setTimeoutHandlers = [];
-		
-		// function to end trial when it is time
-		var end_trial = function() {
+	// function to end trial when it is time
+	var end_trial = function() {
 
-			// kill any remaining setTimeout handlers
-			for (var i = 0; i < setTimeoutHandlers.length; i++) {
-				clearTimeout(setTimeoutHandlers[i]);
-			}
-
-			// gather the data to store for the trial
-			var trial_data = {
-				"rt": response.rt,
-				"stimulus": trial.stimuli,
-				"mouse_click": response.mouse
-			};
-
-			jsPsych.data.write(trial_data);
-
-			// clear the display
-			display_element.html('');
-
-			// move on to the next trial
-			jsPsych.finishTrial();
-		};		
-		
-		// display stimulus
-		display_element.append($('<div>', {
-					html: trial.stimuli,
-					id: 'jspsych-multi-button-stimulus'
-				}));
-				
-		//show prompt if there is one
-			if (trial.prompt !== "") {
-				display_element.append(trial.prompt);
-			}
-		
-		//Define button press behavior
-        $('.' + trial.button_class).on('click',function(){
-			if(response.mouse == -1){
-				var end_time = (new Date()).getTime();
-				var rt = end_time - start_time;
-				
-				response.rt = rt
-				if ($(this).attr('id') != undefined) {
-					response.mouse = $(this).attr('id')
-				} else {
-					response.mouse = 'undefined_button'
-				}
-				$(this).addClass('responded')
-				if (trial.response_ends_trial) {
-					end_trial();
-				}
-			}
-        });
-		
-		// hide image if timing is set
-		if (trial.timing_stim > 0) {
-			var t1 = setTimeout(function() {
-				$('#jspsych-multi-stim-stimulus').css('visibility', 'hidden');
-			}, trial.timing_stim);
-			setTimeoutHandlers.push(t1);
+		// kill any remaining setTimeout handlers
+		for (var i = 0; i < setTimeoutHandlers.length; i++) {
+			clearTimeout(setTimeoutHandlers[i]);
 		}
 
-		// end trial if time limit is set
-		if (trial.timing_response > 0) {
-			var t2 = setTimeout(function() {
+		// gather the data to store for the trial
+		var trial_data = {
+			"rt": response.rt,
+			"stimulus": trial.stimuli,
+			"mouse_click": response.mouse
+		};
+
+			//jsPsych.data.write(trial_data);
+
+		// clear the display
+		display_element.html('');
+
+		// move on to the next trial
+		jsPsych.finishTrial(trial_data);
+	};		
+		
+	// display stimulus
+	display_element.append($('<div>', {
+		html: trial.stimuli,
+		id: 'jspsych-multi-button-stimulus'
+	}));
+
+	//show prompt if there is one
+	if (trial.prompt !== "") {
+		display_element.append(trial.prompt);
+	}
+		
+	//Define button press behavior
+	$('.' + trial.button_class).on('click',function(){
+		if(response.mouse == -1){
+			var end_time = (new Date()).getTime();
+			var rt = end_time - start_time;
+
+			response.rt = rt
+			if ($(this).attr('id') != undefined) {
+				response.mouse = $(this).attr('id')
+			} else {
+				response.mouse = 'undefined_button'
+			}
+			$(this).addClass('responded')
+			if (trial.response_ends_trial) {
 				end_trial();
-			}, trial.timing_response);
-			setTimeoutHandlers.push(t2);
+			}
 		}
-    }
+	});
+		
+	// hide image if timing is set
+	if (trial.timing_stim > 0) {
+		var t1 = setTimeout(function() {
+			$('#jspsych-multi-stim-stimulus').css('visibility', 'hidden');
+		}, trial.timing_stim);
+		setTimeoutHandlers.push(t1);
+	}
 
-    return plugin;
+	// end trial if time limit is set
+	if (trial.timing_response > 0) {
+		var t2 = setTimeout(function() {
+			end_trial();
+		}, trial.timing_response);
+		setTimeoutHandlers.push(t2);
+	}
+  };
 
+  return plugin;
 })();
