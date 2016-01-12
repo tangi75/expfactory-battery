@@ -25,10 +25,16 @@ Summary of changes
 
 - From the documentation on media preloading: "Note: If you are using HTML strings as stimuli, such as in the single-stim plugin, **you will see a series of error messages in the JavaScript console about failing to find files. These messages can be ignored.**"
 
+- In custom plugins `jspsych-stim-feedback-IE` and `jspsych-single-stim-button` which appeared to be based on `jspsych-single-stim` I changed the parameter `stimuli` to `stimulus` to be in line with the rest of the structure. I think using the `timeline` parameter for these custom plugins when multiple stimuli are necessary should work the same way.
+
+> Implied change: Replace `stimuli` parameter with `stimulus` or `timeline` for the `jspsych-stim-feedback-IE` and `jspsych-single-stim-button` custom plugins.
+
 
 To-Do:
 ------
 
 - finish updating custom plugins in expfacotry-battery/static/js/jspsych-5.0 (because preview won't work until you push these changes to the upstream master)
+''- custom plugins not writen by me should be tested. I only modified the main structure.
+
 - go over the .js files for all the experiments in expfactory-experiments
 - code questionnaires
