@@ -1,3 +1,6 @@
+01.12.2015
+----------
+
 Summary of changes
 ------------------
 
@@ -32,9 +35,6 @@ Summary of changes
 
 To-Do:
 ------
-
-- finish updating custom plugins in expfacotry-battery/static/js/jspsych-5.0 (because preview won't work until you push these changes to the upstream master)
-''- custom plugins not writen by me should be tested. I only modified the main structure.
 
 - go over the .js files for all the experiments in expfactory-experiments
 - code questionnaires
