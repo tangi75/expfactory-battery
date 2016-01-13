@@ -14,16 +14,6 @@
   transform: translate(-50%,-50%);
 }
 
-/* Used for positioning nav buttons during instructions */
-
-.jspsych-instructions-nav {
-  width:20vw;
-  height: 20vw;
-  position:absolute;
-  top: 5%;
-  left:10%;
-  margin-right:-50%;
-}
 
 /* Text based classes */
 /* Used for general instructions */
@@ -112,6 +102,16 @@ body {
 	line-height: 20px;
 }
 
+/* Used for positioning nav buttons during instructions */
+
+.jspsych-instructions-nav {
+  width:20vw;
+  height: 20vw;
+  position:absolute;
+  top: 5%;
+  left:10%;
+  margin-right:-50%;
+}
 
 #jspsych-instructions-next, #jspsych-instructions-back,  .default_button {
   background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #7f9ac9), color-stop(1, #476e9e));
