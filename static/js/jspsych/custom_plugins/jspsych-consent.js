@@ -12,10 +12,10 @@ jsPsych.plugins["consent"] = (function() {
   plugin.trial = function(display_element, trial) {
 
     // set default values for parameters
-    trial.consent_text = trial.consent_text;
-    trial.checkbox_text = trial.checkbox_text;
-    trial.button_text = trial.button_text;
-    trial.container = trial.container || -1
+    trial.consent_text = trial.consent_text || "";
+    trial.checkbox_text = trial.checkbox_text || "Check here";
+    trial.button_text = trial.button_text || "Continue";
+    trial.container = trial.container || -1;
 
     // allow variables as functions
     // this allows any trial variable to be specified as a function
