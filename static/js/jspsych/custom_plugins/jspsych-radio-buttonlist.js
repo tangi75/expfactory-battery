@@ -22,9 +22,9 @@
 
     // set default values for parameters
     trial.preamble = (typeof trial.preamble === 'undefined') ? "" : trial.preamble;
-    trial.buttonlist = trial.buttonlist;
-    trial.checkAll = trial.checkAll;
-    trial.numq = trial.numq;
+    trial.buttonlist = (typeof trial.buttonlist === 'undefined') ? "" : trial.buttonlist;
+    trial.checkAll = (typeof trial.checkAll === 'undefined') ? false : trial.checkAll;
+    trial.numq = (typeof trial.numq === 'undefined') ? 0 : trial.numq;
 
     // allow variables as functions
     // this allows any trial variable to be specified as a function
