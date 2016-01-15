@@ -38,8 +38,6 @@ key_press | numeric | response key
 
 ## Examples
 
-#### EXPLANATION/TITLE OF EXAMPLE
-
 ```javascript
 practice_stims = [{sound: 'static/experiments/tone_monitoring/sounds/880Hz_-6dBFS_.5s.mp3',
 		  data: {exp_id: 'tone_monitoring', trial_id: 'high', condition: 'practice'}},

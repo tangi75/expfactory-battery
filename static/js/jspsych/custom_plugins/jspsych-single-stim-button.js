@@ -53,7 +53,7 @@ jsPsych.plugins["single-stim-button"] = (function() {
 		// gather the data to store for the trial
 		var trial_data = {
 			"rt": response.rt,
-			"stimulus": trial.stimuli,
+			"stimulus": trial.stimulus,
 			"mouse_click": response.mouse
 		};
 
