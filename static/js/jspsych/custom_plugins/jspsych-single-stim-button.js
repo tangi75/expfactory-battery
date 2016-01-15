@@ -17,8 +17,7 @@ jsPsych.plugins["single-stim-button"] = (function() {
   plugin.trial = function(display_element, trial) {
 
     // set default values for parameters
-    // trial.parameter = trial.parameter || 'default value';
-    trial.stimulus = trial.stimulus; 
+ 
 	trial.button_class = trial.button_class; //class of button to listen for. All buttons that have this class will advance the trial and be recorded
 	trial.response_ends_trial = (typeof trial.response_ends_trial === 'undefined') ? true : trial.response_ends_trial;
 	// timing parameters
@@ -68,8 +67,8 @@ jsPsych.plugins["single-stim-button"] = (function() {
 		
 	// display stimulus
 	display_element.append($('<div>', {
-		html: trial.stimuli,
-		id: 'jspsych-multi-button-stimulus'
+		html: trial.stimulus,
+		id: 'jspsych-single-button-stimulus'
 	}));
 
 	//show prompt if there is one
