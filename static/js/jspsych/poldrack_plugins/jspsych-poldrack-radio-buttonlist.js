@@ -14,7 +14,7 @@
  See if there is a way to get rid of data.write in finishTrial
  */
 
- jsPsych.plugins["radio-buttonlist"] = (function() {
+ jsPsych.plugins["poldrack-radio-buttonlist"] = (function() {
 
   var plugin = {};
 
