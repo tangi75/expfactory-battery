@@ -10,17 +10,14 @@
  * - [check] Store each question in separate rows
  * - [check] include numeric codes
  * - [check] scored numeric data
- * - progress bars
+ * - [check]progress bars
  * - [check] response range: 
  * - [check] include question data
  *
  * TODO:
- * When back -> next have page populated with responses before back (maybe a fillPageResponses function?)
- * continuous trial num
  * fix css to fit all options on one row
+ * progress bar
  *
- * add later:
- * "num_response_change": , //number of times a response was changed
  */
 
 
@@ -40,7 +37,7 @@ jsPsych.plugins['survey-multi-choice'] = (function() {
     // trial defaults
     trial.preamble = typeof trial.preamble == 'undefined' ? "" : trial.preamble;
     trial.required = typeof trial.required == 'undefined' ? null : trial.required; // should have same dims as trial.pages
-    trial.horizontal = typeof trial.required == 'undefined' ? false : trial.horizontal;
+    trial.horizontal = typeof trial.horizontal == 'undefined' ? false : trial.horizontal;
 
     trial.pages = typeof trial.pages == 'undefined' ? "" : trial.pages;
     trial.show_clickable_nav = (typeof trial.show_clickable_nav === 'undefined') ? true : trial.show_clickable_nav;
@@ -50,7 +47,7 @@ jsPsych.plugins['survey-multi-choice'] = (function() {
     // options - Array with an array for each page that contains array with responses for each question (i.e. 3 dim array instead of 2 options[current_page][current_question][current_option])
     // scale - Object containing how any option should be coded numerically
 
-    // Helper function to create arrays of lenght len filled with val
+    // Helper function to create arrays of length len filled with val
     function fillArray(value, len) {
       if (len == 0) return [];
       var a = [value];
@@ -83,7 +80,11 @@ jsPsych.plugins['survey-multi-choice'] = (function() {
       response_data.push([]);
     }
 
-    var wentBack = false;
+    var trial_form_id = _join(plugin_id_name, "form");
+    display_element.append($('<form>', {
+      "id": trial_form_id
+    }));
+    var $trial_form = $("#" + trial_form_id);
 
     function show_current_page() {
       
@@ -105,7 +106,6 @@ jsPsych.plugins['survey-multi-choice'] = (function() {
     $('#' + preamble_id_name).html(trial.preamble);
 
     // add multiple-choice questions
-    // for (var i = 0; i < trial.questions.length; i++) {
     for (var i = 0; i < trial.pages[current_page].length; i++) {
       // create question container
       var question_classes = [_join(plugin_id_name, 'question')];
@@ -166,6 +166,7 @@ jsPsych.plugins['survey-multi-choice'] = (function() {
         }
 
         // add forward button
+        // nav_html += "<button id='jspsych-survey-multi-choice-next' class='jspsych-btn'>Next &gt;</button></div>"
         nav_html += "<button id='jspsych-survey-multi-choice-next' class='jspsych-btn'>Next &gt;</button></div>"
 
         // add html for button to the page
@@ -187,6 +188,11 @@ jsPsych.plugins['survey-multi-choice'] = (function() {
         });
 
       }
+
+      var progress_bar = "<br><meter value='"+current_page+"' min='0' max='"+trial.pages.length+"'></meter><br>"
+
+      // add html for button to the page
+      display_element.append(progress_bar);
     }
 
     function clear_button_handlers() {
@@ -196,7 +202,11 @@ jsPsych.plugins['survey-multi-choice'] = (function() {
 
     function next() {
 
-      add_current_page_to_view_history()
+      //because the data submit functionality is changed the required property of radio buttons is not working
+      //so everytime the next button is clicked make sure that all the required questions on the page are checked
+      if(check_required_questions()){
+      
+      add_current_page_to_view_history();
 
       //submit_page_data();
       //DON'T SUBMIT IT BUT UPDATE THE RESPONSE_DATA ARRAY
@@ -207,25 +217,70 @@ jsPsych.plugins['survey-multi-choice'] = (function() {
       // if done, finish up...
       if (current_page >= trial.pages.length) { 
 
+        //submit the data stored in the response_data array
         submit_page_data();
 
+        //end trial the jspsych way
         endTrial();
+      
+      //otherwise after each page      
       } else {
 
+        //clear screen
         display_element.html('')
 
+        //show the current page html
         show_current_page();
+
+        //fill the selections if there are any (left over from clicking back)
+        fill_page_selections();
       }
+      }
+      
+      else {
+        alert('Please make sure to respond to all required questions');
+        update_page_data();
+        display_element.html('');
+        show_current_page();
+        fill_page_selections();
+      }
+      
 
     }
+  
+
+    function check_required_questions(){
+
+      var req_check = []
+
+      for (var i = 0; i < trial.pages[current_page].length; i++){
+        //if you haven't checked a questions && that is required
+        if($("#"+plugin_id_name+"-"+i).find("input:radio")[0].required){
+          if($("#"+plugin_id_name+"-"+i).find("input:radio:checked").length > 0){
+            req_check.push(true)
+          }
+        }
+        else {
+          req_check.push(false)
+        }
+      }
+
+      //if there are falses in the req_check array
+      if (req_check.indexOf(false) != -1){
+        return false
+      }
+      else{
+        return true
+      }
+    }
+
 
     function update_page_data(){
-      if (wentBack){
+      if (getTimesViewed(view_history, current_page) > 0){
         //REPLACE THE CURRENT RESPONSES  IN RESPONSE_DATA INSTEAD OF PUSHING
         for (var i = 0; i < trial.pages[current_page].length; i++){
           response_data[current_page][i] = $("#"+plugin_id_name+"-"+i).find("input:radio:checked").val();
         }
-        wentBack = false;
       }
 
       else {
@@ -241,26 +296,38 @@ jsPsych.plugins['survey-multi-choice'] = (function() {
 
       // DOUBLE LOOP TO SUBMIT AFTER DONE WITH SURVEY INSTEAD OF EACH PAGE 
       //loop to submit each question data on separate row
-      for (var i = 0; i < trial.pages.length; i++){
-        for (var j = 0; j < trial.pages[i].length; j++){
+      for (var i = 0; i < trial.pages.length; i++){ // i for each page (previously current_page)
+        for (var j = 0; j < trial.pages[i].length; j++){ //j is for each question
           jsPsych.data.write({
             "rt": getPageViewTime(view_history,i),
             "qnum": j+1,
             "page_num": i+1,
+            "trial_num":getTrialNum(i, j, trial.pages),
             "stim_question": trial.pages[i][j],
             "stim_response": response_data[i][j],
             "num_response": getNumResponse(response_data[i][j], trial.scale),
-            "score_response": getScoreResponse(response_data[i][j], trial.scale, j, trial.reverse_score, trial.options[i][j]),
+            "score_response": getScoreResponse(response_data[i][j], trial.scale, trial.reverse_score[i][j], trial.options[i][j]),
             "response_range": getRange(trial.options[i][j]),
             "times_viewed": getTimesViewed(view_history,i)
           })
         }
       }
 
-
       display_element.html('');
+    }
 
-      wentBack = false;
+    function getTrialNum(current_page, current_qnum, pages_array){
+      //page_lengths = get the length of each array in pages_array (i.e. number of questions on each page)
+      var page_lengths = pages_array.map(function(array){
+        return array.length;
+      });
+      //trial_num = sum(page_lengths[0:current_page]) + current_qnum
+      tmp = 0;
+      for (var i = 0; i < current_page; i++){
+        tmp += page_lengths[i]
+      }
+      trial_num = tmp + current_qnum
+      return trial_num
     }
 
     function getTimesViewed(view_history_obj_array, page_index){
@@ -301,9 +368,9 @@ jsPsych.plugins['survey-multi-choice'] = (function() {
       return scale[text_response]
     }
 
-    function getScoreResponse(text_response, scale, index, reverse_score_array, option_array){
+    function getScoreResponse(text_response, scale, reverse_score_array_value, option_array){
       var num_response = getNumResponse(text_response, scale)
-      if (reverse_score_array[index]){
+      if (reverse_score_array_value){
         score_response = (option_array.length + 1) - num_response;
         return score_response;
       }
@@ -312,9 +379,10 @@ jsPsych.plugins['survey-multi-choice'] = (function() {
 
     function back() {
 
-      wentBack = true;
+      add_current_page_to_view_history();
 
-      add_current_page_to_view_history()
+      //update the response_data array so it can be loaded again after clicking next
+      update_page_data();
 
       current_page--;
 
@@ -324,6 +392,12 @@ jsPsych.plugins['survey-multi-choice'] = (function() {
       //So load page
       show_current_page();
 
+      //then fill the selection
+      fill_page_selections();
+
+    }
+
+    function fill_page_selections(){
       // get the names of all the options in each question block (option names for each block is the same so the participant can only select one option)
       var option_names = [];
       $("div." + plugin_id_name + "-question").each(function(index) {
@@ -346,7 +420,6 @@ jsPsych.plugins['survey-multi-choice'] = (function() {
         //check the option for each question with the matching value
         $("#"+plugin_id_name+"-"+current_qnum).find("input:radio[value='" + val + "']").prop("checked", true) 
       }
-
     }
 
     function add_current_page_to_view_history() {
