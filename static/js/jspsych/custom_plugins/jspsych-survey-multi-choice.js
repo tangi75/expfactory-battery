@@ -149,7 +149,7 @@ jsPsych.plugins['survey-multi-choice'] = (function() {
 
       // ADD PROGRESS BAR
       var progress = (current_page/trial.pages.length) * 100
-      var progress_bar = '<div class = "jspsych-survey-multi-choice-progress-bar"><progress value="'+progress+'" max="100"><div class = "progress-bar"><span style="width:'+ progress +'%;">Progress: '+progress+'%</span></div></progress></div>'
+      var progress_bar = '<div class = "center-content"><progress value="'+progress+'" max="100"><div class = "progress-bar"><span style="width:'+ progress +'%;">Progress: '+progress+'%</span></div></progress></div>'
 
       // add html for progress bar to the page
       display_element.append(progress_bar);
