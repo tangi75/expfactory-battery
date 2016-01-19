@@ -1,22 +1,19 @@
 /**
  * jspsych-survey-multi-choice
- * a jspsych plugin for multiple choice survey questions
+ * a jspsych plugin for multiple choice survey questions, an enhancement/combination of survey-multi-choice, survey-likert and instructions plugins
  *
- * Shane Martin
+ * A. Zeynep Enkavi
  *
- * documentation: docs.jspsych.org
+ * documentation: https://github.com/expfactory/expfactory-battery/tree/master/static/js/jspsych/poldrack_plugins/docs
  * 
- * Addition by Zeynep Enkavi:
- * - [check] Store each question in separate rows
- * - [check] include numeric codes
- * - [check] scored numeric data
- * - [check] progress bars
- * - [check] response range: 
- * - [check] include question data
- * - [check] back buttons
- *
- * TODO:
- * fix css to fit all options on one row
+ * Features:
+ * - Store each question in separate rows
+ * - Include numeric codes
+ * - Scored numeric data
+ * - Progress bars
+ * - Response range: 
+ * - Include question data
+ * - Back buttons
  *
  * ADD TO DEFAULT.CSS
  *
@@ -83,9 +80,6 @@ jsPsych.plugins['survey-multi-choice'] = (function() {
     }
 
     var trial_form_id = _join(plugin_id_name, "form");
-    // display_element.append($('<form>', {
-    //   "id": trial_form_id
-    // }));
     var $trial_form = $("#" + trial_form_id);
 
     function show_current_page() {
@@ -127,33 +121,13 @@ jsPsych.plugins['survey-multi-choice'] = (function() {
         '<p class="' + plugin_id_name + '-text survey-multi-choice">' + trial.pages[current_page][i] + '</p>'
       );
 
-      // create option radio buttons
-      // for (var j = 0; j < trial.options[current_page][i].length; j++) {
-      //   var option_id_name = _join(plugin_id_name, "option", i, j),
-      //     option_id_selector = '#' + option_id_name;
-
-      //   // add radio button container
-      //   $(question_selector).append($('<div>', {
-      //     "id": option_id_name,
-      //     "class": _join(plugin_id_name, 'option')
-      //   }));
-
-      //   // add label and question text
-      //   var option_label = '<label class="' + plugin_id_name + '-text">' + trial.options[current_page][i][j] + '</label>';
-      //   $(option_id_selector).append(option_label);
-
-      //   // create radio button
-      //   var input_id_name = _join(plugin_id_name, 'response', i);
-      //   $(option_id_selector + " label").prepend('<input type="radio" name="' + input_id_name + '" value="' + trial.options[current_page][i][j] + '">');
-      // }
-////////////      
-        //instead of adding a separate div for each radio button add an unordered list (ul) with list items (li) spread on page width
+      //instead of adding a separate div for each radio button add an unordered list (ul) with list items (li) spread on page width
         
-        //append ul containing all the response options for the question
-        options_string = '<ul class="'+_join(plugin_id_name, 'opts')+'">'
-        for (var j = 0; j < trial.options[current_page][i].length; j++) {
+      //append ul containing all the response options for the question
+      options_string = '<ul class="'+_join(plugin_id_name, 'opts')+'">'
+      for (var j = 0; j < trial.options[current_page][i].length; j++) {
         var option_id_name = _join(plugin_id_name, "option", i, j),
-          option_id_selector = '#' + option_id_name;
+        option_id_selector = '#' + option_id_name;
         //append li for each option with width divded by number of options
         //each li contains first the input (on top of the option text)
         //then the label for the option text
@@ -164,24 +138,6 @@ jsPsych.plugins['survey-multi-choice'] = (function() {
       options_string += '</ul>';
       $(question_selector).append(options_string);
 
-////////
-    //   display_element.append('<form id="jspsych-survey-likert-form">');
-    // // add likert scale questions
-    // for (var i = 0; i < trial.questions.length; i++) {
-    //   form_element = $('#jspsych-survey-likert-form');
-    //   // add question
-    //   form_element.append('<label class="jspsych-survey-likert-statement">' + trial.questions[i] + '</label>');
-    //   // add options
-    //   var width = 100 / trial.labels[i].length;
-    //   options_string = '<ul class="jspsych-survey-likert-opts" data-radio-group="Q' + i + '">';
-    //   for (var j = 0; j < trial.labels[i].length; j++) {
-    //     options_string += '<li style="width:' + width + '%"><input type="radio" name="Q' + i + '" value="' + j + '"><label class="jspsych-survey-likert-opt-label">' + trial.labels[i][j] + '</label></li>';
-    //   }
-    //   options_string += '</ul>';
-    //   form_element.append(options_string);
-    //}
-////////
-
       if (trial.required && trial.required[current_page][i]) {
         // add "question required" asterisk
         $(question_selector + " p").append("<span class='required'>*</span>")
@@ -190,6 +146,13 @@ jsPsych.plugins['survey-multi-choice'] = (function() {
         $(question_selector + " input:radio").prop("required", true);
       }
     }
+
+      // ADD PROGRESS BAR
+      var progress = (current_page/trial.pages.length) * 100
+      var progress_bar = '<div class = "jspsych-survey-multi-choice-progress-bar"><progress value="'+progress+'" max="100"><div class = "progress-bar"><span style="width:'+ progress +'%;">Progress: '+progress+'%</span></div></progress></div>'
+
+      // add html for progress bar to the page
+      display_element.append(progress_bar);
 
 
       // ADD NAVIGATION BUTTONS
@@ -225,14 +188,6 @@ jsPsych.plugins['survey-multi-choice'] = (function() {
         });
 
       }
-
-      // var progress_bar = "<br><meter value='"+current_page+"' min='0' max='"+trial.pages.length+"'></meter><br>"
-      var progress = (current_page/trial.pages.length) * 100
-      var progress_bar = '<div class = "center-content"><progress value="'+progress+'" max="100"><div class = "progress-bar"><span style="width:'+ progress +'%;">Progress: '+progress+'%</span></div></progress></div>'
-
-
-      // add html for button to the page
-      display_element.append(progress_bar);
     }
 
     function clear_button_handlers() {
