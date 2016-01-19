@@ -6,10 +6,11 @@
  *
  * documentation: docs.jspsych.org
  *
- *
+ * Modification by Ian Eisenberg - changed navigation buttons such that the "Next" button reads
+ * "End Instructions" on the last page
  */
 
-jsPsych.plugins.instructions = (function() {
+jsPsych.plugins['poldrack-instructions'] = (function() {
 
   var plugin = {};
 
@@ -40,10 +41,14 @@ jsPsych.plugins.instructions = (function() {
       if (trial.show_clickable_nav) {
 
         var nav_html = "<div class='jspsych-instructions-nav'>";
-        if (current_page != 0 && trial.allow_backward) {
-          nav_html += "<button id='jspsych-instructions-back' class='jspsych-btn'>&lt; Previous</button>";
+        if (current_page == trial.pages.length-1) {
+          nav_html += "<button id='jspsych-instructions-next'>End Instructions</button>"
+        } else {
+          nav_html += "<button id='jspsych-instructions-next'>Next</button>"
         }
-        nav_html += "<button id='jspsych-instructions-next' class='jspsych-btn'>Next &gt;</button></div>"
+        if (current_page != 0 && trial.allow_backward) {
+          nav_html += "<button id='jspsych-instructions-back'>Previous</button>";
+        }
         
         nav_html += "</div>"
 

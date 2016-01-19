@@ -3,18 +3,15 @@
  * a jspsych plugin for displaying a form with a list of radio buttons
  *
  * A. Zeynep Enkavi 
-
  NOTE: survey-multi-choice might be a better plugin for most cases. 
  This plugin requires more raw html work when specifying questions
  (thouhg this may cater to more flexible formatting needs).
  Additionally data is saved in rows for each questions minimizing 
  required text parsing later on.
-
- TODO:
- See if there is a way to get rid of data.write in finishTrial
+ 
  */
 
- jsPsych.plugins["radio-buttonlist"] = (function() {
+ jsPsych.plugins["poldrack-radio-buttonlist"] = (function() {
 
   var plugin = {};
 
@@ -22,9 +19,9 @@
 
     // set default values for parameters
     trial.preamble = (typeof trial.preamble === 'undefined') ? "" : trial.preamble;
-    trial.buttonlist = (typeof trial.buttonlist === 'undefined') ? "" : trial.buttonlist;
-    trial.checkAll = (typeof trial.checkAll === 'undefined') ? false : trial.checkAll;
-    trial.numq = (typeof trial.numq === 'undefined') ? 0 : trial.numq;
+    trial.buttonlist = trial.buttonlist;
+    trial.checkAll = trial.checkAll;
+    trial.numq = trial.numq;
 
     // allow variables as functions
     // this allows any trial variable to be specified as a function

@@ -1,5 +1,5 @@
 /**
- * jspsych-survey-multi-choice
+ * jspsych-poldrack-survey-multi-choice
  * a jspsych plugin for multiple choice survey questions, an enhancement/combination of survey-multi-choice, survey-likert and instructions plugins
  *
  * A. Zeynep Enkavi
@@ -14,19 +14,16 @@
  * - Response range: 
  * - Include question data
  * - Back buttons
- *
- * ADD TO DEFAULT.CSS
- *
  */
 
 
-jsPsych.plugins['survey-multi-choice'] = (function() {
+jsPsych.plugins['poldrack-survey-multi-choice'] = (function() {
 
   var plugin = {};
 
   plugin.trial = function(display_element, trial) {
 
-    var plugin_id_name = "jspsych-survey-multi-choice";
+    var plugin_id_name = "poldrack-jspsych-survey-multi-choice";
     var plugin_id_selector = '#' + plugin_id_name;
     var _join = function( /*args*/ ) {
       var arr = Array.prototype.slice.call(arguments, _join.length);

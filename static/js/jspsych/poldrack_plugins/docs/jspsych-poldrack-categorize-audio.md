@@ -1,4 +1,4 @@
-# jspsych-categorize-audio plugin
+# jspsych-poldrack-categorize-audio plugin
 
 Plugin for playing an audio file, getting a keyboard response, and giving feedback.
 

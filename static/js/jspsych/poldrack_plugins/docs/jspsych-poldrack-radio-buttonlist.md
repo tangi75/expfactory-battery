@@ -1,4 +1,4 @@
-# jspsych-radio-buttonlist plugin
+# jspsych-poldrack-radio-buttonlist plugin
 
 Plugin to display an HTML form with radio buttons. Mostly intended for survey presentations. In many ways an earlier and more primitive version of [jspsych-survey-multi-choice.js](http://docs.jspsych.org/plugins/jspsych-multi-stim-multi-response/)
 

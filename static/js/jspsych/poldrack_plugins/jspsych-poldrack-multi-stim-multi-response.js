@@ -10,7 +10,7 @@
  **/
 
 
-jsPsych.plugins["multi-stim-multi-response"] = (function() {
+jsPsych.plugins["poldrack-multi-stim-multi-response"] = (function() {
 
   var plugin = {};
 

@@ -1,12 +1,11 @@
-
 .multi-parent {
-	position:relative;
-	text-align:center;
+  position:relative;
+  text-align:center;
 }
 
 .centerbox {
   width:35vw;
-  height: 30vw;
+  height: 60vh;
   position:absolute;
   top:50%;
   left:50%;
@@ -14,16 +13,6 @@
   transform: translate(-50%,-50%);
 }
 
-/* Used for positioning nav buttons during instructions */
-
-.jspsych-instructions-nav {
-  width:20vw;
-  height: 20vw;
-  position:absolute;
-  top: 5%;
-  left:10%;
-  margin-right:-50%;
-}
 
 /* Text based classes */
 /* Used for general instructions */
@@ -105,15 +94,26 @@ Sample html: <div class = centerbox><div class = img-container><img...></img></d
 }
 
 body {
-	padding: 0;
-	margin: 0;
-	font-family: Palatino Linotype, Bookman Antiqua, Palatino, serif;
-	font-size: 16px;
-	line-height: 20px;
+  padding: 0;
+  margin: 0;
+  font-family: Palatino Linotype, Bookman Antiqua, Palatino, serif;
+  font-size: 16px;
+  line-height: 20px;
 }
 
+/* Used for positioning nav buttons during instructions */
+/*
+.jspsych-instructions-nav {
+  width:20vw;
+  height: 20vw;
+  position:absolute;
+  top: 5%;
+  left:10%;
+  margin-right:-50%;
+}
+*/
 
-#jspsych-instructions-next, #jspsych-instructions-back,  .default_button {
+.jspsych-instructions-nav button,  .default_button {
   background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #7f9ac9), color-stop(1, #476e9e));
   background:-moz-linear-gradient(top, #7f9ac9 5%, #476e9e 100%);
   background:-webkit-linear-gradient(top, #7f9ac9 5%, #476e9e 100%);
@@ -128,23 +128,22 @@ body {
   cursor:pointer;
   color:#ffffff;
   font-family:Arial;
-  font-size:20px;
+  font-size:24px;
   padding:14px 37px;
   text-decoration:none;
   text-shadow:0px 1px 0px #283966;
 
-	border: 1px solid #999;
-	border-top: 1px solid #e0e0e0;
-	border-left: 1px solid #e0e0e0;
-	margin: 10px;
-	padding-left: 5px;
-	padding-right: 5px;
-	height: 4vw;
-	min-width: 15vw;
-  max-width: 25vw;
+  border: 1px solid #999;
+  border-top: 1px solid #e0e0e0;
+  border-left: 1px solid #e0e0e0;
+  margin: 10px;
+  padding-left: 5px;
+  padding-right: 5px;
+  height: 6vh;
+  width: 200px;
   
 }
-#jspsych-instructions-next:hover, #jspsych-instructions-back:hover, .default_button:hover {
+.jspsych-instructions-nav button:hover, .default_button:hover {
   background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #476e9e), color-stop(1, #7f9ac9));
   background:-moz-linear-gradient(top, #476e9e 5%, #7f9ac9 100%);
   background:-webkit-linear-gradient(top, #476e9e 5%, #7f9ac9 100%);
@@ -155,11 +154,11 @@ body {
   background-color:#476e9e;
 }
 
-#jspsych-instructions-next[disabled], #jspsych-instructions-back[disabled], .default_button[disabled] {
-	border: 1px solid #999;
-	border-top: 1px solid #e0e0e0;
-	border-left: 1px solid #e0e0e0;
-	cursor: not-allowed;
+.jspsych-instructions-nav button[disabled], .default_button[disabled] {
+  border: 1px solid #999;
+  border-top: 1px solid #e0e0e0;
+  border-left: 1px solid #e0e0e0;
+  cursor: not-allowed;
   background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #282828), color-stop(1, #7f9ac9));
   background:-moz-linear-gradient(top, #282828 5%, #7f9ac9 100%);
   background:-webkit-linear-gradient(top, #282828 5%, #7f9ac9 100%);
@@ -170,3 +169,84 @@ body {
   background-color:#282828;
 }
 
+/*
+ *
+ * PLUGIN: jspsych-poldrack-survey-multi-choice
+ *
+ */
+
+.jspsych-poldrack-survey-multi-choice-question {
+  margin-top: 2em;
+  margin-bottom: 2em;
+ }
+
+.jspsych-poldrack-survey-multi-choice-text span.required {
+  color: darkred;
+}
+
+.jspsych-poldrack-survey-multi-choice-horizontal .jspsych-poldrack-survey-multi-choice-text {
+  text-align: left;
+}
+
+.jspsych-poldrack-survey-multi-choice-option {
+  line-height: 2;
+}
+.jspsych-poldrack-survey-multi-choice-horizontal .jspsych-poldrack-survey-multi-choice-option {
+  display: inline-block;
+  margin-left: 1em;
+  margin-right: 1em;
+  vertical-align: top;
+}
+
+label.jspsych-poldrack-survey-multi-choice-text input[type="radio"] {
+  margin-right: 1em;
+}
+
+#jspsych-poldrack-survey-multi-choice-next {
+  display: block;
+  margin: auto;
+}
+
+.jspsych-poldrack-survey-multi-choice-opts {
+  list-style:none;
+  width:100%;
+  margin:0;
+  padding:0 0 35px;
+  display:block;
+  font-size: 13px;
+  line-height:1.1em;
+}
+
+.jspsych-poldrack-survey-multi-choice-opt-label {
+  line-height: 1.1em;
+}
+
+.jspsych-poldrack-survey-multi-choice-opts:before {
+  content: '';
+  position:relative;
+  top:11px;
+  /*left:9.5%;*/
+  display:block;
+  /*background-color:#efefef*/;
+  height:4px;
+  width:100%;
+}
+
+.jspsych-poldrack-survey-multi-choice-opts:last-of-type {
+  border-bottom: 0;
+}
+
+.jspsych-poldrack-survey-multi-choice-opts li {
+  display:inline-block;
+  /*width:19%;*/
+  text-align:center;
+  vertical-align: top;
+}
+
+.jspsych-poldrack-survey-multi-choice-opts li input[type=radio] {
+  display:block;
+  position:relative;
+  top:0;
+  left:50%;
+  margin-left:-6px;
+}
