@@ -10,13 +10,15 @@
  * - [check] Store each question in separate rows
  * - [check] include numeric codes
  * - [check] scored numeric data
- * - [check]progress bars
+ * - [check] progress bars
  * - [check] response range: 
  * - [check] include question data
+ * - [check] back buttons
  *
  * TODO:
  * fix css to fit all options on one row
- * progress bar
+ *
+ * ADD TO DEFAULT.CSS
  *
  */
 
@@ -81,9 +83,9 @@ jsPsych.plugins['survey-multi-choice'] = (function() {
     }
 
     var trial_form_id = _join(plugin_id_name, "form");
-    display_element.append($('<form>', {
-      "id": trial_form_id
-    }));
+    // display_element.append($('<form>', {
+    //   "id": trial_form_id
+    // }));
     var $trial_form = $("#" + trial_form_id);
 
     function show_current_page() {
@@ -126,24 +128,59 @@ jsPsych.plugins['survey-multi-choice'] = (function() {
       );
 
       // create option radio buttons
-      for (var j = 0; j < trial.options[current_page][i].length; j++) {
+      // for (var j = 0; j < trial.options[current_page][i].length; j++) {
+      //   var option_id_name = _join(plugin_id_name, "option", i, j),
+      //     option_id_selector = '#' + option_id_name;
+
+      //   // add radio button container
+      //   $(question_selector).append($('<div>', {
+      //     "id": option_id_name,
+      //     "class": _join(plugin_id_name, 'option')
+      //   }));
+
+      //   // add label and question text
+      //   var option_label = '<label class="' + plugin_id_name + '-text">' + trial.options[current_page][i][j] + '</label>';
+      //   $(option_id_selector).append(option_label);
+
+      //   // create radio button
+      //   var input_id_name = _join(plugin_id_name, 'response', i);
+      //   $(option_id_selector + " label").prepend('<input type="radio" name="' + input_id_name + '" value="' + trial.options[current_page][i][j] + '">');
+      // }
+////////////      
+        //instead of adding a separate div for each radio button add an unordered list (ul) with list items (li) spread on page width
+        
+        //append ul containing all the response options for the question
+        options_string = '<ul class="'+_join(plugin_id_name, 'opts')+'">'
+        for (var j = 0; j < trial.options[current_page][i].length; j++) {
         var option_id_name = _join(plugin_id_name, "option", i, j),
           option_id_selector = '#' + option_id_name;
-
-        // add radio button container
-        $(question_selector).append($('<div>', {
-          "id": option_id_name,
-          "class": _join(plugin_id_name, 'option')
-        }));
-
-        // add label and question text
-        var option_label = '<label class="' + plugin_id_name + '-text">' + trial.options[current_page][i][j] + '</label>';
-        $(option_id_selector).append(option_label);
-
-        // create radio button
+        //append li for each option with width divded by number of options
+        //each li contains first the input (on top of the option text)
+        //then the label for the option text
+        var width = 100 / trial.options[current_page][i].length;
         var input_id_name = _join(plugin_id_name, 'response', i);
-        $(option_id_selector + " label").prepend('<input type="radio" name="' + input_id_name + '" value="' + trial.options[current_page][i][j] + '">');
+        options_string += '<li style="width:' + width + '%"><input type="radio" name="' + input_id_name + '" value="' + trial.options[current_page][i][j] + '"><label class="' + plugin_id_name + '-text">' + trial.options[current_page][i][j] + '</label></li>'
       }
+      options_string += '</ul>';
+      $(question_selector).append(options_string);
+
+////////
+    //   display_element.append('<form id="jspsych-survey-likert-form">');
+    // // add likert scale questions
+    // for (var i = 0; i < trial.questions.length; i++) {
+    //   form_element = $('#jspsych-survey-likert-form');
+    //   // add question
+    //   form_element.append('<label class="jspsych-survey-likert-statement">' + trial.questions[i] + '</label>');
+    //   // add options
+    //   var width = 100 / trial.labels[i].length;
+    //   options_string = '<ul class="jspsych-survey-likert-opts" data-radio-group="Q' + i + '">';
+    //   for (var j = 0; j < trial.labels[i].length; j++) {
+    //     options_string += '<li style="width:' + width + '%"><input type="radio" name="Q' + i + '" value="' + j + '"><label class="jspsych-survey-likert-opt-label">' + trial.labels[i][j] + '</label></li>';
+    //   }
+    //   options_string += '</ul>';
+    //   form_element.append(options_string);
+    //}
+////////
 
       if (trial.required && trial.required[current_page][i]) {
         // add "question required" asterisk
@@ -162,12 +199,12 @@ jsPsych.plugins['survey-multi-choice'] = (function() {
         
         // add back button if the current page is not 0 and going back is allowed in the parameters
         if (current_page != 0 && trial.allow_backward) {
-          nav_html += "<button id='jspsych-survey-multi-choice-back' class='jspsych-btn'>&lt; Previous</button>";
+          nav_html += "<div class = 'left'><button id='jspsych-survey-multi-choice-back' class='jspsych-btn'>&lt; Previous</button></div>";
         }
 
         // add forward button
         // nav_html += "<button id='jspsych-survey-multi-choice-next' class='jspsych-btn'>Next &gt;</button></div>"
-        nav_html += "<button id='jspsych-survey-multi-choice-next' class='jspsych-btn'>Next &gt;</button></div>"
+        nav_html += "<div class = 'right'><button id='jspsych-survey-multi-choice-next' class='jspsych-btn'>Next &gt;</button><div></div>"
 
         // add html for button to the page
         display_element.append(nav_html);
@@ -189,7 +226,10 @@ jsPsych.plugins['survey-multi-choice'] = (function() {
 
       }
 
-      var progress_bar = "<br><meter value='"+current_page+"' min='0' max='"+trial.pages.length+"'></meter><br>"
+      // var progress_bar = "<br><meter value='"+current_page+"' min='0' max='"+trial.pages.length+"'></meter><br>"
+      var progress = (current_page/trial.pages.length) * 100
+      var progress_bar = '<div class = "center-content"><progress value="'+progress+'" max="100"><div class = "progress-bar"><span style="width:'+ progress +'%;">Progress: '+progress+'%</span></div></progress></div>'
+
 
       // add html for button to the page
       display_element.append(progress_bar);
@@ -205,36 +245,36 @@ jsPsych.plugins['survey-multi-choice'] = (function() {
       //because the data submit functionality is changed the required property of radio buttons is not working
       //so everytime the next button is clicked make sure that all the required questions on the page are checked
       if(check_required_questions()){
+
+        add_current_page_to_view_history();
+
+        //submit_page_data();
+        //DON'T SUBMIT IT BUT UPDATE THE RESPONSE_DATA ARRAY
+        update_page_data();
+
+        current_page++;
+
+        // if done, finish up...
+        if (current_page >= trial.pages.length) { 
+
+          //submit the data stored in the response_data array
+          submit_page_data();
+
+         //end trial the jspsych way
+          endTrial();
       
-      add_current_page_to_view_history();
+        //otherwise after each page      
+        } else {
 
-      //submit_page_data();
-      //DON'T SUBMIT IT BUT UPDATE THE RESPONSE_DATA ARRAY
-      update_page_data();
+          //clear screen
+          display_element.html('')
 
-      current_page++;
+          //show the current page html
+          show_current_page();
 
-      // if done, finish up...
-      if (current_page >= trial.pages.length) { 
-
-        //submit the data stored in the response_data array
-        submit_page_data();
-
-        //end trial the jspsych way
-        endTrial();
-      
-      //otherwise after each page      
-      } else {
-
-        //clear screen
-        display_element.html('')
-
-        //show the current page html
-        show_current_page();
-
-        //fill the selections if there are any (left over from clicking back)
-        fill_page_selections();
-      }
+          //fill the selections if there are any (left over from clicking back)
+          fill_page_selections();
+        }
       }
       
       else {
@@ -244,8 +284,6 @@ jsPsych.plugins['survey-multi-choice'] = (function() {
         show_current_page();
         fill_page_selections();
       }
-      
-
     }
   
 
@@ -259,9 +297,9 @@ jsPsych.plugins['survey-multi-choice'] = (function() {
           if($("#"+plugin_id_name+"-"+i).find("input:radio:checked").length > 0){
             req_check.push(true)
           }
-        }
-        else {
-          req_check.push(false)
+          else {
+            req_check.push(false)
+          }
         }
       }
 
@@ -272,6 +310,7 @@ jsPsych.plugins['survey-multi-choice'] = (function() {
       else{
         return true
       }
+    
     }
 
 
