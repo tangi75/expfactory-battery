@@ -25,6 +25,7 @@ jsPsych.plugins["poldrack-multi-stim-multi-response"] = (function() {
     for (var j = 0; j < trial.stimuli.length; j++) {
       default_timing_array.push(1000);
     }
+    trial.timing_gap = trial.timing_gap || 0 //gap between stimuli
     trial.timing_stim = trial.timing_stim || default_timing_array;
     trial.timing_response = trial.timing_response || -1; // if -1, then wait for response forever
     // optional parameters
@@ -80,11 +81,29 @@ jsPsych.plugins["poldrack-multi-stim-multi-response"] = (function() {
       // kill keyboard listeners
       jsPsych.pluginAPI.cancelKeyboardResponse(keyboardListener);
 
+      if (trial.response_ends_trial) {
+        //If all responses are valid, add up the rt's and the gaps between them to determine block duration
+        if (checkAllResponsesAreValid()) {
+          var overall_time = 0
+          for (var i = 0; i < validResponses.length; i++) {
+            overall_time += (responseTimes[i] + trial.timing_gap)
+          overall_time - trial.timing_gap
+        } else {
+          var block_duration = trial.timing_response
+        }
+      } else {
+        var block_duration = trial.timing_response
+      }
+
       // gather the data to store for the trial
       var trial_data = {
         "rt": JSON.stringify(responseTimes),
-        "stimulus": JSON.stringify(trial.stimuli),
-        "key_press": JSON.stringify(responseKeys)
+        "stimuli": JSON.stringify(trial.stimuli),
+        "key_presses": JSON.stringify(responseKeys),
+        "possible_responses": trial.choices,
+        "stim_durations": JSON.stringify(trial.timing_stim),
+        "block_duration": block_duration,
+        "timing_post_trial": trial.timing_post_trial
       };
 
       // clear the display
