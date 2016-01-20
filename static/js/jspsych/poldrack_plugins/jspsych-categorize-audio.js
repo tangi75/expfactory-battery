@@ -36,7 +36,7 @@ jsPsych.plugins["categorize-audio"] = (function() {
 	// timing parameters
 	// trials[i].timing_stim = params.timing_stim || -1; // if -1, then show indefinitely
 	trial.timing_response = trial.timing_response || -1; // if -1, then wait for response forever
-	trial.prompt = (typeof trial.prompt === 'undefined') ? "" : trial.prompt;
+	//trial.prompt = (typeof trial.prompt === 'undefined') ? "" : trial.prompt;
 	trial.timing_feedback_duration = trial.timing_feedback_duration || 2000;
 
     // allow variables as functions
@@ -100,7 +100,8 @@ jsPsych.plugins["categorize-audio"] = (function() {
 		var trial_data = {
 			"rt": info.rt,
 			"correct": correct,
-			"stimulus": trial.a_path,
+			// "stimulus": trial.a_path,
+			"stimulus": trial.audio_path,
 			"key_press": info.key
 			};
 

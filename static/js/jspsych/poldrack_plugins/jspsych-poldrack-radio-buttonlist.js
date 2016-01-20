@@ -3,15 +3,12 @@
  * a jspsych plugin for displaying a form with a list of radio buttons
  *
  * A. Zeynep Enkavi 
-
  NOTE: survey-multi-choice might be a better plugin for most cases. 
  This plugin requires more raw html work when specifying questions
  (thouhg this may cater to more flexible formatting needs).
  Additionally data is saved in rows for each questions minimizing 
  required text parsing later on.
-
- TODO:
- See if there is a way to get rid of data.write in finishTrial
+ 
  */
 
  jsPsych.plugins["poldrack-radio-buttonlist"] = (function() {
