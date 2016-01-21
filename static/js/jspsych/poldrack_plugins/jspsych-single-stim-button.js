@@ -49,11 +49,35 @@ jsPsych.plugins["single-stim-button"] = (function() {
 			clearTimeout(setTimeoutHandlers[i]);
 		}
 
+		//calculate stim and block duration
+        if (trial.response_ends_trial) {
+          if (response.rt != -1) {
+            var block_duration = response.rt
+          } else {
+            var block_duration = trial.timing_response
+          }
+          if (stim_duration < block_duration & stim_duration != -1) {
+            var stim_duration = trial.timing_stim
+          } else {
+            var stim_duration = block_duration
+          }
+        } else {
+          var block_duration = trial.timing_response
+          if (stim_duration < block_duration & stim_duration != -1) {
+            var stim_duration = timing_stim
+          } else {
+            var stim_duration = block_duration
+          }
+        }
+        
 		// gather the data to store for the trial
 		var trial_data = {
 			"rt": response.rt,
 			"stimulus": trial.stimuli,
-			"mouse_click": response.mouse
+			"mouse_click": response.mouse,
+	        "stim_duration": stim_duration,
+	        "block_duration": block_duration,
+	        "timing_post_trial": trial.timing_post_trial
 		};
 
 			//jsPsych.data.write(trial_data);

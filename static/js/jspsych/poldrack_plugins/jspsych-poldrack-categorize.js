@@ -113,6 +113,7 @@ jsPsych.plugins["poldrack-categorize"] = (function() {
         "correct": correct,
         "stimulus": trial.stimulus,
         "key_press": info.key,
+        "correct_response": trial.key_answer,
         "possible_responses": trial.choices,
         "stim_duration": stim_duration,
         "block_duration": block_duration,
