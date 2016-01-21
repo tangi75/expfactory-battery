@@ -1,6 +1,26 @@
-.multi-parent {
-  position:relative;
-  text-align:center;
+
+
+body {
+  padding: 0;
+  margin: 0;
+  font-family: Palatino Linotype, Bookman Antiqua, Palatino, serif;
+  font-size: 16px;
+  line-height: 20px;
+  background-color: #900; /* #F8F8F8 #D0D0D0; */
+}
+
+body:before {
+    content: "";
+    position: fixed;
+    background: #900;
+    left: 5vw;
+    top: 2vh;
+    height: 94vh;
+    width: 90vw;
+    background-color: white;
+    border-radius: 15px;
+    border: 1vh solid #D0D0D0;
+    z-index: -1;
 }
 
 .centerbox {
@@ -93,78 +113,45 @@ Sample html: <div class = centerbox><div class = img-container><img...></img></d
   font-size: 0.8em;
 }
 
-body {
-  padding: 0;
-  margin: 0;
-  font-family: Palatino Linotype, Bookman Antiqua, Palatino, serif;
-  font-size: 16px;
-  line-height: 20px;
-}
 
 /* Used for positioning nav buttons during instructions */
-/*
+
 .jspsych-instructions-nav {
-  width:20vw;
-  height: 20vw;
-  position:absolute;
-  top: 5%;
-  left:10%;
-  margin-right:-50%;
+  text-align: center;
+  margin-top: 100px;
 }
-*/
 
-.jspsych-instructions-nav button,  .default_button {
-  background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #7f9ac9), color-stop(1, #476e9e));
-  background:-moz-linear-gradient(top, #7f9ac9 5%, #476e9e 100%);
-  background:-webkit-linear-gradient(top, #7f9ac9 5%, #476e9e 100%);
-  background:-o-linear-gradient(top, #7f9ac9 5%, #476e9e 100%);
-  background:-ms-linear-gradient(top, #7f9ac9 5%, #476e9e 100%);
-  background:linear-gradient(to bottom, #7f9ac9 5%, #476e9e 100%);
-  filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#7f9ac9', endColorstr='#476e9e',GradientType=0);
-  background-color:#7f9ac9;
-  -moz-border-radius:15px;
-  -webkit-border-radius:151px;
-  border-radius:15px;
-  cursor:pointer;
-  color:#ffffff;
-  font-family:Arial;
+.jspsych-instructions-nav button, .jspsych-btn {
+  background: #ECECEC;
+  border-radius: 15px;
+  padding: 10px 20px;
+  font-weight: bold;
+  color:#7f7f7f;
+  text-decoration: none;
+  text-shadow:0px 1px 0px #fff;
+  border:1px solid #a7a7a7;
+  width: 145px;
+  margin:0px auto;
+  margin-right: 25px;
+  box-shadow: 0px 2px 1px white inset, 0px -2px 8px white, 0px 2px 5px rgba(0, 0, 0, 0.1), 0px 8px 10px rgba(0, 0, 0, 0.1);
+  -webkit-transition:box-shadow 0.5s;
   font-size:24px;
-  padding:14px 37px;
-  text-decoration:none;
-  text-shadow:0px 1px 0px #283966;
-	border: 1px solid #999;
-	border-top: 1px solid #e0e0e0;
-	border-left: 1px solid #e0e0e0;
-	margin: 10px;
-	padding-left: 5px;
-	padding-right: 5px;
-	height: 6vh;
-	width: 200px;
-}
-.jspsych-instructions-nav button:hover, .default_button:hover {
-  background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #476e9e), color-stop(1, #7f9ac9));
-  background:-moz-linear-gradient(top, #476e9e 5%, #7f9ac9 100%);
-  background:-webkit-linear-gradient(top, #476e9e 5%, #7f9ac9 100%);
-  background:-o-linear-gradient(top, #476e9e 5%, #7f9ac9 100%);
-  background:-ms-linear-gradient(top, #476e9e 5%, #7f9ac9 100%);
-  background:linear-gradient(to bottom, #476e9e 5%, #7f9ac9 100%);
-  filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#476e9e', endColorstr='#7f9ac9',GradientType=0);
-  background-color:#476e9e;
+  font-family: 'Helvetica Neue',Arial,sans-serif;
+  height: 6vh;
+  width: 240px;
 }
 
-.jspsych-instructions-nav button[disabled], .default_button[disabled] {
-	border: 1px solid #999;
-	border-top: 1px solid #e0e0e0;
-	border-left: 1px solid #e0e0e0;
-	cursor: not-allowed;
-  background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #282828), color-stop(1, #7f9ac9));
-  background:-moz-linear-gradient(top, #282828 5%, #7f9ac9 100%);
-  background:-webkit-linear-gradient(top, #282828 5%, #7f9ac9 100%);
-  background:-o-linear-gradient(top, #282828 5%, #7f9ac9 100%);
-  background:-ms-linear-gradient(top, #282828 5%, #7f9ac9 100%);
-  background:linear-gradient(to bottom, #282828 5%, #7f9ac9 100%);
-  filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#282828', endColorstr='#7f9ac9',GradientType=0);
-  background-color:#282828;
+
+.jspsych-instructions-nav button:hover, .jspsych-btn:hover {
+  background:-webkit-linear-gradient(top, #d1d1d1 0%,#ECECEC 50%);
+  box-shadow: 0 0 5px rgba(81, 203, 238, 1);
+  border: 2px solid rgba(81, 203, 238, 1);
+  
+}
+
+.jspsych-instructions-nav button:active, .jspsych-btn:active {
+  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.5) inset, 0px -2px 20px white, 0px 1px 5px rgba(0, 0, 0, 0.1), 0px 2px 10px rgba(0, 0, 0, 0.1);
+    background:-webkit-linear-gradient(top, #d1d1d1 0%,#ECECEC 100%);
 }
 
 /*
