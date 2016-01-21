@@ -18,7 +18,7 @@ jsPsych.plugins["categorize-audio"] = (function() {
 
     // set default values for parameters
     //trial.parameter = trial.parameter || 'default value';
-    trial.audio_stim = jsPsych.pluginAPI.loadAudioFile(trial.stimuli);
+    trial.audio_stim = jsPsych.pluginAPI.loadAudioFile(trial.stimulus);
     trial.audio_path = trial.stimuli;
     trial.choices = trial.choices || [];
 	// option to show image for fixed time interval, ignoring key responses
@@ -34,7 +34,7 @@ jsPsych.plugins["categorize-audio"] = (function() {
 	trial.show_feedback_on_timeout = (typeof trial.show_feedback_on_timeout === 'undefined') ? false : trial.show_feedback_on_timeout;
 	trial.timeout_message = trial.timeout_message || "<p>Please respond faster.</p>";
 	// timing parameters
-	// trials[i].timing_stim = params.timing_stim || -1; // if -1, then show indefinitely
+	trial.response_ends_trial = (typeof trial.response_ends_trial == 'undefined') ? true : trial.response_ends_trial;
 	trial.timing_response = trial.timing_response || -1; // if -1, then wait for response forever
 	//trial.prompt = (typeof trial.prompt === 'undefined') ? "" : trial.prompt;
 	trial.timing_feedback_duration = trial.timing_feedback_duration || 2000;
@@ -93,24 +93,48 @@ jsPsych.plugins["categorize-audio"] = (function() {
 		if (trial.key_answer == info.key) {
 			correct = true;
 		}
-		console.log(trial.key_answer)
-		console.log(info.key)
+		
+
+		//calculate stim and block duration
+		if (trial.response_ends_trial) {
+		  if (info.rt != -1) {
+		    var block_duration = info.rt
+		  } else {
+		    var block_duration = trial.timing_response
+		  }
+		} else {
+		  var block_duration = trial.timing_response
+		}
 
 		// save data
 		var trial_data = {
 			"rt": info.rt,
 			"correct": correct,
-			// "stimulus": trial.a_path,
-			"stimulus": trial.audio_path,
-			"key_press": info.key
+			"stimulus": trial.stimulus,
+			"key_press": info.key,
+			"correct_response": trial.key_answer,
+	        "possible_responses": trial.choices,
+	        "block_duration": block_duration,
+	        "feedback_duration": trial.timing_feedback_duration,
+	        "timing_post_trial": trial.timing_post_trial
 			};
 
 		// jsPsych.data.write(trial_data);
 
-		display_element.html('');
+		
+	    var timeout = info.rt == -1;
 
-		var timeout = info.rt == -1;
-		doFeedback(correct, timeout);
+	    // if response ends trial display feedback immediately
+	    if (trial.response_ends_trial || info.rt == -1) {
+	      display_element.html('');
+	      doFeedback(correct, timeout);
+	    // otherwise wait until timing_response is reached
+	    } else {
+	      setTimeout(function() {
+	        display_element.html('');
+	        doFeedback(correct, timeout);
+	      }, trial.timing_response - info.rt);
+	    }
 	};
 
 	jsPsych.pluginAPI.getKeyboardResponse({
