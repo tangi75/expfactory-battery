@@ -23,7 +23,7 @@ jsPsych.plugins['poldrack-survey-multi-choice'] = (function() {
 
   plugin.trial = function(display_element, trial) {
 
-    var plugin_id_name = "poldrack-jspsych-survey-multi-choice";
+    var plugin_id_name = "jspsych-poldrack-survey-multi-choice";
     var plugin_id_selector = '#' + plugin_id_name;
     var _join = function( /*args*/ ) {
       var arr = Array.prototype.slice.call(arguments, _join.length);
