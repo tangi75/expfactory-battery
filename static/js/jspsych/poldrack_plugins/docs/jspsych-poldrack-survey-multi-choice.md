@@ -48,7 +48,7 @@ view_history | js object | the last row of output containing raw js data on orde
 ## Examples
 
 ```javascript
-unction fillArray(value, len) {
+function fillArray(value, len) {
   if (len == 0) return [];
   var a = [value];
   while (a.length * 2 <= len) a = a.concat(a);
@@ -65,7 +65,7 @@ var all_options = [fillArray(opts, 2),fillArray(opts, 3), fillArray(opts, 5)]
 var score_scale = {"Strongly disagree": 1, "Mostly disagree": 2, "Somewhat disagree": 3, "Neither agree or disagree": 4, "Somewhat agree": 5, "Mostly agree": 6, "Strongly agree": 7}
 
 var survey_block = {
-  type: "survey-multi-choice",
+  type: "poldrack-survey-multi-choice",
   horizontal: true,
   preamble: "Answer the questions",
   pages: all_pages,
