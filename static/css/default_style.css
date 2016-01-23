@@ -4,9 +4,9 @@ body {
   padding: 0;
   margin: 0;
   font-family: Palatino Linotype, Bookman Antiqua, Palatino, serif;
-  font-size: 16px;
+  font-size: 20px;
   line-height: 20px;
-  background-color: #900; /* #F8F8F8 #D0D0D0; */
+  background-color: #707070; /* #900 #F8F8F8 #D0D0D0; */
 }
 
 body:before {
@@ -24,7 +24,7 @@ body:before {
 }
 
 .centerbox {
-  width:35vw;
+  width: 50vw;
   height: 60vh;
   position:absolute;
   top:50%;
@@ -42,7 +42,7 @@ body:before {
   text-align: justify;
   margin: 0 auto;
   margin-bottom: 1em;
-  font-size: 20px;
+  font-size: 24px;
   line-height: 120%;
 }
 
@@ -118,7 +118,7 @@ Sample html: <div class = centerbox><div class = img-container><img...></img></d
 
 .jspsych-instructions-nav {
   text-align: center;
-  margin-top: 100px;
+  margin-top: 60px;
 }
 
 .jspsych-instructions-nav button, .jspsych-btn {
@@ -130,9 +130,9 @@ Sample html: <div class = centerbox><div class = img-container><img...></img></d
   text-decoration: none;
   text-shadow:0px 1px 0px #fff;
   border:1px solid #a7a7a7;
-  width: 145px;
   margin:0px auto;
   margin-right: 25px;
+  margin-bottom: 25px;
   box-shadow: 0px 2px 1px white inset, 0px -2px 8px white, 0px 2px 5px rgba(0, 0, 0, 0.1), 0px 8px 10px rgba(0, 0, 0, 0.1);
   -webkit-transition:box-shadow 0.5s;
   font-size:24px;
@@ -145,8 +145,7 @@ Sample html: <div class = centerbox><div class = img-container><img...></img></d
 .jspsych-instructions-nav button:hover, .jspsych-btn:hover {
   background:-webkit-linear-gradient(top, #d1d1d1 0%,#ECECEC 50%);
   box-shadow: 0 0 5px rgba(81, 203, 238, 1);
-  border: 2px solid rgba(81, 203, 238, 1);
-  
+  border: 2px solid rgba(81, 203, 238, 1); 
 }
 
 .jspsych-instructions-nav button:active, .jspsych-btn:active {
