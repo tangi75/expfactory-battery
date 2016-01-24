@@ -69,8 +69,12 @@ var jsPsych = (function() {
     opts = $.extend({}, defaults, options);
 
     // set target
-    DOM_target = opts.display_element;
-
+    if (typeof window[opts.display_element] == 'function') {
+      DOM_target = window[opts.display_element]()
+    } else {
+      DOM_target = opts.display_element;
+    }    
+    
     // add CSS class to DOM_target
     DOM_target.addClass('jspsych-display-element');
 
@@ -237,6 +241,7 @@ var jsPsych = (function() {
         delete node_data.timeline;
         delete node_data.conditional_function;
         delete node_data.loop_function;
+        delete node_data.randomize_order;
 
         // create a TimelineNode for each element in the timeline
         for (var i = 0; i < parameters.timeline.length; i++) {
@@ -505,7 +510,7 @@ var jsPsych = (function() {
       if (keyboardNotAllowed) {
         go();
       } else {
-        DOM_target.append('<div style=""><p>The experiment will launch in fullscreen mode when you click the button below.</p><button id="jspsych-fullscreen-btn" class="jspsych-btn">Launch Experiment</button></div>');
+        DOM_target.append('<div class = jspsych-instructions-nav><p>The experiment will launch in fullscreen mode when you click the button below.</p><button id="jspsych-fullscreen-btn" class="jspsych-btn">Launch Experiment</button></div>');
         $('#jspsych-fullscreen-btn').on('click', function() {
           var element = document.documentElement;
           if (element.requestFullscreen) {
@@ -584,11 +589,6 @@ var jsPsych = (function() {
     var progress = jsPsych.progress();
 
     $('#jspsych-progressbar-inner').css('width', progress.percent_complete + "%");
-  }
-
-  function preloadStimuli() {
-    // for now, this checks if there are any audio stimuli that need to be preloaded
-    // it could be extended to check if there are image files that need to be preloaded
   }
 
   return core;
@@ -1456,23 +1456,13 @@ jsPsych.pluginAPI = (function() {
       return;
     }
 
-    for (var i = 0; i < files.length; i++) {
-      var bufferID = files[i];
-      if (typeof audio_buffers.bufferID !== 'undefined') {
-        n_loaded++;
-        loadfn(n_loaded);
-        if(n_loaded == files.length) {
-          finishfn();
-        }
-      }
-      audio_buffers[bufferID] = 'tmp';
-
+    function load_audio_file(source){
       var request = new XMLHttpRequest();
-      request.open('GET', bufferID, true);
+      request.open('GET', source, true);
       request.responseType = 'arraybuffer';
       request.onload = function() {
         context.decodeAudioData(request.response, function(buffer) {
-          audio_buffers[bufferID] = buffer;
+          audio_buffers[source] = buffer;
           n_loaded++;
           loadfn(n_loaded);
           if(n_loaded == files.length) {
@@ -1483,6 +1473,19 @@ jsPsych.pluginAPI = (function() {
         });
       }
       request.send();
+    }
+
+    for (var i = 0; i < files.length; i++) {
+      var bufferID = files[i];
+      if (typeof audio_buffers[bufferID] !== 'undefined') {
+        n_loaded++;
+        loadfn(n_loaded);
+        if(n_loaded == files.length) {
+          finishfn();
+        }
+      }
+      audio_buffers[bufferID] = 'tmp';
+      load_audio_file(bufferID);
     }
 
   }

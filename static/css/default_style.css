@@ -1,16 +1,24 @@
 
-
 body {
   padding: 0;
   margin: 0;
   font-family: Palatino Linotype, Bookman Antiqua, Palatino, serif;
   font-size: 20px;
   line-height: 20px;
-  background-color: #707070; /* #900 #F8F8F8 #D0D0D0; */
 }
 
-body:before {
-    content: "";
+.jspsych-display-element {
+  margin: 0;
+}
+
+.display_stage_background {
+  height: 100vh;
+  width: 100vw;
+  background-color: #707070;
+  z-index: -1;
+}
+
+.display_stage {
     position: fixed;
     background: #900;
     left: 5vw;
@@ -20,8 +28,9 @@ body:before {
     background-color: white;
     border-radius: 15px;
     border: 1vh solid #D0D0D0;
-    z-index: -1;
+    z-index: 0;
 }
+
 
 .centerbox {
   width: 50vw;
@@ -118,7 +127,9 @@ Sample html: <div class = centerbox><div class = img-container><img...></img></d
 
 .jspsych-instructions-nav {
   text-align: center;
-  margin-top: 60px;
+  margin-top: 0px;
+  position: relative;
+  z-index: 1;
 }
 
 .jspsych-instructions-nav button, .jspsych-btn {
@@ -133,12 +144,11 @@ Sample html: <div class = centerbox><div class = img-container><img...></img></d
   margin:0px auto;
   margin-right: 25px;
   margin-bottom: 25px;
-  box-shadow: 0px 2px 1px white inset, 0px -2px 8px white, 0px 2px 5px rgba(0, 0, 0, 0.1), 0px 8px 10px rgba(0, 0, 0, 0.1);
   -webkit-transition:box-shadow 0.5s;
   font-size:24px;
   font-family: 'Helvetica Neue',Arial,sans-serif;
   height: 6vh;
-  width: 240px;
+  width: 260px;
 }
 
 
