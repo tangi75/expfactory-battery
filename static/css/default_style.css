@@ -19,16 +19,16 @@ body {
 }
 
 .display_stage {
-    position: fixed;
-    background: #900;
-    left: 5vw;
-    top: 2vh;
-    height: 94vh;
-    width: 90vw;
-    background-color: white;
-    border-radius: 15px;
-    border: 1vh solid #D0D0D0;
-    z-index: 0;
+  position: fixed;
+  background: #900;
+  left: 5vw;
+  top: 2vh;
+  height: 94vh;
+  width: 90vw;
+  background-color: white;
+  border-radius: 15px;
+  border: 1vh solid #D0D0D0;
+  z-index: 0;
 }
 
 
@@ -87,9 +87,9 @@ body {
   text-align: center;
   font-size: 150px;
   position: relative;
-    top: 50%; 
-    transform: translateY(-50%);
-    -webkit-transform: translateY(-50%);
+  top: 50%; 
+  transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
 }
 
 
@@ -98,22 +98,18 @@ body {
   font-size: 20px;
 }
 
-
-
-
-
 /* flex box used to vertically and horizontally center an img.
 Sample html: <div class = centerbox><div class = img-container><img...></img></div></div>
 */
 .img-container {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    display: flex;
-    justify-content: center; /* align horizontal */
-    align-items: center; /* align vertical */
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center; /* align horizontal */
+  align-items: center; /* align vertical */
 }
 
 #legal {
@@ -160,7 +156,7 @@ Sample html: <div class = centerbox><div class = img-container><img...></img></d
 
 .jspsych-instructions-nav button:active, .jspsych-btn:active {
   box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.5) inset, 0px -2px 20px white, 0px 1px 5px rgba(0, 0, 0, 0.1), 0px 2px 10px rgba(0, 0, 0, 0.1);
-    background:-webkit-linear-gradient(top, #d1d1d1 0%,#ECECEC 100%);
+  background:-webkit-linear-gradient(top, #d1d1d1 0%,#ECECEC 100%);
 }
 
 /*
@@ -169,10 +165,10 @@ Sample html: <div class = centerbox><div class = img-container><img...></img></d
  *
  */
 
-.jspsych-poldrack-survey-multi-choice-question {
+ .jspsych-poldrack-survey-multi-choice-question {
   margin-top: 2em;
   margin-bottom: 2em;
- }
+}
 
 .jspsych-poldrack-survey-multi-choice-text span.required {
   color: darkred;
@@ -243,4 +239,30 @@ label.jspsych-poldrack-survey-multi-choice-text input[type="radio"] {
   top:0;
   left:50%;
   margin-left:-6px;
+}
+
+/*
+ *
+ * PLUGIN: jspsych-attention-check
+ *
+ */
+
+ #jspsych-attention-check-stimulus {
+  width: 50vw;
+  height: 60vh;
+  position:absolute;
+  top:50%;
+  left:50%;
+  margin-right:-50%;
+  transform: translate(-50%,-50%);
+}
+
+.jspsych-attention-check-stimulus > p {
+  width:100%;
+  height 100vw;
+  text-align: justify;
+  margin: 0 auto;
+  margin-bottom: 1em;
+  font-size: 24px;
+  line-height: 120%;
 }
