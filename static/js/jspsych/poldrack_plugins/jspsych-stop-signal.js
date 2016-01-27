@@ -98,6 +98,7 @@ jsPsych.plugins["stop-signal"] = (function() {
 	        
 			// gather the data to store for the trial
 			var trial_data = {
+				"stimulus": trial.stimulus,
 				"rt": response.rt,
 				"SS_stimulus": trial.SS_stimulus,
 				"key_press": response.key,
@@ -109,13 +110,11 @@ jsPsych.plugins["stop-signal"] = (function() {
 		        "timing_post_trial": trial.timing_post_trial
 			};
 
-			jsPsych.data.write(trial_data);
-
 			// clear the display
 			display_element.html('');
 
 			// move on to the next trial
-			jsPsych.finishTrial();
+			jsPsych.finishTrial(trial_data);
 		};
 
 		// function to handle responses by the subject
