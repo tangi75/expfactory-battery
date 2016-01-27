@@ -12,7 +12,6 @@
 
  	var questions = [{'Q': 'Press the Left Arrow</p>', 'A': 37},
 				 	{'Q': '<p>Press the Right Arrow</p>', 'A': 39},
-				 	{'Q': "<p>Don't Press Anything", 'A': -1},
 				 	{'Q': '<p>If (4 + 12) / 4 is greater than 3 press the "M" key. Otherwise press the "Z" key.</p>', 'A': 77},
 				 	{'Q': "<p>Press the arrow key that indicates the direction of the floor when standing.</p>", 'A': 34},
 				 	{'Q': '<p>Please read the following paragraph:</p><p>I first met Dean not long after my wife and I split up. I had just gotten over a serious illness that I won’t bother to talk about, except that it had something to do with the miserably weary split-up and my feeling that everything was dead. With the coming of Dean Moriarty began the part of my life you could call my life on the road. Before that I’d often dreamed of going West to see the country, always vaguely planning and never taking off. If you are reading this paragraph, press the F key instead of the M key. Dean is the perfect guy for the road because he actually was born on the road, when his parents were passing through Salt Lake City in 1926, in a jalopy, on their way to Los Angeles. First reports of him came to me through Chad King, who’d shown me a few letters from him written in a New Mexico reform school. I was tremendously interested in the letters because they so naively and sweetly asked Chad to teach him all about Nietzsche and all the wonderful intellectual things that Chad knew. At one point Carlo and I talked about the letters and wondered if we would ever meet the strange Dean Moriarty. This is all far back, when Dean was not the way he is today, when he was a young jailkid shrouded in mystery. Then news came that Dean was out of reform school and was coming to New York for the first time; also there was talk that he had just married a girl called Marylou. --On the Road (Jack Kerouac)</p><p>Press the "M" key.', 'A': 70},
@@ -32,7 +31,6 @@
 
     // set default values for the parameters
     var default_question = questions.pop()
-    console.log(questions.length)
     trial.question = trial.question || default_question['Q']
     trial.key_answer = trial.key_answer || default_question['A']
     trial.choices = trial.choices || [];
