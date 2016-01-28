@@ -16,6 +16,7 @@ This table lists the parameters associated with this plugin. Parameters with a d
 
 Parameter | Type | Default Value | Description
 ----------|------|---------------|------------
+exp_id | string | "" | Name of survey that will be included in output for `exp_id`
 preamble | string | "" | Text to show above each page.
 required | array  | null | Should have same dimensions as pages. Values should be booleans indicating whether question is mandatory.
 horizontal | boolean | false | Should response options be displayed horizontally on a single line.

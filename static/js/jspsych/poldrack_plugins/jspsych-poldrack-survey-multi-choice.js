@@ -31,6 +31,7 @@ jsPsych.plugins['poldrack-survey-multi-choice'] = (function() {
     }
 
     // trial defaults
+    trial.exp_id = typeof trial.exp_id == 'undefined' ? "" : trial.exp_id;
     trial.preamble = typeof trial.preamble == 'undefined' ? "" : trial.preamble;
     trial.required = typeof trial.required == 'undefined' ? null : trial.required; // should have same dims as trial.pages
     trial.horizontal = typeof trial.horizontal == 'undefined' ? false : trial.horizontal;
@@ -130,10 +131,20 @@ jsPsych.plugins['poldrack-survey-multi-choice'] = (function() {
         //then the label for the option text
         var width = 100 / trial.options[current_page][i].length;
         var input_id_name = _join(plugin_id_name, 'response', i);
-        options_string += '<li style="width:' + width + '%"><input type="radio" name="' + input_id_name + '" value="' + trial.options[current_page][i][j] + '"><label class="' + plugin_id_name + '-text">' + trial.options[current_page][i][j] + '</label></li>'
+        // options_string += '<li style="width:' + width + '%"><input type="radio" name="' + input_id_name + '" value="' + trial.options[current_page][i][j] + '"><label class="' + plugin_id_name + '-text">' + trial.options[current_page][i][j] + '</label></li>'
+        options_string += '<li><input type="radio" name="' + input_id_name + '" value="' + trial.options[current_page][i][j] + '"><label class="' + plugin_id_name + '-text">' + trial.options[current_page][i][j] + '</label></li>'
       }
       options_string += '</ul>';
+
       $(question_selector).append(options_string);
+
+      //add conditional determining width of list depending on horizontal here?
+      if(trial.horizontal){
+        $('ul li').css({'width' : width + '%'})
+      }
+      else{
+        $('ul li').css({'width': '100%'})
+      }
 
       if (trial.required && trial.required[current_page][i]) {
         // add "question required" asterisk
@@ -291,6 +302,7 @@ jsPsych.plugins['poldrack-survey-multi-choice'] = (function() {
         for (var j = 0; j < trial.pages[i].length; j++){ //j is for each question
           jsPsych.data.write({
             "rt": getPageViewTime(view_history,i),
+            "exp_id": trial.exp_id,
             "qnum": j+1,
             "page_num": i+1,
             "trial_num":getTrialNum(i, j, trial.pages),
