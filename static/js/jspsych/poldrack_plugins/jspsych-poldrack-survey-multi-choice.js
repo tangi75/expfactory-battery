@@ -448,7 +448,8 @@ jsPsych.plugins['poldrack-survey-multi-choice'] = (function() {
       //check if you need to keep this
       var trial_data = {
         "view_history": JSON.stringify(view_history),
-        "rt": (new Date()).getTime() - start_time
+        "rt": (new Date()).getTime() - start_time,
+        "exp_id": trial.exp_id
       };
 
       jsPsych.finishTrial(trial_data);
