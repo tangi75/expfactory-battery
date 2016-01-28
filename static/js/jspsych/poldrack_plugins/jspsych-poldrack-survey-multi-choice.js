@@ -31,7 +31,7 @@ jsPsych.plugins['poldrack-survey-multi-choice'] = (function() {
     }
 
     // trial defaults
-    trial.survey_name = typeof trial.survey_name == 'undefined' ? "" : trial.survey_name;
+    trial.exp_id = typeof trial.exp_id == 'undefined' ? "" : trial.exp_id;
     trial.preamble = typeof trial.preamble == 'undefined' ? "" : trial.preamble;
     trial.required = typeof trial.required == 'undefined' ? null : trial.required; // should have same dims as trial.pages
     trial.horizontal = typeof trial.horizontal == 'undefined' ? false : trial.horizontal;
@@ -302,7 +302,7 @@ jsPsych.plugins['poldrack-survey-multi-choice'] = (function() {
         for (var j = 0; j < trial.pages[i].length; j++){ //j is for each question
           jsPsych.data.write({
             "rt": getPageViewTime(view_history,i),
-            "exp_id": trial.survey_name,
+            "exp_id": trial.exp_id,
             "qnum": j+1,
             "page_num": i+1,
             "trial_num":getTrialNum(i, j, trial.pages),
