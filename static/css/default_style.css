@@ -165,10 +165,10 @@ Sample html: <div class = centerbox><div class = img-container><img...></img></d
  *
  */
 
- .jspsych-poldrack-survey-multi-choice-question {
+.jspsych-poldrack-survey-multi-choice-question {
   margin-top: 2em;
   margin-bottom: 2em;
-}
+ }
 
 .jspsych-poldrack-survey-multi-choice-text span.required {
   color: darkred;
@@ -226,19 +226,40 @@ label.jspsych-poldrack-survey-multi-choice-text input[type="radio"] {
   border-bottom: 0;
 }
 
-.jspsych-poldrack-survey-multi-choice-opts li {
+/*descendants of horizontal are inline-block*/
+.jspsych-poldrack-survey-multi-choice-horizontal .jspsych-poldrack-survey-multi-choice-opts li {
   display:inline-block;
   /*width:19%;*/
   text-align:center;
   vertical-align: top;
 }
 
-.jspsych-poldrack-survey-multi-choice-opts li input[type=radio] {
+/*otherwise they are just block*/
+.jspsych-poldrack-survey-multi-choice-opts li {
+  display:block;
+  /*width:100% !important*/;
+  text-align:left;
+  vertical-align: top;
+  padding: 10px;
+}
+
+
+/*descendants of horizontal are block so they are above the option*/
+.jspsych-poldrack-survey-multi-choice-horizontal .jspsych-poldrack-survey-multi-choice-opts li input[type=radio] {
   display:block;
   position:relative;
   top:0;
   left:50%;
   margin-left:-6px;
+}
+
+/*otherwise they are inline-block so they are next to the option*/
+.jspsych-poldrack-survey-multi-choice-opts li input[type=radio] {
+  display:inline-block;
+  /*position:relative;
+  top:0;
+  left:0;*/
+  margin-right:6px;
 }
 
 /*
