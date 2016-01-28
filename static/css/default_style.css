@@ -232,6 +232,7 @@ label.jspsych-poldrack-survey-multi-choice-text input[type="radio"] {
   /*width:19%;*/
   text-align:center;
   vertical-align: top;
+  padding: 0px;
 }
 
 /*otherwise they are just block*/
