@@ -1,5 +1,5 @@
 /**
- * jspsych-poldrack-survey-multi-choice
+ * jspsych-survey-multi-choice
  * a jspsych plugin for multiple choice survey questions, an enhancement/combination of survey-multi-choice, survey-likert and instructions plugins
  *
  * A. Zeynep Enkavi
@@ -122,29 +122,22 @@ jsPsych.plugins['poldrack-survey-multi-choice'] = (function() {
       //instead of adding a separate div for each radio button add an unordered list (ul) with list items (li) spread on page width
         
       //append ul containing all the response options for the question
-      options_string = '<ul class="'+_join(plugin_id_name, 'opts')+'">'
+      // options_string = '<ul class="'+_join(plugin_id_name, 'opts') +'">'
+      options_string = '<ul class="'+_join(plugin_id_name, 'opts') + '"'+'id = "'+_join(plugin_id_name, "option", i)+'">'
       for (var j = 0; j < trial.options[current_page][i].length; j++) {
         var option_id_name = _join(plugin_id_name, "option", i, j),
         option_id_selector = '#' + option_id_name;
+        // options_string += ' id = "' + option_id_name +'">'
         //append li for each option with width divded by number of options
         //each li contains first the input (on top of the option text)
         //then the label for the option text
-        var width = 100 / trial.options[current_page][i].length;
         var input_id_name = _join(plugin_id_name, 'response', i);
-        // options_string += '<li style="width:' + width + '%"><input type="radio" name="' + input_id_name + '" value="' + trial.options[current_page][i][j] + '"><label class="' + plugin_id_name + '-text">' + trial.options[current_page][i][j] + '</label></li>'
+      
         options_string += '<li><input type="radio" name="' + input_id_name + '" value="' + trial.options[current_page][i][j] + '"><label class="' + plugin_id_name + '-text">' + trial.options[current_page][i][j] + '</label></li>'
       }
       options_string += '</ul>';
-
+      
       $(question_selector).append(options_string);
-
-      //add conditional determining width of list depending on horizontal here?
-      if(trial.horizontal){
-        $('ul li').css({'width' : width + '%'})
-      }
-      else{
-        $('ul li').css({'width': '100%'})
-      }
 
       if (trial.required && trial.required[current_page][i]) {
         // add "question required" asterisk
@@ -154,6 +147,20 @@ jsPsych.plugins['poldrack-survey-multi-choice'] = (function() {
         $(question_selector + " input:radio").prop("required", true);
       }
     }
+
+    //add conditional determining width of list elements depending on horizontal
+      if(trial.horizontal){
+        //for each question - num of q's on each page is trial.pages[current_page].length (number of times outer loop)
+        for (var i = 0; i < trial.pages[current_page].length; i++) {
+        //width = the length of the options array for that question
+          var width = 100 / trial.options[current_page][i].length
+        //selector(ul with id plugin_name+option+i).css({'width' : width + '%'})
+        $('ul#jspsych-poldrack-survey-multi-choice-option-'+i).children().css({'width' : width + '%'})
+        }
+      }
+      else{
+        $('ul li').css({'width': '100%'})
+      }
 
       // ADD PROGRESS BAR
       var progress = (current_page/trial.pages.length) * 100
