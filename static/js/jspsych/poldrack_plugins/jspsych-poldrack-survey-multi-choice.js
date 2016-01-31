@@ -1,5 +1,5 @@
 /**
- * jspsych-poldrack-survey-multi-choice
+ * jspsych-survey-multi-choice
  * a jspsych plugin for multiple choice survey questions, an enhancement/combination of survey-multi-choice, survey-likert and instructions plugins
  *
  * A. Zeynep Enkavi
@@ -31,6 +31,7 @@ jsPsych.plugins['poldrack-survey-multi-choice'] = (function() {
     }
 
     // trial defaults
+    trial.exp_id = typeof trial.exp_id == 'undefined' ? "" : trial.exp_id;
     trial.preamble = typeof trial.preamble == 'undefined' ? "" : trial.preamble;
     trial.required = typeof trial.required == 'undefined' ? null : trial.required; // should have same dims as trial.pages
     trial.horizontal = typeof trial.horizontal == 'undefined' ? false : trial.horizontal;
@@ -121,18 +122,21 @@ jsPsych.plugins['poldrack-survey-multi-choice'] = (function() {
       //instead of adding a separate div for each radio button add an unordered list (ul) with list items (li) spread on page width
         
       //append ul containing all the response options for the question
-      options_string = '<ul class="'+_join(plugin_id_name, 'opts')+'">'
+      // options_string = '<ul class="'+_join(plugin_id_name, 'opts') +'">'
+      options_string = '<ul class="'+_join(plugin_id_name, 'opts') + '"'+'id = "'+_join(plugin_id_name, "option", i)+'">'
       for (var j = 0; j < trial.options[current_page][i].length; j++) {
         var option_id_name = _join(plugin_id_name, "option", i, j),
         option_id_selector = '#' + option_id_name;
+        // options_string += ' id = "' + option_id_name +'">'
         //append li for each option with width divded by number of options
         //each li contains first the input (on top of the option text)
         //then the label for the option text
-        var width = 100 / trial.options[current_page][i].length;
         var input_id_name = _join(plugin_id_name, 'response', i);
-        options_string += '<li style="width:' + width + '%"><input type="radio" name="' + input_id_name + '" value="' + trial.options[current_page][i][j] + '"><label class="' + plugin_id_name + '-text">' + trial.options[current_page][i][j] + '</label></li>'
+      
+        options_string += '<li><input type="radio" name="' + input_id_name + '" value="' + trial.options[current_page][i][j] + '"><label class="' + plugin_id_name + '-text">' + trial.options[current_page][i][j] + '</label></li>'
       }
       options_string += '</ul>';
+      
       $(question_selector).append(options_string);
 
       if (trial.required && trial.required[current_page][i]) {
@@ -143,6 +147,20 @@ jsPsych.plugins['poldrack-survey-multi-choice'] = (function() {
         $(question_selector + " input:radio").prop("required", true);
       }
     }
+
+    //add conditional determining width of list elements depending on horizontal
+      if(trial.horizontal){
+        //for each question - num of q's on each page is trial.pages[current_page].length (number of times outer loop)
+        for (var i = 0; i < trial.pages[current_page].length; i++) {
+        //width = the length of the options array for that question
+          var width = 100 / trial.options[current_page][i].length
+        //selector(ul with id plugin_name+option+i).css({'width' : width + '%'})
+        $('ul#jspsych-poldrack-survey-multi-choice-option-'+i).children().css({'width' : width + '%'})
+        }
+      }
+      else{
+        $('ul li').css({'width': '100%'})
+      }
 
       // ADD PROGRESS BAR
       var progress = (current_page/trial.pages.length) * 100
@@ -291,6 +309,7 @@ jsPsych.plugins['poldrack-survey-multi-choice'] = (function() {
         for (var j = 0; j < trial.pages[i].length; j++){ //j is for each question
           jsPsych.data.write({
             "rt": getPageViewTime(view_history,i),
+            "exp_id": trial.exp_id,
             "qnum": j+1,
             "page_num": i+1,
             "trial_num":getTrialNum(i, j, trial.pages),
@@ -436,7 +455,8 @@ jsPsych.plugins['poldrack-survey-multi-choice'] = (function() {
       //check if you need to keep this
       var trial_data = {
         "view_history": JSON.stringify(view_history),
-        "rt": (new Date()).getTime() - start_time
+        "rt": (new Date()).getTime() - start_time,
+        "exp_id": trial.exp_id
       };
 
       jsPsych.finishTrial(trial_data);
