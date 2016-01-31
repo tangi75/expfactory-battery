@@ -87,24 +87,15 @@ jsPsych.plugins["poldrack-categorize"] = (function() {
       }
 
       //calculate stim and block duration
-      if (trial.response_ends_trial) {
-        if (info.rt != -1) {
-          var block_duration = info.rt
-        } else {
-          var block_duration = trial.timing_response
-        }
-        if (stim_duration < block_duration & stim_duration != -1) {
-          var stim_duration = trial.timing_stim
-        } else {
-          var stim_duration = block_duration
-        }
+      var stim_duration = trial.timing_stim
+      var block_duration = trial.timing_response
+      if (trial.response_ends_trial & info.rt != -1) {
+          block_duration = info.rt
+      }
+      if (stim_duration != -1) {
+        stim_duration = Math.min(block_duration,trial.timing_stim)
       } else {
-        var block_duration = trial.timing_response
-        if (stim_duration < block_duration & stim_duration != -1) {
-          var stim_duration = timing_stim
-        } else {
-          var stim_duration = block_duration
-        }
+        stim_duration = block_duration
       }
 
       // save data
