@@ -21,8 +21,8 @@ jsPsych.plugins["stop-signal"] = (function() {
 	    // it with the output of the function
 	    trial = jsPsych.pluginAPI.evaluateFunctionParameters(trial);
 
-		trial.response_ends_trial = (typeof trial.response_ends_trial === 'undefined') ? true : trial.response_ends_trial;
-		trial.SS_stimulus = trial.SS_stimulus;
+	    trial.response_ends_trial = (typeof trial.response_ends_trial === 'undefined') ? true : trial.response_ends_trial;
+	    trial.SS_stimulus = trial.SS_stimulus;
 		trial.SS_trial_type = trial.SS_trial_type // 'stop' or 'go'
 		// timing parameters
 		trial.timing_stim = trial.timing_stim || -1; // if -1, then show indefinitely
@@ -76,26 +76,17 @@ jsPsych.plugins["stop-signal"] = (function() {
 			}
 
 			//calculate stim and block duration
-	        if (trial.response_ends_trial) {
-	          if (response.rt != -1) {
-	            var block_duration = response.rt
-	          } else {
-	            var block_duration = trial.timing_response
-	          }
-	          if (stim_duration < block_duration & stim_duration != -1) {
-	            var stim_duration = trial.timing_stim
-	          } else {
-	            var stim_duration = block_duration
-	          }
-	        } else {
-	          var block_duration = trial.timing_response
-	          if (stim_duration < block_duration & stim_duration != -1) {
-	            var stim_duration = timing_stim
-	          } else {
-	            var stim_duration = block_duration
-	          }
-	        }
-	        
+			var stim_duration = trial.timing_stim
+			var block_duration = trial.timing_response
+			if (trial.response_ends_trial & response.rt != -1) {
+				block_duration = info.rt
+			}
+			if (stim_duration != -1) {
+				stim_duration = Math.min(block_duration,trial.timing_stim)
+			} else {
+				stim_duration = block_duration
+			}
+
 			// gather the data to store for the trial
 			var trial_data = {
 				"stimulus": trial.stimulus,
@@ -104,10 +95,11 @@ jsPsych.plugins["stop-signal"] = (function() {
 				"key_press": response.key,
 				"SS_delay": trial.SSD,
 				"SS_trial_type": trial.SS_trial_type,
-		        "possible_responses": trial.choices,
-		        "stim_duration": stim_duration,
-		        "block_duration": block_duration,
-		        "timing_post_trial": trial.timing_post_trial
+				"possible_responses": trial.choices,
+				"stim_duration": stim_duration,
+				"SS_duration": trial.timing_SS,
+				"block_duration": block_duration,
+				"timing_post_trial": trial.timing_post_trial
 			};
 
 			// clear the display
@@ -155,7 +147,7 @@ jsPsych.plugins["stop-signal"] = (function() {
 
 		// end trial if time limit is set
 		if (trial.timing_response > 0) {
-			var t2 = setTimeout(function() {
+			var t2  = setTimeout(function() {
 				end_trial();
 			}, trial.timing_response);
 			setTimeoutHandlers.push(t2);
@@ -172,7 +164,7 @@ jsPsych.plugins["stop-signal"] = (function() {
 				}, trial.SSD);
 				setTimeoutHandlers.push(t3);
 			}
-		
+
 			// hide SS after a fixed interval (or when stimulus ends)
 			if (trial.timing_SS > 0) {
 				var t4 = setTimeout(function() {
