@@ -32,10 +32,7 @@ jsPsych.plugins["stop-signal"] = (function() {
 		// optional parameters
 		trial.is_html = (typeof trial.is_html === 'undefined') ? false : trial.is_html;
 		trial.prompt = (typeof trial.prompt === 'undefined') ? "" : trial.prompt;
-		// if any trial variables are functions
-		// this evaluates the function and replaces
-		// it with the output of the function
-		trial = jsPsych.pluginAPI.evaluateFunctionParameters(trial);
+
 
 		// this array holds handlers from setTimeout calls
 		// that need to be cleared if the trial ends early
@@ -79,7 +76,7 @@ jsPsych.plugins["stop-signal"] = (function() {
 			var stim_duration = trial.timing_stim
 			var block_duration = trial.timing_response
 			if (trial.response_ends_trial & response.rt != -1) {
-				block_duration = info.rt
+				block_duration = response.rt
 			}
 			if (stim_duration != -1) {
 				stim_duration = Math.min(block_duration,trial.timing_stim)

@@ -76,7 +76,7 @@ jsPsych.plugins["poldrack-single-stim"] = (function() {
       var stim_duration = trial.timing_stim
       var block_duration = trial.timing_response
       if (trial.response_ends_trial & response.rt != -1) {
-          block_duration = info.rt
+          block_duration = response.rt
       }
       if (stim_duration != -1) {
         stim_duration = Math.min(block_duration,trial.timing_stim)
