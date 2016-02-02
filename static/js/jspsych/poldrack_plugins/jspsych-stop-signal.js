@@ -64,7 +64,7 @@ jsPsych.plugins["stop-signal"] = (function() {
 
 			// kill any remaining setTimeout handlers
 			for (var i = 0; i < setTimeoutHandlers.length; i++) {
-				clearTimeout(setTimeoutHandlers);
+				clearTimeout(setTimeoutHandlers[i]);
 			}
 
 			// kill keyboard listeners
