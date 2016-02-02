@@ -1,10 +1,14 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto|Raleway|Roboto+Slab)
+
+html {
+  font-family: sans-serif;
+  font-size: 18px;
+  line-height: 1.6em;
+}
 
 body {
-  padding: 0;
   margin: 0;
-  font-family: Palatino Linotype, Bookman Antiqua, Palatino, serif;
-  font-size: 20px;
-  line-height: 20px;
+  padding: 0;
 }
 
 .jspsych-display-element {
@@ -20,15 +24,15 @@ body {
 
 .display_stage {
   position: fixed;
-  background: #900;
   left: 5vw;
   top: 2vh;
   height: 94vh;
   width: 90vw;
   background-color: white;
+  box-shadow: 1px 1px 1px #999;
   border-radius: 15px;
-  border: 1vh solid #D0D0D0;
   z-index: 0;
+  padding: 30px 30px 30px 50px;
 }
 
 
@@ -119,44 +123,19 @@ Sample html: <div class = centerbox><div class = img-container><img...></img></d
 }
 
 
-/* Used for positioning nav buttons during instructions */
+/* Used for positioning during instructions */
 
 .jspsych-instructions-nav {
   text-align: center;
-  margin-top: 0px;
+  margin-top: 50px;
   position: relative;
   z-index: 1;
 }
 
-.jspsych-instructions-nav button, .jspsych-btn {
-  background: #ECECEC;
-  border-radius: 15px;
-  padding: 10px 20px;
-  font-weight: bold;
-  color:#7f7f7f;
-  text-decoration: none;
-  text-shadow:0px 1px 0px #fff;
-  border:1px solid #a7a7a7;
-  margin:0px auto;
-  margin-right: 25px;
-  margin-bottom: 25px;
-  -webkit-transition:box-shadow 0.5s;
-  font-size:24px;
-  font-family: 'Helvetica Neue',Arial,sans-serif;
-  height: 6vh;
-  width: 260px;
-}
-
-
-.jspsych-instructions-nav button:hover, .jspsych-btn:hover {
-  background:-webkit-linear-gradient(top, #d1d1d1 0%,#ECECEC 50%);
-  box-shadow: 0 0 5px rgba(81, 203, 238, 1);
-  border: 2px solid rgba(81, 203, 238, 1); 
-}
-
-.jspsych-instructions-nav button:active, .jspsych-btn:active {
-  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.5) inset, 0px -2px 20px white, 0px 1px 5px rgba(0, 0, 0, 0.1), 0px 2px 10px rgba(0, 0, 0, 0.1);
-  background:-webkit-linear-gradient(top, #d1d1d1 0%,#ECECEC 100%);
+.jspsych-instructions-nav p {
+  font-family: 'Roboto' serif;
+  font-size: 20px;
+  line-height: 20px;
 }
 
 /*
@@ -263,6 +242,49 @@ label.jspsych-poldrack-survey-multi-choice-text input[type="radio"] {
   margin-right:6px;
 }
 
+/* Buttons */
+.jspsych-btn, #jspsych-instructions-next, #jspsych-instructions-back {
+  font-size:20px;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  padding: 12px 20px 12px 20px;
+  color: white;
+  background-color:cornflowerblue;
+  cursor: pointer;
+  line-height: 1.4;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  background-image: none;
+  border: 1px solid transparent;
+  border-radius: 4px;
+}
+
+#jspsych-instructions-next, #jspsych-instructions-back {
+  padding: 12px 40px 12px 40px;
+}
+
+.jspsych-btn:hover, #jspsych-instructions-next:hover, #jspsych-instructions-back:hover {
+  border-color:#999;
+  background-color: darkblue;
+}
+
+#jspsych-survey-multi-choice-next {
+  padding-bottom: 10px;
+}
+
+/* Inputs and forms */
+
+textarea {
+  height: 28px;
+  border-radius: 5px;
+  margin: 20px 20px 0px 0px;
+}
+
+input[type=radio] {
+    height: 30px;
+    width: 10%;
+}
+
 /*
  *
  * PLUGIN: jspsych-attention-check
@@ -287,4 +309,14 @@ label.jspsych-poldrack-survey-multi-choice-text input[type="radio"] {
   margin-bottom: 1em;
   font-size: 24px;
   line-height: 120%;
+}
+
+/*
+ *
+ * PLUGIN: jspsych-multi-choice-nav
+ *
+ */
+
+.jspsych-survey-multi-choice-nav {
+  padding-top: 20px;
 }
