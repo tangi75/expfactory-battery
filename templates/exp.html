@@ -16,37 +16,17 @@
     </script>
     
     <script src="static/js/jspsych/jspsych.js"></script>
-    <script src="static/js/jspsych/plugins/jspsych-text.js"></script>
-    <script src="static/js/jspsych/plugins/jspsych-instructions.js"></script>
-    <script src="static/js/jspsych/plugins/jspsych-single-stim.js"></script>
-    <script src="static/js/jspsych/plugins/jspsych-categorize.js"></script>
-    <script src="static/js/jspsych/custom_plugins/jspsych-consent.js"></script>
-    <script src="static/js/jspsych/plugins/jspsych-survey-text.js"></script>
-    <script src="static/js/jspsych/custom_plugins/jspsych-stim-feedback-IE.js"></script>
     <script src="static/js/load_experiments.js" type="text/javascript"></script>
-    <script src="/static/js/psiturk.js" type="text/javascript"></script>	
-    <link href="static/css/jspsych.css" rel="stylesheet" type="text/css"></link>
-    <link href="static/css/default_style.css" rel="stylesheet" type="text/css"></link>
 	
   </head>
   <body>
 	  
 	  <script> 
-	    var psiturk = new PsiTurk(uniqueId, adServerLoc, mode);
-	    
+	    var psiturk = new PsiTurk(uniqueId, adServerLoc, mode);	    
 		var task_list = '<ul list-text>'
 		for (i=0; i<experiment_names.length; i++) {
 			task_list += '<li>' + experiment_names[i] + '</li>'
 		}
-
-
-        var consent_block = {
-          type:'consent',
-          consent_text:'<div class = centerbox><p class = block-text>Welcome to the experiment. Please sign away your brain.</p><br></br>',
-          checkbox_text: 'I agree to participate in this study.',
-          button_text: "Begin experiment!",
-          timing_post_trial: 0
-        };
       
 		
 		var task_list_block = {
@@ -57,22 +37,23 @@
 				
 		var experiments = []
 		experiments.push(task_list_block)
-        experiments.push(consent_block);
-		<!-- concatenate on the experimental blocks defined for each of the constituent experiments -->
+
+		// concatenate on the experimental blocks defined for each of the constituent experiments
 		cat_experiments(experiments)
 
-		<!-- start the experiment -->
+		// start the experiment -->
 		jsPsych.init({
 		    //experiment_structure: experiments,
 		    timeline: experiments,
-        on_finish: function() {
-                psiturk.saveData({
-                    success: function() { psiturk.completeHIT(); }
-                });
-            },
-            on_data_update: function(data) {
-                psiturk.recordTrialData(data);
-            }
+            
+                    on_finish: function() {
+                        psiturk.saveData({
+                        success: function() { psiturk.completeHIT(); }
+                    });
+                },
+                    on_data_update: function(data) {
+                        psiturk.recordTrialData(data);
+                     }
 		});
 		
 	  </script>
