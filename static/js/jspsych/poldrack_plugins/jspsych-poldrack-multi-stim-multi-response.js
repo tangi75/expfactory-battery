@@ -87,6 +87,7 @@ jsPsych.plugins["poldrack-multi-stim-multi-response"] = (function() {
           var overall_time = 0
           for (var i = 0; i < validResponses.length; i++) {
             overall_time += (responseTimes[i] + trial.timing_gap)
+          }
           overall_time - trial.timing_gap
         } else {
           var block_duration = trial.timing_response
