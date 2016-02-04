@@ -31,12 +31,6 @@ var experimentDraw = function(lst, time) {
 experiment_list = [SUB_EXPERIMENTTIMES_SUB]						
 experiment_names = experimentDraw(experiment_list)
 
-/* One the experiments are selected, load the appropriate files */
-for (i = 0; i < experiment_names.length; i++) {
-	switch (experiment_names[i]) {
-        [SUB_EXPERIMENTLOAD_SUB]
-	}
-}
 
 /* takes an experiment array and concatenates it with the array of each experiment \
 identified in 'experiment_names' */
