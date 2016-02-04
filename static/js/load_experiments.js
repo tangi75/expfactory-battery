@@ -3,19 +3,10 @@ function loadjscssfile(filename, filetype){
 		document.write('<script src =' + filename + '></script>')
 	}
 	else if (filetype = "css") {
-		document.write('<link href =' + filename + ' rel="stylesheet" type="text/css"></script>')
+		document.write('<link href =' + filename + ' rel="stylesheet" type="text/css">')
 	}
 }
 
-var randomDraw = function(lst,n) {
-	n = n || "1"
-	var random_list = []
-	for (i=0; i<n; i++) {
-		index = Math.floor(Math.random()*lst.length)
-		random_list.push(lst[index])
-	}
-    return random_list
-}
 
 /* Draws experiments randomly to fill up a certain amount of time. 
 Completely avoids any knapsack type optimization and just stops 
@@ -36,10 +27,6 @@ var experimentDraw = function(lst, time) {
     return return_list
 }
 
-/* Define some function to select experiments to show. Right now I am hard coding,
-but eventually they should be selected by some function (I.E. random new combinations
-for a returning subject, keeping the total time under 30 minutes)
-*/ 
 // full list of experiment names:
 experiment_list = [SUB_EXPERIMENTTIMES_SUB]						
 experiment_names = experimentDraw(experiment_list)
