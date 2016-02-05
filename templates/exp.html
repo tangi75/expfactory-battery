@@ -1,6 +1,6 @@
 <html>
   <head>
-    <title>My experiment</title>
+    <title>My Experiment</title>
     <script src="static/lib/jquery-min.js" type="text/javascript"> </script>
     <script src="static/lib/underscore-min.js" type="text/javascript"> </script>
     <script src="static/lib/backbone-min.js" type="text/javascript"> </script>
@@ -14,16 +14,18 @@
         var condition = "{{ condition }}";
         var counterbalance = "{{ counterbalance }}";
     </script>
-    
-    <script src="static/js/jspsych/jspsych.js"></script>
+
+    [SUB_EXPERIMENTSTATIC_SUB]    
     <script src="static/js/load_experiments.js" type="text/javascript"></script>
-    <script src="/static/js/psiturk.js" type="text/javascript"></script>		
+    <script src="static/js/psiturk.js" type="text/javascript"></script>		
+    <link rel='stylesheet' href='static/css/default_style.css' type="text/css">  
   
   </head>
   <body>
 	  
 	  <script> 
-	    var psiturk = new PsiTurk(uniqueId, adServerLoc, mode);	    
+	   
+              var psiturk = new PsiTurk(uniqueId, adServerLoc, mode);	    
 		var task_list = '<ul list-text>'
 		for (i=0; i<experiment_names.length; i++) {
 			task_list += '<li>' + experiment_names[i] + '</li>'
@@ -33,7 +35,7 @@
 		var task_list_block = {
 		  type: 'text',
 		  text: '<div class = centerbox><p class = block-text>In this HIT you will be completing the following tasks: </p>' + task_list + '</ul><p class = block-text>Press <strong>enter</strong> to continue.</p></div>',
-		  cont_key: 13,
+		  cont_key: [13],
 		};
 				
 		var experiments = []
@@ -42,11 +44,15 @@
 		// concatenate on the experimental blocks defined for each of the constituent experiments
 		cat_experiments(experiments)
 
+            $( document ).ready(function() {
+
 		// start the experiment -->
 		jsPsych.init({
-		    //experiment_structure: experiments,
-		    timeline: experiments,
-            
+	
+ 	            timeline: experiments,
+                    display_element: "getDisplayElement",
+                    fullscreen: true,
+
                     on_finish: function() {
                         psiturk.saveData({
                         success: function() { psiturk.completeHIT(); }
@@ -56,7 +62,8 @@
                         psiturk.recordTrialData(data);
                      }
 		});
-		
+
+          });		
 	  </script>
   </body>
 </html>
