@@ -27,7 +27,7 @@ jsPsych.plugins["poldrack-categorize"] = (function() {
     trial.show_feedback_on_timeout = (typeof trial.show_feedback_on_timeout === 'undefined') ? false : trial.show_feedback_on_timeout;
     trial.timeout_message = trial.timeout_message || "<p>Please respond faster.</p>";
     // timing params
-    trial.response_ends_trial = (typeof trial.response_ends_trial == 'undefined') ? true : trial.response_ends_trial;
+    trial.response_ends_trial = (typeof trial.response_ends_trial == 'undefined') ? false : trial.response_ends_trial;
     trial.timing_stim = trial.timing_stim || -1; // default is to show image until response
     trial.timing_response = trial.timing_response || -1; // default is no max response time
     trial.timing_feedback_duration = trial.timing_feedback_duration || 2000;
@@ -73,6 +73,10 @@ jsPsych.plugins["poldrack-categorize"] = (function() {
     // create response function
     var after_response = function(info) {
 
+      // after a valid response, the stimulus will have the CSS class 'responded'
+      // which can be used to provide visual feedback that a response was recorded
+      $("#jspsych-categorize-stimulus").addClass('responded');
+
       // kill any remaining setTimeout handlers
       for (var i = 0; i < setTimeoutHandlers.length; i++) {
         clearTimeout(setTimeoutHandlers[i]);
@@ -80,7 +84,6 @@ jsPsych.plugins["poldrack-categorize"] = (function() {
 
       // clear keyboard listener
       jsPsych.pluginAPI.cancelAllKeyboardResponses();
-
       var correct = false;
       if (trial.key_answer == info.key) {
         correct = true;
