@@ -19,7 +19,7 @@ jsPsych.plugins["single-stim-button"] = (function() {
     // set default values for parameters
  
 	trial.button_class = trial.button_class; //class of button to listen for. All buttons that have this class will advance the trial and be recorded
-	trial.response_ends_trial = (typeof trial.response_ends_trial === 'undefined') ? false : trial.response_ends_trial;
+	trial.response_ends_trial = (typeof trial.response_ends_trial === 'undefined') ? true : trial.response_ends_trial;
 	// timing parameters
 	trial.timing_stim = trial.timing_stim || -1; // if -1, then show indefinitely
 	trial.timing_response = trial.timing_response || -1; // if -1, then wait for response forever
