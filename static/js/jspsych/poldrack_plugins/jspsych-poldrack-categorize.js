@@ -27,7 +27,7 @@ jsPsych.plugins["poldrack-categorize"] = (function() {
     trial.show_feedback_on_timeout = (typeof trial.show_feedback_on_timeout === 'undefined') ? false : trial.show_feedback_on_timeout;
     trial.timeout_message = trial.timeout_message || "<p>Please respond faster.</p>";
     // timing params
-    trial.response_ends_trial = (typeof trial.response_ends_trial == 'undefined') ? true : trial.response_ends_trial;
+    trial.response_ends_trial = (typeof trial.response_ends_trial == 'undefined') ? false : trial.response_ends_trial;
     trial.timing_stim = trial.timing_stim || -1; // default is to show image until response
     trial.timing_response = trial.timing_response || -1; // default is no max response time
     trial.timing_feedback_duration = trial.timing_feedback_duration || 2000;
@@ -45,13 +45,13 @@ jsPsych.plugins["poldrack-categorize"] = (function() {
       // add image to display
       display_element.append($('<img>', {
         "src": trial.stimulus,
-        "class": 'jspsych-categorize-stimulus',
-        "id": 'jspsych-categorize-stimulus'
+        "class": 'jspsych-poldrack-categorize-stimulus',
+        "id": 'jspsych-poldrack-categorize-stimulus'
       }));
     } else {
       display_element.append($('<div>', {
-        "id": 'jspsych-categorize-stimulus',
-        "class": 'jspsych-categorize-stimulus',
+        "id": 'jspsych-poldrack-categorize-stimulus',
+        "class": 'jspsych-poldrack-categorize-stimulus',
         "html": trial.stimulus
       }));
     }
@@ -59,7 +59,7 @@ jsPsych.plugins["poldrack-categorize"] = (function() {
     // hide image after time if the timing parameter is set
     if (trial.timing_stim > 0) {
       setTimeoutHandlers.push(setTimeout(function() {
-        $('#jspsych-categorize-stimulus').css('visibility', 'hidden');
+        $('#jspsych-poldrack-categorize-stimulus').css('visibility', 'hidden');
       }, trial.timing_stim));
     }
 
@@ -72,6 +72,10 @@ jsPsych.plugins["poldrack-categorize"] = (function() {
 
     // create response function
     var after_response = function(info) {
+
+      // after a valid response, the stimulus will have the CSS class 'responded'
+      // which can be used to provide visual feedback that a response was recorded
+      $("#jspsych-poldrack-categorize-stimulus").addClass('responded');
 
       // kill any remaining setTimeout handlers
       for (var i = 0; i < setTimeoutHandlers.length; i++) {
@@ -156,13 +160,13 @@ jsPsych.plugins["poldrack-categorize"] = (function() {
             // add image to display
             display_element.append($('<img>', {
               "src": trial.stimulus,
-              "class": 'jspsych-categorize-stimulus',
-              "id": 'jspsych-categorize-stimulus'
+              "class": 'jspsych-poldrack-categorize-stimulus',
+              "id": 'jspsych-poldrack-categorize-stimulus'
             }));
           } else {
             display_element.append($('<div>', {
-              "id": 'jspsych-categorize-stimulus',
-              "class": 'jspsych-categorize-stimulus',
+              "id": 'jspsych-poldrack-categorize-stimulus',
+              "class": 'jspsych-poldrack-categorize-stimulus',
               "html": trial.stimulus
             }));
           }
