@@ -75,7 +75,11 @@ jsPsych.plugins["poldrack-categorize"] = (function() {
 
       // after a valid response, the stimulus will have the CSS class 'responded'
       // which can be used to provide visual feedback that a response was recorded
+<<<<<<< HEAD
       $("#jspsych-poldrack-categorize-stimulus").addClass('responded');
+=======
+      $("#jspsych-categorize-stimulus").addClass('responded');
+>>>>>>> master
 
       // kill any remaining setTimeout handlers
       for (var i = 0; i < setTimeoutHandlers.length; i++) {
@@ -84,7 +88,6 @@ jsPsych.plugins["poldrack-categorize"] = (function() {
 
       // clear keyboard listener
       jsPsych.pluginAPI.cancelAllKeyboardResponses();
-
       var correct = false;
       if (trial.key_answer == info.key) {
         correct = true;
