@@ -21,7 +21,7 @@ jsPsych.plugins["stop-signal"] = (function() {
 	    // it with the output of the function
 	    trial = jsPsych.pluginAPI.evaluateFunctionParameters(trial);
 
-	    trial.response_ends_trial = (typeof trial.response_ends_trial === 'undefined') ? true : trial.response_ends_trial;
+	    trial.response_ends_trial = (typeof trial.response_ends_trial === 'undefined') ? false : trial.response_ends_trial;
 	    trial.SS_stimulus = trial.SS_stimulus;
 		trial.SS_trial_type = trial.SS_trial_type // 'stop' or 'go'
 		// timing parameters
