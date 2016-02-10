@@ -45,13 +45,13 @@ jsPsych.plugins["poldrack-categorize"] = (function() {
       // add image to display
       display_element.append($('<img>', {
         "src": trial.stimulus,
-        "class": 'jspsych-categorize-stimulus',
-        "id": 'jspsych-categorize-stimulus'
+        "class": 'jspsych-poldrack-categorize-stimulus',
+        "id": 'jspsych-poldrack-categorize-stimulus'
       }));
     } else {
       display_element.append($('<div>', {
-        "id": 'jspsych-categorize-stimulus',
-        "class": 'jspsych-categorize-stimulus',
+        "id": 'jspsych-poldrack-categorize-stimulus',
+        "class": 'jspsych-poldrack-categorize-stimulus',
         "html": trial.stimulus
       }));
     }
@@ -59,7 +59,7 @@ jsPsych.plugins["poldrack-categorize"] = (function() {
     // hide image after time if the timing parameter is set
     if (trial.timing_stim > 0) {
       setTimeoutHandlers.push(setTimeout(function() {
-        $('#jspsych-categorize-stimulus').css('visibility', 'hidden');
+        $('#jspsych-poldrack-categorize-stimulus').css('visibility', 'hidden');
       }, trial.timing_stim));
     }
 
@@ -75,7 +75,11 @@ jsPsych.plugins["poldrack-categorize"] = (function() {
 
       // after a valid response, the stimulus will have the CSS class 'responded'
       // which can be used to provide visual feedback that a response was recorded
+<<<<<<< HEAD
+      $("#jspsych-poldrack-categorize-stimulus").addClass('responded');
+=======
       $("#jspsych-categorize-stimulus").addClass('responded');
+>>>>>>> master
 
       // kill any remaining setTimeout handlers
       for (var i = 0; i < setTimeoutHandlers.length; i++) {
@@ -159,13 +163,13 @@ jsPsych.plugins["poldrack-categorize"] = (function() {
             // add image to display
             display_element.append($('<img>', {
               "src": trial.stimulus,
-              "class": 'jspsych-categorize-stimulus',
-              "id": 'jspsych-categorize-stimulus'
+              "class": 'jspsych-poldrack-categorize-stimulus',
+              "id": 'jspsych-poldrack-categorize-stimulus'
             }));
           } else {
             display_element.append($('<div>', {
-              "id": 'jspsych-categorize-stimulus',
-              "class": 'jspsych-categorize-stimulus',
+              "id": 'jspsych-poldrack-categorize-stimulus',
+              "class": 'jspsych-poldrack-categorize-stimulus',
               "html": trial.stimulus
             }));
           }

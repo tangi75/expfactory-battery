@@ -20,7 +20,8 @@ jsPsych.plugins['poldrack-instructions'] = (function() {
     trial.key_backward = trial.key_backward || 'leftarrow';
     trial.allow_backward = (typeof trial.allow_backward === 'undefined') ? true : trial.allow_backward;
     trial.allow_keys = (typeof trial.allow_keys === 'undefined') ? true : trial.allow_keys;
-    trial.show_clickable_nav = (typeof trial.show_clickable_nav === 'undefined') ? false : trial.show_clickable_nav;
+    trial.show_clickable_nav = (typeof trial.show_clickable_nav === 'undefined') ? false :
+      trial.show_clickable_nav;
 
     // if any trial variables are functions
     // this evaluates the function and replaces
@@ -39,20 +40,28 @@ jsPsych.plugins['poldrack-instructions'] = (function() {
       if (trial.show_clickable_nav) {
 
         var nav_html = "<div class='jspsych-instructions-nav'>";
-        if (current_page == trial.pages.length-1) {
+        if (trial.pages.length == 1) {
           nav_html += "<button id='jspsych-instructions-next'>End Instructions</button>"
         } else {
-          nav_html += "<button id='jspsych-instructions-next'>Next</button>"
+          if (current_page == 0) {
+            nav_html += "<button id='jspsych-instructions-next'>Next</button>"
+          } else if (current_page == trial.pages.length - 1) {
+            if (trial.allow_backward) {
+              nav_html += "<button id='jspsych-instructions-back'>Previous</button>";
+            }
+            nav_html += "<button id='jspsych-instructions-next'>End Instructions</button>"
+          } else {
+            if (trial.allow_backward) {
+              nav_html += "<button id='jspsych-instructions-back'>Previous</button>";
+            }
+            nav_html += "<button id='jspsych-instructions-next'>Next</button>"
+          }
         }
-        if (current_page != 0 && trial.allow_backward) {
-          nav_html += "<button id='jspsych-instructions-back'>Previous</button>";
-        }
-        
         nav_html += "</div>"
 
         // Place nav_html into the container div for the instruction page and display
         if (trial.pages[current_page].slice(-6) == '</div>') {
-          display_element.html(trial.pages[current_page].slice(0,-6) + nav_html + '</div>')
+          display_element.html(trial.pages[current_page].slice(0, -6) + nav_html + '</div>')
         } else {
           display_element.html(trial.pages[current_page] + nav_html + '</div>')
         }
@@ -145,13 +154,15 @@ jsPsych.plugins['poldrack-instructions'] = (function() {
         allow_held_key: false
       });
       // check if key is forwards or backwards and update page
-      if (info.key === trial.key_backward || info.key === jsPsych.pluginAPI.convertKeyCharacterToKeyCode(trial.key_backward)) {
+      if (info.key === trial.key_backward || info.key === jsPsych.pluginAPI.convertKeyCharacterToKeyCode(
+          trial.key_backward)) {
         if (current_page !== 0 && trial.allow_backward) {
           back();
         }
       }
 
-      if (info.key === trial.key_forward || info.key === jsPsych.pluginAPI.convertKeyCharacterToKeyCode(trial.key_forward)) {
+      if (info.key === trial.key_forward || info.key === jsPsych.pluginAPI.convertKeyCharacterToKeyCode(
+          trial.key_forward)) {
         next();
       }
 
