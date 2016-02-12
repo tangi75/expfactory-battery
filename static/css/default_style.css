@@ -84,11 +84,6 @@ body {
   transform: translateY(-50%);
 }
 
-/* used when the background is dark */
-.white-text {
-  color: white;
-}
-
 /* fixation should be used like this in: '<div class = centerbox><div class = fixation>+</div></div>'*/
 .fixation {
   text-align: center;
