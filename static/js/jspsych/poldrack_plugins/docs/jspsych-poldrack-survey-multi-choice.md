@@ -24,8 +24,7 @@ pages | array | "" | Array of arrays containing questions. Should include an arr
 show_clickable_nav | boolean | true | Whether to display navigation buttons.
 allow_backward | boolean | true | Whether to allow a back button to navigate to previous pages.
 options | array | NA | Array with an array for each page that contains array with responses for each question (i.e. 3 dim array instead of 2 options\[current_page\]\[current_question\]\[current_option\])
-scale | object | NA | Object containing how any option should be coded numerically
-reverse_score | array | Array of false | Array indicating if a question should be reverse scored. Values should be booleans and the length of the array should be the number of questions.
+scale | array of objects | NA | Array containing objects containing how any option should be coded numerically
 
 ## Data Generated
 
@@ -40,8 +39,7 @@ page_num | numeric | page number question was presented in
 trial_num | numeric | continous trial number variable
 stim_question | text | text of question that participant saw
 stim_response | text | text of response option participant selected
-num_response | numeric | numeric value specified in `scale` parameter for the text option selected
-score_response | numeric | numeric value of scored response
+score_response | numeric | numeric value of scored response as specified in `scale` parameter
 response_range | numeric | range of available responses
 times_viewed | numeric | number of times page was viewed
 view_history | js object | the last row of output containing raw js data on order of page views
@@ -57,24 +55,52 @@ function fillArray(value, len) {
   return a;
 }
 
-var opts = ["Strongly disagree", "Mostly disagree", "Somewhat disagree", "Neither agree or disagree", "Somewhat agree", "Mostly agree", "Strongly agree"]
+var opts = ["Disagree strongly", "Disagree moderately", "Disagree a little",
+  "Neither agree nor disagree", "Agree a little", "Agree moderately", "Agree strongly"
+]
+var scale_reg = {
+  "Disagree strongly": 1,
+  "Disagree moderately": 2,
+  "Disagree a little": 3,
+  "Neither agree nor disagree": 4,
+  "Agree a little": 5,
+  "Agree moderately": 6,
+  "Agree strongly": 7
+}
+var scale_rev = {
+  "Disagree strongly": 7,
+  "Disagree moderately": 6,
+  "Disagree a little": 5,
+  "Neither agree nor disagree": 4,
+  "Agree a little": 3,
+  "Agree moderately": 2,
+  "Agree strongly": 1
+}
 
-var all_pages = [["I control my emotions by changing the way I think about the situation I am in.","When I want to feel less negative emotion, I change the way I am thinking about the situation."],["When I want to feel more positive emotion, I change the way I am thinking about the situation.","When I want to feel more positive emotion (such as joy or amusement), I change what I am thinking about.","When I want to feel less negative emotion (such as sadness or anger), I change what I am thinking about."],["When I am faced with a stressful situation, I make myself think about it in a way that helps me stay calm.","I control my emotions by not expressing them.","When I am feeling negative emotions, I make sure not to express them.","I keep my emotions to myself.","When I am feeling positive emotions, I am careful not to express them."]]
+var all_pages = [
+  ["Extraverted, enthusiastic.", "Critical, quarrelsome.", "Dependable, self-disciplined.",
+    "Anxious, easily upset.", "Open to new experiences, complex.", "Reserved, quiet.",
+    "Sympathetic, warm.", "Disorganized, careless.", "Calm, emotionally stable.",
+    "Conventional, uncreative."
+  ]
+]
 
-var all_options = [fillArray(opts, 2),fillArray(opts, 3), fillArray(opts, 5)]
+var all_options = [fillArray(opts, 10)]
 
-var score_scale = {"Strongly disagree": 1, "Mostly disagree": 2, "Somewhat disagree": 3, "Neither agree or disagree": 4, "Somewhat agree": 5, "Mostly agree": 6, "Strongly agree": 7}
+var score_scale = [
+    [scale_reg, scale_rev, scale_reg, scale_rev, scale_reg, scale_rev, scale_reg, scale_rev, scale_reg, scale_rev]
+  ]
 
 var survey_block = {
   type: "poldrack-survey-multi-choice",
+  exp_id: "ten_item_personality",
   horizontal: true,
-  preamble: "Answer the questions",
+  preamble: '<p><strong>I see myself as:</strong></p>',
   pages: all_pages,
   options: all_options,
   scale: score_scale,
   show_clickable_nav: true,
   allow_backward: true,
-  required: [fillArray(true,2),[false].concat(fillArray(true, 2)),fillArray(true, 5)],
-  reverse_score: [fillArray(true,2),fillArray(false, 3),fillArray(true, 5)],
+  required: [fillArray(true, 10)]
 };
 ```
