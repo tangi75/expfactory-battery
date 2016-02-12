@@ -53,11 +53,6 @@ jsPsych.plugins['poldrack-survey-multi-choice'] = (function() {
       return a;
     }
 
-    var total_qnum = trial.pages.reduce(function(a, b) {return a.concat(b);}, []).length;
-    
-    // reverse_score - Array indicating if question should be reverse scored
-    trial.reverse_score = (typeof trial.reverse_score === 'undefined') ? fillArray(false, total_qnum) : trial.reverse_score;
-
     // if any trial variables are functions
     // this evaluates the function and replaces
     // it with the output of the function
@@ -122,12 +117,12 @@ jsPsych.plugins['poldrack-survey-multi-choice'] = (function() {
       //instead of adding a separate div for each radio button add an unordered list (ul) with list items (li) spread on page width
         
       //append ul containing all the response options for the question
-      // options_string = '<ul class="'+_join(plugin_id_name, 'opts') +'">'
+      
       options_string = '<ul class="'+_join(plugin_id_name, 'opts') + '"'+'id = "'+_join(plugin_id_name, "option", i)+'">'
       for (var j = 0; j < trial.options[current_page][i].length; j++) {
         var option_id_name = _join(plugin_id_name, "option", i, j),
         option_id_selector = '#' + option_id_name;
-        // options_string += ' id = "' + option_id_name +'">'
+        
         //append li for each option with width divded by number of options
         //each li contains first the input (on top of the option text)
         //then the label for the option text
@@ -181,7 +176,7 @@ jsPsych.plugins['poldrack-survey-multi-choice'] = (function() {
         }
 
         // add forward button
-        // nav_html += "<button id='jspsych-survey-multi-choice-next' class='jspsych-btn'>Next &gt;</button></div>"
+        
         nav_html += "<div class = 'right'><button id='jspsych-survey-multi-choice-next' class='jspsych-btn'>Next &gt;</button><div></div>"
 
         // add html for button to the page
@@ -315,8 +310,7 @@ jsPsych.plugins['poldrack-survey-multi-choice'] = (function() {
             "trial_num":getTrialNum(i, j, trial.pages),
             "stim_question": trial.pages[i][j],
             "stim_response": response_data[i][j],
-            "num_response": getNumResponse(response_data[i][j], trial.scale),
-            "score_response": getScoreResponse(response_data[i][j], trial.scale, trial.reverse_score[i][j], trial.options[i][j]),
+            "score_response": trial.scale[i][j][response_data[i][j]],
             "response_range": getRange(trial.options[i][j]),
             "times_viewed": getTimesViewed(view_history,i)
           })
@@ -331,7 +325,7 @@ jsPsych.plugins['poldrack-survey-multi-choice'] = (function() {
       var page_lengths = pages_array.map(function(array){
         return array.length;
       });
-      //trial_num = sum(page_lengths[0:current_page]) + current_qnum
+      
       tmp = 0;
       for (var i = 0; i < current_page; i++){
         tmp += page_lengths[i]
@@ -372,19 +366,6 @@ jsPsych.plugins['poldrack-survey-multi-choice'] = (function() {
     function getRange(question_option_array){
       range = [1, question_option_array.length];
       return range
-    }
-
-    function getNumResponse(text_response, scale){
-      return scale[text_response]
-    }
-
-    function getScoreResponse(text_response, scale, reverse_score_array_value, option_array){
-      var num_response = getNumResponse(text_response, scale)
-      if (reverse_score_array_value){
-        score_response = (option_array.length + 1) - num_response;
-        return score_response;
-      }
-      return num_response
     }
 
     function back() {
@@ -447,8 +428,6 @@ jsPsych.plugins['poldrack-survey-multi-choice'] = (function() {
     }
 
     function endTrial() {
-
-      //submit_page_data();
 
       display_element.html('');
 
