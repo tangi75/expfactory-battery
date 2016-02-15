@@ -11,6 +11,10 @@ body {
   padding: 0;
 }
 
+.consent, .consent > p {
+  color: black;
+}
+
 .jspsych-display-element {
   margin: 0;
 }
@@ -181,7 +185,7 @@ label.jspsych-poldrack-survey-multi-choice-text input[type="radio"] {
   margin:0;
   padding:0 0 35px;
   display:block;
-  font-size: 13px;
+  font-size: 16px;
   line-height:1.1em;
 }
 
