@@ -11,6 +11,10 @@ body {
   padding: 0;
 }
 
+.consent, .consent > p {
+  color: black;
+}
+
 .jspsych-display-element {
   margin: 0;
 }
