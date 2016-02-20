@@ -80,9 +80,6 @@ jsPsych.plugins['poldrack-survey-multi-choice'] = (function() {
       var questions = trial.pages[current_page]
       // ADD ALL THE HTML CODE GENERATION HERE
       
-      // Add top tag to link to when clicking next
-      display_element.html("<a id='top'></a>")
-
       // form element
     var trial_form_id = _join(plugin_id_name, "form");
     display_element.append($('<form>', {
@@ -96,8 +93,7 @@ jsPsych.plugins['poldrack-survey-multi-choice'] = (function() {
       "id": preamble_id_name,
       "class": preamble_id_name
     }));
-    // $('#' + preamble_id_name).html(trial.preamble);
-    $('#' + preamble_id_name).append(trial.preamble);
+    $('#' + preamble_id_name).html(trial.preamble);
 
     // add multiple-choice questions
     for (var i = 0; i < trial.pages[current_page].length; i++) {
@@ -180,16 +176,7 @@ jsPsych.plugins['poldrack-survey-multi-choice'] = (function() {
           nav_html += "<div class = 'left'><button id='jspsych-survey-multi-choice-back' class='jspsych-btn'>&lt; Previous</button></div>";
         }
 
-        // add forward button
-        if (current_page+1 >= trial.pages.length){ //if on last page{
-          nav_html += "<div class = 'right'><button id='jspsych-survey-multi-choice-next' class='jspsych-btn'>Next &gt;</button><div></div>" //no scrolling up
-        }
-        else{
-          //if not on last page add href to the nav button to scroll back up on the page 
-        //(the page actually never changes. when you click next you just delete the content save the responses in an array temporarily and insert the new content instead)
-          nav_html += "<div class = 'right'><a href = '#top' style='text-decoration:none'><button id='jspsych-survey-multi-choice-next' class='jspsych-btn'>Next &gt;</button></a><div></div>"
-        }
-        
+        nav_html += "<div class = 'right'><button id='jspsych-survey-multi-choice-next' class='jspsych-btn'>Next &gt;</button><div></div>"
 
         // add html for button to the page
         display_element.append(nav_html);
@@ -251,6 +238,8 @@ jsPsych.plugins['poldrack-survey-multi-choice'] = (function() {
 
           //fill the selections if there are any (left over from clicking back)
           fill_page_selections();
+
+          $(document).scrollTop(0);
         }
       }
       
