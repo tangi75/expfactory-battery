@@ -181,11 +181,15 @@ jsPsych.plugins['poldrack-survey-multi-choice'] = (function() {
         }
 
         // add forward button
-        
-        // nav_html += "<div class = 'right'><button id='jspsych-survey-multi-choice-next' class='jspsych-btn'>Next &gt;</button><div></div>"
-        //add href to the nav button to scroll back up on the page 
+        if (current_page+1 >= trial.pages.length){ //if on last page{
+          nav_html += "<div class = 'right'><button id='jspsych-survey-multi-choice-next' class='jspsych-btn'>Next &gt;</button><div></div>" //no scrolling up
+        }
+        else{
+          //if not on last page add href to the nav button to scroll back up on the page 
         //(the page actually never changes. when you click next you just delete the content save the responses in an array temporarily and insert the new content instead)
-        nav_html += "<div class = 'right'><a href = '#top' style='text-decoration:none'><button id='jspsych-survey-multi-choice-next' class='jspsych-btn'>Next &gt;</button></a><div></div>"
+          nav_html += "<div class = 'right'><a href = '#top' style='text-decoration:none'><button id='jspsych-survey-multi-choice-next' class='jspsych-btn'>Next &gt;</button></a><div></div>"
+        }
+        
 
         // add html for button to the page
         display_element.append(nav_html);
