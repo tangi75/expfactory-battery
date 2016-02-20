@@ -239,7 +239,7 @@ jsPsych.plugins['poldrack-survey-multi-choice'] = (function() {
           //fill the selections if there are any (left over from clicking back)
           fill_page_selections();
 
-          $(document).scrollTop(0);
+          $('#jspsych-poldrack-survey-multi-choice-form').parent().scrollTop(0);
         }
       }
       
