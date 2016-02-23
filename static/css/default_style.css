@@ -229,6 +229,15 @@ label.jspsych-poldrack-survey-multi-choice-text input[type="radio"] {
 
 /*descendants of horizontal are block so they are above the option*/
 .jspsych-poldrack-survey-multi-choice-horizontal .jspsych-poldrack-survey-multi-choice-opts li input[type=radio] {
+    -webkit-appearance: none;
+    height: 1.5em;
+    position: relative;
+    background-color: #276FF4;
+    width: 1.5em;
+    border-radius: 50%;
+    outline: none;
+    font-size: 14px;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
   display:block;
   position:relative;
   top:0;
@@ -236,8 +245,29 @@ label.jspsych-poldrack-survey-multi-choice-text input[type="radio"] {
   margin-left:-6px;
 }
 
+.jspsych-poldrack-survey-multi-choice-horizontal .jspsych-poldrack-survey-multi-choice-opts li input[type=radio]:checked:before {
+    content: '';
+    height: 0.4em;
+    width: 0.4em;
+    background-color: #FFF;
+    position: absolute;
+    border-radius: 50%;
+    top: 0.3em;
+    left: 0.3em;
+}
+
+
 /*otherwise they are inline-block so they are next to the option*/
 .jspsych-poldrack-survey-multi-choice-opts li input[type=radio] {
+    -webkit-appearance: none;
+    height: 1.5em;
+    position: relative;
+    background-color: #276FF4;
+    width: 1.5em;
+    border-radius: 50%;
+    outline: none;
+    font-size: 14px;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
   display:inline-block;
   /*position:relative;
   top:0;
