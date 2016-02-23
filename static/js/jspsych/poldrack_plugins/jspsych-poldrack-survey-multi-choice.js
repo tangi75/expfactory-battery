@@ -79,6 +79,7 @@ jsPsych.plugins['poldrack-survey-multi-choice'] = (function() {
       
       var questions = trial.pages[current_page]
       // ADD ALL THE HTML CODE GENERATION HERE
+      
       // form element
     var trial_form_id = _join(plugin_id_name, "form");
     display_element.append($('<form>', {
@@ -158,7 +159,7 @@ jsPsych.plugins['poldrack-survey-multi-choice'] = (function() {
       }
 
       // ADD PROGRESS BAR
-      var progress = (current_page/trial.pages.length) * 100
+      var progress = ((current_page+1)/trial.pages.length) * 100
       var progress_bar = '<div class = "center-content"><progress value="'+progress+'" max="100"><div class = "progress-bar"><span style="width:'+ progress +'%;">Progress: '+progress+'%</span></div></progress></div>'
 
       // add html for progress bar to the page
@@ -175,8 +176,6 @@ jsPsych.plugins['poldrack-survey-multi-choice'] = (function() {
           nav_html += "<div class = 'left'><button id='jspsych-survey-multi-choice-back' class='jspsych-btn'>&lt; Previous</button></div>";
         }
 
-        // add forward button
-        
         nav_html += "<div class = 'right'><button id='jspsych-survey-multi-choice-next' class='jspsych-btn'>Next &gt;</button><div></div>"
 
         // add html for button to the page
@@ -239,6 +238,8 @@ jsPsych.plugins['poldrack-survey-multi-choice'] = (function() {
 
           //fill the selections if there are any (left over from clicking back)
           fill_page_selections();
+
+          $('#jspsych-poldrack-survey-multi-choice-form').parent().scrollTop(0);
         }
       }
       
