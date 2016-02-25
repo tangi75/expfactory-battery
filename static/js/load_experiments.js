@@ -13,7 +13,7 @@ Completely avoids any knapsack type optimization and just stops
 when it can't find another experiment to add */
 
 var experimentDraw = function(lst, time) {
-	var time = time || "30"
+	var time = time || "[SUB_TOTALTIME_SUB]"
 	var return_list = []
 	var total_time = 0
 	while (total_time < time && lst.length > 0) {
