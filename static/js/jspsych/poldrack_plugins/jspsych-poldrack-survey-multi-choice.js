@@ -115,10 +115,9 @@ jsPsych.plugins['poldrack-survey-multi-choice'] = (function() {
         '<p class="' + plugin_id_name + '-text survey-multi-choice">' + trial.pages[current_page][i] + '</p>'
       );
 
-      //instead of adding a separate div for each radio button add an unordered list (ul) with list items (li) spread on page width
-        
-      //append ul containing all the response options for the question
       
+      //instead of adding a separate div for each radio button add an unordered list (ul) with list items (li) spread on page width
+      //append ul containing all the response options for the question 
       options_string = '<ul class="'+_join(plugin_id_name, 'opts') + '"'+'id = "'+_join(plugin_id_name, "option", i)+'">'
       for (var j = 0; j < trial.options[current_page][i].length; j++) {
         var option_id_name = _join(plugin_id_name, "option", i, j),
@@ -142,6 +141,7 @@ jsPsych.plugins['poldrack-survey-multi-choice'] = (function() {
         // add required property
         $(question_selector + " input:radio").prop("required", true);
       }
+    
     }
 
     //add conditional determining width of list elements depending on horizontal
