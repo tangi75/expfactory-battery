@@ -78,10 +78,11 @@ jsPsych.plugins['poldrack-survey-multi-choice'] = (function() {
     var last_page_update_time = start_time;
 
     //array with arrays for each page to store the responses and lookup at navigation
-    var response_data = []
-    for(var i = 0; i < trial.pages.length; i++) {
-      response_data.push([]);
-    }
+    // var response_data = []
+    // for(var i = 0; i < trial.pages.length; i++) {
+    //   response_data.push([]);
+    // }
+    var response_data = fillInputType([],trial.pages)
 
     var trial_form_id = _join(plugin_id_name, "form");
     var $trial_form = $("#" + trial_form_id);
@@ -216,7 +217,7 @@ jsPsych.plugins['poldrack-survey-multi-choice'] = (function() {
           $(question_selector + " input").prop("required", true);
         }
     
-    //}
+    }
 
     //add conditional determining width of list elements depending on horizontal
         if(trial.horizontal){
@@ -232,7 +233,7 @@ jsPsych.plugins['poldrack-survey-multi-choice'] = (function() {
           $('ul li').css({'width': '100%'})
         }
 
-      }
+      //}
 
         // ADD PROGRESS BAR
         var progress = ((current_page+1)/trial.pages.length) * 100
@@ -333,11 +334,38 @@ jsPsych.plugins['poldrack-survey-multi-choice'] = (function() {
       var req_check = []
 
       for (var i = 0; i < trial.pages[current_page].length; i++){
-        //if you haven't checked a questions && that is required
-        if($("#"+plugin_id_name+"-"+i).find("input:radio")[0].required){
+        //if the question is required
+        if($("#"+plugin_id_name+"-"+i).find("input")[0].required){
+
+        //RADIO BUTTON DATA
+        if(trial.input_type[current_page][i] == 'radio'){
           if($("#"+plugin_id_name+"-"+i).find("input:radio:checked").length > 0){
             req_check.push(true)
-          }
+        }
+      }
+
+        //TEXT DATA
+        if(trial.input_type[current_page][i] == 'text'){
+          if($("#"+plugin_id_name+"-"+i).find("input:text").val().length > 0){
+            req_check.push(true)
+        }
+      }
+
+        //NUMBER DATA
+        if(trial.input_type[current_page][i] == 'number'){
+          if($("#"+plugin_id_name+"-"+i).find("input").val().length > 0){
+            req_check.push(true)
+        }
+      }
+
+        //CHECKBOX DATA
+        if(trial.input_type[current_page][i] == 'checkbox'){
+          if($("#"+plugin_id_name+"-"+i).find("input:checkbox:checked").length > 0){
+            req_check.push(true)
+        }
+      }
+
+
           else {
             req_check.push(false)
           }
@@ -356,19 +384,36 @@ jsPsych.plugins['poldrack-survey-multi-choice'] = (function() {
 
 
     function update_page_data(){
-      if (getTimesViewed(view_history, current_page) > 0){
-        //REPLACE THE CURRENT RESPONSES  IN RESPONSE_DATA INSTEAD OF PUSHING
-        for (var i = 0; i < trial.pages[current_page].length; i++){
-          response_data[current_page][i] = $("#"+plugin_id_name+"-"+i).find("input:radio:checked").val();
-        }
-      }
+      
+      //loop through all responses on page and update response_data array accordingly
+      for (var i = 0; i<trial.pages[current_page].length; i++){
+        
+        var option_selector = _join(plugin_id_name, "option", i)
 
-      else {
-      //push to array with all responses
-        $("div." + plugin_id_name + "-question").each(function(index) {
-          var val = $(this).find("input:radio:checked").val();
-          response_data[current_page].push(val);
-        });
+        //RADIO BUTTON DATA
+        if(trial.input_type[current_page][i] == 'radio'){
+          response_data[current_page][i] = $('#'+option_selector).find('input:radio:checked').val()
+        }
+
+        //TEXT DATA
+        if(trial.input_type[current_page][i] == 'text'){
+          response_data[current_page][i] = $('#'+option_selector).find('input:text').val()
+        }
+
+        //NUMBER DATA
+        if(trial.input_type[current_page][i] == 'number'){
+          response_data[current_page][i] = $('#'+option_selector).find('input').val()
+        }
+
+        //CHECKBOX DATA
+        if(trial.input_type[current_page][i] == 'checkbox'){
+          var tmp = []
+          $('#'+option_selector).find('input:checked').each(function(){
+            tmp.push($(this).val())
+          });
+          response_data[current_page][i] = tmp.join()
+        }
+
       }
     }
 
@@ -386,7 +431,7 @@ jsPsych.plugins['poldrack-survey-multi-choice'] = (function() {
             "trial_num":getTrialNum(i, j, trial.pages),
             "stim_question": trial.pages[i][j],
             "stim_response": response_data[i][j],
-            "score_response": trial.scale[i][j][response_data[i][j]],
+            "score_response": typeof trial.scale[i][j][response_data[i][j]] == 'undefined' ? "NA" : trial.scale[i][j][response_data[i][j]],
             "response_range": getRange(trial.options[i][j]),
             "times_viewed": getTimesViewed(view_history,i)
           })
@@ -465,27 +510,36 @@ jsPsych.plugins['poldrack-survey-multi-choice'] = (function() {
     }
 
     function fill_page_selections(){
-      // get the names of all the options in each question block (option names for each block is the same so the participant can only select one option)
-      var option_names = [];
-      $("div." + plugin_id_name + "-question").each(function(index) {
-        if (option_names.indexOf($(this).find("input:radio").attr("name")) < 0) {
-            option_names.push($(this).find("input:radio").attr("name"));
-        }
-    });
-
-      //each option name ends with a number indicating the question number. split the texts to get the question number index to use in the loop
-      option_numbers = option_names.map(function(str){
-        tmp = str.split("-")
-        return parseInt(tmp[tmp.length - 1])
-      })
-
-      //loop through each question number, 
-      for (var i = 0; i < option_numbers.length; i++){
-        var current_qnum = option_numbers[i]
+      
+      //loop through all responses on page and update response_data array accordingly
+      for (var i = 0; i<trial.pages[current_page].length; i++){
+        
+        var option_selector = _join(plugin_id_name, "option", i)
         //get the previously selected value for that question stored in response_data
-        var val = response_data[current_page][current_qnum]
-        //check the option for each question with the matching value
-        $("#"+plugin_id_name+"-"+current_qnum).find("input:radio[value='" + val + "']").prop("checked", true) 
+        var val = response_data[current_page][i]
+
+        //RADIO BUTTON DATA
+        if(trial.input_type[current_page][i] == 'radio'){
+          $('#'+option_selector).find("input:radio[value='" + val + "']").prop("checked", true) 
+        }
+
+        //TEXT DATA
+        if(trial.input_type[current_page][i] == 'text'){
+          $('#'+option_selector).find('input:text').attr("value", val)
+        }
+
+        //NUMBER DATA
+        if(trial.input_type[current_page][i] == 'number'){
+          $('#'+option_selector).find('input').attr("value", val)
+        }
+
+        //CHECKBOX DATA
+        if(trial.input_type[current_page][i] == 'checkbox'){
+          var tmp = val.split(",")
+          for (var j = 0; j<tmp.length; j++){
+            $('#'+option_selector).find("input:checkbox[value='" + tmp[j] + "']").prop("checked", true)
+          }
+        }
       }
     }
 
