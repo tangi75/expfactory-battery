@@ -78,10 +78,6 @@ jsPsych.plugins['poldrack-survey-multi-choice'] = (function() {
     var last_page_update_time = start_time;
 
     //array with arrays for each page to store the responses and lookup at navigation
-    // var response_data = []
-    // for(var i = 0; i < trial.pages.length; i++) {
-    //   response_data.push([]);
-    // }
     var response_data = fillInputType([],trial.pages)
 
     var trial_form_id = _join(plugin_id_name, "form");
@@ -341,32 +337,32 @@ jsPsych.plugins['poldrack-survey-multi-choice'] = (function() {
         if(trial.input_type[current_page][i] == 'radio'){
           if($("#"+plugin_id_name+"-"+i).find("input:radio:checked").length > 0){
             req_check.push(true)
+          }
         }
-      }
 
         //TEXT DATA
-        if(trial.input_type[current_page][i] == 'text'){
+        else if(trial.input_type[current_page][i] == 'text'){
           if($("#"+plugin_id_name+"-"+i).find("input:text").val().length > 0){
             req_check.push(true)
+          }
         }
-      }
 
         //NUMBER DATA
-        if(trial.input_type[current_page][i] == 'number'){
+        else if(trial.input_type[current_page][i] == 'number'){
           if($("#"+plugin_id_name+"-"+i).find("input").val().length > 0){
             req_check.push(true)
+         }
         }
-      }
 
         //CHECKBOX DATA
-        if(trial.input_type[current_page][i] == 'checkbox'){
+        else if(trial.input_type[current_page][i] == 'checkbox'){
           if($("#"+plugin_id_name+"-"+i).find("input:checkbox:checked").length > 0){
             req_check.push(true)
+          }
         }
-      }
 
 
-          else {
+        else {
             req_check.push(false)
           }
         }
@@ -396,17 +392,17 @@ jsPsych.plugins['poldrack-survey-multi-choice'] = (function() {
         }
 
         //TEXT DATA
-        if(trial.input_type[current_page][i] == 'text'){
+        else if(trial.input_type[current_page][i] == 'text'){
           response_data[current_page][i] = $('#'+option_selector).find('input:text').val()
         }
 
         //NUMBER DATA
-        if(trial.input_type[current_page][i] == 'number'){
+        else if(trial.input_type[current_page][i] == 'number'){
           response_data[current_page][i] = $('#'+option_selector).find('input').val()
         }
 
         //CHECKBOX DATA
-        if(trial.input_type[current_page][i] == 'checkbox'){
+        else if(trial.input_type[current_page][i] == 'checkbox'){
           var tmp = []
           $('#'+option_selector).find('input:checked').each(function(){
             tmp.push($(this).val())
@@ -524,21 +520,23 @@ jsPsych.plugins['poldrack-survey-multi-choice'] = (function() {
         }
 
         //TEXT DATA
-        if(trial.input_type[current_page][i] == 'text'){
+        else if(trial.input_type[current_page][i] == 'text'){
           $('#'+option_selector).find('input:text').attr("value", val)
         }
 
         //NUMBER DATA
-        if(trial.input_type[current_page][i] == 'number'){
+        else if(trial.input_type[current_page][i] == 'number'){
           $('#'+option_selector).find('input').attr("value", val)
         }
 
         //CHECKBOX DATA
-        if(trial.input_type[current_page][i] == 'checkbox'){
-          var tmp = val.split(",")
-          for (var j = 0; j<tmp.length; j++){
-            $('#'+option_selector).find("input:checkbox[value='" + tmp[j] + "']").prop("checked", true)
-          }
+        else if(trial.input_type[current_page][i] == 'checkbox'){
+          if (val.length>0) { //would work without this but would give an error every time you start a page fresh because it checks to see if there is already a value for the checkbox
+            var tmp = val.split(",")
+            for (var j = 0; j<tmp.length; j++){
+              $('#'+option_selector).find("input:checkbox[value='" + tmp[j] + "']").prop("checked", true)
+            }
+          } 
         }
       }
     }
