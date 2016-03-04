@@ -328,42 +328,49 @@ jsPsych.plugins['poldrack-survey-multi-choice'] = (function() {
     function check_required_questions(){
 
       var req_check = []
-
+      
       for (var i = 0; i < trial.pages[current_page].length; i++){
         //if the question is required
         if($("#"+plugin_id_name+"-"+i).find("input")[0].required){
 
         //RADIO BUTTON DATA
-        if(trial.input_type[current_page][i] == 'radio'){
-          if($("#"+plugin_id_name+"-"+i).find("input:radio:checked").length > 0){
+          if(trial.input_type[current_page][i] == 'radio'){
+            if($("#"+plugin_id_name+"-"+i).find("input:radio:checked").length > 0){
             req_check.push(true)
+            }
+            else {
+              req_check.push(false)
+            }
           }
-        }
 
         //TEXT DATA
-        else if(trial.input_type[current_page][i] == 'text'){
-          if($("#"+plugin_id_name+"-"+i).find("input:text").val().length > 0){
-            req_check.push(true)
+          else if(trial.input_type[current_page][i] == 'text'){
+            if($("#"+plugin_id_name+"-"+i).find("input:text").val().length > 0){
+             req_check.push(true)
+            }
+            else {
+              req_check.push(false)
+            }
           }
-        }
 
         //NUMBER DATA
-        else if(trial.input_type[current_page][i] == 'number'){
-          if($("#"+plugin_id_name+"-"+i).find("input").val().length > 0){
-            req_check.push(true)
-         }
-        }
+          else if(trial.input_type[current_page][i] == 'number'){
+            if($("#"+plugin_id_name+"-"+i).find("input").val().length > 0){
+              req_check.push(true)
+            }
+            else {
+              req_check.push(false)
+            }
+          }
 
         //CHECKBOX DATA
-        else if(trial.input_type[current_page][i] == 'checkbox'){
-          if($("#"+plugin_id_name+"-"+i).find("input:checkbox:checked").length > 0){
-            req_check.push(true)
-          }
-        }
-
-
-        else {
-            req_check.push(false)
+          else if(trial.input_type[current_page][i] == 'checkbox'){
+            if($("#"+plugin_id_name+"-"+i).find("input:checkbox:checked").length > 0){
+              req_check.push(true)
+            }
+            else {
+              req_check.push(false)
+            }
           }
         }
       }
