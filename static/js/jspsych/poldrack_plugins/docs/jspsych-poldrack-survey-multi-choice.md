@@ -6,7 +6,7 @@ Modified version of the original [jspsych-survey-multi-choice](http://docs.jspsy
 * Both the text and numeric codes for the response option 
 * Scored numeric data
 * Progress bars
-* Response rangein output 
+* Response range in output 
 * Include question data in output
 * Back buttons
 
@@ -25,6 +25,7 @@ show_clickable_nav | boolean | true | Whether to display navigation buttons.
 allow_backward | boolean | true | Whether to allow a back button to navigate to previous pages.
 options | array | NA | Array with an array for each page that contains array with responses for each question (i.e. 3 dim array instead of 2 options\[current_page\]\[current_question\]\[current_option\])
 scale | array of objects | NA | Array containing objects containing how any option should be coded numerically
+input | array of arrays | radio | option to specify different types of input (current options: `"radio"`, `"text"`, `"checkbox"`, `"number"`)
 
 ## Data Generated
 
