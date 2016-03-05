@@ -25,6 +25,7 @@ jsPsych.plugins["writing"] = (function() {
     trial.text_class = trial.text_class || 'jspsych-writing-box'
     trial.choices = trial.choices || [];
     trial.response_ends_trial = (typeof trial.response_ends_trial == 'undefined') ? true : trial.response_ends_trial;
+    trial.timing_response = trial.timing_response || -1;
     trial.is_html = (typeof trial.is_html == 'undefined') ? false : trial.is_html;
     trial.prompt = trial.prompt || "";
 
@@ -110,6 +111,15 @@ jsPsych.plugins["writing"] = (function() {
       alert('Please write for the full time! Disable this alert if you really need to leave this page.')
       setTimeout(function() {$("#jspsych-writing-box").focus()}, 1);
     });
+
+    // end trial if time limit is set
+    if (trial.timing_response > 0) {
+      var t1 = setTimeout(function() {
+        end_trial();
+      }, trial.timing_response);
+      setTimeoutHandlers.push(t1);
+    }
+
   }
                             
   return plugin;
