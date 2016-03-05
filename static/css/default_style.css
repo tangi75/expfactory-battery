@@ -309,12 +309,16 @@ label.jspsych-poldrack-survey-multi-choice-text input[type="radio"] {
   padding-bottom: 10px;
 }
 
-/* Inputs and forms */
+/*
+ *
+ * PLUGIN: jspsych-survey-text
+ *
+ */
 
-textarea {
-  height: 28px;
-  border-radius: 5px;
-  margin: 20px 20px 0px 0px;
+.jspsych-survey-text-question > textarea, #jspsych-survey-text-next {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 /*
