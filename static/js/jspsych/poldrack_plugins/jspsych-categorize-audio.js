@@ -4,7 +4,7 @@
  *
  * plugin for playing an audio file, getting a keyboard response, and giving feedback
  *
- * modified by Zeynep Enkavi
+ * modified by Zeynep Enkavi and Ian Eisenberg
  * to be tested
  **/
 
@@ -13,18 +13,12 @@ jsPsych.plugins["categorize-audio"] = (function() {
   var plugin = {};
 
   var context = new AudioContext();
+  jsPsych.pluginAPI.registerPreload('single-audio', 'stimulus', 'audio');
 
   plugin.trial = function(display_element, trial) {
 
     // set default values for parameters
-    //trial.parameter = trial.parameter || 'default value';
-    trial.audio_stim = jsPsych.pluginAPI.loadAudioFile(trial.stimulus);
-    trial.audio_path = trial.stimuli;
     trial.choices = trial.choices || [];
-	// option to show image for fixed time interval, ignoring key responses
-	//      true = image will keep displaying after response
-	//      false = trial will immediately advance when response is recorded
-	trial.key_answer = trial.key_answer;
 	trial.text_answer = (typeof trial.text_answer === 'undefined') ? "" : trial.text_answer;
 	trial.correct_text = (typeof trial.correct_text === 'undefined') ? "<p class='feedback'>Correct</p>" : trial.correct_text;
 	trial.incorrect_text = (typeof trial.incorrect_text === 'undefined') ? "<p class='feedback'>Incorrect</p>" : trial.incorrect_text;
@@ -53,7 +47,7 @@ jsPsych.plugins["categorize-audio"] = (function() {
 
 	// play stimulus
 	var source = context.createBufferSource();
-	source.buffer = jsPsych.pluginAPI.getAudioBuffer(trial.audio_stim);
+	source.buffer = jsPsych.pluginAPI.getAudioBuffer(trial.stimulus);
 	source.connect(context.destination);
 	startTime = context.currentTime + 0.1;
 	source.start(startTime);
@@ -63,20 +57,7 @@ jsPsych.plugins["categorize-audio"] = (function() {
 		display_element.append(trial.prompt);
 	}
 
-	// store response
-	var response = {rt: -1, key: -1};
-
-			// // function to end trial when it is time
-			// var end_trial = function() {
-
-			// 	// kill any remaining setTimeout handlers
-			// 	for (var i = 0; i < setTimeoutHandlers.length; i++) {
-			// 		clearTimeout(setTimeoutHandlers[i]);
-			// 	}
-
-			// 	// move on to the next trial
-			// 	jsPsych.finishTrial();
-			// };
+	var trial_data = {};
 
 	// function to handle responses by the subject
 	var after_response = function(info) {
@@ -96,21 +77,17 @@ jsPsych.plugins["categorize-audio"] = (function() {
 		
 
 		//calculate stim and block duration
-		if (trial.response_ends_trial) {
-		  if (info.rt != -1) {
-		    var block_duration = info.rt
-		  } else {
-		    var block_duration = trial.timing_response
-		  }
-		} else {
-		  var block_duration = trial.timing_response
-		}
+		//calculate stim and block duration
+	      var block_duration = trial.timing_response
+	      if (trial.response_ends_trial & info.rt != -1) {
+	          block_duration = info.rt
+	      }
 
 		// save data
 		var trial_data = {
 			"rt": info.rt,
 			"correct": correct,
-			"stimulus": trial.stimulus,
+			"stimulus": trial.audio_path,
 			"key_press": info.key,
 			"correct_response": trial.key_answer,
 	        "possible_responses": trial.choices,
@@ -119,19 +96,15 @@ jsPsych.plugins["categorize-audio"] = (function() {
 	        "timing_post_trial": trial.timing_post_trial
 			};
 
-		// jsPsych.data.write(trial_data);
-
 		
 	    var timeout = info.rt == -1;
 
 	    // if response ends trial display feedback immediately
 	    if (trial.response_ends_trial || info.rt == -1) {
-	      display_element.html('');
 	      doFeedback(correct, timeout);
 	    // otherwise wait until timing_response is reached
 	    } else {
 	      setTimeout(function() {
-	        display_element.html('');
 	        doFeedback(correct, timeout);
 	      }, trial.timing_response - info.rt);
 	    }
@@ -145,28 +118,31 @@ jsPsych.plugins["categorize-audio"] = (function() {
 		allow_held_key: false
 	});
 
-	if(trial.timing_response > 0) {
-		setTimeoutHandlers.push(setTimeout(function(){
-			after_response({key: -1, rt: -1});
-		}, trial.timing_response));
-	}
+		if (trial.timing_response > 0) {
+			setTimeoutHandlers.push(setTimeout(function() {
+				after_response({
+					key: -1,
+					rt: -1
+				});
+			}, trial.timing_response));
+		}
 
 	function doFeedback(correct, timeout) {
 
-		if(timeout && !trial.show_feedback_on_timeout){
+		if (timeout && !trial.show_feedback_on_timeout) {
 			display_element.append(trial.timeout_message);
 		} else {
-		// substitute answer in feedback string.
-		var atext = "";
-		if (correct) {
-			atext = trial.correct_text.replace("%ANS%", trial.text_answer);
-		} else {
-			atext = trial.incorrect_text.replace("%ANS%", trial.text_answer);
-		}
+			// substitute answer in feedback string.
+			var atext = "";
+			if (correct) {
+				atext = trial.correct_text.replace("%ANS%", trial.text_answer);
+			} else {
+				atext = trial.incorrect_text.replace("%ANS%", trial.text_answer);
+			}
 
-		// show the feedback
-		display_element.append(atext);
-				}
+			// show the feedback
+			display_element.append(atext);
+		}
 		// check if force correct button press is set
 		if (trial.force_correct_button_press && correct === false && ((timeout && trial.show_feedback_on_timeout) || !timeout)) {
 
@@ -199,6 +175,7 @@ jsPsych.plugins["categorize-audio"] = (function() {
 		jsPsych.finishTrial(trial_data);
 	}
 
+};
   return plugin;
 })();
 
