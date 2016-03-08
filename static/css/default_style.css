@@ -275,6 +275,17 @@ label.jspsych-poldrack-survey-multi-choice-text input[type="radio"] {
   margin-right:6px;
 }
 
+.jspsych-poldrack-survey-multi-choice-opts li input[type=radio]:checked:before {
+    content: '';
+    height: 0.4em;
+    width: 0.4em;
+    background-color: #FFF;
+    position: absolute;
+    border-radius: 50%;
+    top: 0.3em;
+    left: 0.3em;
+}
+
 /* Buttons */
 .jspsych-btn, #jspsych-instructions-next, #jspsych-instructions-back {
   font-size:22px;
