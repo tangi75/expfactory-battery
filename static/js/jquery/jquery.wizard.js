@@ -81,7 +81,7 @@ $.widget( "kf." + wizard, {
 		backward: ".backward",
 		branches: ".branch",
 		disabled: false,
-		enableSubmit: true,
+		enableSubmit: false,
 		forward: ".forward",
 		header: ":header:first",
 		initialStep: 0,
