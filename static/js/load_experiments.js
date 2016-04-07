@@ -18,7 +18,7 @@ var experimentDraw = function(lst, time) {
 	var total_time = 0
 	while (total_time < time && lst.length > 0) {
 		index = Math.floor(Math.random()*lst.length)
-		if ((total_time + lst[index].time) < 30) {
+		if ((total_time + lst[index].time) < time) {
 			total_time += lst[index].time
 			return_list.push(lst[index].name)
 		} 
