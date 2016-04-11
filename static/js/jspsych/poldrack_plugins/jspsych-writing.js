@@ -63,6 +63,11 @@ jsPsych.plugins["writing"] = (function() {
         clearTimeout(setTimeoutHandlers[i]);
       }
 
+      // kill keyboard listeners
+      if (typeof keyboardListener !== 'undefined') {
+        jsPsych.pluginAPI.cancelKeyboardResponse(keyboardListener);
+      }
+      
       // gather the data to store for the trial
       var trial_data = {
         "rt": response.rt,
