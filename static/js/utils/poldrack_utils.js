@@ -33,7 +33,7 @@ $(window).blur(function(){
 function addID(exp_id) {
 	var full_screen_on = window.innerHeight == screen.height
 	jsPsych.data.addDataToLastTrial({
-		exp_id: name,
+		exp_id: exp_id,
 		full_screen: full_screen_on,
 		focus_shifts: focuser.get_shifts()
 	})
