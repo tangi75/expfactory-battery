@@ -31,10 +31,10 @@ $(window).blur(function(){
 * @param {exp_id} string to specify the experiment id
 */
 function addID(exp_id) {
-	var full_screen_on = window.innerHeight == screen.height
+  var isFullScreen = document.mozFullScreen || document.webkitIsFullScreen || (!window.screenTop && !window.screenY) 
 	jsPsych.data.addDataToLastTrial({
-		exp_id: name,
-		full_screen: full_screen_on,
+		exp_id: exp_id,
+		full_screen: isFullScreen,
 		focus_shifts: focuser.get_shifts()
 	})
 	focuser.reset()
