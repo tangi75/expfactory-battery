@@ -1,31 +1,31 @@
 
 
-// Class to track focus shifts during experiment
-class focus_track {
-  constructor() {
-    this.shift_away = 0;
-  }
-
-  add_shift() {
-  	this.shift_away += 1
-  }
-
-  get_shifts() {
+/* Class to track focus shifts during experiment
+*  **Requires Jquery**
+*
+*/
+var focus_tracker = function(win) {
+  var self = this;
+  this.shift_away = 0;
+    
+  this.get_shifts = function() {
     return this.shift_away;
-  }
+  };
+  
+  this.reset = function() {
+    this.shift_away = 0;
+  };
+  
+  $(win).blur(function() {
+    self.shift_away += 1;
+  });
+};
 
-  reset() {
-  	this.shift_away = 0
-  }
-}
+var focuser = new focus_tracker(window);
 
-var focuser = new focus_track()
-
-$(window).blur(function(){
-  focuser.add_shift()
-});
 
 /**
+* **For JsPsych Only **
 * Adds the experiment ID as well as the number of focus shifts and whether the experiment was in
 * full screen during that trial
 * @param {exp_id} string to specify the experiment id
