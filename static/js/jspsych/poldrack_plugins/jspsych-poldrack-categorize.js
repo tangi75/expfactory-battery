@@ -124,10 +124,20 @@ jsPsych.plugins["poldrack-categorize"] = (function() {
         doFeedback(correct, timeout);
       // otherwise wait until timing_response is reached
       } else {
-        setTimeout(function() {
-          display_element.html('');
-          doFeedback(correct, timeout);
-        }, trial.timing_response - info.rt);
+        if (trial.timing_stim > -1) {
+          setTimeout(function() {
+            display_element.html('');
+          }, trial.timing_stim - info.rt);
+          setTimeout(function() {
+            doFeedback(correct, timeout);
+          }, trial.timing_response - info.rt);
+        }
+        else {
+          setTimeout(function() {
+            display_element.html('');
+            doFeedback(correct, timeout);
+          }, trial.timing_response - info.rt);
+        }
       }
     }
 
