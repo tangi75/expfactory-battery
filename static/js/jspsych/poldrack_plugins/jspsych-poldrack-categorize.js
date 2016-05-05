@@ -126,7 +126,7 @@ jsPsych.plugins["poldrack-categorize"] = (function() {
       } else {
         if (trial.timing_stim > -1) {
           setTimeout(function() {
-            display_element.html('');
+            $('#jspsych-poldrack-categorize-stimulus').css('visibility', 'hidden');
           }, trial.timing_stim - info.rt);
           setTimeout(function() {
             doFeedback(correct, timeout);
