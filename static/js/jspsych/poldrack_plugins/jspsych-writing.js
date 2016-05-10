@@ -24,7 +24,8 @@ jsPsych.plugins["writing"] = (function() {
     // set default values for the parameters
     trial.text_class = trial.text_class || 'jspsych-writing-box'
     trial.choices = trial.choices || [];
-    trial.response_ends_trial = (typeof trial.response_ends_trial == 'undefined') ? true : trial.response_ends_trial;
+    trial.initial_text = trial.initial_text || ''
+    trial.previous_text = trial.previous_text || ''
     trial.timing_response = trial.timing_response || -1;
     trial.is_html = (typeof trial.is_html == 'undefined') ? false : trial.is_html;
     trial.prompt = trial.prompt || "";
@@ -38,16 +39,19 @@ jsPsych.plugins["writing"] = (function() {
     if (myElem === null) {
       display_element.append($('<textarea>', {
         "id": 'jspsych-writing-box',
-        "class": trial.text_class
-      }));
+        "class": trial.text_class,
+        "val": trial.previous_text
+      }))
       $("#jspsych-writing-box").focus()
-      $('#jspsych-writing-box').height('41em');
     }
 
     //show prompt if there is one
-    if (trial.prompt !== "") {
-      display_element.append(trial.prompt);
+    if (trial.initial_text !== "") {
+      $("#jspsych-writing-box").attr('placeholder', trial.initial_text);
     }
+
+    // store writing
+    var writing_data = []
 
     // store response
     var response = {
@@ -68,36 +72,30 @@ jsPsych.plugins["writing"] = (function() {
         jsPsych.pluginAPI.cancelKeyboardResponse(keyboardListener);
       }
       
+      
+      //get text
+      final_text = $('#jspsych-writing-box').val()
+      // clear the display
+      display_element.html('');
+      //jsPsych.data.write(trial_data);
+      $("#jspsych-writing-box").unbind()
+      // move on to the next trial
+      jsPsych.finishTrial({'writing_data': writing_data, 'final_text': final_text});
+    };
+
+    var after_response = function(info) {
+      // after a valid response, the stimulus will have the CSS class 'responded'
+      // which can be used to provide visual feedback that a response was recorded
+      // only record the first response
+      response = info
+    
       // gather the data to store for the trial
       var trial_data = {
         "rt": response.rt,
         "key_press": response.key,
         "previous_text": response.previous_text
       };
-
-      //jsPsych.data.write(trial_data);
-      $("#jspsych-writing-box").unbind()
-      // move on to the next trial
-      jsPsych.finishTrial(trial_data);
-    };
-
-    var after_response = function(info) {
-
-      // after a valid response, the stimulus will have the CSS class 'responded'
-      // which can be used to provide visual feedback that a response was recorded
-      // only record the first response
-      if (response.key == -1) {
-        response = info;
-        // append text that was on screen before keystroke
-        response.previous_text = $('#jspsych-writing-box').val()
-      }
-      var text_length = $('#jspsych-writing-box').val().split("\n").length
-      $('#jspsych-writing-box').height(text_length + 40 + 'em');
-    
-
-      if (trial.response_ends_trial) {
-        end_trial();
-      }
+      writing_data.push(trial_data)
     };
 
 
@@ -107,7 +105,7 @@ jsPsych.plugins["writing"] = (function() {
         callback_function: after_response,
         valid_responses: trial.choices,
         rt_method: 'date',
-        persist: false,
+        persist: true,
         allow_held_key: false
       });
     }
