@@ -25,7 +25,6 @@ jsPsych.plugins["writing"] = (function() {
     trial.text_class = trial.text_class || 'jspsych-writing-box'
     trial.choices = trial.choices || [];
     trial.initial_text = trial.initial_text || ''
-    trial.previous_text = trial.previous_text || ''
     trial.timing_response = trial.timing_response || -1;
     trial.is_html = (typeof trial.is_html == 'undefined') ? false : trial.is_html;
     trial.prompt = trial.prompt || "";
@@ -39,8 +38,7 @@ jsPsych.plugins["writing"] = (function() {
     if (myElem === null) {
       display_element.append($('<textarea>', {
         "id": 'jspsych-writing-box',
-        "class": trial.text_class,
-        "val": trial.previous_text
+        "class": trial.text_class
       }))
       $("#jspsych-writing-box").focus()
     }
@@ -51,7 +49,7 @@ jsPsych.plugins["writing"] = (function() {
     }
 
     // store writing
-    var writing_data = []
+    var key_strokes = []
 
     // store response
     var response = {
@@ -80,7 +78,7 @@ jsPsych.plugins["writing"] = (function() {
       //jsPsych.data.write(trial_data);
       $("#jspsych-writing-box").unbind()
       // move on to the next trial
-      jsPsych.finishTrial({'writing_data': writing_data, 'final_text': final_text});
+      jsPsych.finishTrial({'key_strokes': key_strokes, 'final_text': final_text});
     };
 
     var after_response = function(info) {
@@ -92,10 +90,9 @@ jsPsych.plugins["writing"] = (function() {
       // gather the data to store for the trial
       var trial_data = {
         "rt": response.rt,
-        "key_press": response.key,
-        "previous_text": response.previous_text
+        "key_press": response.key
       };
-      writing_data.push(trial_data)
+      key_strokes.push(trial_data)
     };
 
 
