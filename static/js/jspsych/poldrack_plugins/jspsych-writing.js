@@ -49,7 +49,7 @@ jsPsych.plugins["writing"] = (function() {
     }
 
     // store writing
-    var writing_data = []
+    var key_strokes = []
 
     // store response
     var response = {
@@ -78,7 +78,7 @@ jsPsych.plugins["writing"] = (function() {
       //jsPsych.data.write(trial_data);
       $("#jspsych-writing-box").unbind()
       // move on to the next trial
-      jsPsych.finishTrial({'writing_data': writing_data, 'final_text': final_text});
+      jsPsych.finishTrial({'key_strokes': key_strokes, 'final_text': final_text});
     };
 
     var after_response = function(info) {
@@ -92,7 +92,7 @@ jsPsych.plugins["writing"] = (function() {
         "rt": response.rt,
         "key_press": response.key
       };
-      writing_data.push(trial_data)
+      key_strokes.push(trial_data)
     };
 
 
