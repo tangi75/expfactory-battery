@@ -30,6 +30,10 @@ jsPsych.plugins["poldrack-text"] = (function() {
       clearTimeout(t1);
       display_element.html(''); // clear the display
 
+      if (typeof keyboardListener !== 'undefined') {
+        jsPsych.pluginAPI.cancelKeyboardResponse(keyboardListener);
+      }
+
       var trialdata = {
         "rt": info.rt,
         "key_press": info.key
@@ -52,12 +56,12 @@ jsPsych.plugins["poldrack-text"] = (function() {
 
     };
 
-    // check if key is 'mouse'
+    // check if key is 'mouse' 
     if (trial.cont_key == 'mouse') {
       display_element.click(mouse_listener);
       var start_time = (new Date()).getTime();
     } else {
-      jsPsych.pluginAPI.getKeyboardResponse({
+      var keyboardListener = jsPsych.pluginAPI.getKeyboardResponse({
         callback_function: after_response,
         valid_responses: trial.cont_key,
         rt_method: 'date',
