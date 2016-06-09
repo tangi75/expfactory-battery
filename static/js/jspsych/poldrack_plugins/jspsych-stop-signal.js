@@ -151,7 +151,6 @@ jsPsych.plugins["stop-signal"] = (function() {
 		}
 		
 		if (trial.SS_trial_type.toLowerCase() == 'stop') {
-			// end trial if time limit is set
 			if (trial.SSD >= 0) {
 				var t3 = setTimeout(function() {
 					display_element.append($('<div>', {
