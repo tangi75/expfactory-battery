@@ -26,6 +26,7 @@ jsPsych.plugins["poldrack-text"] = (function() {
     // set the HTML of the display target to replaced_text.
     display_element.html(trial.text);
 
+
     var after_response = function(info) {
       clearTimeout(t1);
       display_element.html(''); // clear the display
@@ -34,9 +35,17 @@ jsPsych.plugins["poldrack-text"] = (function() {
         jsPsych.pluginAPI.cancelKeyboardResponse(keyboardListener);
       }
 
+      var block_duration = trial.timing_response
+      if (info.rt != -1) {
+          block_duration = info.rt
+      }
+
       var trialdata = {
+        "text": trial.text,
         "rt": info.rt,
-        "key_press": info.key
+        "key_press": info.key,
+        "block_duration": block_duration,
+        "timing_post_trial": trial.timing_post_trial
       }
 
       jsPsych.finishTrial(trialdata);
