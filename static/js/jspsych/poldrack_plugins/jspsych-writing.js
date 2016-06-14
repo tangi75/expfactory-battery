@@ -56,6 +56,7 @@ jsPsych.plugins["writing"] = (function() {
       rt: -1,
       key: -1
     };
+    var last_response_time = 0
 
     // function to end trial when it is time
     var end_trial = function() {
@@ -89,9 +90,10 @@ jsPsych.plugins["writing"] = (function() {
     
       // gather the data to store for the trial
       var trial_data = {
-        "rt": response.rt,
+        "rt": response.rt - last_response_time,
         "key_press": response.key
       };
+      last_response_time = response.rt
       key_strokes.push(trial_data)
     };
 
