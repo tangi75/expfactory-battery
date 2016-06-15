@@ -23,6 +23,7 @@ jsPsych.plugins["single-stim-button"] = (function() {
 	// timing parameters
 	trial.timing_stim = trial.timing_stim || -1; // if -1, then show indefinitely
 	trial.timing_response = trial.timing_response || -1; // if -1, then wait for response forever
+	trial.timing_post_trial = trial.timing_post_trial || 1000;
 	// optional parameters
 	trial.prompt = (typeof trial.prompt === 'undefined') ? "" : trial.prompt;
 

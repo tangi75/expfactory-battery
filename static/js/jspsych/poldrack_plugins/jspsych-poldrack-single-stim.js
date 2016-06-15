@@ -28,6 +28,7 @@ jsPsych.plugins["poldrack-single-stim"] = (function() {
     trial.response_ends_trial = (typeof trial.response_ends_trial == 'undefined') ? false : trial.response_ends_trial;
     trial.timing_stim = trial.timing_stim || -1;
     trial.timing_response = trial.timing_response || -1;
+    trial.timing_post_trial = trial.timing_post_trial || 1000;
     trial.is_html = (typeof trial.is_html == 'undefined') ? false : trial.is_html;
     trial.prompt = trial.prompt || "";
 
