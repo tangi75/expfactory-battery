@@ -31,6 +31,7 @@ jsPsych.plugins["poldrack-categorize"] = (function() {
     trial.timing_stim = trial.timing_stim || -1; // default is to show image until response
     trial.timing_response = trial.timing_response || -1; // default is no max response time
     trial.timing_feedback_duration = trial.timing_feedback_duration || 2000;
+    trial.timing_post_trial = trial.timing_post_trial || 1000;
 
     // if any trial variables are functions
     // this evaluates the function and replaces
