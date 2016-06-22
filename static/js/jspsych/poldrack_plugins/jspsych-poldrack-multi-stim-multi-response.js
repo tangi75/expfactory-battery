@@ -28,7 +28,7 @@ jsPsych.plugins["poldrack-multi-stim-multi-response"] = (function() {
     trial.timing_gap = trial.timing_gap || 0 //gap between stimuli
     trial.timing_stim = trial.timing_stim || default_timing_array;
     trial.timing_response = trial.timing_response || -1; // if -1, then wait for response forever
-    trial.timing_post_trial = trial.timing_post_trial || 1000;
+    trial.timing_post_trial = (typeof trial.timing_post_trial === 'undefined') ? 1000 : trial.timing_post_trial;
     // optional parameters
     trial.is_html = (typeof trial.is_html === 'undefined') ? false : trial.is_html;
     trial.prompt = (typeof trial.prompt === 'undefined') ? "" : trial.prompt;

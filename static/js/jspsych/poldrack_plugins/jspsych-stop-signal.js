@@ -29,7 +29,7 @@ jsPsych.plugins["stop-signal"] = (function() {
 		trial.timing_SS = trial.timing_SS || -1; // if -1, then show indefinitely
 		trial.timing_response = trial.timing_response || -1; // if -1, then wait for response forever
 		trial.SSD = trial.SSD
-		trial.timing_post_trial = trial.timing_post_trial || 1000;
+		trial.timing_post_trial = (typeof trial.timing_post_trial === 'undefined') ? 1000 : trial.timing_post_trial;
 		// optional parameters
 		trial.is_html = (typeof trial.is_html === 'undefined') ? false : trial.is_html;
 		trial.prompt = (typeof trial.prompt === 'undefined') ? "" : trial.prompt;

@@ -17,7 +17,7 @@ jsPsych.plugins["poldrack-text"] = (function() {
 
     trial.timing_response = trial.timing_response || -1;
     trial.cont_key = trial.cont_key || [];
-    trial.timing_post_trial = trial.timing_post_trial || 1000;
+    trial.timing_post_trial = (typeof trial.timing_post_trial === 'undefined') ? 1000 : trial.timing_post_trial;
     // if any trial variables are functions
     // this evaluates the function and replaces
     // it with the output of the function
