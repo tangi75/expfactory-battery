@@ -509,8 +509,17 @@ var jsPsych = (function() {
       var keyboardNotAllowed = typeof Element !== 'undefined' && 'ALLOW_KEYBOARD_INPUT' in Element;
       if (keyboardNotAllowed) {
         go();
-      } else {
-        DOM_target.append('<div class = jspsych-instructions-nav><p>The experiment will launch in fullscreen mode when you click the button below.</p><button id="jspsych-fullscreen-btn" class="jspsych-btn">Launch Experiment</button></div>');
+      } else { // MOD : adding multilingual support
+        var html_text;
+        switch(opts.language){
+          case "fr": html_text = '<div class = jspsych-instructions-nav><p>Ce test va démarrer en mode plein écran quand vous cliquerez sur le bouton ci-dessous.</p>'
+                                +'<button id="jspsych-fullscreen-btn" class="jspsych-btn">Démarrer le test</button></div>';
+            break;
+          default: html_text = '<div class = jspsych-instructions-nav><p>This test will launch in fullscreen mode when you click the button below.</p>'
+                                +'<button id="jspsych-fullscreen-btn" class="jspsych-btn">Start Test</button></div>';
+            break;
+        }
+        DOM_target.append(html_text);
         $('#jspsych-fullscreen-btn').on('click', function() {
           var element = document.documentElement;
           if (element.requestFullscreen) {
